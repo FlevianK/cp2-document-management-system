@@ -1,0 +1,33 @@
+{
+  "name": "cp2-document-management-system",
+  "version": "1.0.0",
+  "description": "Document management system",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon ./bin/www",
+    "test": "npm test",
+    "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlevianK/cp2-document-management-system.git"
+  },
+  "author": "Flevian Kanaiza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FlevianK/cp2-document-management-system/issues"
+  },
+  "homepage": "https://github.com/FlevianK/cp2-document-management-system#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "pg": "^6.2.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "sequelize-cli": "^2.7.0"
+  }
+}
