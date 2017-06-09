@@ -1,27 +1,28 @@
 const User = require('../models').User;
 const Document = require('../models').Document;
+const InputValidate = require('./inputValidate');
 
 module.exports = {
   create(req, res) {
-    User.create({
-      username: req.body.username,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      roleId: req.body.roleId,
-    })
+    if (InputValidate.validateInput(req.body)) {
+      return res.status(403).json({ // forbidden request
+        message: 'Invalid Input',
+      });
+    }
+    return User
+      .create({
+        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        roleId: req.body.roleId,
+      })
       .then(user => res.status(201).send(user))
       .catch(error => res.status(400).send(error));
   },
-  list(req, res) {
-    return User
-      .findAll()
-      .then(users => res.status(200).send(users))
-      .catch(error => res.status(400).send(error));
-  },
-
-  paginateUsers(req, res) {
+  
+  listUsers(req, res) {
     if (req.query.limit || req.query.offset) {
       return User
         .findAll({
@@ -38,6 +39,10 @@ module.exports = {
         })
         .catch(error => res.status(400).send(error));
     }
+    return User
+      .findAll()
+      .then(users => res.status(200).send(users))
+      .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
     return User

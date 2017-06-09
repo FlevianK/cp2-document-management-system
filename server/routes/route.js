@@ -5,21 +5,19 @@ const authenticatesController = require('../controllers').authenticates;
 
 module.exports = (app) => {
 
-  // app.post('/roles', rolesController.create);
+  app.post('/roles', rolesController.create);
 
   app.post('/users/login', authenticatesController.login);
 
   app.post('/users/', usersController.create);
-  app.get('/users/', usersController.paginateUsers);
-  app.get('/users/', authenticatesController.verifyLogin, usersController.list);
+  app.get('/users/', usersController.listUsers);
   app.get('/users/:userId', usersController.retrieve);
   app.put('/users/:userId', usersController.update);
   app.delete('/users/:userId', usersController.destroy);
   app.get('/search/users/', usersController.searchUser);
 
   app.post('/documents/', documentsController.create);
-  app.get('/documents/', documentsController.paginateDocs);
-  app.get('/documents/', documentsController.list);
+  app.get('/documents/', documentsController.listDocs);
   app.get('/documents/:documentId', documentsController.retrieve);
   app.put('/documents/:documentId', documentsController.update);
   app.get('/users/:userId/documents', documentsController.userDocs);

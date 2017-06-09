@@ -1,23 +1,25 @@
 const Document = require('../models').Document;
+const InputValidate = require('./inputValidate');
 
 module.exports = {
   create(req, res) {
-    Document.create({
-        title: req.body.title,
-        content: req.body.content,
-        access: req.body.access,
-        userId: req.body.userId,
-      })
-      .then(document => res.status(201).send(document))
-      .catch(error => res.status(400).send(error));
+    if (InputValidate.validateInput(req.body)) {
+      return res.status(403).json({ // forbidden request
+        message: 'Invalid Input',
+      });
+    }
+    return Document
+      .create({
+          title: req.body.title,
+          content: req.body.content,
+          access: req.body.access,
+          userId: req.body.userId,
+        })
+        .then(document => res.status(201).send(document))
+        .catch(error => res.status(400).send(error));
   },
-  list(req, res) {
-  return Document
-    .findAll()
-    .then(document => res.status(200).send(document))
-    .catch(error => res.status(400).send(error));
-  },
-  paginateDocs(req, res) {
+  
+  listDocs(req, res) {
     if (req.query.limit || req.query.offset) {
       return Document
         .findAll({ 
@@ -34,6 +36,10 @@ module.exports = {
         })
         .catch(error => res.status(400).send(error));
     }
+    return Document
+    .findAll()
+    .then(document => res.status(200).send(document))
+    .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
     return Document
