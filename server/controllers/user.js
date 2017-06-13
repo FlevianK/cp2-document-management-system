@@ -1,12 +1,15 @@
 const User = require('../models').User;
 const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
+const bcrypt = require('bcrypt');
+
+const salt = 8;
 
 module.exports = {
   create(req, res) {
     if (InputValidate.validateInput(req.body)) {
       return res.status(403).json({ // forbidden request
-        message: 'Invalid Input',
+        message: 'Input required',
       });
     }
     return User
@@ -15,13 +18,13 @@ module.exports = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
+        password: bcrypt.hashSync(req.body.password, salt),
         roleId: req.body.roleId,
       })
       .then(user => res.status(201).send(user))
       .catch(error => res.status(400).send(error));
   },
-  
+
   listUsers(req, res) {
     if (req.query.limit || req.query.offset) {
       return User
@@ -67,14 +70,7 @@ module.exports = {
           });
         }
         return user
-          .update({
-            username: req.body.username || user.username,
-            firstName: req.body.firstName || user.firstName,
-            lastName: req.body.lastName || user.lastName,
-            email: req.body.email || user.email,
-            password: req.body.password || user.password,
-            roleId: req.body.roleId || user.roleId,
-          })
+          .update(req.body)
           .then(() => res.status(200).send(user))  // Send back the updated user.
           .catch((error) => res.status(400).send(error));
       })

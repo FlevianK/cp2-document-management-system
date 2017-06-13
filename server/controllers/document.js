@@ -10,21 +10,75 @@ module.exports = {
     }
     return Document
       .create({
-          title: req.body.title,
-          content: req.body.content,
-          access: req.body.access,
-          userId: req.body.userId,
-        })
-        .then(document => res.status(201).send(document))
-        .catch(error => res.status(400).send(error));
+        title: req.body.title,
+        content: req.body.content,
+        access: req.body.access,
+        userId: req.body.userId,
+      })
+      .then(document => res.status(201).send(document))
+      .catch(error => res.status(400).send(error));
   },
-  
+
   listDocs(req, res) {
-    if (req.query.limit || req.query.offset) {
+    if (req.decoded.role == 'admin') {
+      if (req.query.limit || req.query.offset) {
+        return Document
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit
+          })
+          .then(document => {
+            if (!document) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+
+          })
+          .catch(error => res.status(400).send(error));
+      }
+      console.log(req.decoded.role);
       return Document
-        .findAll({ 
-          offset: req.query.offset, 
-          limit: req.query.limit 
+        .findAll()
+        .then(document => {
+          if (!document) {
+            return res.status(404).send({
+              message: 'Document Not Found',
+            });
+          }
+        })
+        .catch(error => res.status(400).send(error));
+    }
+    if (req.decoded.role == 'regular') {
+      if (req.query.limit || req.query.offset) {
+        return Document
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+            where: {
+              $or: [
+                { access: { $like: `%${'public'}%` } },
+              ]
+            }
+          })
+          .then(document => {
+            if (!document) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      }
+      return Document
+        .findAll({
+          where: {
+            $or: [
+              { access: { $like: `%${'public'}%` } },
+            ]
+          }
         })
         .then(document => {
           if (!document) {
@@ -36,10 +90,6 @@ module.exports = {
         })
         .catch(error => res.status(400).send(error));
     }
-    return Document
-    .findAll()
-    .then(document => res.status(200).send(document))
-    .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
     return Document
@@ -58,7 +108,7 @@ module.exports = {
     return Document
       .findById(req.params.documentId)
       .then(document => {
-        if (!document ) {
+        if (!document) {
           return res.status(404).send({
             message: 'Document Not Found',
           });
@@ -90,19 +140,20 @@ module.exports = {
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
-    },
-    searchDoc(req, res) {
+  },
+  searchDoc(req, res) {
+    
     if (req.query.q) {
       return Document
-      .findAll({
-        where: {
-          $or: [
-            { title: { $like: `%${req.query.q}%` } },
-          ]
-        }
-      })
-      .then(response => res.status(200).send(response))
-      .catch(error => res.status(400).send(error));
+        .findAll({
+          where: {
+            $or: [
+              { title: { $like: `%${req.query.q}%` } },
+            ]
+          }
+        })
+        .then(response => res.status(200).send(response))
+        .catch(error => res.status(400).send(error));
     }
   },
   userDocs(req, res) {
@@ -113,7 +164,7 @@ module.exports = {
         }
       })
       .then(document => {
-        if (!document ) {
+        if (!document) {
           return res.status(404).send({
             message: 'Document Not Found',
           });
