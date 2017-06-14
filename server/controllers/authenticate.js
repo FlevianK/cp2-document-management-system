@@ -16,20 +16,28 @@ module.exports = {
       })
       .then((user) => {
         if (!user) {
-          return res.status(404).send({ success: false, message: 'Authentication failed. User not found.' });
+          return res.status(404).send({ 
+            success: false, 
+            message: 'Authentication failed. User not found.' 
+          });
         } else if (user) {
 
           // check if password matches
           if (bcrypt.compareSync(user.password, req.body.password)) {
-            return res.status(401).send({ success: false, message: 'Authentication failed. Wrong password.' });
+            return res.status(401).send({ 
+              success: false, 
+              message: 'Authentication failed. Wrong password.' 
+            });
           } else {
-
-
-            let role = user.roleId === 1 ? 'admin' : 'regular';
 
             // if user is found and password is right
             // create a token
-            const token = jwt.sign({ userId: user.id, role }, secret, {
+            const token = jwt.sign({ 
+              userId: user.id, 
+              userRole: user.title
+            }, 
+            secret, 
+            {
               expiresIn: 1440 // expires in 24 hours
             });
 
@@ -38,8 +46,7 @@ module.exports = {
               success: true,
               message: 'Login successful!',
               token: token,
-              role: role,
-              userId: user.id
+              userRole: user.title
             });
           }
 
@@ -61,7 +68,9 @@ module.exports = {
       // verifies secret and checks exp
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });
+          return res.json({ 
+            success: false, 
+            message: 'Failed to authenticate token.' });
         } else {
           // if everything is good, save to request for use in other routes
           req.decoded = decoded;
@@ -82,7 +91,7 @@ module.exports = {
   },
   roleAuthorise(req, res, next) {
     req.user = {};
-    req.user.roles = [role];
+    req.user.roles = [req.decoded.userRole];
 
     next();
   },
@@ -91,7 +100,7 @@ module.exports = {
 
     // rest-bac authorization error propagate an Error object with a 401 status code 
 
-    res.status(err.status || 500);
+    res.status(err.status || 403);
     res.json({
       message: err.message
     });

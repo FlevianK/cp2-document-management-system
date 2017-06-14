@@ -38,14 +38,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      roleId: {
+      title: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         onDelete: 'CASCADE',
         references: {
           model: 'Roles',
-          key: 'id',
-          as: 'roleId'
+          key: 'title',
+          as: 'title'
         }
       }
     });

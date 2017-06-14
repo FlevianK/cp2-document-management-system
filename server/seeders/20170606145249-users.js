@@ -11,7 +11,7 @@ module.exports = {
         email: 'kezzy@live.com',
         createdAt: new Date(),
         updatedAt: new Date(),
-        roleId: 1,
+        title: "admin",
       },
       {
         username: 'Rodger',
@@ -21,7 +21,7 @@ module.exports = {
         email: 'rodger@gmail.com',
         createdAt: new Date(),
         updatedAt: new Date(),
-        roleId: 2,
+        title: "regular",
       },
       {
         username: 'kelvin',
@@ -31,7 +31,7 @@ module.exports = {
         email: 'kerich@hotmail.com',
         createdAt: new Date(),
         updatedAt: new Date(),
-        roleId: 2,
+        title: "regular",
       },
     ]);
   },

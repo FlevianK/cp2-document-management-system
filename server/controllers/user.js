@@ -1,7 +1,7 @@
 const User = require('../models').User;
 const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const salt = 8;
 
@@ -19,7 +19,7 @@ module.exports = {
         lastName: req.body.lastName,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, salt),
-        roleId: req.body.roleId,
+        title: req.body.title,
       })
       .then(user => res.status(201).send(user))
       .catch(error => res.status(400).send(error));

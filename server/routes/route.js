@@ -18,19 +18,18 @@ module.exports = (app) => {
   app.delete('/documents/:documentId', authenticatesController.verifyLogin, documentsController.destroy);
   app.get('/search/documents/', authenticatesController.verifyLogin, documentsController.searchDoc);
 
-  app.use(authenticatesController.roleAuthorise);
+  app.use(authenticatesController.verifyLogin, authenticatesController.roleAuthorise);
   
   restbac(app, roleConfig, "");
 
-  app.post('/roles',authenticatesController.verifyLogin, rolesController.create);
-  app.get('/roles', authenticatesController.verifyLogin, rolesController.list);
+  app.post('/roles',rolesController.create);
+  app.get('/roles', rolesController.list);
   
   app.get('/users/', usersController.listUsers);
-  app.get('/users/:userId', authenticatesController.verifyLogin, usersController.retrieve);
-  app.put('/users/:userId', authenticatesController.verifyLogin, usersController.update);
-  app.delete('/users/:userId',authenticatesController.verifyLogin, usersController.destroy);
-  app.get('/search/users/', authenticatesController.verifyLogin, usersController.searchUser);
-
+  app.get('/users/:userId', usersController.retrieve);
+  app.put('/users/:userId', usersController.update);
+  app.delete('/users/:userId', usersController.destroy);
+  app.get('/search/users/', usersController.searchUser);
 
   app.use(authenticatesController.roleUnauthorise);
 
