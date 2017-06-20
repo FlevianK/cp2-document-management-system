@@ -1,8 +1,7 @@
 {
     "/roles(/*)?": {
-        "action": "deny",
-        "get": ["regular"],
-        "post": ["regular"]
+        "get": ["admin"],
+        "post": ["admin"]
     },
     "/users/login": {
         "post": ["admin", "regular"]

@@ -13,7 +13,7 @@ module.exports = {
         title: req.body.title,
         content: req.body.content,
         access: req.body.access,
-        userId: req.body.userId,
+        userId: req.decoded.userId,
       })
       .then(document => res.status(201).send(document))
       .catch(error => res.status(400).send(error));
@@ -122,6 +122,7 @@ module.exports = {
 
   },
   update(req, res) {
+    console.log(req.params);
     return Document
       .findOne({
         where: {
@@ -147,6 +148,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
   destroy(req, res) {
+    console.log(req.params.documentId)
     return Document
       .findOne({
         where: {
