@@ -43,6 +43,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "devDependencies": {
+    "ajv": "^5.2.0",
     "babel-polyfill": "^6.23.0",
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
