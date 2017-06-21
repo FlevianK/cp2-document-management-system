@@ -1,3 +1,4 @@
+const User = require('../models').User;
 const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
 
@@ -28,7 +29,7 @@ module.exports = {
             limit: req.query.limit
           })
           .then(document => {
-            if (!document) {
+            if (!document || document.length < 1) {
               return res.status(404).send({
                 message: 'Document Not Found',
               });
@@ -41,7 +42,7 @@ module.exports = {
 
         .findAll()
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -60,7 +61,7 @@ module.exports = {
             }
           })
           .then(document => {
-            if (!document) {
+            if (!document || document.length < 1) {
               return res.status(404).send({
                 message: 'Document Not Found',
               });
@@ -76,7 +77,7 @@ module.exports = {
           }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -91,7 +92,7 @@ module.exports = {
       return Document
         .findById(req.params.documentId)
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -100,7 +101,6 @@ module.exports = {
         })
         .catch(error => res.status(400).send(error));
     } else if (req.decoded.userRole == 'regular') {
-      console.log(req.decoded.userId);
       return Document
         .findOne({
           where: {
@@ -109,7 +109,7 @@ module.exports = {
           }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -130,7 +130,7 @@ module.exports = {
         }
       })
       .then(document => {
-        if (!document) {
+        if (!document || document.length < 1) {
           return res.status(404).send({
             message: 'Document Not Found',
           });
@@ -155,8 +155,8 @@ module.exports = {
         }
       })
       .then(document => {
-        if (!document) {
-          return res.status(400).send({
+        if (!document || document.length < 1) {
+          return res.status(404).send({
             message: 'Document Not Found',
           });
         }
@@ -178,7 +178,7 @@ module.exports = {
               ]
             }
           })
-          .then(response => res.status(200).send(response))
+          .then(document => res.status(200).send(document))
           .catch(error => res.status(400).send(error));
       }
     } else if (req.decoded.userRole == 'regular') {
@@ -192,7 +192,7 @@ module.exports = {
               ]
             }
           })
-          .then(response => res.status(200).send(response))
+          .then(document => res.status(200).send(document))
           .catch(error => res.status(400).send(error));
       }
     }
@@ -206,7 +206,7 @@ module.exports = {
           }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -225,7 +225,7 @@ module.exports = {
           }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -237,4 +237,18 @@ module.exports = {
         });
     }
   },
+
+  listRoleDocs(req, res) {
+    console.log("<<<<<<<<<<<<<<<<<<<<<<<<<", req.decoded.userRole);
+    return User
+      .findAll({
+        where: {
+          title: req.decoded.userRole,
+        }
+      })
+      .then(user => {
+        console.log("...........................",user)
+      })
+      .catch(error => res.status(400).send(error));
+  }
 };

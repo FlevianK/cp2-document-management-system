@@ -9,8 +9,6 @@ module.exports = {
         lastName: 'Angiro',
         password: 'kezzy',
         email: 'kezzy@live.com',
-        createdAt: new Date(),
-        updatedAt: new Date(),
         title: "admin",
       },
       {
@@ -19,8 +17,6 @@ module.exports = {
         lastName: 'Nandaa',
         password: 'rodger',
         email: 'rodger@gmail.com',
-        createdAt: new Date(),
-        updatedAt: new Date(),
         title: "regular",
       },
       {
@@ -29,8 +25,6 @@ module.exports = {
         lastName: 'Choge',
         password: 'kerich',
         email: 'kerich@hotmail.com',
-        createdAt: new Date(),
-        updatedAt: new Date(),
         title: "regular",
       },
     ]);

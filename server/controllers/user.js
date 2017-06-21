@@ -1,7 +1,6 @@
 const User = require('../models').User;
-const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const salt = 8;
 
@@ -33,7 +32,7 @@ module.exports = {
           limit: req.query.limit,
         })
         .then(user => {
-          if (!user) {
+          if (!user || user.length < 1) {
             return res.status(404).send({
               message: 'User Not Found',
             });
@@ -51,7 +50,7 @@ module.exports = {
     return User
       .findById(req.params.userId)
       .then(user => {
-        if (!user) {
+        if (!user || user.length < 1) {
           return res.status(404).send({
             message: 'User Not Found',
           });
@@ -64,7 +63,7 @@ module.exports = {
     return User
       .findById(req.params.userId)
       .then(user => {
-        if (!user) {
+        if (!user || user.length < 1) {
           return res.status(404).send({
             message: 'User Not Found',
           });
@@ -80,8 +79,8 @@ module.exports = {
     return User
       .findById(req.params.userId)
       .then(user => {
-        if (!user) {
-          return res.status(400).send({
+        if (!user || user.length < 1) {
+          return res.status(404).send({
             message: 'User Not Found',
           });
         }
@@ -105,8 +104,8 @@ module.exports = {
             ]
           }
         })
-        .then(response => res.status(200).send(response))
+        .then(user => res.status(200).send(user))
         .catch(error => res.status(400).send(error));
     }
-  },
+  }
 };
