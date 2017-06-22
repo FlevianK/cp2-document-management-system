@@ -1,11 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router'; 
+import { Link } from 'react-router'; 
 
-const DocumentHeader = ({documents}) => {  
+const DocumentHeader = ({ documents }) => {  
   return (
-      <nav>
-      <Link to="/documents/create" 
-        activeClassName="active">Add</Link>
+    <nav>
+      <Link to="/documents/create" activeClassName="active">Add</Link>
       {" | "}
       <Link to="/documents/update" activeClassName="active">Update</Link>
       {" | "}
@@ -14,6 +13,4 @@ const DocumentHeader = ({documents}) => {
   );
 };
 
-
-
-export default DocumentHeader;  
+export default DocumentHeader; 

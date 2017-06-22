@@ -1,17 +1,18 @@
 const User = require('../models').User;
 const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const salt = 8;
 
 module.exports = {
   create(req, res) {
     if (InputValidate.validateInput(req.body)) {
-      return res.status(403).json({ // forbidden request
+      return res.status(400).json({ // forbidden request
         message: 'Input required',
       });
     }
+     console.log(req.body);
     return User
       .create({
         username: req.body.username,
@@ -19,7 +20,7 @@ module.exports = {
         lastName: req.body.lastName,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, salt),
-        title: req.body.title,
+        title: "regular",
       })
       .then(user => res.status(201).send(user))
       .catch(error => res.status(400).send(error));

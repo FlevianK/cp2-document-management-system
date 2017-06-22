@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-
-import Form from '../containers/form';
+import { Form } from '../containers';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginAction from '../actions/loginAction';

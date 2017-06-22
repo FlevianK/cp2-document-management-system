@@ -24,6 +24,7 @@ module.exports = (app) => {
 
   app.post('/api/roles',rolesController.create);
   app.get('/api/roles', rolesController.list);
+  app.delete('/api/roles/:role', rolesController.destroy);
   
   app.get('/api/users/', usersController.listUsers);
   app.get('/api/users/:userId', usersController.retrieve);

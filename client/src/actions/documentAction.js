@@ -12,6 +12,7 @@ export function loadDocuments() {
       });
   };
 }
+
 export function loadDocumentsSuccess(documents) {
   return { type: 'LOAD_DOCUMENTS_SUCCESS', documents };
 }
@@ -27,6 +28,7 @@ export function createDocument(newDoc) {
       });
   };
 }
+
 export function createdocumentSuccess() {
   return { type: 'CREATE_DOCUMENT_SUCCESS' }
 }
@@ -42,6 +44,7 @@ export function deleteDocument(deletedDoc) {
       });
   };
 }
+
 export function deletedocumentSuccess() {
   return { type: 'DELETE_DOCUMENT_SUCCESS' }
 }
@@ -57,6 +60,7 @@ export function updateDocument(updateDocs) {
       });
   };
 }
+
 export function updatedocumentSuccess() {
   return { type: 'UPDATE_DOCUMENT_SUCCESS' }
 }

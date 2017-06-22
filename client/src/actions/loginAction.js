@@ -13,6 +13,7 @@ export function loginUser(user) {
     });
   };
 }
+
 export function loginUserSuccess() {
   return { type: 'USER_LOGIN_SUCCESS' };
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DocumentList = ({documents}) => {  
+const DocumentList = ({ documents }) => {  
   return (
     <table>
         <thead>

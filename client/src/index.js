@@ -1,16 +1,29 @@
 import 'babel-polyfill';
 import React from 'react';
+import routes from './routes';
+import configureStore from './store/configureStore';
+import initialState from './reducers/initialState';
+import '../../node_modules/materialize-css/dist/css/materialize.min.css';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import routes from './routes';
-import configureStore from './store/configureStore';
-import { loginUser, loadDocuments } from './actions';
-import initialState from './reducers/initialState';
-import '../../node_modules/materialize-css/dist/css/materialize.min.css';
+import { 
+  loginUser, 
+  loadDocuments, 
+  createDocument, 
+  deleteDocument, 
+  updateDocument, 
+  loadUsers, 
+  createUser, 
+  deleteUser, 
+  updateUser,
+  loadRoles,
+  createRole,
+  deleteRole,
+  searchUser
+} from './actions';
+
 const store = configureStore();
-// store.dispatch(loginUser());
-// store.dispatch(loadDocuments());
 
 render(
   <Provider store={store}>

@@ -1,7 +1,8 @@
 {
     "/roles(/*)?": {
         "get": ["admin"],
-        "post": ["admin"]
+        "post": ["admin"],
+        "delete": ["admin"]
     },
     "/users/login": {
         "post": ["admin", "regular"]
@@ -13,5 +14,8 @@
         "get": ["admin"],
         "delete": ["admin"],
         "put": ["regular", "admin"]
+    },
+    "/search/users(/*)?": {
+        "get": ["admin"]
     }
 }
