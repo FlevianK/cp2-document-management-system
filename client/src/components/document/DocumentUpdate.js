@@ -2,66 +2,69 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form, Forms } from '../../containers';
+import { Form, Forms, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
+import jwtDecode from 'jwt-decode';
 
-class DocumentUpdate extends React.Component {
+export class DocumentUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      document: Object.assign({}, props.document)
+      documents: {
+        documentId: this.props.params.documentId
+      }
     };
     this.onDocumentChange = this.onDocumentChange.bind(this);
     this.onDocumentSave = this.onDocumentSave.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.props.document.id != nextProps.document.id) {
-      this.setState({document: Object.assign({}, nextProps.document)});
-    }
+  componentWillMount() {
+    this.props.actions.loadDocument(this.props.params)
   }
 
   onDocumentChange(event) {
     event.preventDefault();
     const field = event.target.name;
-    const document = this.state.document;
-    document[field] = event.target.value;
-    return this.setState({ document: document });
+    const documents = this.state.documents;
+    documents[field] = event.target.value;
+    return this.setState({ documents: documents });
   }
 
   onDocumentSave(event) {
     event.preventDefault();
-    this.props.actions.updateDocument(this.state.document);
-    this.context.router.push('/documents')
+    this.props.actions.updateDocument(this.state.documents);
   }
 
   render() {
+    const token = localStorage.jwt;
+    const role = token && jwtDecode(token);
     return (
-      <div className="col-md-12">
+      <div>
+        {role && role.userRole === "admin"
+          ? <DashboardHeader />
+          : ''
+        }
         <form>
-          <Forms
-            name="documentId"
-            label="document id"
-            type="number"
-            onChange={this.onDocumentChange} />
-
-            <Form
+          <Form
             name="title"
             label="title"
             type="text"
+            placeholder={this.props.documents.title}
             onChange={this.onDocumentChange} />
 
           <Form
             name="content"
             label="Content"
             type="text"
+            placeholder={this.props.documents.content}
             onChange={this.onDocumentChange} />
 
           <Form
             name="access"
             label="access"
             type="text"
+            placeholder={this.props.documents.access}
             onChange={this.onDocumentChange} />
 
           <input
@@ -75,46 +78,15 @@ class DocumentUpdate extends React.Component {
 }
 
 DocumentUpdate.propTypes = {
-  document: PropTypes.object.isRequired,
+  documents: PropTypes.object.isRequired,
   access: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
-DocumentUpdate.contextTypes = {
-  router: PropTypes.object
-};
-
-function getDocumentById(documents, id) {
-  const document = documents.filter( document => document.id == id)
-  if(document) return document[0];
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
-  const documentId = ownProps.params.id;
-
-  let document = {id: '', title: '', content: '', access: ''}
-
-  if(documentId && state.documents.length > 0) {
-    document = getDocumentById(state.documents, documentId)
-  }
-
-  const accessFormattedFordDropdown = [
-    {value: "private", text: "Private"},
-    {value: "public", text:"Public"}
-    ];
-
   return {
-    document: document,
-    access: accessFormattedFordDropdown
-}; 
-// const roleformattedForDropdown =state.roles.map(role => {
-//   return {
-//     value: role.title,
-//     text: role.title
-//   };
-// });
-
+    documents: state.documents
+  }
 }
 
 function mapDispatchToProps(dispatch) {

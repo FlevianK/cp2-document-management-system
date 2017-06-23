@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginAction from '../actions/loginAction';
 
-class Login extends React.Component {
+export class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,33 +29,49 @@ class Login extends React.Component {
 
   onLoginSave(event) {
     event.preventDefault();
-    this.props.actions.loginUser(this.state.loginDetails); 
+    this.props.actions.loginUser(this.state.loginDetails);
   }
-  
+
 
   render() {
     return (
       <div>
-        <form>
-          <Form
-            name="email"
-            label="email"
-            value={this.state.loginDetails.email}
-            onChange={this.onLoginChange} />
+        <div className="row">
+          <div className="col s6 offset-m3">
+            Login or Sign up
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s6 offset-m3">
+            <form>
+              <Form
+                name="email"
+                label="email"
+                value={this.state.loginDetails.email}
+                onChange={this.onLoginChange} />
 
-          <Form
-            name="password"
-            label="password"
-            type="password"
-            value={this.state.loginDetails.password}
-            onChange={this.onLoginChange} />
+              <Form
+                name="password"
+                label="password"
+                type="password"
+                value={this.state.loginDetails.password}
+                onChange={this.onLoginChange} />
 
-          <input
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.onLoginSave} />
-        </form>
-      </div>
+              <input
+                type="submit"
+                className="btn btn-primary"
+                onClick={this.onLoginSave} />
+            </form>
+            <div>
+            </div>
+            <div className="row">
+              <div className="col s6 offset-m3">
+                <Link to="/users/create" activeClassName="active">Sign Up</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div >
     );
   }
 }

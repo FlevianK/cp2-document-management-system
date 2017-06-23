@@ -1,11 +1,11 @@
-import { allUsers, createdUser, userDelete, userUpdate, userSearch } from '../api/userApi';
+import { allUsers, createdUser, userDelete, userUpdate, userSearch, allUser } from '../api/userApi';
 import * as types from '../constants/appConstants';
 
 export function loadUsers() {
   return function (dispatch) {
     return allUsers()
       .then(users => {
-        dispatch(loadUsersSuccess(users));
+        dispatch(loadusersSuccess(users));
       })
       .catch(error => {
         throw (error);
@@ -13,7 +13,7 @@ export function loadUsers() {
   };
 }
 
-export function loadUsersSuccess(users) {
+export function loadusersSuccess(users) {
   return { type: 'LOAD_USERS_SUCCESS', users };
 }
 
@@ -69,7 +69,7 @@ export function searchUsers(searchValue) {
   return function (dispatch) {
     return userSearch(searchValue)
       .then(users => {
-        dispatch(searchUserSuccess(users));
+        dispatch(searchuserSuccess(users));
       })
       .catch(error => {
         throw (error);
@@ -79,4 +79,20 @@ export function searchUsers(searchValue) {
 
 export function searchuserSuccess(users) {
   return { type: 'SEARCH_USER_SUCCESS', users }
+}
+
+export function loadUser(user) {
+  return function (dispatch) {
+    return allUser(user)
+      .then(users => {
+        dispatch(loadUserSuccess(users));
+      })
+      .catch(error => {
+        throw (error);
+      });
+  };
+}
+
+export function loadUserSuccess(users) {
+  return { type: 'LOAD_USER_SUCCESS', users };
 }

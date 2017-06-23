@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const RoleList = ({ roles }) => {  
   return (
@@ -6,7 +7,7 @@ const RoleList = ({ roles }) => {
         <thead>
           <tr>
               <th>Role</th>
-              <th>Action</th>
+              <th></th>
           </tr>
         </thead>
 
@@ -14,7 +15,7 @@ const RoleList = ({ roles }) => {
            {roles.map(role => 
           <tr>
             <td>{role.title}</td>
-            <th>Delete</th>
+            <td ><Link to={`/roles/delete/${role.title}`}>Delete</Link></td>
           </tr>
            )}
           </tbody>

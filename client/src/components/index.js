@@ -2,6 +2,7 @@ import Login from './Login';
 import App from './App';
 import Dashboard from './Dashboard';
 import Document from './document/Document';
+import Documents from './document/Documents';
 import DocumentCreate from './document/DocumentCreate';
 import DocumentDelete from './document/DocumentDelete';
 import DocumentUpdate from './document/DocumentUpdate';
@@ -18,6 +19,7 @@ export {
   App,
   Dashboard,
   Document,
+  Documents,
   DocumentCreate,
   DocumentDelete,
   DocumentUpdate,

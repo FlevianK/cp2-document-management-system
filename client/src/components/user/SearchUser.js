@@ -1,58 +1,62 @@
-import React from 'react'; 
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { UserList, Form, UserHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
- 
-class SearchUser extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    // this.state = {
-    //   user: { searchName:''}
-    // };
-    this.onUserChange = this.onUserChange.bind(this);
-    this.onUserClick = this.onUserClick.bind(this);
-  }
 
-  onUserChange(event) {
-    // const field = event.target.name;
-    // const user = this.state.user;
-    // user[field] = event.target.value;
-    return this.setState({ searchValue: event.target.value});
-  }
+export class SearchUser extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            searchValue: ''
+        };
+        this.onUserChange = this.onUserChange.bind(this);
+        this.onUserClick = this.onUserClick.bind(this);
+    }
 
-  onUserClick(searchValue) {
-    event.preventDefault();
-    this.props.actions.searchsUser(searchValue);
-  }
+    onUserChange(event) {
+        return this.setState({ searchValue: event.target.value });
+    }
 
-  render () {
-    return (
-      <div className="col-md-12">
-        <form>
-          <Form
-            name="user"
-            label="Search"
-            type="text"
-            onChange={this.onUserChange}
-            onClick={this.onUserClick} />
-          </form>
-      </div>
-    )
-  }
+    onUserClick() {
+        event.preventDefault();
+        this.props.actions.searchUsers(this.state.searchValue);
+    }
+
+    render() {
+        return (
+            <div className="row">
+                <div className="col s4 offset-m4">
+
+                    <input
+                        name="user"
+                        label="Search"
+                        type="text"
+                        onChange={this.onUserChange} />
+                </div>
+                <div className="col s4 ">
+                    <i className="material-icons" onClick={this.onUserClick} >search</i>
+                </div>
+            </div >
+        )
+    }
 }
 
 SearchUser.PropTypes = {
-  users: PropTypes.object.isRequired
+    users: PropTypes.object.isRequired
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userAction, dispatch)
-  };
+    return {
+        actions: bindActionCreators(userAction, dispatch)
+    };
+}
+function mapStateToProps(state) {
+    return {
+        state
+    }
 }
 
-export default connect( mapDispatchToProps)(SearchUser);
- 
+export default connect(mapStateToProps, mapDispatchToProps)(SearchUser);

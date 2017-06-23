@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form } from '../../containers';
+import { Form , DashboardHeader} from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 
-class RoleCreate extends React.Component {
+export class RoleCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +34,7 @@ class RoleCreate extends React.Component {
   render() {
     return (
       <div className="col-md-12">
+        <DashboardHeader />
         <form>
           <Form
             name="title"

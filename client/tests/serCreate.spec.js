@@ -1,0 +1,36 @@
+import expect from 'expect';
+import React from 'react';
+import {UserCreate} from './../src/components/user/UserCreate';
+import { shallow, mount } from 'enzyme';
+
+it('renders div', () => {
+  const wrapper = mount(<UserCreate />)
+  expect(wrapper.find('div').length).toBe(11)
+})
+it('renders input', () => {
+  const wrapper = mount(<UserCreate />)
+  expect(wrapper.find('input').length).toBe(6)
+})
+it('renders Form', () => {
+  const wrapper = mount(<UserCreate />)
+  expect(wrapper.find('Form').length).toBe(5)
+})
+it('renders submit button', () => {
+  const props = {
+    actions: {
+      createUser: () => { return Promise.resolve();}
+    },
+    newUser: {
+        title: ''
+      }
+  }
+  const wrapper = mount(<UserCreate {...props} />)
+  const submit = wrapper.find('input').last()
+  expect(submit.prop('type')).toBe('submit')
+  submit.simulate('click')
+})
+it('form  input type', () => {
+  const wrapper = mount(<UserCreate />)
+  const submit = wrapper.find('Form').last()
+  expect(submit.prop('type')).toBe('text')
+})

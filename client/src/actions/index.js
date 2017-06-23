@@ -1,5 +1,5 @@
-import { loadDocuments, createDocument, deleteDocument, updateDocument } from './documentAction';
-import { loadUsers, createUser, deleteUser, updateUser, searchUser } from './userAction';
+import { loadDocuments, createDocument, deleteDocument, updateDocument, loadDocument, loadDoc, searchDocument } from './documentAction';
+import { loadUsers, createUser, deleteUser, updateUser, searchUser, loadUser } from './userAction';
 import { loadRoles, createRole, deleteRole } from './roleAction';
 import { loginUser } from './loginAction';
 
@@ -16,5 +16,9 @@ export {
   loadRoles,
   createRole,
   deleteRole,
-  searchUser
+  searchUser,
+  loadUser,
+  loadDocument,
+  loadDoc,
+  searchDocument
 }

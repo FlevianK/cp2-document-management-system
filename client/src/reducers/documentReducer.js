@@ -19,6 +19,16 @@ export default function documentReducer(state = initialState.documents, action) 
       browserHistory.push('/documents')
       return action.documents.data
 
+    case types.LOAD_DOCUMENT_SUCCESS:
+      return action.documents.data
+
+    case types.SEARCH_DOCUMENT_SUCCESS:
+      return action.documents.data  
+
+    case types.LOAD_DOC_SUCCESS:
+      return action.documents.data
+
+
     default:
       return state;
   }

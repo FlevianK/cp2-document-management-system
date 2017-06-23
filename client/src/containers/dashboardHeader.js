@@ -9,6 +9,8 @@ const DashboardHeader = ({ dashboard }) => {
         <Link to="/users" activeClassName="active">Users</Link>
         {" | "}
         <Link to="/documents"activeClassName="active">Documents</Link>
+        {" | "}
+        <Link to="/"activeClassName="active">Logout</Link>
     </nav>
   );
 };

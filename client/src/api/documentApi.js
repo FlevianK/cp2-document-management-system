@@ -35,3 +35,27 @@ export function deleteDoc(deletedDoc) {
     { headers: { 'x-access-token': token } }
   );
 }
+
+export function allDocument(document) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/documents/${document.documentId}`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
+export function allDoc(doc) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/users/${doc}/documents`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
+export function documentSearch(documentValue) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/search/documents/?q=${documentValue}`,
+    { headers: { 'x-access-token': token } }
+  );
+}

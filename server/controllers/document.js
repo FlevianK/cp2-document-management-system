@@ -176,7 +176,9 @@ module.exports = {
           .findAll({
             where: {
               $or: [
-                { title: { $like: `%${req.query.q}%` } },
+                { title: { $iLike: `%${req.query.q}%` } },
+                { access: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
@@ -190,7 +192,8 @@ module.exports = {
             where: {
               userId: req.decoded.userId,
               $or: [
-                { title: { $like: `%${req.query.q}%` } },
+                { title: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } }
               ]
             }
           })

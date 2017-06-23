@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
 
-const RoleHeader = ({ roles }) => {  
-  return (
-    <nav>
-      <Link to="/roles/create" activeClassName="active">Add</Link>
-      {" | "}
-      <Link to="/roles/delete"activeClassName="active">Delete</Link>
-    </nav>
-  );
+const RoleHeader = ({ roles }) => {
+    return (
+        <div style={{ marginTop: '10px' }}>
+            <Link to="/roles/create" activeClassName="active">Add</Link>
+        </div>
+    );
 };
 
 export default RoleHeader;

@@ -99,10 +99,10 @@ module.exports = {
         .findAll({
           where: {
             $or: [
-              { username: { $like: `%${req.query.q}%` } },
-              { firstName: { $like: `%${req.query.q}%` } },
-              { lastName: { $like: `%${req.query.q}%` } },
-              { email: { $like: `%${req.query.q}%` } }
+              { username: { $iLike: `%${req.query.q}%` } },
+              { firstName: { $iLike: `%${req.query.q}%` } },
+              { lastName: { $iLike: `%${req.query.q}%` } },
+              { email: { $iLike: `%${req.query.q}%` } }
             ]
           }
         })

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL='http://localhost:8000/api'
+const API_URL = 'http://localhost:8000/api'
 
 export function login(user) {
-  return axios.post(`${API_URL}/users/login`, user )
+  return axios.post(`${API_URL}/users/login`, user)
 }
 
 export function allUsers() {
@@ -40,10 +40,18 @@ export function userDelete(deletedUser) {
   );
 }
 
-export function userSearch() {
+export function userSearch(userValue) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/search/users/?q=${userValue}`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
+export function allUser(user) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/users/${user.userId}`,
     { headers: { 'x-access-token': token } }
   );
 }

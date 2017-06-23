@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentList, DocumentHeader } from '../../containers';
+import { DocumentList, DocumentHeader, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
+import jwtDecode from 'jwt-decode';
+import SearchDocument from './SearchDocument';
  
-class Document extends React.Component {
+export class Document extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -18,15 +20,23 @@ class Document extends React.Component {
     };
   }
   componentWillMount() {
-    let documents;
-    this.props.actions.loadDocuments()
+    const token = localStorage.jwt;
+    const user = token && jwtDecode(token);
+    const idUser = user.userId;
+    this.props.actions.loadDoc(idUser);
   }
 
   render () {
+    const token = localStorage.jwt;
+    const role = token && jwtDecode(token);
     return (
-      <div className="col-md-12">
-        <h1>Documents</h1>
+      <div>
+        {role && role.userRole === "admin"
+          ? <DashboardHeader />
+            : ''
+          }
         <DocumentHeader />
+        <SearchDocument />
         <DocumentList documents={this.props.documents} />
       </div>
     )

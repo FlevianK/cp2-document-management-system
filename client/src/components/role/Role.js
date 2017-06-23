@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { RoleList, RoleHeader } from '../../containers';
+import { RoleList, RoleHeader, DashboardHeader } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
  
-class Role extends React.Component {
+export class Role extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -24,7 +24,7 @@ class Role extends React.Component {
   render () {
     return (
       <div className="col-md-12">
-        <h1>Roles</h1>
+        <DashboardHeader />
         <RoleHeader />
         <RoleList roles={this.props.roles} />
       </div>

@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form } from '../../containers';
+import { Form, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
+import jwtDecode from 'jwt-decode';
 
-class DocumentCreate extends React.Component {
+export class DocumentCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,9 +35,14 @@ class DocumentCreate extends React.Component {
   }
 
   render() {
-    console.log()
+    const token = localStorage.jwt;
+    const role = token && jwtDecode(token);
     return (
-      <div className="col-md-12">
+      <div>
+        {role && role.userRole === "admin"
+          ? <DashboardHeader />
+          : ''
+        }
         <form>
           <Form
             name="title"

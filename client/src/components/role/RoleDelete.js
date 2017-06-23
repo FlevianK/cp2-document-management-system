@@ -2,29 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form } from '../../containers';
+import { Form, DashboardHeader } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 
-class RoleDelete extends React.Component {
+export class RoleDelete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       deletedRole: {
-        role: ''
+        role: this.props.params.role
       }
     };
-    this.onRoleChange = this.onRoleChange.bind(this);
     this.onRoleSave = this.onRoleSave.bind(this);
   }
 
-  onRoleChange(event) {
-    event.preventDefault();
-    const field = event.target.name;
-    const deletedRole = this.state.deletedRole;
-    deletedRole[field] = event.target.value;
-    return this.setState({ deletedRole: deletedRole });
-  }
 
   onRoleSave(event) {
     event.preventDefault();
@@ -34,11 +26,10 @@ class RoleDelete extends React.Component {
   render() {
     return (
       <div className="col-md-12">
+        <DashboardHeader />
         <form>
           <Form
-            name="role"
-            type="text"
-            onChange={this.onRoleChange} />
+            value={this.props.params.role} />
 
           <input
             type="submit"

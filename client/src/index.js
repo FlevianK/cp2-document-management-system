@@ -20,7 +20,11 @@ import {
   loadRoles,
   createRole,
   deleteRole,
-  searchUser
+  searchUser,
+  loadUser,
+  loadDocument,
+  loadDoc,
+  searchDocument
 } from './actions';
 
 const store = configureStore();

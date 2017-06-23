@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList, UserHeader } from '../../containers';
+import { UserList, UserHeader, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
-import SearchUser from './SearchUser'
+import SearchUser from './SearchUser';
  
-class User extends React.Component {
+export class User extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -28,7 +28,7 @@ class User extends React.Component {
   render () {
     return (
       <div className="col-md-12">
-        <h1>Users</h1>
+        <DashboardHeader />
         <UserHeader />
         <SearchUser />
         <UserList users={this.props.users} />

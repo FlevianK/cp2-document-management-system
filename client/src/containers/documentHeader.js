@@ -1,15 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
+import jwtDecode from 'jwt-decode';
 
-const DocumentHeader = ({ documents }) => {  
+const DocumentHeader = ({ documents }) => {
+  const token = localStorage.jwt;
+  const role = token && jwtDecode(token);
   return (
-    <nav>
+    <div style={{ marginTop: '10px' }}>
       <Link to="/documents/create" activeClassName="active">Add</Link>
       {" | "}
-      <Link to="/documents/update" activeClassName="active">Update</Link>
+      <Link to="/documents" activeClassName="active">My Documents</Link>
       {" | "}
-      <Link to="/documents/delete"activeClassName="active">Delete</Link>
-    </nav>
+      <Link to="/documents/all" activeClassName="active">All Documents</Link>
+      {role && role.userRole !== "admin"
+        ?
+        <Link to="/" activeClassName="active">Logout</Link>
+        : ''
+      }
+    </div>
   );
 };
 

@@ -4,60 +4,73 @@ import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import Form from '../../containers/form';
-import { Forms } from '../../containers';
+import { Forms, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 
-class UserUpdate extends React.Component {
+export class UserUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      updatedUser: []
+      users: {
+        userId: this.props.params.userId
+      }
     };
-    this.onUserChange = this.onUserChange.bind(this);
     this.onUserSave = this.onUserSave.bind(this);
+    this.onUserChange = this.onUserChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.actions.loadUser(this.props.params)
   }
 
   onUserChange(event) {
     event.preventDefault();
     const field = event.target.name;
-    const updatedUser = this.state.updatedUser;
-    updatedUser[field] = event.target.value;
-    return this.setState({ updatedUser: updatedUser });
+    const users = this.state.users;
+    users[field] = event.target.value;
+    return this.setState({ users: users });
   }
 
   onUserSave(event) {
     event.preventDefault();
-    this.props.actions.updateUser(this.state.updatedUser);
+    this.props.actions.updateUser(this.state.users);
   }
 
   render() {
+    // const user = this.props.users;
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
     return (
       <div className="col-md-12">
+        <DashboardHeader />
         <form>
           <Form
             name="username"
             label="Username"
             type="text"
-            onChange={this.onUserChange} />
+            placeholder={this.props.users.firstName}
+            onChange={this.onUserChange}
+          />
 
           <Form
             name="firstName"
             label="First Name"
+            placeholder={this.props.users.firstName}
             type="text"
             onChange={this.onUserChange} />
 
           <Form
             name="lastName"
-            label="Surname"
+            label="Last name"
+            placeholder={this.props.users.lastName}
             type="text"
             onChange={this.onUserChange} />
 
           <Form
             name="email"
-            label="Email Address"
+            label="Email ddress"
+            placeholder={this.props.users.email}
             type="text"
             onChange={this.onUserChange} />
 
@@ -65,15 +78,17 @@ class UserUpdate extends React.Component {
             name="password"
             label="Password"
             type="text"
+            placeholder={this.props.users.email}
             onChange={this.onUserChange} />
 
 
           {role && role.userRole === "admin"
-          ? <Form
-            name="title"
-            label="Title"
-            type="text"
-            onChange={this.onUserChange} />
+            ? <Form
+              name="title"
+              label="Title"
+              type="text"
+              placeholder={this.props.users.title}
+              onChange={this.onUserChange} />
             : ''
           }
 
@@ -87,10 +102,20 @@ class UserUpdate extends React.Component {
   }
 }
 
+UserUpdate.PropTypes = {
+  users: PropTypes.object.isRequired
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    users: state.users
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userAction, dispatch)
   };
 }
 
-export default connect(null, mapDispatchToProps)(UserUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate);

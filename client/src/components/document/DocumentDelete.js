@@ -2,59 +2,54 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Forms } from '../../containers';
+import { Forms, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
+import jwtDecode from 'jwt-decode';
 
-class DocumentDelete extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      deleteDocument: {
-        documentId: ''
-      }
-    };
-    this.onDocumentChange = this.onDocumentChange.bind(this);
-    this.onDocumentSave = this.onDocumentSave.bind(this);
-  }
+export class DocumentDelete extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            deleteDocument: {
+                documentId: this.props.params.documentId
+            }
+        };
+        this.onDocumentSave = this.onDocumentSave.bind(this);
+    }
+    onDocumentSave(event) {
+        event.preventDefault();
+        this.props.actions.deleteDocument(this.state.deleteDocument);
+    }
 
-  onDocumentChange(event) {
-    event.preventDefault();
-    const field = event.target.name;
-    const deleteDocument = this.state.deleteDocument;
-    deleteDocument[field] = event.target.value;
-    return this.setState({ deleteDocument: deleteDocument });
-  }
+    render() {
+        const token = localStorage.jwt;
+        const role = token && jwtDecode(token);
+        return (
+            <div className="col-md-12">
+                {role && role.userRole === "admin"
+                    ? <DashboardHeader />
+                    : ''
+                }
+                <form>
+                    <Forms
+                        value={this.props.params.documentId} />
 
-  onDocumentSave(event) {
-    event.preventDefault();
-    this.props.actions.deleteDocument(this.state.deleteDocument);
-  }
-
-  render() {
-    return (
-      <div className="col-md-12">
-        <form>
-          <Forms
-            name="documentId"
-            label="Document Id"
-            type="number"
-            onChange={this.onDocumentChange} />
-
-          <input
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.onDocumentSave} />
-        </form>
-      </div>
-    )
-  }
+                    <input
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={this.onDocumentSave} />
+                </form>
+            </div>
+        )
+    }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(documentAction, dispatch)
-  };
+    return {
+        actions: bindActionCreators(documentAction, dispatch)
+    };
 }
 
 export default connect(null, mapDispatchToProps)(DocumentDelete);
+

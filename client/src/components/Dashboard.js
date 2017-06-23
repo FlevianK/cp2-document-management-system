@@ -11,10 +11,6 @@ class Dashboard extends React.Component {
     const role = token && jwtDecode(token);
     return (
       <div>
-        {role && role.userRole === "admin"
-          ? <DashboardHeader />
-            : ''
-          }
         <Document />
         {this.props.children}
       </div>
