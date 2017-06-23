@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTgwNjYwNjksImV4cCI6MTQ5ODA2NzUwOX0.OPnhwc1zy61hK2y6XAjEYjz1dgx9dkfnKC1-cyVlF1I"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTgyMzg0OTEsImV4cCI6MTQ5ODIzOTkzMX0.jfm7B_rcCT_Zszt_zXmoWwUW2PQRF-bqsn22K6Y_WjI"
 
 describe('Roles', () => {
   describe('/POST', () => {

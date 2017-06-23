@@ -6,6 +6,10 @@
     },
     "/users(/*)?": {
         "get": ["admin"],
-        "delete": ["admin"]
+        "delete": ["admin"],
+        "put": ["admin", "regular"]
+    },
+    "/search/users(/*)?":{
+        "get": ["admin"]
     }
 }

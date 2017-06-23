@@ -5,7 +5,8 @@
     "database": "database_development",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "loggig": false
   },
   "test": {
     "username": "fleviankanaiza",
@@ -13,7 +14,8 @@
     "database": "database_test",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
     "username": "fleviankanaiza",
@@ -21,6 +23,7 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging":false
   }
 }

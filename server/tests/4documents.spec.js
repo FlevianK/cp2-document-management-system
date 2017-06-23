@@ -6,7 +6,7 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJSb2xlIjoicmVndWxhciIsImlhdCI6MTQ5ODA2NjEzOCwiZXhwIjoxNDk4MDY3NTc4fQ.E6tneXHk4zBQEsamuU1VKh969jLgfLJGbxXtQYvgRq4"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM5LCJ1c2VyUm9sZSI6InJlZ3VsYXIiLCJpYXQiOjE0OTgyMzg3MzcsImV4cCI6MTQ5ODI0MDE3N30.xXBLayRiE0V5tWmi_Bfa2AVKPxXm_yNB2C1Lga0tvVs"
 
 describe('Documents', () => {
   describe('/GET/documents', () => {
