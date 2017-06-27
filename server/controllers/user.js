@@ -46,6 +46,7 @@ module.exports = {
       .then(users => res.status(200).send(users))
       .catch(error => res.status(400).send(error));
   },
+
   retrieve(req, res) {
     return User
       .findById(req.params.userId)
@@ -59,6 +60,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+
   update(req, res) {
     return User
       .findById(req.params.userId)
@@ -75,6 +77,7 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+
   destroy(req, res) {
     return User
       .findById(req.params.userId)
@@ -91,16 +94,17 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+  
   searchUser(req, res) {
     if (req.query.q) {
       return User
         .findAll({
           where: {
             $or: [
-              { username: { $like: `%${req.query.q}%` } },
-              { firstName: { $like: `%${req.query.q}%` } },
-              { lastName: { $like: `%${req.query.q}%` } },
-              { email: { $like: `%${req.query.q}%` } }
+              { username: { $iLike: `%${req.query.q}%` } },
+              { firstName: { $iLike: `%${req.query.q}%` } },
+              { lastName: { $iLike: `%${req.query.q}%` } },
+              { email: { $iLike: `%${req.query.q}%` } }
             ]
           }
         })

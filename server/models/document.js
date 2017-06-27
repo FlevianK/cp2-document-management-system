@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       required: true,
       default: 'public',
       enum: ['private', 'public']
+    },
+    userRole: {
+      type: DataTypes.STRING,
+      required: true,
     }
   }, {
       classMethods: {

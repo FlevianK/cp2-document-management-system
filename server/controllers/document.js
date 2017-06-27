@@ -15,6 +15,7 @@ module.exports = {
         content: req.body.content,
         access: req.body.access,
         userId: req.body.userId,
+        userRole: req.decoded.userRole,
       })
       .then(document => res.status(201).send(document))
       .catch(error => res.status(400).send(error));
@@ -39,7 +40,6 @@ module.exports = {
           .catch(error => res.status(400).send(error));
       }
       return Document
-
         .findAll()
         .then(document => {
           if (!document || document.length < 1) {
@@ -50,7 +50,7 @@ module.exports = {
           return res.status(200).send(document);
         })
         .catch(error => res.status(400).send(error));
-    } else if (req.decoded.userRole == 'regular') {
+    } else {
       if (req.query.limit || req.query.offset) {
         return Document
           .findAll({
@@ -87,10 +87,15 @@ module.exports = {
         .catch(error => res.status(400).send(error));
     }
   },
+
   retrieve(req, res) {
-    if (req.decoded.userRole == 'admin') {
+    if(req.params.documentId == "admin"){
       return Document
-        .findById(req.params.documentId)
+        .findAll({
+          where: {
+            userRole: req.params.documentId 
+          }
+        })
         .then(document => {
           if (!document || document.length < 1) {
             return res.status(404).send({
@@ -100,7 +105,24 @@ module.exports = {
           return res.status(200).send(document);
         })
         .catch(error => res.status(400).send(error));
-    } else if (req.decoded.userRole == 'regular') {
+    } else if (req.params.documentId == req.decoded.userRole){
+      return Document
+        .findAll({
+          where: {
+            access: 'public',
+            userRole: req.params.documentId
+          }
+        })
+        .then(document => {
+          if (!document || document.length < 1) {
+            return res.status(404).send({
+              message: 'Document Not Found',
+            });
+          }
+          return res.status(200).send(document);
+        })
+        .catch(error => res.status(400).send(error));
+    } else {
       return Document
         .findOne({
           where: {
@@ -118,9 +140,8 @@ module.exports = {
         })
         .catch(error => res.status(400).send(error));
     }
-
-
   },
+
   update(req, res) {
     return Document
       .findOne({
@@ -139,13 +160,15 @@ module.exports = {
           .update({
             title: req.body.title || document.title,
             content: req.body.content || document.content,
-            access: req.body.access || document.access
+            access: req.body.access || document.access,
+            userRole: req.decoded.userRole
           })
-          .then(() => res.status(200).send(document))  // Send back the updated document.
+          .then(() => res.status(200).send(document)) 
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
   },
+
   destroy(req, res) {
     return Document
       .findOne({
@@ -167,6 +190,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+
   searchDoc(req, res) {
     if (req.decoded.userRole == 'admin') {
       if (req.query.q) {
@@ -174,21 +198,24 @@ module.exports = {
           .findAll({
             where: {
               $or: [
-                { title: { $like: `%${req.query.q}%` } },
+                { title: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } },
+                { userRole: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
           .then(document => res.status(200).send(document))
           .catch(error => res.status(400).send(error));
       }
-    } else if (req.decoded.userRole == 'regular') {
+    } else {
       if (req.query.q) {
         return Document
           .findAll({
             where: {
               userId: req.decoded.userId,
               $or: [
-                { title: { $like: `%${req.query.q}%` } },
+                { title: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
@@ -197,58 +224,24 @@ module.exports = {
       }
     }
   },
-  userDocs(req, res) {
-    if (req.decoded.userRole == 'admin') {
-      return Document
-        .findAll({
-          where: {
-            userId: req.params.userId
-          }
-        })
-        .then(document => {
-          if (!document || document.length < 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-        .catch((error) => {
-          res.status(400).send(error)
-        });
-    } else if (req.decoded.userRole == 'regular') {
-      return Document
-        .findAll({
-          where: {
-            userId: req.params.userId,
-            access: 'public'
-          }
-        })
-        .then(document => {
-          if (!document || document.length < 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-        .catch((error) => {
-          res.status(400).send(error)
-        });
-    }
-  },
 
-  listRoleDocs(req, res) {
-    console.log("<<<<<<<<<<<<<<<<<<<<<<<<<", req.decoded.userRole);
-    return User
+  userDocs(req, res) {
+    return Document
       .findAll({
         where: {
-          title: req.decoded.userRole,
+          userId: req.params.userId
         }
       })
-      .then(user => {
-        console.log("...........................",user)
+      .then(document => {
+        if (!document || document.length < 1) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        return res.status(200).send(document);
       })
-      .catch(error => res.status(400).send(error));
+      .catch((error) => {
+        res.status(400).send(error)
+      });
   }
 };
