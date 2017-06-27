@@ -6,7 +6,7 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTgyMzg0OTEsImV4cCI6MTQ5ODIzOTkzMX0.jfm7B_rcCT_Zszt_zXmoWwUW2PQRF-bqsn22K6Y_WjI"
+const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg1NTE3MTIsImV4cCI6MTQ5ODU1MzE1Mn0.qSNKNaQLGPDb50AepDMPThTeLjhtSIbaNrNza6vD0V0"
 
 describe('Documents', () => {
   describe('/GET/documents', () => {
@@ -330,6 +330,17 @@ describe('/PUT', () => {
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/<document>', () => {
+    it('it should GET a document by the user role', (done) => {
+      chai.request(app)
+        .get('/api/documents/admin')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
           done();
         });
     });

@@ -9,11 +9,11 @@ module.exports = {
       .then(role => res.status(201).send(role))
       .catch(error => res.status(400).send(error));
   },
-  
+
   list(req, res) {
     return Role
       .findAll()
-      .then(role => {console.log(res.status(200).send(role))})
+      .then(role => res.status(200).send(role))
       .catch(error => res.status(400).send(error));
   },
 

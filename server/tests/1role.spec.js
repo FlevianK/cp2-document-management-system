@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTgyMzg0OTEsImV4cCI6MTQ5ODIzOTkzMX0.jfm7B_rcCT_Zszt_zXmoWwUW2PQRF-bqsn22K6Y_WjI"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg1NTE3MTIsImV4cCI6MTQ5ODU1MzE1Mn0.qSNKNaQLGPDb50AepDMPThTeLjhtSIbaNrNza6vD0V0"
 
 describe('Roles', () => {
   describe('/POST', () => {
@@ -19,7 +19,6 @@ describe('Roles', () => {
           title: "admin"
         })
         .end((err, res) => {
-          // console.log(res);
           res.should.have.status(201);
           done();
         });
@@ -34,7 +33,6 @@ describe('Roles', () => {
           title: "regular"
         })
         .end((err, res) => {
-          // console.log(res);
           res.should.have.status(201);
           done();
         });
@@ -49,7 +47,6 @@ describe('Roles', () => {
           title: "fellow"
         })
         .end((err, res) => {
-          // console.log(res);
           res.should.have.status(201);
           done();
         });
@@ -65,7 +62,6 @@ describe('Roles', () => {
           te: "fellow"
         })
         .end((err, res) => {
-          // console.log(res);
           res.should.have.status(400);
           done();
         });
