@@ -6,6 +6,7 @@ import { Form, Forms, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
+import { browserHistory } from 'react-router';
 
 export class DocumentUpdate extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export class DocumentUpdate extends React.Component {
   onDocumentSave(event) {
     event.preventDefault();
     this.props.actions.updateDocument(this.state.documents);
+    browserHistory.push('/documents')
   }
 
   render() {

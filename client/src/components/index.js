@@ -6,6 +6,7 @@ import Documents from './document/Documents';
 import DocumentCreate from './document/DocumentCreate';
 import DocumentDelete from './document/DocumentDelete';
 import DocumentUpdate from './document/DocumentUpdate';
+import DocumentRole from './document/DocumentRole';
 import User from './user/User';
 import UserCreate from './user/UserCreate';
 import UserDelete from './user/UserDelete';
@@ -18,11 +19,13 @@ export {
   Login, 
   App,
   Dashboard,
+  
   Document,
   Documents,
   DocumentCreate,
   DocumentDelete,
   DocumentUpdate,
+  DocumentRole
 
   User,
   UserCreate,

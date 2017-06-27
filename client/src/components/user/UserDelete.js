@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Form, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 
 export class UserDelete extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export class UserDelete extends React.Component {
   onUserSave(event) {
     event.preventDefault();
     this.props.actions.deleteUser(this.state.deletedUser);
+    browserHistory.push('/users')
   }
 
   render() {

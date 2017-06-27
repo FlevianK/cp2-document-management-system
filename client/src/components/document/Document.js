@@ -20,9 +20,10 @@ export class Document extends React.Component {
     };
   }
   componentWillMount() {
+    let idUser;
     const token = localStorage.jwt;
     const user = token && jwtDecode(token);
-    const idUser = user.userId;
+    // const idUser = user.userId;
     this.props.actions.loadDoc(idUser);
   }
 

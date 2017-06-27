@@ -11,6 +11,8 @@ const DocumentHeader = ({ documents }) => {
       {" | "}
       <Link to="/documents" activeClassName="active">My Documents</Link>
       {" | "}
+      <Link to="/documents/role" activeClassName="active">Role Documents</Link>
+      {" | "}
       <Link to="/documents/all" activeClassName="active">All Documents</Link>
       {role && role.userRole !== "admin"
         ?

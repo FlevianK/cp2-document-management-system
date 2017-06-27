@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Form , DashboardHeader} from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 
 export class RoleCreate extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export class RoleCreate extends React.Component {
     this.state = {
       newRole: {
         title: ''
-      }
+      },
+      errors: {}
     };
     this.onRoleChange = this.onRoleChange.bind(this);
     this.onRoleSave = this.onRoleSave.bind(this);
@@ -26,9 +28,25 @@ export class RoleCreate extends React.Component {
     return this.setState({ newRole: newRole });
   }
 
+  roleFormIsValid(){
+    let formIsValid = true;
+    let errors = {};
+
+    if (this.state.newRole.title.length < 1 ) {
+      errors.title = 'Role must not be empty';
+      formIsValid = false;
+    } 
+    this.setState({errors: errors});
+    return formIsValid;
+  }
+
   onRoleSave(event) {
     event.preventDefault();
+    if(!this.roleFormIsValid()){
+      return;
+    }
     this.props.actions.createRole(this.state.newRole);
+      browserHistory.push('/roles')
   }
 
   render() {
@@ -39,6 +57,7 @@ export class RoleCreate extends React.Component {
           <Form
             name="title"
             type="text"
+            label="Role"
             onChange={this.onRoleChange} />
 
           <input

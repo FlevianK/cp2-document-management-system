@@ -34,6 +34,7 @@ export class Document extends React.Component {
         }
         <h2>Documents</h2>
         <DocumentHeader />
+        <SearchDocument />
         <DocumentList documents={this.props.documents} />
       </div>
     )

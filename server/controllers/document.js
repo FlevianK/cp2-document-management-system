@@ -14,6 +14,7 @@ module.exports = {
         content: req.body.content,
         access: req.body.access,
         userId: req.decoded.userId,
+        userRole: req.decoded.userRole
       })
       .then(document => res.status(201).send(document))
       .catch(error => res.status(400).send(error));
@@ -38,7 +39,6 @@ module.exports = {
           .catch(error => res.status(400).send(error));
       }
       return Document
-
         .findAll()
         .then(document => {
           if (!document) {
@@ -49,7 +49,7 @@ module.exports = {
           return res.status(200).send(document);
         })
         .catch(error => res.status(400).send(error));
-    } else if (req.decoded.userRole == 'regular') {
+    } else {
       if (req.query.limit || req.query.offset) {
         return Document
           .findAll({
@@ -87,25 +87,11 @@ module.exports = {
     }
   },
   retrieve(req, res) {
-    if (req.decoded.userRole == 'admin') {
+    if{req.params.documentId == req.decoded.userRole }{
       return Document
-        .findById(req.params.documentId)
-        .then(document => {
-          if (!document) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-        .catch(error => res.status(400).send(error));
-    } else if (req.decoded.userRole == 'regular') {
-      console.log(req.decoded.userId);
-      return Document
-        .findOne({
+        .findAll({
           where: {
-            id: req.params.documentId,
-            userId: req.decoded.userId
+            userRole: req.params.documentId
           }
         })
         .then(document => {
@@ -117,9 +103,38 @@ module.exports = {
           return res.status(200).send(document);
         })
         .catch(error => res.status(400).send(error));
+    } else {
+      if (req.decoded.userRole == 'admin') {
+        return Document
+          .findById(req.params.documentId)
+          .then(document => {
+            if (!document) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      } else {
+        return Document
+          .findOne({
+            where: {
+              id: req.params.documentId,
+              userId: req.decoded.userId
+            }
+          })
+          .then(document => {
+            if (!document) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      }
     }
-
-
   },
   update(req, res) {
     console.log(req.params);
@@ -140,7 +155,8 @@ module.exports = {
           .update({
             title: req.body.title || document.title,
             content: req.body.content || document.content,
-            access: req.body.access || document.access
+            access: req.body.access || document.access,
+            userRole: req.decoded.userRole
           })
           .then(() => res.status(200).send(document))  // Send back the updated document.
           .catch((error) => res.status(400).send(error));
@@ -179,13 +195,14 @@ module.exports = {
                 { title: { $iLike: `%${req.query.q}%` } },
                 { access: { $iLike: `%${req.query.q}%` } },
                 { content: { $iLike: `%${req.query.q}%` } },
+                { userRole: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
           .then(response => res.status(200).send(response))
           .catch(error => res.status(400).send(error));
       }
-    } else if (req.decoded.userRole == 'regular') {
+    } else {
       if (req.query.q) {
         return Document
           .findAll({
@@ -193,7 +210,8 @@ module.exports = {
               userId: req.decoded.userId,
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
-                { content: { $iLike: `%${req.query.q}%` } }
+                { content: { $iLike: `%${req.query.q}%` } },
+                { userRole: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
@@ -221,7 +239,7 @@ module.exports = {
         .catch((error) => {
           res.status(400).send(error)
         });
-    } else if (req.decoded.userRole == 'regular') {
+    } else {
       return Document
         .findAll({
           where: {

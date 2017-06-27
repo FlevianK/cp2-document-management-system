@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux';
 import Form from '../../containers/form';
 import { Forms, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; 
+import { browserHistory } from 'react-router';
 
 export class UserUpdate extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ export class UserUpdate extends React.Component {
   onUserSave(event) {
     event.preventDefault();
     this.props.actions.updateUser(this.state.users);
+    browserHistory.push('/users')
   }
 
   render() {

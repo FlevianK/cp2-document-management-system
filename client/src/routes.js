@@ -15,7 +15,8 @@ import {
   Role,
   RoleCreate,
   RoleDelete,
-  Documents 
+  Documents,
+  DocumentRole 
 } from './components'
 
 export default (
@@ -27,6 +28,7 @@ export default (
       <Route path="/documents/create" component={DocumentCreate} />
       <Route path="/documents/delete/:documentId" component={DocumentDelete} />
       <Route path="/documents/update/:documentId" component={DocumentUpdate} />
+      <Route path="/documents/role" component={DocumentRole} />
       <Route path="/users" component={User} />
       <Route path="/users/create" component={UserCreate} />
       <Route path="/users/delete/:userId" component={UserDelete} />

@@ -20,8 +20,8 @@ export function loadDocumentsSuccess(documents) {
 export function createDocument(newDoc) {
   return function (dispatch) {
     return createDoc(newDoc)
-      .then(response => {
-        dispatch(createdocumentSuccess());
+      .then(document => {
+        dispatch(createdocumentSuccess(document));
       })
       .catch(error => {
         throw (error);
@@ -29,8 +29,8 @@ export function createDocument(newDoc) {
   };
 }
 
-export function createdocumentSuccess() {
-  return { type: 'CREATE_DOCUMENT_SUCCESS' }
+export function createdocumentSuccess(document) {
+  return { type: 'CREATE_DOCUMENT_SUCCESS', document }
 }
 
 export function deleteDocument(deletedDoc) {

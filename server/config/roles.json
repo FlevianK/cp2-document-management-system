@@ -4,16 +4,9 @@
         "post": ["admin"],
         "delete": ["admin"]
     },
-    "/users/login": {
-        "post": ["admin", "regular"]
-    },
-    "/users/logout": {
-        "post": ["admin", "regular"]
-    },
     "/users(/*)?": {
         "get": ["admin"],
-        "delete": ["admin"],
-        "put": ["regular", "admin"]
+        "delete": ["admin"]
     },
     "/search/users(/*)?": {
         "get": ["admin"]

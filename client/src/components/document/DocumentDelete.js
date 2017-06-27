@@ -6,6 +6,7 @@ import { Forms, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
+import { browserHistory } from 'react-router';
 
 export class DocumentDelete extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export class DocumentDelete extends React.Component {
     onDocumentSave(event) {
         event.preventDefault();
         this.props.actions.deleteDocument(this.state.deleteDocument);
+        browserHistory.push('/documents')
     }
 
     render() {

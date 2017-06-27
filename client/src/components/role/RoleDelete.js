@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Form, DashboardHeader } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 
 export class RoleDelete extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export class RoleDelete extends React.Component {
   onRoleSave(event) {
     event.preventDefault();
     this.props.actions.deleteRole(this.state.deletedRole);
+      browserHistory.push('/roles')
   }
 
   render() {

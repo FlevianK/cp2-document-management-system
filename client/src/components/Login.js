@@ -5,6 +5,7 @@ import { Form } from '../containers';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginAction from '../actions/loginAction';
+import { browserHistory } from 'react-router';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ export class Login extends React.Component {
   onLoginSave(event) {
     event.preventDefault();
     this.props.actions.loginUser(this.state.loginDetails);
+    browserHistory.push('/dashboard')
   }
 
 
