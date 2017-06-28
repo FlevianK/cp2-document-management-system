@@ -5,19 +5,18 @@ import { browserHistory } from 'react-router';
 export default function documentReducer(state = initialState.documents, action) {
   switch (action.type) {
     case types.LOAD_DOCUMENTS_SUCCESS:
-    console.log(action.documents, "ugjyftdgsf")
       return action.documents
 
     case types.CREATE_DOCUMENT_SUCCESS:
-    browserHistory.push('/documents')
-      return action.documents
+      return [
+                ...state,
+                Object.assign({}, action.documents)
+            ];
 
     case types.DELETE_DOCUMENT_SUCCESS:
-      browserHistory.push('/documents')
       return action.documents
 
     case types.UPDATE_DOCUMENT_SUCCESS:
-    browserHistory.push('/documents')
       return action.documents
 
     case types.LOAD_DOCUMENT_SUCCESS:

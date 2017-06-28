@@ -15,11 +15,11 @@ export default function userReducer(state = initialState.users, action) {
             ];
 
         case types.DELETE_USER_SUCCESS:
-            browserHistory.push('/users');
+            // browserHistory.push('/users');
             return action.users
 
         case types.UPDATE_USER_SUCCESS:
-            browserHistory.push('/users');
+            // browserHistory.push('/users');
             return [
                 ...state.filter(users => users.id !== action.users.id),
                 Object.assign({}, action.users)

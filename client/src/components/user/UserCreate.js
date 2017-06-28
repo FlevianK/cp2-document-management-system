@@ -65,8 +65,7 @@ export class UserCreate extends React.Component {
     if(!this.userFormIsValid()){
       return;
     }
-    this.props.actions.createUser(this.state.newUser);
-    browserHistory.push('/')
+    this.props.actions.createUser(this.state.newUser).then(()=> browserHistory.push('/'));
   }
 
   render() {

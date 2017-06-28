@@ -45,8 +45,8 @@ export function createDocument(newDoc) {
   };
 }
 
-export function createdocumentSuccess(document) {
-  return { type: 'CREATE_DOCUMENT_SUCCESS', document }
+export function createdocumentSuccess(documents) {
+  return { type: 'CREATE_DOCUMENT_SUCCESS', documents }
 }
 
 export function deleteDocument(deletedDoc) {
@@ -61,8 +61,8 @@ export function deleteDocument(deletedDoc) {
   };
 }
 
-export function deletedocumentSuccess() {
-  return { type: 'DELETE_DOCUMENT_SUCCESS' }
+export function deletedocumentSuccess(documents) {
+  return { type: 'DELETE_DOCUMENT_SUCCESS', documents }
 }
 
 export function updateDocument(updateDocs) {

@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList, UserHeader, DashboardHeader } from '../../containers';
+import { UserList, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import SearchUser from './SearchUser';
+import swal from 'sweetalert';
  
 export class User extends React.Component {
   constructor(props, context) {
@@ -31,7 +32,6 @@ export class User extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
-        <UserHeader />
         <SearchUser />
         <UserList users={this.props.users} />
       </div>

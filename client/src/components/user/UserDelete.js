@@ -20,8 +20,7 @@ export class UserDelete extends React.Component {
   onUserSave(event) {
     event.preventDefault();
     this.props.actions.deleteUser(this.state.deletedUser);
-    this.props.actions.loadUsers();
-    // browserHistory.push('/users');
+    this.props.actions.loadUsers().then(()=> browserHistory.push('/users'));
   }
 
   render() {

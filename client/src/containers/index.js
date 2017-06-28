@@ -1,8 +1,8 @@
 import DocumentHeader from './documentHeader';
 import DocumentList from './documentList';
+import DocumentsList from './DocumentsList';
 import Form from './form';
 import Forms from './forms';
-import UserHeader from './userHeader';
 import UserList from './userList';
 import RoleHeader from './roleHeader';
 import RoleList from './roleList';
@@ -13,9 +13,9 @@ export {
   DocumentList,
   Form,
   Forms,
-  UserHeader,
   UserList,
   RoleHeader,
   RoleList,
-  DashboardHeader
+  DashboardHeader,
+  DocumentsList,
 }

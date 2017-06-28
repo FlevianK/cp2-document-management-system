@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentList, DocumentHeader, DashboardHeader } from '../../containers';
+import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
@@ -24,6 +24,7 @@ export class Documents extends React.Component {
   }
 
   render () {
+    const documents = this.props.documents;
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
     return (
@@ -34,7 +35,7 @@ export class Documents extends React.Component {
           }
         <DocumentHeader />
         <SearchDocument />
-        <DocumentList documents={this.props.documents} />
+        <DocumentsList documents={documents} />
       </div>
     )
   }

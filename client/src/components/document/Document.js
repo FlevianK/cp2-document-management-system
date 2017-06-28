@@ -28,6 +28,7 @@ export class Document extends React.Component {
   }
 
   render () {
+    const documents = this.props.documents;
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
     return (
@@ -38,7 +39,7 @@ export class Document extends React.Component {
           }
         <DocumentHeader />
         <SearchDocument />
-        <DocumentList documents={this.props.documents} />
+        <DocumentList documents={documents} />
       </div>
     )
   }
