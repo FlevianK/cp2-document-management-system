@@ -21,7 +21,7 @@ const DocumentList = ({ documents }) => {
             <td>{document.content}</td>
             <td>{document.access}</td>
             <td ><Link to={`/documents/delete/${document.id}`}>Delete</Link></td>
-            <td ><Link to={`/documents/delete/${document.id}`}>Update</Link></td>
+            <td ><Link to={`/documents/update/${document.id}`}>Update</Link></td>
           </tr>
            )}
           </tbody>

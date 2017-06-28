@@ -20,9 +20,11 @@ export class User extends React.Component {
     };
   }
 
-  componentWillMount() {
-    let users;
+  componentDidMount() {
     this.props.actions.loadUsers()
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({ users: Object.assign({}, nextProps.users)})
   }
 
   render () {

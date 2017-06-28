@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
@@ -6,8 +6,9 @@ import { DocumentList, DocumentHeader, DashboardHeader } from '../../containers'
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
-
-export class Document extends React.Component {
+import SearchDocument from './SearchDocument';
+ 
+export class Documents extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -16,23 +17,21 @@ export class Document extends React.Component {
         content: '',
         access: ''
       }]
-    };
+    }
   }
   componentWillMount() {
-    let documents;
-    this.props.actions.loadDocuments()
+    this.props.actions.loadDocuments();
   }
 
-  render() {
+  render () {
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
     return (
       <div>
         {role && role.userRole === "admin"
           ? <DashboardHeader />
-          : ''
-        }
-        <h2>Documents</h2>
+            : ''
+          }
         <DocumentHeader />
         <SearchDocument />
         <DocumentList documents={this.props.documents} />
@@ -41,11 +40,11 @@ export class Document extends React.Component {
   }
 }
 
-Document.PropTypes = {
+Documents.PropTypes = {
   documents: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps){
   if (state.documents.length > 0) {
     return {
       documents: state.documents
@@ -63,4 +62,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Document);
+export default connect(mapStateToProps, mapDispatchToProps)(Documents);
+ 

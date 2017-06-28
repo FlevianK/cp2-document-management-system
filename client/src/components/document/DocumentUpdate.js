@@ -34,8 +34,8 @@ export class DocumentUpdate extends React.Component {
 
   onDocumentSave(event) {
     event.preventDefault();
-    this.props.actions.updateDocument(this.state.documents);
-    browserHistory.push('/documents')
+    this.props.actions.updateDocument(this.state.documents).then(()=> browserHistory.push('/documents'));
+    
   }
 
   render() {

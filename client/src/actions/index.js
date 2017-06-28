@@ -1,4 +1,4 @@
-import { loadDocuments, createDocument, deleteDocument, updateDocument, loadDocument, loadDoc, searchDocument } from './documentAction';
+import { loadDocuments, createDocument, deleteDocument, updateDocument, loadDocument, loadDoc, searchDocument, loadRoleDocuments } from './documentAction';
 import { loadUsers, createUser, deleteUser, updateUser, searchUser, loadUser } from './userAction';
 import { loadRoles, createRole, deleteRole } from './roleAction';
 import { loginUser } from './loginAction';
@@ -20,5 +20,6 @@ export {
   loadUser,
   loadDocument,
   loadDoc,
-  searchDocument
+  searchDocument,
+  loadRoleDocuments
 }

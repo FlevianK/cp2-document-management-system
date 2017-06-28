@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       required: true,
       default: 'public',
-      enum: ['private', 'public']
     }
   }, {
       classMethods: {

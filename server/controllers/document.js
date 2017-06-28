@@ -1,3 +1,4 @@
+const User = require('../models').User;
 const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
 
@@ -14,7 +15,6 @@ module.exports = {
         content: req.body.content,
         access: req.body.access,
         userId: req.decoded.userId,
-        userRole: req.decoded.userRole
       })
       .then(document => res.status(201).send(document))
       .catch(error => res.status(400).send(error));
@@ -29,7 +29,7 @@ module.exports = {
             limit: req.query.limit
           })
           .then(document => {
-            if (!document) {
+            if (!document || document.length < 1) {
               return res.status(404).send({
                 message: 'Document Not Found',
               });
@@ -41,7 +41,7 @@ module.exports = {
       return Document
         .findAll()
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -56,11 +56,12 @@ module.exports = {
             offset: req.query.offset,
             limit: req.query.limit,
             where: {
-              access: 'public'
+              access: 'public',
+
             }
           })
           .then(document => {
-            if (!document) {
+            if (!document || document.length < 1) {
               return res.status(404).send({
                 message: 'Document Not Found',
               });
@@ -76,7 +77,7 @@ module.exports = {
           }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -86,16 +87,16 @@ module.exports = {
         .catch(error => res.status(400).send(error));
     }
   },
+
   retrieve(req, res) {
-    if{req.params.documentId == req.decoded.userRole }{
       return Document
-        .findAll({
+        .findOne({
           where: {
-            userRole: req.params.documentId
+            documentId: req.params.documentId
           }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
@@ -103,41 +104,9 @@ module.exports = {
           return res.status(200).send(document);
         })
         .catch(error => res.status(400).send(error));
-    } else {
-      if (req.decoded.userRole == 'admin') {
-        return Document
-          .findById(req.params.documentId)
-          .then(document => {
-            if (!document) {
-              return res.status(404).send({
-                message: 'Document Not Found',
-              });
-            }
-            return res.status(200).send(document);
-          })
-          .catch(error => res.status(400).send(error));
-      } else {
-        return Document
-          .findOne({
-            where: {
-              id: req.params.documentId,
-              userId: req.decoded.userId
-            }
-          })
-          .then(document => {
-            if (!document) {
-              return res.status(404).send({
-                message: 'Document Not Found',
-              });
-            }
-            return res.status(200).send(document);
-          })
-          .catch(error => res.status(400).send(error));
-      }
-    }
   },
+
   update(req, res) {
-    console.log(req.params);
     return Document
       .findOne({
         where: {
@@ -146,7 +115,7 @@ module.exports = {
         }
       })
       .then(document => {
-        if (!document) {
+        if (!document || document.length < 1) {
           return res.status(404).send({
             message: 'Document Not Found',
           });
@@ -156,15 +125,14 @@ module.exports = {
             title: req.body.title || document.title,
             content: req.body.content || document.content,
             access: req.body.access || document.access,
-            userRole: req.decoded.userRole
           })
-          .then(() => res.status(200).send(document))  // Send back the updated document.
+          .then(() => res.status(200).send(document)) 
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
   },
+
   destroy(req, res) {
-    console.log(req.params.documentId)
     return Document
       .findOne({
         where: {
@@ -173,8 +141,8 @@ module.exports = {
         }
       })
       .then(document => {
-        if (!document) {
-          return res.status(400).send({
+        if (!document || document.length < 1) {
+          return res.status(404).send({
             message: 'Document Not Found',
           });
         }
@@ -185,6 +153,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+
   searchDoc(req, res) {
     if (req.decoded.userRole == 'admin') {
       if (req.query.q) {
@@ -193,13 +162,11 @@ module.exports = {
             where: {
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
-                { access: { $iLike: `%${req.query.q}%` } },
                 { content: { $iLike: `%${req.query.q}%` } },
-                { userRole: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
-          .then(response => res.status(200).send(response))
+          .then(document => res.status(200).send(document))
           .catch(error => res.status(400).send(error));
       }
     } else {
@@ -211,53 +178,70 @@ module.exports = {
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
                 { content: { $iLike: `%${req.query.q}%` } },
-                { userRole: { $iLike: `%${req.query.q}%` } },
               ]
             }
           })
-          .then(response => res.status(200).send(response))
+          .then(document => res.status(200).send(document))
           .catch(error => res.status(400).send(error));
       }
     }
   },
+
   userDocs(req, res) {
-    if (req.decoded.userRole == 'admin') {
+    return Document
+      .findAll({
+        where: {
+          userId: req.params.userId
+        }
+      })
+      .then(document => {
+        if (!document || document.length < 1) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        return res.status(200).send(document);
+      })
+      .catch((error) => {
+        res.status(400).send(error)
+      });
+},
+
+roleDocs(req, res) {
+      if (req.query.limit || req.query.offset) {
+        return Document
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+             where: {
+              access: req.decoded.userRole
+            }
+          })
+          .then(document => {
+            if (!document || document.length < 1) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      }
+      console.log(req.decoded.userRole, "jkhgfd");
       return Document
         .findAll({
-          where: {
-            userId: req.params.userId
-          }
+           where: {
+              access: req.decoded.userRole
+            }
         })
         .then(document => {
-          if (!document) {
+          if (!document || document.length < 1) {
             return res.status(404).send({
               message: 'Document Not Found',
             });
           }
           return res.status(200).send(document);
         })
-        .catch((error) => {
-          res.status(400).send(error)
-        });
-    } else {
-      return Document
-        .findAll({
-          where: {
-            userId: req.params.userId,
-            access: 'public'
-          }
-        })
-        .then(document => {
-          if (!document) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-        .catch((error) => {
-          res.status(400).send(error)
-        });
+        .catch(error => res.status(400).send(error));
     }
-  },
-};
+  }

@@ -23,7 +23,7 @@ export class Document extends React.Component {
     let idUser;
     const token = localStorage.jwt;
     const user = token && jwtDecode(token);
-    // const idUser = user.userId;
+    idUser = user.userId;
     this.props.actions.loadDoc(idUser);
   }
 
@@ -49,6 +49,7 @@ Document.PropTypes = {
 }
 
 function mapStateToProps(state, ownProps){
+  console.log(state.documents.data)
   if (state.documents.length > 0) {
     return {
       documents: state.documents

@@ -21,7 +21,7 @@ export class DocumentDelete extends React.Component {
     onDocumentSave(event) {
         event.preventDefault();
         this.props.actions.deleteDocument(this.state.deleteDocument);
-        browserHistory.push('/documents')
+        // browserHistory.push('/documents')
     }
 
     render() {

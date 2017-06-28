@@ -30,8 +30,7 @@ export class Login extends React.Component {
 
   onLoginSave(event) {
     event.preventDefault();
-    this.props.actions.loginUser(this.state.loginDetails);
-    browserHistory.push('/dashboard')
+    this.props.actions.loginUser(this.state.loginDetails).then(()=> browserHistory.push('/dashboard'));
   }
 
 

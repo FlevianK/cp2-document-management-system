@@ -1,7 +1,6 @@
 const User = require('../models').User;
-const Document = require('../models').Document;
 const InputValidate = require('./inputValidate');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const salt = 8;
 
@@ -34,7 +33,7 @@ module.exports = {
           limit: req.query.limit,
         })
         .then(user => {
-          if (!user) {
+          if (!user || user.length < 1) {
             return res.status(404).send({
               message: 'User Not Found',
             });
@@ -48,11 +47,12 @@ module.exports = {
       .then(users => res.status(200).send(users))
       .catch(error => res.status(400).send(error));
   },
+
   retrieve(req, res) {
     return User
       .findById(req.params.userId)
       .then(user => {
-        if (!user) {
+        if (!user || user.length < 1) {
           return res.status(404).send({
             message: 'User Not Found',
           });
@@ -61,11 +61,12 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+
   update(req, res) {
     return User
       .findById(req.params.userId)
       .then(user => {
-        if (!user) {
+        if (!user || user.length < 1) {
           return res.status(404).send({
             message: 'User Not Found',
           });
@@ -77,12 +78,13 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+
   destroy(req, res) {
     return User
       .findById(req.params.userId)
       .then(user => {
-        if (!user) {
-          return res.status(400).send({
+        if (!user || user.length < 1) {
+          return res.status(404).send({
             message: 'User Not Found',
           });
         }
@@ -93,6 +95,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+  
   searchUser(req, res) {
     if (req.query.q) {
       return User
@@ -106,8 +109,8 @@ module.exports = {
             ]
           }
         })
-        .then(response => res.status(200).send(response))
+        .then(user => res.status(200).send(user))
         .catch(error => res.status(400).send(error));
     }
-  },
+  }
 };

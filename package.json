@@ -4,11 +4,11 @@
   "description": "Document management system",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon ./bin/www",
     "client-test": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./client/utils/config.js --report lcovonly -- -R spec ./client/tests/**",
-    "test": "NODE_ENV=test npm run migrate && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec ./tests/server",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test": "NODE_ENV=test npm run test-migrate && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -R spec server/tests",
+    "test-migrate": "sequelize db:migrate:undo:all && sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -58,6 +58,7 @@
     "enzyme": "^2.9.0",
     "expect": "^1.20.2",
     "html-webpack-plugin": "^2.28.0",
+    "fs.realpath": "^1.0.0",
     "istanbul": "^0.4.5",
     "jsonwebtoken": "^7.4.1",
     "localStorage": "^1.0.3",

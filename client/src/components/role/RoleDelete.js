@@ -22,7 +22,7 @@ export class RoleDelete extends React.Component {
   onRoleSave(event) {
     event.preventDefault();
     this.props.actions.deleteRole(this.state.deletedRole);
-      browserHistory.push('/roles')
+      // browserHistory.push('/roles')
   }
 
   render() {

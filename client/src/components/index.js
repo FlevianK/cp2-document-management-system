@@ -1,4 +1,5 @@
 import Login from './Login';
+// import Logout from './Logout';
 import App from './App';
 import Dashboard from './Dashboard';
 import Document from './document/Document';
@@ -16,7 +17,8 @@ import RoleCreate from './role/RoleCreate';
 import RoleDelete from './role/RoleDelete';
 
 export {
-  Login, 
+  Login,
+  // Logout 
   App,
   Dashboard,
   
@@ -25,7 +27,7 @@ export {
   DocumentCreate,
   DocumentDelete,
   DocumentUpdate,
-  DocumentRole
+  DocumentRole,
 
   User,
   UserCreate,

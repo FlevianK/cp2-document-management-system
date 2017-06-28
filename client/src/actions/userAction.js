@@ -4,8 +4,8 @@ import * as types from '../constants/appConstants';
 export function loadUsers() {
   return function (dispatch) {
     return allUsers()
-      .then(users => {
-        dispatch(loadusersSuccess(users));
+      .then(res => {
+        dispatch(loadusersSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -36,8 +36,8 @@ export function createuserSuccess() {
 export function deleteUser(deletedUser) {
   return function (dispatch) {
     return userDelete(deletedUser)
-      .then(response => {
-        dispatch(deleteuserSuccess());
+      .then(res => {
+        dispatch(deleteuserSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -45,15 +45,15 @@ export function deleteUser(deletedUser) {
   };
 }
 
-export function deleteuserSuccess() {
-  return { type: 'DELETE_USER_SUCCESS' }
+export function deleteuserSuccess(users) {
+  return { type: 'DELETE_USER_SUCCESS', users }
 }
 
 export function updateUser(updatedUser) {
   return function (dispatch) {
     return userUpdate(updatedUser)
-      .then(response => {
-        dispatch(updateuserSuccess());
+      .then(res => {
+        dispatch(updateuserSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -61,15 +61,15 @@ export function updateUser(updatedUser) {
   };
 }
 
-export function updateuserSuccess() {
-  return { type: 'UPDATE_USER_SUCCESS' }
+export function updateuserSuccess(users) {
+  return { type: 'UPDATE_USER_SUCCESS', users }
 }
 
 export function searchUsers(searchValue) {
   return function (dispatch) {
     return userSearch(searchValue)
-      .then(users => {
-        dispatch(searchuserSuccess(users));
+      .then(res => {
+        dispatch(searchuserSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -84,8 +84,8 @@ export function searchuserSuccess(users) {
 export function loadUser(user) {
   return function (dispatch) {
     return allUser(user)
-      .then(users => {
-        dispatch(loadUserSuccess(users));
+      .then(res => {
+        dispatch(loadUserSuccess(res.data));
       })
       .catch(error => {
         throw (error);

@@ -16,7 +16,7 @@ const DocumentHeader = ({ documents }) => {
       <Link to="/documents/all" activeClassName="active">All Documents</Link>
       {role && role.userRole !== "admin"
         ?
-        <Link to="/" activeClassName="active">Logout</Link>
+        <Link to="/logout" activeClassName="active">Logout</Link>
         : ''
       }
     </div>

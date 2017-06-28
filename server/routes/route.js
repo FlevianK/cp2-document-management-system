@@ -10,26 +10,27 @@ module.exports = (app) => {
   app.post('/api/users/login', authenticatesController.login);
   app.post('/api/users/', usersController.create);
 
-  app.user(authenticatesController.verifyLogin);
-
-  app.put('/api/users/:userId', usersController.update);
-
+  app.use(authenticatesController.verifyLogin);
+  
   app.post('/api/documents/', documentsController.create);
   app.get('/api/documents/', documentsController.listDocs);
   app.get('/api/documents/:documentId', documentsController.retrieve);
   app.put('/api/documents/:documentId', documentsController.update);
   app.get('/api/users/:userId/documents', documentsController.userDocs);
+  app.get('/api/roles/documents/', documentsController.roleDocs);
   app.delete('/api/documents/:documentId', documentsController.destroy);
   app.get('/api/search/documents/', documentsController.searchDoc);
 
   app.use(authenticatesController.roleAuthorise);
-  
+
+  app.put('/api/users/:userId', usersController.update);
+
   restbac(app, roleConfig, "/api");
 
-  app.post('/api/roles',rolesController.create);
-  app.get('/api/roles', rolesController.list);
-  app.delete('/api/roles/:role', rolesController.destroy);
-  
+  app.post('/api/roles/', rolesController.create);
+  app.get('/api/roles/', rolesController.list);
+  app.delete('/api/roles/:roleId', rolesController.destroy);
+
   app.get('/api/users/', usersController.listUsers);
   app.get('/api/users/:userId', usersController.retrieve);
   app.delete('/api/users/:userId', usersController.destroy);

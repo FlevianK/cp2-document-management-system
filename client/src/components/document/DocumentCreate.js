@@ -31,33 +31,33 @@ export class DocumentCreate extends React.Component {
     return this.setState({ newDocument: newDocument });
   }
 
-  documentFormIsValid(){
-    let formIsValid = true;
-    let errors = {};
+  // documentFormIsValid(){
+  //   let formIsValid = true;
+  //   let errors = {};
 
-    if (this.state.newDocument.title.length < 1 ) {
-      errors.title = 'Title must not be empty';
-      formIsValid = false;
-    } 
-    if (this.state.newDocument.content.length < 5 ) {
-      errors.content = 'Content must be at least 5 characters';
-      formIsValid = false;
-    } 
-    if (this.state.newDocument.access.length < 5 ) {
-      errors.access = 'Must select the type of document access';
-      formIsValid = false;
-    } 
-    this.setState({errors: errors});
-    return formIsValid;
-  }
+  //   if (this.state.newDocument.title.length < 1 ) {
+  //     errors.title = 'Title must not be empty';
+  //     formIsValid = false;
+  //   } 
+  //   if (this.state.newDocument.content.length < 5 ) {
+  //     errors.content = 'Content must be at least 5 characters';
+  //     formIsValid = false;
+  //   } 
+  //   if (this.state.newDocument.access.length < 5 ) {
+  //     errors.access = 'Must select the type of document access';
+  //     formIsValid = false;
+  //   } 
+  //   this.setState({errors: errors});
+  //   return formIsValid;
+  // }
 
   onDocumentSave(event) {
     event.preventDefault();
-    if(!this.documentFormIsValid()){
-      return;
-    }
+    // if(!this.documentFormIsValid()){
+    //   return;
+    // }
     this.props.actions.createDocument(this.state.newDocument);
-      browserHistory.push('/documents')
+      // browserHistory.push('/documents')
   }
 
   render() {

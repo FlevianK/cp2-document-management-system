@@ -4,8 +4,8 @@ import * as types from '../constants/appConstants';
 export function loadRoles() {
   return function (dispatch) {
     return allRoles()
-      .then(roles => {
-        dispatch(loadRolesSuccess(roles));
+      .then(res => {
+        dispatch(loadRolesSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -20,8 +20,8 @@ export function loadRolesSuccess(roles) {
 export function createRole(newRole) {
   return function (dispatch) {
     return roleCreate(newRole)
-      .then(response => {
-        dispatch(createroleSuccess());
+      .then(res => {
+        dispatch(createroleSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -29,15 +29,15 @@ export function createRole(newRole) {
   };
 }
 
-export function createroleSuccess() {
-  return { type: 'CREATE_ROLE_SUCCESS' }
+export function createroleSuccess(roles) {
+  return { type: 'CREATE_ROLE_SUCCESS', roles }
 }
 
 export function deleteRole(deletedRole) {
   return function (dispatch) {
     return roleDelete(deletedRole)
-      .then(response => {
-        dispatch(deleteroleSuccess());
+      .then(res => {
+        dispatch(deleteroleSuccess(res.data));
       })
       .catch(error => {
         throw (error);
@@ -45,6 +45,6 @@ export function deleteRole(deletedRole) {
   };
 }
 
-export function deleteroleSuccess() {
-  return { type: 'DELETE_ROLE_SUCCESS' }
+export function deleteroleSuccess(roles) {
+  return { type: 'DELETE_ROLE_SUCCESS', roles }
 }

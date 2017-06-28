@@ -8,7 +8,7 @@
         "get": ["admin"],
         "delete": ["admin"]
     },
-    "/search/users(/*)?": {
+    "/search/users(/*)?":{
         "get": ["admin"]
     }
 }

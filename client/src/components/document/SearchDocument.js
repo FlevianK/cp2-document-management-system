@@ -16,11 +16,13 @@ export class SearchDocument extends React.Component {
   }
 
   onDocumentChange(event) {
+    console.log(event.target.value, "event")
     return this.setState({ searchValue: event.target.value });
   }
 
   onDocumentClick() {
     event.preventDefault();
+    console.log(this.state.searchValue, "iuyftd");
     this.props.actions.searchDocument(this.state.searchValue);
   }
 

@@ -22,7 +22,7 @@ module.exports = {
       {
         title: 'MeteorJs',
         content: 'It is out dated nowadays',
-        access: 'public',
+        access: 'regular',
         createdAt: new Date(),
         updatedAt: new Date(),
         userId: 3,

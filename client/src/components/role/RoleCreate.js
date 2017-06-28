@@ -45,8 +45,8 @@ export class RoleCreate extends React.Component {
     if(!this.roleFormIsValid()){
       return;
     }
-    this.props.actions.createRole(this.state.newRole);
-      browserHistory.push('/roles')
+    this.props.actions.createRole(this.state.newRole).then(()=> browserHistory.push('/users'));
+      // browserHistory.push('/roles')
   }
 
   render() {

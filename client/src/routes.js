@@ -36,6 +36,7 @@ export default (
       <Route path="/roles" component={Role} />
       <Route path="/roles/create" component={RoleCreate} />
       <Route path="/roles/delete/:role" component={RoleDelete} />
+      {/*<Route path="/roles/delete/:role" component={RoleDelete} />*/}
   </Route>
 )
 

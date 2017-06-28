@@ -32,11 +32,13 @@ export class UserUpdate extends React.Component {
     users[field] = event.target.value;
     return this.setState({ users: users });
   }
+ 
 
   onUserSave(event) {
     event.preventDefault();
-    this.props.actions.updateUser(this.state.users);
-    browserHistory.push('/users')
+    this.props.actions.updateUser(this.state.users)
+    .then()
+    this.props.actions.loadUsers().then(()=> browserHistory.push('/users'));
   }
 
   render() {

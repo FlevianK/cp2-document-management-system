@@ -1,4 +1,6 @@
 'use strict';
+const bcrypt = require('bcrypt');
+const salt = 8;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -7,31 +9,31 @@ module.exports = {
         username: 'kezzy',
         firstName: 'Awori',
         lastName: 'Angiro',
-        password: 'kezzy',
+        password: bcrypt.hashSync('kezzy', salt),
         email: 'kezzy@live.com',
+        title: "admin",
         createdAt: new Date(),
         updatedAt: new Date(),
-        title: "admin",
       },
       {
         username: 'Rodger',
         firstName: 'Agom',
         lastName: 'Nandaa',
-        password: 'rodger',
+        password: bcrypt.hashSync('rodger', salt),
         email: 'rodger@gmail.com',
+        title: "regular",
         createdAt: new Date(),
         updatedAt: new Date(),
-        title: "regular",
       },
       {
         username: 'kelvin',
         firstName: 'Kerich',
         lastName: 'Choge',
-        password: 'kerich',
+        password: bcrypt.hashSync('kerich', salt),
         email: 'kerich@hotmail.com',
+        title: "regular",
         createdAt: new Date(),
         updatedAt: new Date(),
-        title: "regular",
       },
     ]);
   },

@@ -59,3 +59,11 @@ export function documentSearch(documentValue) {
     { headers: { 'x-access-token': token } }
   );
 }
+
+export function allRoleDocument() {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/roles/documents`,
+    { headers: { 'x-access-token': token } }
+  );
+}
