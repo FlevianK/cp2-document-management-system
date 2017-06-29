@@ -13,6 +13,7 @@ export default function roleReducer(state = initialState.roles, action) {
       ];
 
     case types.DELETE_ROLE_SUCCESS:
+    console.log(action.roles);
       return action.roles
 
     default:

@@ -109,6 +109,6 @@ export function loadUsersPage(limit, offset) {
   };
 }
 
-export function loadUserPageSuccess(usersPage) {
+export function loadUsersPageSuccess(usersPage) {
   return { type: 'LOAD_USERS_PAGE_SUCCESS', usersPage };
 }

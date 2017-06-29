@@ -56,7 +56,7 @@ export function allUser(user) {
   );
 }
 
-export function allUsersPage(limit=4, offset=1) {
+export function allUsersPage(limit=4, offset=0) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/users/?limit=${limit}&offset=${offset}`,

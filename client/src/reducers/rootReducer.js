@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';  
 import loginUser from './loginUserReducer';
 import documents from './documentReducer';
-import documentsPage from './documentPageReducer';  
+import documentsPage from './documentPageReducer';
+import usersPage from './userPageReducer';  
 import roles from './roleReducer';
 import users from './userReducer';
 import * as types from '../constants/appConstants';  

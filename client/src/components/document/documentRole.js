@@ -36,8 +36,8 @@ export class DocumentRole extends React.Component {
   }
 
   render() {
-    const documents = this.props.documentsPage;
-    const totalItems = this.props.documents.length;
+    const documents = this.props.documents;
+    const totalItems = this.props.documentsPage.length;
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
     return (

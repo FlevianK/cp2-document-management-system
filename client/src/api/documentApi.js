@@ -10,7 +10,7 @@ export function allDocuments() {
   );
 }
 
-export function allDocumentsPage(limit=4, offset=1) {
+export function allDocumentsPage(limit=4, offset=0) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/documents/?limit=${limit}&offset=${offset}`,
@@ -75,7 +75,7 @@ export function allRoleDocument() {
     { headers: { 'x-access-token': token } }
   );
 }
-export function allRoleDocumentPage(limit=4, offset=1) {
+export function allRoleDocumentPage(limit=4, offset=0) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/roles/documents/?limit=${limit}&offset=${offset}`,

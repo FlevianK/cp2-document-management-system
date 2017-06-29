@@ -21,7 +21,8 @@ export class RoleDelete extends React.Component {
 
   onRoleSave(event) {
     event.preventDefault();
-    this.props.actions.deleteRole(this.state.deletedRole).then(()=> browserHistory.push('/roles'));
+    this.props.actions.deleteRole(this.state.deletedRole);
+    this.props.actions.loadRoles().then(()=> browserHistory.push('/roles'));
   }
 
   render() {
@@ -30,7 +31,8 @@ export class RoleDelete extends React.Component {
         <DashboardHeader />
         <form>
           <Input
-            value={this.props.params.role} />
+            value={this.props.params.role}
+            label="User role"/>
 
           <input
             type="submit"

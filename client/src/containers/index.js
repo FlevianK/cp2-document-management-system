@@ -1,7 +1,8 @@
 import DocumentHeader from './documentHeader';
 import DocumentList from './documentList';
 import DocumentsList from './DocumentsList';
-import SelectOptions from './SelectInput.js'
+import SelectOptions from './SelectInput.js';
+import SelectOption from './selectNewDocument';
 import Input from './form';
 import Forms from './forms';
 import UserList from './userList';
@@ -19,5 +20,6 @@ export {
   RoleList,
   DashboardHeader,
   DocumentsList,
-  SelectOptions
+  SelectOptions,
+  SelectOption
 }

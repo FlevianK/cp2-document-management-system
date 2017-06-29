@@ -218,6 +218,7 @@ module.exports = {
 },
 
 roleDocs(req, res) {
+  console.log(req.decoded.userRole, "role");
       if (req.query.limit || req.query.offset) {
         return Document
           .findAll({

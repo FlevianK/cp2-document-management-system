@@ -3,8 +3,8 @@ import initialState from './initialState';
 
 export default function userReducer(state = initialState.users, action) {
     switch (action.type) {
-        case types.LOAD_USERS_SUCCESS:
-            return action.users
+    case types.LOAD_USERS_PAGE_SUCCESS:
+      return action.usersPage
 
         case types.CREATE_USER_SUCCESS:
             return [
@@ -16,10 +16,7 @@ export default function userReducer(state = initialState.users, action) {
             return action.users
 
         case types.UPDATE_USER_SUCCESS:
-            return [
-                ...state.filter(users => users.id !== action.users.id),
-                Object.assign({}, action.users)
-            ];
+            return action.users
 
         case types.SEARCH_USER_SUCCESS:
             return action.users

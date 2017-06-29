@@ -41,6 +41,7 @@ export class DocumentUpdate extends React.Component {
   render() {
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
+    const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: role.userRole, text:"Role"} ]
     return (
       <div>
         {role && role.userRole === "admin"
@@ -53,6 +54,7 @@ export class DocumentUpdate extends React.Component {
             label="title"
             type="text"
             placeholder={this.props.documents.title}
+            errors={this.state.errors}
             onChange={this.onDocumentChange} />
 
           <Input
@@ -60,14 +62,17 @@ export class DocumentUpdate extends React.Component {
             label="Content"
             type="text"
             placeholder={this.props.documents.content}
+            errors={this.state.errors}
             onChange={this.onDocumentChange} />
 
           <SelectOptions 
-            options = {[]}
+            options = {accessOption}
             name="access"
             label="Access Type"
+            defaultOption="select access type"
+            value={this.state.documents.access}
             errors={this.state.errors}
-            onChange={this.onDocumentChange} />
+            onChange={this.onDocumentChange} /> 
           <input
             type="submit"
             className="btn btn-primary"

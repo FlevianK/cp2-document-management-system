@@ -33,7 +33,9 @@ module.exports = {
         }
         return role
           .destroy()
-          .then(() => res.status(204).send())
+          .then(() => res.status(204).send({
+            message: 'Deleted successfully',
+          }))
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));

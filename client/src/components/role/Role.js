@@ -16,7 +16,7 @@ export class Role extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.loadRoles()
   }
 
@@ -36,15 +36,9 @@ Role.PropTypes = {
 }
 
 function mapStateToProps(state, ownProps){
-  if (state.roles.length > 0) {
     return {
       roles: state.roles
     };
-  } else {
-    return {
-      roles: [{ id: '', title: '' }]
-    };
-  }
 }
 
 function mapDispatchToProps(dispatch) {

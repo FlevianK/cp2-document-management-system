@@ -37,8 +37,7 @@ export class UserUpdate extends React.Component {
 
   onUserSave(event) {
     event.preventDefault();
-    this.props.actions.updateUser(this.state.users)
-    .then()
+    this.props.actions.updateUser(this.state.users);
     this.props.actions.loadUsers().then(()=> browserHistory.push('/users'));
   }
 
