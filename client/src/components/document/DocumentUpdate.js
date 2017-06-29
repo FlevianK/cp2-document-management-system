@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form, Forms, DashboardHeader } from '../../containers';
+import { Input, Forms, SelectOptions, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
@@ -48,27 +48,26 @@ export class DocumentUpdate extends React.Component {
           : ''
         }
         <form>
-          <Form
+          <Input
             name="title"
             label="title"
             type="text"
             placeholder={this.props.documents.title}
             onChange={this.onDocumentChange} />
 
-          <Form
+          <Input
             name="content"
             label="Content"
             type="text"
             placeholder={this.props.documents.content}
             onChange={this.onDocumentChange} />
 
-          <Form
+          <SelectOptions 
+            options = {[]}
             name="access"
-            label="access"
-            type="text"
-            placeholder={this.props.documents.access}
+            label="Access Type"
+            errors={this.state.errors}
             onChange={this.onDocumentChange} />
-
           <input
             type="submit"
             className="btn btn-primary"

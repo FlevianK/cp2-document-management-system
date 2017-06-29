@@ -25,7 +25,10 @@ import {
   loadDocument,
   loadDoc,
   searchDocument,
-  loadRoleDocuments
+  loadRoleDocuments,
+  loadDocumentsPage,
+  loadRoleDocumentsPage, 
+  loadUsersPage
 } from './actions';
 
 const store = configureStore();

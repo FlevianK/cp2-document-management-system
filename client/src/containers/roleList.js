@@ -13,7 +13,7 @@ const RoleList = ({ roles }) => {
 
         <tbody>
            {roles.map(role => 
-          <tr>
+          <tr key={role.title}>
             <td>{role.title}</td>
             <td ><Link to={`/roles/delete/${role.title}`}>Delete</Link></td>
           </tr>

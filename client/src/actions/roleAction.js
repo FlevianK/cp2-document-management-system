@@ -37,7 +37,7 @@ export function deleteRole(deletedRole) {
   return function (dispatch) {
     return roleDelete(deletedRole)
       .then(res => {
-        dispatch(deleteroleSuccess(res.data));
+        dispatch(deleteroleSuccess(res.body));
       })
       .catch(error => {
         throw (error);

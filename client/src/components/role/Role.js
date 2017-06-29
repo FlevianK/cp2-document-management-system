@@ -17,7 +17,6 @@ export class Role extends React.Component {
   }
 
   componentWillMount() {
-    let roles;
     this.props.actions.loadRoles()
   }
 

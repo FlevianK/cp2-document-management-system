@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Forms, DashboardHeader } from '../../containers';
+import { Input, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
@@ -25,6 +25,7 @@ export class DocumentDelete extends React.Component {
     }
 
     render() {
+        console.log(this.props.params, "qwewrf")
         const token = localStorage.jwt;
         const role = token && jwtDecode(token);
         return (
@@ -34,7 +35,7 @@ export class DocumentDelete extends React.Component {
                     : ''
                 }
                 <form>
-                    <Forms
+                    <Input
                         value={this.props.params.documentId} />
 
                     <input

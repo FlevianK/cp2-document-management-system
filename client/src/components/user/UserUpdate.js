@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import Form from '../../containers/form';
-import { Forms, DashboardHeader } from '../../containers';
+import { Input, SelectOptions, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
+import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types'; 
 import { browserHistory } from 'react-router';
 
@@ -23,6 +23,7 @@ export class UserUpdate extends React.Component {
 
   componentWillMount() {
     this.props.actions.loadUser(this.props.params)
+    this.props.action.loadRoles()
   }
 
   onUserChange(event) {
@@ -49,7 +50,7 @@ export class UserUpdate extends React.Component {
       <div className="col-md-12">
         <DashboardHeader />
         <form>
-          <Form
+          <Input
             name="username"
             label="Username"
             type="text"
@@ -57,28 +58,28 @@ export class UserUpdate extends React.Component {
             onChange={this.onUserChange}
           />
 
-          <Form
+          <Input
             name="firstName"
             label="First Name"
             placeholder={this.props.users.firstName}
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="lastName"
             label="Last name"
             placeholder={this.props.users.lastName}
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="email"
             label="Email ddress"
             placeholder={this.props.users.email}
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="password"
             label="Password"
             type="text"
@@ -87,12 +88,13 @@ export class UserUpdate extends React.Component {
 
 
           {role && role.userRole === "admin"
-            ? <Form
-              name="title"
-              label="Title"
-              type="text"
-              placeholder={this.props.users.title}
-              onChange={this.onUserChange} />
+            ?<SelectOptions 
+            options = {this.props.roles}
+            name="title"
+            label="Title"
+            defaultOption="Select role"
+            placeholder={this.props.users.title}
+            onChange={this.onUserChange}/> 
             : ''
           }
 
@@ -107,18 +109,27 @@ export class UserUpdate extends React.Component {
 }
 
 UserUpdate.PropTypes = {
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
+  role: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state, ownProps) {
+  const roleDropdownData =state.roles.map(role => {
+    return {
+      value: role.title,
+      text: role.title
+    };
+  });
   return {
-    users: state.users
+    users: state.users, 
+    roles: roleDropdownData
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(userAction, dispatch)
+    actions: bindActionCreators(userAction, dispatch),
+    action: bindActionCreators(roleAction, dispatch)
   };
 }
 

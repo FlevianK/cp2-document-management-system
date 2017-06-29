@@ -90,11 +90,7 @@ module.exports = {
 
   retrieve(req, res) {
       return Document
-        .findOne({
-          where: {
-            documentId: req.params.documentId
-          }
-        })
+        .findById(req.params.documentId)
         .then(document => {
           if (!document || document.length < 1) {
             return res.status(404).send({
@@ -166,7 +162,14 @@ module.exports = {
               ]
             }
           })
-          .then(document => res.status(200).send(document))
+          .then(document => {
+          if (!document || document.length < 1) {
+            return res.status(404).send({
+              message: 'Document Not Found',
+            });
+          }
+          return res.status(200).send(document);
+        })
           .catch(error => res.status(400).send(error));
       }
     } else {
@@ -174,14 +177,21 @@ module.exports = {
         return Document
           .findAll({
             where: {
-              userId: req.decoded.userId,
+              access: 'public' || req.decoded.userRole,
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
-                { content: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } }
               ]
             }
           })
-          .then(document => res.status(200).send(document))
+          .then(document => {
+          if (!document || document.length < 1) {
+            return res.status(404).send({
+              message: 'Document Not Found',
+            });
+          }
+          return res.status(200).send(document);
+        })
           .catch(error => res.status(400).send(error));
       }
     }
@@ -227,7 +237,6 @@ roleDocs(req, res) {
           })
           .catch(error => res.status(400).send(error));
       }
-      console.log(req.decoded.userRole, "jkhgfd");
       return Document
         .findAll({
            where: {

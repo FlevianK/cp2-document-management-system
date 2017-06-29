@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Form = ({name, label, onChange, placeholder, value, error, type="text"}) => {
+const Input = ({name, label, onChange, placeholder, value, error, type="text"}) => {
   let wrapperClass = 'form-group';
   if (error && error.length > 0) {
     wrapperClass += " " + 'has-error';
@@ -24,7 +24,7 @@ const Form = ({name, label, onChange, placeholder, value, error, type="text"}) =
   );
 };
 
-Form.propTypes = {
+Input.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -33,4 +33,4 @@ Form.propTypes = {
   error: PropTypes.string
 };
 
-export default Form;
+export default Input;

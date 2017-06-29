@@ -18,6 +18,11 @@ module.exports = {
   },
 
   destroy(req, res) {
+    if (req.params.roleId == 'admin') {
+      return res.status(401).send({
+        message: 'Can not delete admin role',
+      });
+    }
     return Role
       .findById(req.params.roleId)
       .then(role => {

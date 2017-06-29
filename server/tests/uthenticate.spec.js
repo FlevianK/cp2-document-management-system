@@ -8,13 +8,13 @@ chai.use(chaiHttp)
 
 describe('Authenticate', () => {
   describe('/POST/users/login', () => {
-    it('it should GET a token', (done) => {
+    it('it should return 200 response with a token when loging in with correct credecials', (done) => {
       chai.request(app)
         .post('/api/users/login')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-          email: "hellen@gmail.com",
-          password: "hellen"
+          email: "admin@gmail.com",
+          password: "admin"
         })
         .end((err, res) => {
           res.should.have.status(200);
@@ -23,13 +23,13 @@ describe('Authenticate', () => {
     });
   });
   describe('/POST a wrong email', () => {
-    it('it should GET a token', (done) => {
+    it('it should return 404 response loging in with wrong email', (done) => {
       chai.request(app)
         .post('/api/users/login')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-          email: "hellen.com",
-          password: "hellen"
+          email: "admin.com",
+          password: "admin"
         })
         .end((err, res) => {
           res.should.have.status(404);

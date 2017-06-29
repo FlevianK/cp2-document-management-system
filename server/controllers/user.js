@@ -7,11 +7,11 @@ const salt = 8;
 module.exports = {
   create(req, res) {
     if (InputValidate.validateInput(req.body)) {
-      return res.status(400).json({ // forbidden request
+      return res.status(403).json({ // forbidden request
         message: 'Input required',
       });
     }
-     console.log(req.body);
+    console.log(req.body);
     return User
       .create({
         username: req.body.username,
@@ -63,6 +63,11 @@ module.exports = {
   },
 
   update(req, res) {
+    if (req.params.userId == 1) {
+      return res.status(401).send({ // forbidden request
+        message: 'Can not update super admin',
+      });
+    }
     return User
       .findById(req.params.userId)
       .then(user => {
@@ -72,7 +77,14 @@ module.exports = {
           });
         }
         return user
-          .update(req.body)
+          .update({
+            username: req.body.username || user.username,
+            firstName: req.body.firstName || user.firstname,
+            lastName: req.body.lastName || user.lastName,
+            email: req.body.email || user.email,
+            password: req.body.password || user.password,
+            title: req.body.title || user.title,
+          })
           .then(() => res.status(200).send(user))  // Send back the updated user.
           .catch((error) => res.status(400).send(error));
       })
@@ -80,6 +92,11 @@ module.exports = {
   },
 
   destroy(req, res) {
+    if (req.params.userId == 1) {
+      return res.status(401).send({ // forbidden request
+        message: 'Can not delete super admin',
+      });
+    }
     return User
       .findById(req.params.userId)
       .then(user => {
@@ -95,7 +112,7 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
-  
+
   searchUser(req, res) {
     if (req.query.q) {
       return User
@@ -109,7 +126,14 @@ module.exports = {
             ]
           }
         })
-        .then(user => res.status(200).send(user))
+        .then(user => {
+        if (!user || user.length < 1) {
+          return res.status(404).send({
+            message: 'User Not Found',
+          });
+        }
+        return res.status(200).send(user);
+      })
         .catch(error => res.status(400).send(error));
     }
   }

@@ -55,3 +55,11 @@ export function allUser(user) {
     { headers: { 'x-access-token': token } }
   );
 }
+
+export function allUsersPage(limit=4, offset=1) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/users/?limit=${limit}&offset=${offset}`,
+    { headers: { 'x-access-token': token } }
+  );
+}

@@ -1,4 +1,4 @@
-import { allDocuments, createDoc, deleteDoc, updateDoc, allDocument, allRoleDocument, allDoc, documentSearch } from '../api/documentApi';
+import { allDocuments, createDoc, deleteDoc, allRoleDocumentPage, allDocumentsPage, updateDoc, allDocument, allRoleDocument, allDoc, documentSearch } from '../api/documentApi';
 import * as types from '../constants/appConstants';
 
 export function loadDocuments() {
@@ -17,6 +17,22 @@ export function loadDocumentsSuccess(documents) {
   return { type: 'LOAD_DOCUMENTS_SUCCESS', documents };
 }
 
+export function loadDocumentsPage(limit, offset) {
+  return function (dispatch) {
+    return allDocumentsPage(limit, offset)
+      .then(res => {
+        dispatch(loadDocumentsPageSuccess(res.data));
+      })
+      .catch(error => {
+        throw (error);
+      });
+  };
+}
+
+export function loadDocumentsPageSuccess(documentsPage) {
+  return { type: 'LOAD_DOCUMENTS_PAGE_SUCCESS', documentsPage };
+}
+
 export function loadRoleDocuments() {
   return function (dispatch) {
     return allRoleDocument()
@@ -31,6 +47,22 @@ export function loadRoleDocuments() {
 
 export function loadRoleDocumentsSuccess(documents) {
   return { type: 'LOAD_ROLE_DOCUMENTS_SUCCESS', documents };
+}
+
+export function loadRoleDocumentsPage(limit, offset) {
+  return function (dispatch) {
+    return allRoleDocumentPage(limit, offset)
+      .then(res => {
+        dispatch(loadRoleDocumentsPageSuccess(res.data));
+      })
+      .catch(error => {
+        throw (error);
+      });
+  };
+}
+
+export function loadRoleDocumentsPageSuccess(documentsPage) {
+  return { type: 'LOAD_ROLE_DOCUMENTS_PAGE_SUCCESS', documentsPage };
 }
 
 export function createDocument(newDoc) {

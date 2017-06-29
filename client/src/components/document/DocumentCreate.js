@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form, DashboardHeader } from '../../containers';
+import { Input, DashboardHeader, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
@@ -17,7 +17,7 @@ export class DocumentCreate extends React.Component {
         content: '',
         access: ''
       }, 
-      errors: {}
+      errors: {},
     };
     this.onDocumentChange = this.onDocumentChange.bind(this);
     this.onDocumentSave = this.onDocumentSave.bind(this);
@@ -57,11 +57,14 @@ export class DocumentCreate extends React.Component {
       return;
     }
     this.props.actions.createDocument(this.state.newDocument).then(()=> browserHistory.push('/documents'));
+    
   }
 
   render() {
     const token = localStorage.jwt;
     const role = token && jwtDecode(token);
+    const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: role.userRole, text:"Role"} ]
+    const roleUser = role.userRole;
     return (
       <div>
         {role && role.userRole === "admin"
@@ -69,22 +72,26 @@ export class DocumentCreate extends React.Component {
           : ''
         }
         <form>
-          <Form
+          <Input
             name="title"
             label="title"
-            type="text"
+            errors={this.state.errors}
             onChange={this.onDocumentChange} />
 
-          <Form
+          <Input
             name="content"
             label="Content"
-            type="text"
+            errors={this.state.errors}
             onChange={this.onDocumentChange} />
-          <Form
+
+          <SelectOptions 
+            options = {accessOption}
             name="access"
-            label="Access"
-            type="text"
-            onChange={this.onDocumentChange} />
+            label="Access Type"
+            defaultOption="select access type"
+            value={this.state.newDocument.access}
+            errors={this.state.errors}
+            onChange={this.onDocumentChange} /> 
 
           <input
             type="submit"
@@ -96,10 +103,22 @@ export class DocumentCreate extends React.Component {
   }
 }
 
+DocumentCreate.propTypes = {
+  documents: PropTypes.object.isRequired,
+  access: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    documents: state.documents
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(documentAction, dispatch)
   };
 }
 
-export default connect(null, mapDispatchToProps)(DocumentCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentCreate);

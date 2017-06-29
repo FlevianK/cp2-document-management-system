@@ -6,11 +6,14 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg1NzYyNjUsImV4cCI6MTQ5ODU3NzcwNX0.nB4BHBM48InoCGITIKvj11Q-Mky-OO2p7mnsDT663Nk"
+const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg3MDg3OTMsImV4cCI6MTQ5ODcxMDIzM30.WemDTbqNT7Ya2OKijcmyuWAqEFlDB9DS0ppj_2CfMEM"
+
+
+//testing as an admin
 
 describe('Documents', () => {
   describe('/GET/documents', () => {
-    it('it should GET documents while paginate', (done) => {
+    it('it should GET documents while paginate and do not document exist', (done) => {
       chai.request(app)
         .get('/api/documents/')
         .set('x-access-token', token)
@@ -20,9 +23,31 @@ describe('Documents', () => {
         });
     });
   });
+  describe('/GET/documents', () => {
+    it('it should GET documents while paginate and do not document exist for roles access type', (done) => {
+      chai.request(app)
+        .get('/api/roles/documents/')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
 
+describe('/GET/documents', () => {
+    it('it should 404 response lists documents and non exist for role access type', (done) => {
+      chai.request(app)
+        .get('/api/roles/documents/')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
   describe('/POST', () => {
-    it('should return a 201 response', (done) => {
+    it('should return a 201 response creating a document successfuly', (done) => {
       chai.request(app)
         .post('/api/documents/')
         .set('x-access-token', token)
@@ -30,7 +55,26 @@ describe('Documents', () => {
         .send({
           title: "Tour to Quebeq",
           content: "Day to remember",
-          access: "private",
+          access: "public",
+          userId: 1
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+  });
+
+  describe('/POST', () => {
+    it('should return a 201 response creating a document successfuly', (done) => {
+      chai.request(app)
+        .post('/api/documents/')
+        .set('x-access-token', token)
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+          title: "Tour Quebeq",
+          content: "Day remember",
+          access: "admin",
           userId: 1
         })
         .end((err, res) => {
@@ -41,7 +85,7 @@ describe('Documents', () => {
   });
 
 describe('/POST', () => {
-    it('should return a 403 response', (done) => {
+    it('should return a 403 response while some specified fields are empty', (done) => {
       chai.request(app)
         .post('/api/documents/')
         .set('x-access-token', token)
@@ -59,20 +103,8 @@ describe('/POST', () => {
     });
   });
 
-  describe('/GET/<id>', () => {
-    it('it should GET a document by the given id', (done) => {
-      chai.request(app)
-        .get('/api/documents/2')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          res.should.have.status(404);
-          done();
-        });
-    });
-  });
-
 describe('/GET/<id>', () => {
-    it('it should GET a document by datatype id', (done) => {
+    it('it should 400 fetching a document by wrong datatype id', (done) => {
       chai.request(app)
         .get('/api/documents/jmhnvbcc')
         .set('x-access-token', token)
@@ -84,7 +116,7 @@ describe('/GET/<id>', () => {
   });
 
   describe('/POST', () => {
-    it('should return a 201 response', (done) => {
+    it('should return a 201 response created a document successfully', (done) => {
       chai.request(app)
         .post('/api/documents/')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -103,7 +135,7 @@ describe('/GET/<id>', () => {
   });
 
   describe('/POST', () => {
-    it('should return a 201 response', (done) => {
+    it('should return a 201 response created a document successfully', (done) => {
       chai.request(app)
         .post('/api/documents/')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -111,11 +143,10 @@ describe('/GET/<id>', () => {
         .send({
           title: "December holiday",
           content: "Going to vist children homes in Kampala",
-          access: "public",
+          access: "admin",
           userId: 1,
         })
         .end((err, res) => {
-          console.log(err);
           res.should.have.status(201);
           done();
         });
@@ -123,7 +154,7 @@ describe('/GET/<id>', () => {
   });
 
   describe('/PUT', () => {
-    it('should return a 200 response', (done) => {
+    it('should return a 200 response updating a dcument with a document id that exist', (done) => {
       chai.request(app)
         .put('/api/documents/1')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -131,7 +162,7 @@ describe('/GET/<id>', () => {
         .send({
           title: "Fair day",
           content: "Dancing and shouting",
-          access: "private",
+          access: "public",
           UserId: 2,
         })
         .end((err, res) => {
@@ -144,7 +175,7 @@ describe('/GET/<id>', () => {
   
 
 describe('/PUT', () => {
-    it('should return a 400 response', (done) => {
+    it('should return a 400 response when updating a document using a wrong document id type', (done) => {
       chai.request(app)
         .put('/api/documents/jmnbcvx')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -162,46 +193,8 @@ describe('/PUT', () => {
     });
   });
 
-  describe('/POST', () => {
-    it('should return a 201 response', (done) => {
-      chai.request(app)
-        .post('/api/documents/')
-        .set('x-access-token', token)
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-          title: "Tour",
-          content: "Day to remember",
-          access: "public",
-          userId: 2
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          done();
-        });
-    });
-  });
-
-  describe('/POST', () => {
-    it('should return a 201 response', (done) => {
-      chai.request(app)
-        .post('/api/documents/')
-        .set('x-access-token', token)
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-          title: "Tour to Quebeq",
-          content: "Day to remember",
-          access: "public",
-          userId: "yfy"
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          done();
-        });
-    });
-  });
-
   describe('/PUT', () => {
-    it('should return a 404 response', (done) => {
+    it('should return a 404 response when updating a document that does not exist', (done) => {
       chai.request(app)
         .put('/api/documents/80')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -220,9 +213,9 @@ describe('/PUT', () => {
   });
 
   describe('/GET/<document>', () => {
-    it('it should GET a document by the given id', (done) => {
+    it('it should return 200 response and data when retriving a document thaat exist', (done) => {
       chai.request(app)
-        .get('/api/documents/2')
+        .get('/api/documents/3')
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(200);
@@ -236,7 +229,7 @@ describe('/PUT', () => {
   });
 
   describe('/GET/documents', () => {
-    it('it should GET all documents', (done) => {
+    it('it should 200 response and data lists documents and atleast one exist', (done) => {
       chai.request(app)
         .get('/api/documents/')
         .set('x-access-token', token)
@@ -248,7 +241,7 @@ describe('/PUT', () => {
   });
 
   describe('/GET/documents', () => {
-    it('it should GET documents while paginate', (done) => {
+    it('it should 200 response and data listing documents while paginate with a range that exist', (done) => {
       chai.request(app)
         .get('/api/documents/?limit=1&offset=1')
         .set('x-access-token', token)
@@ -260,7 +253,7 @@ describe('/PUT', () => {
   });
 
   describe('/GET/documents', () => {
-    it('it should GET documents while paginate', (done) => {
+    it('it should 404 rensponse when listing documents while paginate with non existing range', (done) => {
       chai.request(app)
         .get('/api/documents/?limit=80&offset=60')
         .set('x-access-token', token)
@@ -272,7 +265,7 @@ describe('/PUT', () => {
   });
 
    describe('/GET/documents', () => {
-    it('it should GET documents while paginate using wrong datatype input', (done) => {
+    it('it should return 400 response when documents while paginate using wrong datatype input', (done) => {
       chai.request(app)
         .get('/api/documents/?limit=khjgjf&offset=jhgngcbx')
         .set('x-access-token', token)
@@ -284,7 +277,7 @@ describe('/PUT', () => {
   });
 
   describe('/DELETE', () => {
-    it('should return a 204 response', (done) => {
+    it('should return a 204 response when deleting a document that exists using correct document id datatype', (done) => {
       chai.request(app)
         .delete('/api/documents/2')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -297,7 +290,7 @@ describe('/PUT', () => {
   });
 
   describe('/DELETE', () => {
-    it('should return a  400', (done) => {
+    it('should return a  400 when deleting a document using wrong datatype', (done) => {
       chai.request(app)
         .delete('/api/documents/ljkhgfbf')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -310,7 +303,7 @@ describe('/PUT', () => {
   });
 
   describe('/DELETE', () => {
-    it('should return a 404 response', (done) => {
+    it('should return a 404 response when deleteing document that does not exist', (done) => {
       chai.request(app)
         .delete('/api/documents/2')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -324,7 +317,7 @@ describe('/PUT', () => {
 
 
   describe('/GET/<document>', () => {
-    it('it should GET a document by the given id', (done) => {
+    it('it should return 404 when retring a document that does not exist', (done) => {
       chai.request(app)
         .get('/api/documents/2')
         .set('x-access-token', token)
@@ -334,21 +327,9 @@ describe('/PUT', () => {
         });
     });
   });
-  describe('/GET/<document>', () => {
-    it('it should GET a document by the user role', (done) => {
-      chai.request(app)
-        .get('/api/documents/admin')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          res.should.have.status(200);
-          done();
-        });
-    });
-  });
-
-
+  
   describe('/GET/search/documents/?q={}', () => {
-    it('it should GET a document by searching', (done) => {
+    it('it should 200 response and data when searching a document that exist', (done) => {
       chai.request(app)
         .get('/api/search/documents/?q=Fair%20day')
         .set('x-access-token', token)
@@ -360,7 +341,7 @@ describe('/PUT', () => {
   });
 
   describe('/api/users/:userId/documents', () => {
-    it('it should GET a documents for non existing user', (done) => {
+    it('it should 404 response when retriving documents for non existing user', (done) => {
       chai.request(app)
         .get('/api/users/2/documents')
         .set('x-access-token', token)
@@ -370,9 +351,10 @@ describe('/PUT', () => {
         });
     });
   });
+
   
   describe('/api/users/:userId/documents', () => {
-    it('it should GET a documents for an existing user', (done) => {
+    it('it should 200 response when retriving documents for an existing user', (done) => {
       chai.request(app)
         .get('/api/users/1/documents')
         .set('x-access-token', token)
@@ -384,7 +366,7 @@ describe('/PUT', () => {
   });
 
   describe('/api/users/:userId/documents', () => {
-    it('it should GET a documents using wrong datatype for user id', (done) => {
+    it('it should 400 response when retriving documents using wrong datatype for user id', (done) => {
       chai.request(app)
         .get('/api/users/jghnfbdd/documents')
         .set('x-access-token', token)
@@ -395,7 +377,7 @@ describe('/PUT', () => {
     });
   });
   describe('/DELETE', () => {
-    it('should return a 204 response', (done) => {
+    it('should return a 204 response when deleting an existing document with the correct document id datatype', (done) => {
       chai.request(app)
         .delete('/api/documents/1')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -406,16 +388,83 @@ describe('/PUT', () => {
         });
     });
   });
-  describe('/DELETE', () => {
-    it('should return a 204 response', (done) => {
+
+  describe('/POST', () => {
+    it('should return a 201 response creating a document successfuly for roles', (done) => {
       chai.request(app)
-        .delete('/api/documents/3')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .post('/api/documents/')
         .set('x-access-token', token)
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+          title: "Tour to Quebeq",
+          content: "Day to remember",
+          access: "public",
+          userId: 1
+        })
         .end((err, res) => {
-          res.should.have.status(204);
+          res.should.have.status(201);
           done();
         });
     });
   });
-});
+  
+   describe('/GET/documents', () => {
+    it('it should 200 response and data lists documents and atleast one exist for role access type', (done) => {
+      chai.request(app)
+        .get('/api/roles/documents/')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+
+  describe('/GET/documents', () => {
+    it('it should 200 response and data listing documents while paginate with a range that exist for roles access type', (done) => {
+      chai.request(app)
+        .get('/api/roles/documents/?limit=1&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+
+  describe('/GET/documents', () => {
+    it('it should 404 rensponse when listing documents while paginate with non existing range for roles access type', (done) => {
+      chai.request(app)
+        .get('/api/roles/documents/?limit=80&offset=60')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+
+   describe('/GET/documents', () => {
+    it('it should return 400 response when documents while paginate using wrong datatype input for role access type', (done) => {
+      chai.request(app)
+        .get('/api/roles/documents/?limit=khjgjf&offset=jhgngcbx')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
+
+  describe('/GET/search/documents/?q={}', () => {
+    it('it should 404 response when searching a document that does not exist', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=Toolkjj')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+})

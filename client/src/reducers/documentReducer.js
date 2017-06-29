@@ -1,6 +1,5 @@
 import * as types from '../constants/appConstants';
 import initialState from './initialState';
-import { browserHistory } from 'react-router';
 
 export default function documentReducer(state = initialState.documents, action) {
   switch (action.type) {
@@ -9,28 +8,30 @@ export default function documentReducer(state = initialState.documents, action) 
 
     case types.CREATE_DOCUMENT_SUCCESS:
       return [
-                ...state,
-                Object.assign({}, action.documents)
-            ];
+        ...state,
+        Object.assign({}, action.documents)
+      ];
 
     case types.DELETE_DOCUMENT_SUCCESS:
       return action.documents
 
     case types.UPDATE_DOCUMENT_SUCCESS:
-      return action.documents
+      return [
+        ...state.filter(documents => documents.id !== action.documents.id),
+        Object.assign({}, action.documents)
+      ];
 
     case types.LOAD_DOCUMENT_SUCCESS:
       return action.documents
 
     case types.SEARCH_DOCUMENT_SUCCESS:
-      return action.documents  
+      return action.documents
 
     case types.LOAD_DOC_SUCCESS:
       return action.documents
 
     case types.LOAD_ROLE_DOCUMENTS_SUCCESS:
       return action.documents
-
 
     default:
       return state;

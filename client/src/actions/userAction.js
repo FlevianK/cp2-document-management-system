@@ -1,4 +1,4 @@
-import { allUsers, createdUser, userDelete, userUpdate, userSearch, allUser } from '../api/userApi';
+import { allUsers, createdUser, userDelete, userUpdate, allUsersPage, userSearch, allUser } from '../api/userApi';
 import * as types from '../constants/appConstants';
 
 export function loadUsers() {
@@ -95,4 +95,20 @@ export function loadUser(user) {
 
 export function loadUserSuccess(users) {
   return { type: 'LOAD_USER_SUCCESS', users };
+}
+
+export function loadUsersPage(limit, offset) {
+  return function (dispatch) {
+    return allUsersPage(limit, offset)
+      .then(res => {
+        dispatch(loadUsersPageSuccess(res.data));
+      })
+      .catch(error => {
+        throw (error);
+      });
+  };
+}
+
+export function loadUserPageSuccess(usersPage) {
+  return { type: 'LOAD_USERS_PAGE_SUCCESS', usersPage };
 }

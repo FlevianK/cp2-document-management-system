@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Form, DashboardHeader  } from '../../containers';
+import { Input, DashboardHeader  } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
@@ -72,31 +72,31 @@ export class UserCreate extends React.Component {
     return (
       <div>
         <form>
-          <Form
+          <Input
             name="username"
             label="Username"
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="firstName"
             label="First Name"
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="lastName"
             label="Surname"
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="email"
             label="Email Address"
             type="text"
             onChange={this.onUserChange} />
 
-          <Form
+          <Input
             name="password"
             label="Password"
             type="text"

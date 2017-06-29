@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form } from '../containers';
+import { Input } from '../containers';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginAction from '../actions/loginAction';
@@ -45,13 +45,13 @@ export class Login extends React.Component {
         <div className="row">
           <div className="col s6 offset-m3">
             <form>
-              <Form
+              <Input
                 name="email"
                 label="email"
                 value={this.state.loginDetails.email}
                 onChange={this.onLoginChange} />
 
-              <Form
+              <Input
                 name="password"
                 label="password"
                 type="password"

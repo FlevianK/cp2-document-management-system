@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg1NzYyNjUsImV4cCI6MTQ5ODU3NzcwNX0.nB4BHBM48InoCGITIKvj11Q-Mky-OO2p7mnsDT663Nk"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg3MDg3OTMsImV4cCI6MTQ5ODcxMDIzM30.WemDTbqNT7Ya2OKijcmyuWAqEFlDB9DS0ppj_2CfMEM"
 
 
 describe('Roles', () => {
@@ -82,7 +82,7 @@ describe('Roles', () => {
   });
   
   describe('/DELETE', () => {
-    it('should return a 204 response', (done) => {
+    it('should return a 204 response delete an existing role that is not admin', (done) => {
       chai.request(app)
         .delete('/api/roles/fellow')
         .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -95,13 +95,26 @@ describe('Roles', () => {
   });
 
   describe('/DELETE', () => {
-    it('should return a 404 response', (done) => {
+    it('should return a 404 response when deleting a role does not exist', (done) => {
       chai.request(app)
         .delete('/api/roles/fellow')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404);
+          done();
+        });
+    });
+  });
+
+  describe('/DELETE', () => {
+    it('should return a 401 response when deleting an admin role', (done) => {
+      chai.request(app)
+        .delete('/api/roles/admin')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(401);
           done();
         });
     });
