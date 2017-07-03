@@ -25,15 +25,9 @@ export class DocumentDelete extends React.Component {
     }
 
     render() {
-        console.log(this.props.params, "qwewrf")
-        const token = localStorage.jwt;
-        const role = token && jwtDecode(token);
         return (
             <div className="col-md-12">
-                {role && role.userRole === "admin"
-                    ? <DashboardHeader />
-                    : ''
-                }
+                <DashboardHeader />
                 <form>
                     <Input
                         value={this.props.params.documentId} />

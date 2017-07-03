@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import jwtDecode from 'jwt-decode';
 
 const DocumentHeader = ({ documents }) => {
+
   const token = localStorage.jwt;
   const role = token && jwtDecode(token);
   return (
@@ -14,11 +15,6 @@ const DocumentHeader = ({ documents }) => {
       <Link to="/documents/role" activeClassName="active">Role Documents</Link>
       {" | "}
       <Link to="/documents/all" activeClassName="active">All Documents</Link>
-      {role && role.userRole !== "admin"
-        ?
-        <Link to="/logout" activeClassName="active">Logout</Link>
-        : ''
-      }
     </div>
   );
 };

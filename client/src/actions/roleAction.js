@@ -1,5 +1,6 @@
 import { allRoles, roleCreate, roleDelete } from '../api/roleApi';
 import * as types from '../constants/appConstants';
+import toastr from 'toastr';
 
 export function loadRoles() {
   return function (dispatch) {
@@ -8,7 +9,7 @@ export function loadRoles() {
         dispatch(loadRolesSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -24,7 +25,7 @@ export function createRole(newRole) {
         dispatch(createroleSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -40,7 +41,7 @@ export function deleteRole(deletedRole) {
         dispatch(deleteroleSuccess(res.body));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }

@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { UserList, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
-import SearchUser from './SearchUser';
 import Pagination from 'react-js-pagination';
 
 
@@ -30,18 +29,16 @@ export class User extends React.Component {
         this.props.actions.loadUsersPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
     }
     componentWillMount() {
-        console.log('Component will mount', this.props.actions);
         this.props.actions.loadUsersPage();
         this.props.actions.loadUsers()
     }
 
     render() {
-        const users = this.props.users;
-        const totalItems = this.props.usersPage.length;
+        const users = this.props.usersPage;
+        const totalItems = this.props.users;
         return (
             <div className="col-md-12">
                 <DashboardHeader />
-                <SearchUser />
                 <UserList users={users} />
                 <Pagination
                     activePage={this.state.activePage}
@@ -55,25 +52,14 @@ export class User extends React.Component {
 }
 
 User.PropTypes = {
-    usersPage: PropTypes.object.isRequired
+    users: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log(state, "jhkjgf");
     return {
-        users: state.users,
+        users: state.users.length,
         usersPage: state.usersPage
     };
-    // if (state.users.length > 0) {
-    //     return {
-    //         users: state.users,
-    //         usersPage: state.usersPage
-    //     };
-    // } else {
-    //     return {
-    //         users: [{ id: '', firstName: '', lastName: '', email: '', title: '' }]
-    //     };
-    // }
 }
 
 function mapDispatchToProps(dispatch) {

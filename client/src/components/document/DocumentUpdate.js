@@ -44,10 +44,7 @@ export class DocumentUpdate extends React.Component {
     const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: role.userRole, text:"Role"} ]
     return (
       <div>
-        {role && role.userRole === "admin"
-          ? <DashboardHeader />
-          : ''
-        }
+        <DashboardHeader />
         <form>
           <Input
             name="title"

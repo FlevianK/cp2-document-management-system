@@ -10,7 +10,7 @@ export function allDocuments() {
   );
 }
 
-export function allDocumentsPage(limit=4, offset=0) {
+export function allDocumentsPage(limit=2, offset=0) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/documents/?limit=${limit}&offset=${offset}`,
@@ -44,7 +44,7 @@ export function deleteDoc(deletedDoc) {
   );
 }
 
-export function allDocument(document) {
+export function singleDocument(document) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/documents/${document.documentId}`,
@@ -56,6 +56,14 @@ export function allDoc(doc) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/users/${doc}/documents`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
+export function allDocList(doc, limit=2, offset=0) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/users/${doc}/documents/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }
   );
 }
@@ -75,7 +83,7 @@ export function allRoleDocument() {
     { headers: { 'x-access-token': token } }
   );
 }
-export function allRoleDocumentPage(limit=4, offset=0) {
+export function allRoleDocumentPage(limit=2, offset=0) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/roles/documents/?limit=${limit}&offset=${offset}`,

@@ -1,23 +1,28 @@
-import { allDocuments, createDoc, deleteDoc, allRoleDocumentPage, allDocumentsPage, updateDoc, allDocument, allRoleDocument, allDoc, documentSearch } from '../api/documentApi';
+import { allDocuments, createDoc, deleteDoc, allRoleDocumentPage, allDocumentsPage, updateDoc, singleDocument, allRoleDocument, allDoc, documentSearch, allDocList } from '../api/documentApi';
 import * as types from '../constants/appConstants';
+import toastr from 'toastr';
 
-export function loadDocuments() {
+export function failureMessage(message) {
+  return { type: 'FAILURE_MESSAGE', message };
+}
+
+export function loadDocuments() { //all documents
   return function (dispatch) {
     return allDocuments()
       .then(res => {
         dispatch(loadDocumentsSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
 
-export function loadDocumentsSuccess(documents) {
-  return { type: 'LOAD_DOCUMENTS_SUCCESS', documents };
+export function loadDocumentsSuccess(allDocuments) {
+  return { type: 'LOAD_DOCUMENTS_SUCCESS', allDocuments };
 }
 
-export function loadDocumentsPage(limit, offset) {
+export function loadDocumentsPage(limit, offset) { //all documents by pagination
   return function (dispatch) {
     return allDocumentsPage(limit, offset)
       .then(res => {
@@ -29,40 +34,40 @@ export function loadDocumentsPage(limit, offset) {
   };
 }
 
-export function loadDocumentsPageSuccess(documentsPage) {
-  return { type: 'LOAD_DOCUMENTS_PAGE_SUCCESS', documentsPage };
+export function loadDocumentsPageSuccess(allDocumentsPage) {
+  return { type: 'LOAD_DOCUMENTS_PAGE_SUCCESS', allDocumentsPage };
 }
 
-export function loadRoleDocuments() {
+export function loadRoleDocuments() { //all documents by role
   return function (dispatch) {
     return allRoleDocument()
       .then(res => {
         dispatch(loadRoleDocumentsSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
 
-export function loadRoleDocumentsSuccess(documents) {
-  return { type: 'LOAD_ROLE_DOCUMENTS_SUCCESS', documents };
+export function loadRoleDocumentsSuccess(roleDocuments) {
+  return { type: 'LOAD_ROLE_DOCUMENTS_SUCCESS', roleDocuments };
 }
 
-export function loadRoleDocumentsPage(limit, offset) {
+export function loadRoleDocumentsPage(limit, offset) { //all documents by role while paginated
   return function (dispatch) {
     return allRoleDocumentPage(limit, offset)
       .then(res => {
         dispatch(loadRoleDocumentsPageSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        throw(error);
       });
   };
 }
 
-export function loadRoleDocumentsPageSuccess(documentsPage) {
-  return { type: 'LOAD_ROLE_DOCUMENTS_PAGE_SUCCESS', documentsPage };
+export function loadRoleDocumentsPageSuccess(roleDocumentsPage) {
+  return { type: 'LOAD_ROLE_DOCUMENTS_PAGE_SUCCESS', roleDocumentsPage };
 }
 
 export function createDocument(newDoc) {
@@ -72,7 +77,7 @@ export function createDocument(newDoc) {
         dispatch(createdocumentSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
@@ -88,7 +93,7 @@ export function deleteDocument(deletedDoc) {
         dispatch(deletedocumentSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
@@ -104,7 +109,7 @@ export function updateDocument(updateDocs) {
         dispatch(updatedocumentSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
@@ -113,14 +118,14 @@ export function updatedocumentSuccess(documents) {
   return { type: 'UPDATE_DOCUMENT_SUCCESS', documents }
 }
 
-export function loadDocument(document) {
+export function loadDocument(document) { // single document
   return function (dispatch) {
-    return allDocument(document)
+    return singleDocument(document)
       .then(res => {
         dispatch(loaddocumentSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
@@ -129,20 +134,37 @@ export function loaddocumentSuccess(documents) {
   return { type: 'LOAD_DOCUMENT_SUCCESS', documents };
 }
 
-export function loadDoc(doc) {
+export function loadDoc(doc) { //all user documents
   return function (dispatch) {
     return allDoc(doc)
       .then(res => {
         dispatch(loaddocSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
 
 export function loaddocSuccess(documents) {
   return { type: 'LOAD_DOC_SUCCESS', documents };
+}
+
+export function loadDocList(doc, limit, offset) { //all user documents by page
+  console.log(doc, "oiuyjthrsfaffdgfghj", limit, offset);
+  return function (dispatch) {
+    return allDocList(doc, limit, offset)
+      .then(res => {
+        dispatch(loaddoclistSuccess(res.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+}
+
+export function loaddoclistSuccess(documentsPage) {
+  return { type: 'LOAD_DOC_PAGE_SUCCESS', documentsPage };
 }
 
 export function searchDocument(searchValue) {
@@ -152,12 +174,12 @@ export function searchDocument(searchValue) {
         dispatch(searchdocumentSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.res.data.message);
       });
   };
 }
 
-export function searchdocumentSuccess(documents) {
-  return { type: 'SEARCH_DOCUMENT_SUCCESS', documents }
+export function searchdocumentSuccess(allDocumentsPage) {
+  return { type: 'SEARCH_DOCUMENT_SUCCESS', allDocumentsPage }
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input , DashboardHeader} from '../../containers';
+import { Input, DashboardHeader } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
@@ -28,25 +28,25 @@ export class RoleCreate extends React.Component {
     return this.setState({ newRole: newRole });
   }
 
-  roleFormIsValid(){
+  roleFormIsValid() {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.newRole.title.length < 1 ) {
+    if (this.state.newRole.title.length < 1) {
       errors.title = 'Role must not be empty';
       formIsValid = false;
-    } 
-    this.setState({errors: errors});
+    }
+    this.setState({ errors: errors });
     return formIsValid;
   }
 
   onRoleSave(event) {
     event.preventDefault();
-    if(!this.roleFormIsValid()){
+    if (!this.roleFormIsValid()) {
       return;
     }
     this.props.actions.createRole(this.state.newRole);
-    this.props.actions.loadRoles().then(()=> browserHistory.push('/roles'));
+    this.props.actions.loadRoles().then(() => browserHistory.push('/roles'));
   }
 
   render() {
@@ -55,6 +55,7 @@ export class RoleCreate extends React.Component {
         <DashboardHeader />
         <form>
           <Input
+            error={this.state.errors.title}
             name="title"
             type="text"
             label="Role"

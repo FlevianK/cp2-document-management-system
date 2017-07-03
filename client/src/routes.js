@@ -16,12 +16,13 @@ import {
   RoleCreate,
   RoleDelete,
   Documents,
-  DocumentRole 
+  DocumentRole,
+  SearchUser 
 } from './components'
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Login} onEnter={requireAuth()} />
+    <IndexRoute component={Login} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/documents" component={Document} />
       <Route path="/documents/all" component={Documents} />
@@ -33,18 +34,9 @@ export default (
       <Route path="/users/create" component={UserCreate} />
       <Route path="/users/delete/:userId" component={UserDelete} />
       <Route path="/users/update/:userId" component={UserUpdate} />
+      <Route path="/users/search" component={SearchUser} />
       <Route path="/roles" component={Role} />
       <Route path="/roles/create" component={RoleCreate} />
       <Route path="/roles/delete/:role" component={RoleDelete} />
-      {/*<Route path="/roles/delete/:role" component={RoleDelete} />*/}
   </Route>
 )
-
-function requireAuth(nextState, replace) {
-  if (!localStorage.jwt) {
-    replace({
-      pathname: '/',
-      state: { nextPathname: nextState.location.pathname }
-    })
-  }
-}

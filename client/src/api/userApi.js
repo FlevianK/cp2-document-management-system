@@ -48,6 +48,14 @@ export function userSearch(userValue) {
   );
 }
 
+export function userSearchPage(userValue, limit=4, offset=0) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/search/users/?q=${userValue}&limit=${limit}&offset=${offset}`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
 export function allUser(user) {
   let token = localStorage.jwt;
   return axios.get(

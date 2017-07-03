@@ -28,7 +28,9 @@ import {
   loadRoleDocuments,
   loadDocumentsPage,
   loadRoleDocumentsPage, 
-  loadUsersPage
+  loadUsersPage,
+  loadDocList,
+  searchUsersPage
 } from './actions';
 
 const store = configureStore();

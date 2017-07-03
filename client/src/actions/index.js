@@ -1,7 +1,7 @@
-import { loadDocuments, createDocument, loadRoleDocumentsPage, deleteDocument, updateDocument, loadDocumentsPage, loadDocument, loadDoc, searchDocument, loadRoleDocuments } from './documentAction';
-import { loadUsers, createUser, deleteUser, loadUsersPage, updateUser, searchUser, loadUser } from './userAction';
+import { loadDocuments, createDocument, loadRoleDocumentsPage, deleteDocument, updateDocument, loadDocumentsPage, loadDocument, loadDoc, searchDocument, loadRoleDocuments, loadDocList } from './documentAction';
+import { loadUsers, createUser, deleteUser, loadUsersPage, updateUser, searchUser, loadUser, searchUsersPage } from './userAction';
 import { loadRoles, createRole, deleteRole } from './roleAction';
-import { loginUser } from './loginAction';
+import { loginUser, logoutUser } from './loginAction';
 
 export { 
   loginUser,
@@ -24,5 +24,8 @@ export {
   loadRoleDocuments,
   loadDocumentsPage,
   loadRoleDocumentsPage, 
-  loadUsersPage
+  loadUsersPage,
+  logoutUser,
+  loadDocList,
+  searchUsersPage
 }

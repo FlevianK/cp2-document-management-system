@@ -40,12 +40,8 @@ export class DocumentCreate extends React.Component {
             errors.title = 'Title must not be empty';
             formIsValid = false;
         }
-        if (this.state.newDocument.content.length < 5) {
-            errors.content = 'Content must be at least 5 characters';
-            formIsValid = false;
-        }
-        if (this.state.newDocument.access.length < 1) {
-            errors.access = 'Must select the type of document access';
+        if (this.state.newDocument.content.length < 1) {
+            errors.content = 'Content must be empty';
             formIsValid = false;
         }
         this.setState({ errors: errors });
@@ -64,21 +60,19 @@ export class DocumentCreate extends React.Component {
     render() {
         const token = localStorage.jwt;
         const role = token && jwtDecode(token);
-        const options = [{ value: "public", text: "Public" }, { value: "private", text: "Private" }, { value: role.userRole, text: "Role" }];
         return (
             <div>
-                {role && role.userRole === "admin"
-                    ? <DashboardHeader />
-                    : ''
-                }
+                <DashboardHeader />
                 <form>
                     <Input
+                        error={this.state.errors.title}
                         name="title"
                         label="title"
                         type="text"
                         onChange={this.onDocumentChange} />
 
                     <Input
+                        error={this.state.errors.content}
                         name="content"
                         label="Content"
                         type="text"
@@ -88,7 +82,8 @@ export class DocumentCreate extends React.Component {
                         <label>Access</label>
                         <div>
                             <select name="access" className="browser-default" onChange={this.onDocumentChange}>
-                                <option value="public">Public</option>
+                                <option value="" disabled selected>Select access type</option>
+                                <option value="public" >Public</option>
                                 <option value="private">Private</option>
                                 <option value={role.userRole}>Role</option>
                             </select>

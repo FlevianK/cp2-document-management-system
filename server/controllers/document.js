@@ -198,6 +198,47 @@ module.exports = {
   },
 
   userDocs(req, res) {
+    console.log(req, "yutrew");
+      // if (req.query.q) {
+      //   return Document
+      //     .findAll({
+      //       where: {
+      //         userId: req.params.userId
+      //         $or: [
+      //           { title: { $iLike: `%${req.query.q}%` } },
+      //           { content: { $iLike: `%${req.query.q}%` } },
+      //         ]
+      //       }
+      //     })
+      //     .then(document => {
+      //     if (!document || document.length < 1) {
+      //       return res.status(404).send({
+      //         message: 'Document Not Found',
+      //       });
+      //     }
+      //     return res.status(200).send(document);
+      //   })
+      //     .catch(error => res.status(400).send(error));
+      // }
+      if (req.query.limit || req.query.offset) {
+        return Document
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+             where: {
+              userId: req.params.userId
+            }
+          })
+          .then(document => {
+            if (!document || document.length < 1) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      }
     return Document
       .findAll({
         where: {
@@ -218,7 +259,6 @@ module.exports = {
 },
 
 roleDocs(req, res) {
-  console.log(req.decoded.userRole, "role");
       if (req.query.limit || req.query.offset) {
         return Document
           .findAll({

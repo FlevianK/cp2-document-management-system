@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Input, SelectOptions, DashboardHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 
 export class UserUpdate extends React.Component {
@@ -33,12 +33,12 @@ export class UserUpdate extends React.Component {
     users[field] = event.target.value;
     return this.setState({ users: users });
   }
- 
+
 
   onUserSave(event) {
     event.preventDefault();
-    this.props.actions.updateUser(this.state.users);
-    this.props.actions.loadUsers().then(()=> browserHistory.push('/users'));
+    this.props.actions.updateUser(this.state.users)
+    this.props.actions.loadUsersPage().then(() => browserHistory.push('/users'));
   }
 
   render() {
@@ -87,13 +87,13 @@ export class UserUpdate extends React.Component {
 
 
           {role && role.userRole === "admin"
-            ?<SelectOptions 
-            options = {this.props.roles}
-            name="title"
-            label="Title"
-            defaultOption="Select role"
-            placeholder={this.props.users.title}
-            onChange={this.onUserChange}/> 
+            ? <SelectOptions
+              options={this.props.roles}
+              name="title"
+              label="Title"
+              defaultOption="Select role"
+              placeholder={this.props.users.title}
+              onChange={this.onUserChange} />
             : ''
           }
 
@@ -113,14 +113,14 @@ UserUpdate.PropTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
-  const roleDropdownData =state.roles.map(role => {
+  const roleDropdownData = state.roles.map(role => {
     return {
       value: role.title,
       text: role.title
     };
   });
   return {
-    users: state.users, 
+    users: state.users,
     roles: roleDropdownData
   }
 }

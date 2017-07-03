@@ -12,6 +12,7 @@ import User from './user/User';
 import UserCreate from './user/UserCreate';
 import UserDelete from './user/UserDelete';
 import UserUpdate from './user/UserUpdate';
+import SearchUser from './user/SearchUser';
 import Role from './role/Role';
 import RoleCreate from './role/RoleCreate';
 import RoleDelete from './role/RoleDelete';
@@ -33,6 +34,7 @@ export {
   UserCreate,
   UserDelete,
   UserUpdate,
+  SearchUser,
 
   Role,
   RoleCreate,

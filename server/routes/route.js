@@ -16,10 +16,11 @@ module.exports = (app) => {
   app.get('/api/documents/', documentsController.listDocs);
   app.get('/api/documents/:documentId', documentsController.retrieve);
   app.put('/api/documents/:documentId', documentsController.update);
-  app.get('/api/users/:userId/documents', documentsController.userDocs);
+  app.get('/api/users/:userId/documents/', documentsController.userDocs);
   app.get('/api/roles/documents/', documentsController.roleDocs);
   app.delete('/api/documents/:documentId', documentsController.destroy);
   app.get('/api/search/documents/', documentsController.searchDoc);
+  // app.get('/api/users/:userId/documents/', documentsController.userDocsList);
 
   app.use(authenticatesController.roleAuthorise);
 

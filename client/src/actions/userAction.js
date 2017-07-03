@@ -1,5 +1,6 @@
-import { allUsers, createdUser, userDelete, userUpdate, allUsersPage, userSearch, allUser } from '../api/userApi';
+import { allUsers, createdUser, userDelete, userUpdate, allUsersPage, userSearch, allUser, userSearchPage } from '../api/userApi';
 import * as types from '../constants/appConstants';
+import toastr from 'toastr';
 
 export function loadUsers() {
   return function (dispatch) {
@@ -24,7 +25,7 @@ export function createUser(newUser) {
         dispatch(createuserSuccess());
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -40,7 +41,7 @@ export function deleteUser(deletedUser) {
         dispatch(deleteuserSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -56,7 +57,7 @@ export function updateUser(updatedUser) {
         dispatch(updateuserSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -72,13 +73,29 @@ export function searchUsers(searchValue) {
         dispatch(searchuserSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
 
-export function searchuserSuccess(users) {
-  return { type: 'SEARCH_USER_SUCCESS', users }
+export function searchuserSuccess(usersSearch) {
+  return { type: 'SEARCH_USER_SUCCESS', usersSearch }
+}
+
+export function searchUsersPage(searchValue, limit, offset) {
+  return function (dispatch) {
+    return userSearchPage(searchValue, limit, offset)
+      .then(res => {
+        dispatch(searchuserpagesuccess(res.data));
+      })
+      .catch(error => {
+        toastr.error(error.response.data.message);
+      });
+  };
+}
+
+export function searchuserpagesuccess(usersSearchPage) {
+  return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage }
 }
 
 export function loadUser(user) {
@@ -88,7 +105,7 @@ export function loadUser(user) {
         dispatch(loadUserSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }

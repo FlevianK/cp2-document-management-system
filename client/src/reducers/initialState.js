@@ -1,8 +1,15 @@
 export default {  
-  loginUser: !!localStorage.jwt,
+  loginUser: [],
   documents: [],
   documentsPage: [],
+  allDocuments: [],
+  allDocumentsPage: [],
   users: [],
+  usersPage: [],
   roles: [],
-  usersPage: []
+  failureMessage: null,
+  roleDocuments:[],
+  roleDocumentsPage:[],
+  usersSearchPage: [],
+  usersSearch: []
 }

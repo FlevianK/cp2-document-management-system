@@ -1,19 +1,30 @@
 import { login } from '../api/userApi';
 import * as types from '../constants/appConstants';
+import toastr from 'toastr';
 
 export function loginUser(user) {
   return function (dispatch) {
     return login(user)
-    .then(response => {
-      localStorage.setItem('jwt', response.data.token);
-      dispatch(loginUserSuccess());
-    })
-    .catch(error => {
-      throw(error);
-    });
+      .then(res => {
+        localStorage.setItem('jwt', res.data.token);
+        dispatch(loginUserSuccess(loginUser));
+      })
+      .catch(error => {
+        throw(error)
+      });
   };
 }
 
-export function loginUserSuccess() {
-  return { type: 'USER_LOGIN_SUCCESS' };
+export function loginUserSuccess(loginUser) {
+  return { type: 'USER_LOGIN_SUCCESS', loginUser};
+}
+
+export function logoutUser() {
+  return function (dispatch) {
+    localStorage.removeItem('jwt');
+    dispatch(logoutUserSuccess());
+  }
+}
+export function logoutUserSuccess() {
+  return { type: 'USER_LOGOUT_SUCCESS' };
 }

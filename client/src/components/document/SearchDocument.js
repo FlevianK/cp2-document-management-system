@@ -16,21 +16,19 @@ export class SearchDocument extends React.Component {
   }
 
   onDocumentChange(event) {
-    console.log(event.target.value, "event")
     return this.setState({ searchValue: event.target.value });
   }
 
   onDocumentClick() {
     event.preventDefault();
-    console.log(this.state.searchValue, "iuyftd");
     this.props.actions.searchDocument(this.state.searchValue);
+    this.props.actions.loadDocuments()
   }
 
   render() {
     return (
       <div className="row">
         <div className="col s4 offset-m4">
-
           <input
             name="document"
             label="Search"
