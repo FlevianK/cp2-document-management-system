@@ -15,6 +15,7 @@ export class Documents extends React.Component {
         this.state = {
             activePage: 1,
             limit: 2,
+            offset: 0
         };
         this.handlePageChange = this.handlePageChange.bind(this);
     }
@@ -25,7 +26,7 @@ export class Documents extends React.Component {
     }
 
     componentWillMount() {
-        this.props.actions.loadDocumentsPage();
+        this.props.actions.loadDocumentsPage(this.state.limit, this.state.offset);
         this.props.actions.loadDocuments()
     }
 
@@ -36,7 +37,6 @@ export class Documents extends React.Component {
             <div>
                 <DashboardHeader />
                 <DocumentHeader />
-                <SearchDocument />
                 <DocumentsList documents={allDocuments} />
                 <Pagination
                     activePage={this.state.activePage}

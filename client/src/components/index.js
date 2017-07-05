@@ -8,6 +8,7 @@ import DocumentCreate from './document/DocumentCreate';
 import DocumentDelete from './document/DocumentDelete';
 import DocumentUpdate from './document/DocumentUpdate';
 import DocumentRole from './document/DocumentRole';
+import SearchDocument from './document/SearchDocument';
 import User from './user/User';
 import UserCreate from './user/UserCreate';
 import UserDelete from './user/UserDelete';
@@ -29,6 +30,7 @@ export {
   DocumentDelete,
   DocumentUpdate,
   DocumentRole,
+  SearchDocument,
 
   User,
   UserCreate,

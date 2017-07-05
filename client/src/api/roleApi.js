@@ -5,7 +5,15 @@ const API_URL='http://localhost:8000/api'
 export function allRoles() {
   let token = localStorage.jwt;
   return axios.get(
-    `${API_URL}/roles`,
+    `${API_URL}/roles/`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
+export function allRolesPage(limit, offset) {
+  let token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/roles/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }
   );
 }

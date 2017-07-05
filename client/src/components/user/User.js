@@ -20,6 +20,7 @@ export class User extends React.Component {
             }],
             activePage: 1,
             limit: 4,
+            offset: 0
         };
         this.handlePageChange = this.handlePageChange.bind(this);
     }
@@ -29,7 +30,7 @@ export class User extends React.Component {
         this.props.actions.loadUsersPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
     }
     componentWillMount() {
-        this.props.actions.loadUsersPage();
+        this.props.actions.loadUsersPage(this.state.limit, this.state.offset);
         this.props.actions.loadUsers()
     }
 

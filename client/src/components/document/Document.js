@@ -47,7 +47,6 @@ export class Document extends React.Component {
             <div>
                 <DashboardHeader />
                 <DocumentHeader />
-                <SearchDocument />
                 <DocumentList documents={documents} />
                 <Pagination
                     activePage={this.state.activePage}

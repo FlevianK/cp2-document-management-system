@@ -6,9 +6,6 @@ export default function documentsPageReducer(state = initialState.allDocumentsPa
     case types.LOAD_DOCUMENTS_PAGE_SUCCESS:
       return action.allDocumentsPage
 
-    case types.SEARCH_DOCUMENT_SUCCESS:
-      return action.allDocumentsPage
-
     default:
       return state;
   }

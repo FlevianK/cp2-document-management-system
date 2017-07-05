@@ -1,4 +1,4 @@
-import { allRoles, roleCreate, roleDelete } from '../api/roleApi';
+import { allRoles, roleCreate, roleDelete, allRolesPage } from '../api/roleApi';
 import * as types from '../constants/appConstants';
 import toastr from 'toastr';
 
@@ -9,13 +9,29 @@ export function loadRoles() {
         dispatch(loadRolesSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw(error);
       });
   };
 }
 
 export function loadRolesSuccess(roles) {
-  return { type: 'LOAD_ROLES_SUCCESS', roles };
+  return { type: 'LOAD_ROLES_SUCCESS', roles};
+}
+
+export function loadRolesPage(limit, offset) {
+  return function (dispatch) {
+    return allRolesPage(limit, offset)
+      .then(res => {
+        dispatch(loadRolesPageSuccess(res.data));
+      })
+      .catch(error => {
+        toastr.error(error.response.data.message);
+      });
+  };
+}
+
+export function loadRolesPageSuccess(rolesPage) {
+  return { type: 'LOAD_ROLES_PAGE_SUCCESS', rolesPage };
 }
 
 export function createRole(newRole) {

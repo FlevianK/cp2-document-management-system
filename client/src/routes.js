@@ -7,7 +7,8 @@ import {
   Document, 
   DocumentCreate, 
   DocumentDelete, 
-  DocumentUpdate, 
+  DocumentUpdate,
+  SearchDocument, 
   User,
   UserCreate,
   UserDelete,
@@ -30,6 +31,7 @@ export default (
       <Route path="/documents/delete/:documentId" component={DocumentDelete} />
       <Route path="/documents/update/:documentId" component={DocumentUpdate} />
       <Route path="/documents/role" component={DocumentRole} />
+      <Route path="/documents/search" component={SearchDocument} />
       <Route path="/users" component={User} />
       <Route path="/users/create" component={UserCreate} />
       <Route path="/users/delete/:userId" component={UserDelete} />

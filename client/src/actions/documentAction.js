@@ -1,4 +1,4 @@
-import { allDocuments, createDoc, deleteDoc, allRoleDocumentPage, allDocumentsPage, updateDoc, singleDocument, allRoleDocument, allDoc, documentSearch, allDocList } from '../api/documentApi';
+import { allDocuments, createDoc, deleteDoc, allRoleDocumentPage, allDocumentsPage, updateDoc, singleDocument, allRoleDocument, allDoc, documentSearch, documentSearchPage, allDocList } from '../api/documentApi';
 import * as types from '../constants/appConstants';
 import toastr from 'toastr';
 
@@ -151,7 +151,6 @@ export function loaddocSuccess(documents) {
 }
 
 export function loadDocList(doc, limit, offset) { //all user documents by page
-  console.log(doc, "oiuyjthrsfaffdgfghj", limit, offset);
   return function (dispatch) {
     return allDocList(doc, limit, offset)
       .then(res => {
@@ -167,19 +166,34 @@ export function loaddoclistSuccess(documentsPage) {
   return { type: 'LOAD_DOC_PAGE_SUCCESS', documentsPage };
 }
 
-export function searchDocument(searchValue) {
+export function searchDocuments(searchValue) {
   return function (dispatch) {
     return documentSearch(searchValue)
       .then(res => {
         dispatch(searchdocumentSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.res.data.message);
+        toastr.error(error.response.data.message);
       });
   };
 }
 
-export function searchdocumentSuccess(allDocumentsPage) {
-  return { type: 'SEARCH_DOCUMENT_SUCCESS', allDocumentsPage }
+export function searchdocumentSuccess(documentsSearch) {
+  return { type: 'SEARCH_DOCUMENT_SUCCESS', documentsSearch }
 }
 
+export function searchDocumentsPage(searchValue, limit, offset) {
+  return function (dispatch) {
+    return documentSearchPage(searchValue, limit, offset)
+      .then(res => {
+        dispatch(searchdocumentpagesuccess(res.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+}
+
+export function searchdocumentpagesuccess(documentsSearchPage) {
+  return { type: 'SEARCH_DOCUMENT_PAGE_SUCCESS', documentsSearchPage }
+}

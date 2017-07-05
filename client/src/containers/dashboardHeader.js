@@ -40,6 +40,8 @@ export class DashboardHeader extends React.Component {
                 <Link to="#" activeClassName="active" onClick={this.onLogoutClick}>Logout</Link>
                 {"|"}
                 <Link to="/users/search" activeClassName="active">search</Link>
+                {"|"}
+                <Link to="/documents/search" activeClassName="active">docu</Link>
             </nav>
         );
     }

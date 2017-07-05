@@ -152,6 +152,28 @@ module.exports = {
 
   searchDoc(req, res) {
     if (req.decoded.userRole == 'admin') {
+      if (req.query.limit || req.query.offset) {
+        return Document
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+             where: {
+              $or: [
+                { title: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } },
+              ]
+            }
+          })
+          .then(document => {
+            if (!document || document.length < 1) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      } else {
       if (req.query.q) {
         return Document
           .findAll({
@@ -172,7 +194,31 @@ module.exports = {
         })
           .catch(error => res.status(400).send(error));
       }
+      }
     } else {
+      if (req.query.limit || req.query.offset) {
+        return Document
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+             where: {
+              access: 'public' || req.decoded.userRole,
+              $or: [
+                { title: { $iLike: `%${req.query.q}%` } },
+                { content: { $iLike: `%${req.query.q}%` } }
+              ]
+            }
+          })
+          .then(document => {
+            if (!document || document.length < 1) {
+              return res.status(404).send({
+                message: 'Document Not Found',
+              });
+            }
+            return res.status(200).send(document);
+          })
+          .catch(error => res.status(400).send(error));
+      }
       if (req.query.q) {
         return Document
           .findAll({
@@ -198,28 +244,6 @@ module.exports = {
   },
 
   userDocs(req, res) {
-    console.log(req, "yutrew");
-      // if (req.query.q) {
-      //   return Document
-      //     .findAll({
-      //       where: {
-      //         userId: req.params.userId
-      //         $or: [
-      //           { title: { $iLike: `%${req.query.q}%` } },
-      //           { content: { $iLike: `%${req.query.q}%` } },
-      //         ]
-      //       }
-      //     })
-      //     .then(document => {
-      //     if (!document || document.length < 1) {
-      //       return res.status(404).send({
-      //         message: 'Document Not Found',
-      //       });
-      //     }
-      //     return res.status(200).send(document);
-      //   })
-      //     .catch(error => res.status(400).send(error));
-      // }
       if (req.query.limit || req.query.offset) {
         return Document
           .findAll({

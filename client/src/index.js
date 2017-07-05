@@ -30,7 +30,9 @@ import {
   loadRoleDocumentsPage, 
   loadUsersPage,
   loadDocList,
-  searchUsersPage
+  searchUsersPage,
+  searchDocumentsPage,
+  loadRolesPage
 } from './actions';
 
 const store = configureStore();

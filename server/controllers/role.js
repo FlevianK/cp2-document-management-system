@@ -4,13 +4,29 @@ module.exports = {
   create(req, res) {
     return Role
       .create({
-        title : req.body.title,
+        title: req.body.title,
       })
       .then(role => res.status(201).send(role))
       .catch(error => res.status(400).send(error));
   },
 
   list(req, res) {
+    if (req.query.limit || req.query.offset) {
+      return Role
+        .findAll({
+          offset: req.query.offset,
+          limit: req.query.limit,
+        })
+        .then(role => {
+          if (!role || role.length < 1) {
+            return res.status(404).send({
+              message: 'Role Not Found',
+            });
+          }
+          return res.status(200).send(role);
+        })
+        .catch(error => res.status(400).send(error));
+    }
     return Role
       .findAll()
       .then(role => res.status(200).send(role))

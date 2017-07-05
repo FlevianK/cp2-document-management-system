@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
-import jwtDecode from 'jwt-decode';
 import SearchDocument from './SearchDocument';
 import Pagination from 'react-js-pagination';
 
@@ -15,6 +14,7 @@ export class DocumentRole extends React.Component {
         this.state = {
             activePage: 1,
             limit: 2,
+            offset: 0
         };
         this.handlePageChange = this.handlePageChange.bind(this);
     }
@@ -26,7 +26,7 @@ export class DocumentRole extends React.Component {
 
     componentWillMount() {
         this.props.actions.loadRoleDocuments();
-        this.props.actions.loadRoleDocumentsPage();
+        this.props.actions.loadRoleDocumentsPage(this.state.limit, this.state.offset);
     }
 
     render() {
@@ -36,7 +36,6 @@ export class DocumentRole extends React.Component {
             <div>
                 <DashboardHeader />
                 <DocumentHeader />
-                <SearchDocument />
                 <DocumentsList documents={roleDocuments} />
                 <Pagination
                     activePage={this.state.activePage}

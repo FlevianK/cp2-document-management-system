@@ -20,7 +20,6 @@ module.exports = (app) => {
   app.get('/api/roles/documents/', documentsController.roleDocs);
   app.delete('/api/documents/:documentId', documentsController.destroy);
   app.get('/api/search/documents/', documentsController.searchDoc);
-  // app.get('/api/users/:userId/documents/', documentsController.userDocsList);
 
   app.use(authenticatesController.roleAuthorise);
 

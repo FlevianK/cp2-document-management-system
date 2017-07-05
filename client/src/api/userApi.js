@@ -48,7 +48,7 @@ export function userSearch(userValue) {
   );
 }
 
-export function userSearchPage(userValue, limit=4, offset=0) {
+export function userSearchPage(userValue, limit, offset) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/search/users/?q=${userValue}&limit=${limit}&offset=${offset}`,
@@ -64,7 +64,7 @@ export function allUser(user) {
   );
 }
 
-export function allUsersPage(limit=4, offset=0) {
+export function allUsersPage(limit, offset) {
   let token = localStorage.jwt;
   return axios.get(
     `${API_URL}/users/?limit=${limit}&offset=${offset}`,

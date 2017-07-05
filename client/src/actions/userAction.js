@@ -73,7 +73,7 @@ export function searchUsers(searchValue) {
         dispatch(searchuserSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }
@@ -105,7 +105,7 @@ export function loadUser(user) {
         dispatch(loadUserSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }
@@ -121,7 +121,7 @@ export function loadUsersPage(limit, offset) {
         dispatch(loadUsersPageSuccess(res.data));
       })
       .catch(error => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
