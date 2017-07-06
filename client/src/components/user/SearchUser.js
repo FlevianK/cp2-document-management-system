@@ -54,7 +54,10 @@ export class SearchUser extends React.Component {
                 <div className="col s4 ">
                     <i className="material-icons" onClick={this.onUserClick} >search</i>
                 </div>
-                <UserList users={usersSearch} />
+                {totalItems > 0
+                    ? <UserList users={usersSearch} />
+                    : ''
+                }
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={this.state.limit}

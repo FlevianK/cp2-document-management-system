@@ -53,28 +53,28 @@ export class UserUpdate extends React.Component {
             name="username"
             label="Username"
             type="text"
-            placeholder={this.props.users.firstName}
+            value={this.props.users.firstName}
             onChange={this.onUserChange}
           />
 
           <Input
             name="firstName"
             label="First Name"
-            placeholder={this.props.users.firstName}
+            value={this.props.users.firstName}
             type="text"
             onChange={this.onUserChange} />
 
           <Input
             name="lastName"
             label="Last name"
-            placeholder={this.props.users.lastName}
+            value={this.props.users.lastName}
             type="text"
             onChange={this.onUserChange} />
 
           <Input
             name="email"
             label="Email ddress"
-            placeholder={this.props.users.email}
+            value={this.props.users.email}
             type="text"
             onChange={this.onUserChange} />
 
@@ -82,7 +82,7 @@ export class UserUpdate extends React.Component {
             name="password"
             label="Password"
             type="text"
-            placeholder={this.props.users.email}
+            value={this.props.users.password}
             onChange={this.onUserChange} />
 
 
@@ -92,7 +92,7 @@ export class UserUpdate extends React.Component {
               name="title"
               label="Title"
               defaultOption="Select role"
-              placeholder={this.props.users.title}
+              value={this.props.users.title}
               onChange={this.onUserChange} />
             : ''
           }

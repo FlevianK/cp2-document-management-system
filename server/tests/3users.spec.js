@@ -7,29 +7,20 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg3MDg3OTMsImV4cCI6MTQ5ODcxMDIzM30.WemDTbqNT7Ya2OKijcmyuWAqEFlDB9DS0ppj_2CfMEM"
-
-
 describe('Users', () => {
-  describe('/POST', () => {
-    it('should return a 201 response creating a new user', (done) => {
-      chai.request(app)
-        .post('/api/users/')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          username: "admin",
-          firstName: "admin",
-          lastName: "admin",
-          email: "admin@gmail.com",
-          password: "admin",
-          title: "admin"
-        })
-        .end((err, res) => {
-          res.should.have.status(201);
-          done();
-        });
-    });
+let token= '';
+  beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
+    chai.request(app)
+      .post('/api/users/login')
+      .send({
+        email: "admin@live.com",
+        password: "admin"
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        token = res.body.token;
+        done();
+      });
   });
 
   describe('/GET/:id user', () => {
@@ -49,12 +40,28 @@ describe('Users', () => {
       chai.request(app)
         .post('/api/users/')
         .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
         .send({
           username: "v",
           firstName: "r",
           lastName: "Kaa",
-          email: "fl@gmail.com",
+          email: "regular@gmail.com",
+          password: "regular",
+          title: "regular"
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+    it('should return a 201 response creating a user successfuly', (done) => {
+      chai.request(app)
+        .post('/api/users/')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+          username: "vu",
+          firstName: "ru",
+          lastName: "Kaau",
+          email: "flu@gmail.com",
           password: "flev",
           title: "regular"
         })
@@ -106,10 +113,10 @@ describe('Users', () => {
     });
   });
 
-  describe('/PUt', () => {
+  describe('/PUT', () => {
     it('should return a 200 response when updating user details', (done) => {
       chai.request(app)
-        .put('/api/users/2')
+        .put('/api/users/3')
         .set('x-access-token', token)
         .send({
           username: "Hellen",
@@ -126,7 +133,7 @@ describe('Users', () => {
     });
   });
 
-  describe('/PUt', () => {
+  describe('/PUT', () => {
     it('should return a 400 when updating using wrong time user id', (done) => {
       chai.request(app)
         .put('/api/users/kjhgf')
@@ -167,10 +174,10 @@ describe('Users', () => {
     });
   });
 
-  describe('/PUt', () => {
+  describe('/PUT', () => {
     it('should return a 400 when updating using when inputs are not valid', (done) => {
       chai.request(app)
-        .put('/api/users/2')
+        .put('/api/users/3')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
@@ -212,7 +219,7 @@ describe('Users', () => {
   describe('/GET/:id user', () => {
     it('it should return 200 when fetching an existing user by the given id', (done) => {
       chai.request(app)
-        .get('/api/users/2')
+        .get('/api/users/3')
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(200);
@@ -292,7 +299,7 @@ describe('Users', () => {
   describe('/DELETE', () => {
     it('should return a 204 response when deleting a user that exist', (done) => {
       chai.request(app)
-        .delete('/api/users/2')
+        .delete('/api/users/3')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {

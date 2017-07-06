@@ -16,7 +16,9 @@ module.exports = {
         access: req.body.access,
         userId: req.decoded.userId,
       })
-      .then(document => res.status(201).send(document))
+      .then(() => res.status(201).send({
+             message: 'Created successful',
+          }))
       .catch(error => res.status(400).send(error));
   },
 
@@ -122,7 +124,9 @@ module.exports = {
             content: req.body.content || document.content,
             access: req.body.access || document.access,
           })
-          .then(() => res.status(200).send(document)) 
+          .then(() => res.status(200).send({
+            message: "Updated successful"
+          })) 
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));

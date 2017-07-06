@@ -6,7 +6,9 @@ module.exports = {
       .create({
         title: req.body.title,
       })
-      .then(role => res.status(201).send(role))
+      .then(() => res.status(201).send({
+             message: 'Created successful',
+          }))
       .catch(error => res.status(400).send(error));
   },
 
@@ -49,9 +51,7 @@ module.exports = {
         }
         return role
           .destroy()
-          .then(() => res.status(204).send({
-            message: 'Deleted successfully',
-          }))
+          .then(() => res.status(204).send())
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));

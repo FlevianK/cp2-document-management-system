@@ -6,12 +6,23 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg3MDg3OTMsImV4cCI6MTQ5ODcxMDIzM30.WemDTbqNT7Ya2OKijcmyuWAqEFlDB9DS0ppj_2CfMEM"
-
-
 //testing as an admin
 
-describe('Documents', () => {
+describe('Documents for admin test', () => {
+let token= '';
+  beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
+    chai.request(app)
+      .post('/api/users/login')
+      .send({
+        email: "admin@live.com",
+        password: "admin"
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        token = res.body.token;
+        done();
+      });
+  });
   describe('/GET/documents', () => {
     it('it should GET documents while paginate and do not document exist', (done) => {
       chai.request(app)

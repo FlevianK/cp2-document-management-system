@@ -38,7 +38,8 @@ module.exports = {
               success: true,
               message: 'Login successful!',
               token: token,
-              userRole: user.title
+              userRole: user.title,
+              userId: user.id
             });
           }
 

@@ -6,11 +6,23 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJSb2xlIjoicmVndWxhciIsImlhdCI6MTQ5ODcwODg3MSwiZXhwIjoxNDk4NzEwMzExfQ.P3A1bge4aiBHUy57V5afCBdx8ms6xQrkuTO5wc3uThc"
-
 // testing as regular user
 
-describe('Documents', () => {
+describe('Documents for regular test', () => {
+let token= '';
+  beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
+    chai.request(app)
+      .post('/api/users/login')
+      .send({
+        email: "regular@gmail.com",
+        password: "regular"
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        token = res.body.token;
+        done();
+      });
+  });
   describe('/POST', () => {
     it('should return a 201 response', (done) => {
       chai.request(app)
@@ -21,10 +33,9 @@ describe('Documents', () => {
           title: "Tour to Quebeq",
           content: "Day to remember",
           access: "public",
-          userId: "yfy"
         })
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(201);
           done();
         });
     });

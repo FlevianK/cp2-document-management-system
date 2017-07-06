@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginAction from '../actions/loginAction';
 import { browserHistory } from 'react-router';
-import jwtDecode from 'jwt-decode';
 
 export class DashboardHeader extends React.Component {
     constructor(props) {
@@ -20,31 +19,45 @@ export class DashboardHeader extends React.Component {
     }
 
     render() {
-        const documents = this.props.documents;
-        const token = localStorage.jwt;
-        const role = token && jwtDecode(token);
         return (
             <nav>
-                {role && role.userRole === "admin"
+                {this.props.userRole && this.props.userRole === "admin"
                     ? <Link to="/roles" activeClassName="active">Roles</Link>
                     : ''
                 }
-                {" | "}
-                {role && role.userRole === "admin"
+                {this.props.userRole && this.props.userRole === "admin"
+                    ? " | "
+                    : ''
+                }
+                {this.props.userRole && this.props.userRole === "admin"
                     ? <Link to="/users" activeClassName="active">Users</Link>
                     : ''
                 }
-                {" | "}
+                {this.props.userRole && this.props.userRole === "admin"
+                    ? " | "
+                    : ''
+                }
                 <Link to="/documents" activeClassName="active">Documents</Link>
+                {"|"}
+                <Link to="/users/search" activeClassName="active">User search</Link>
+                {"|"}
+                <Link to="/documents/search" activeClassName="active">Document search</Link>
                 {" | "}
                 <Link to="#" activeClassName="active" onClick={this.onLogoutClick}>Logout</Link>
-                {"|"}
-                <Link to="/users/search" activeClassName="active">search</Link>
-                {"|"}
-                <Link to="/documents/search" activeClassName="active">docu</Link>
             </nav>
         );
     }
+}
+
+DashboardHeader.PropTypes = {
+    userRole: PropTypes.string.isRequired
+}
+
+function mapStateToProps(state, ownProps) {
+    console.log(state.loginUser.userRole)
+    return {
+        userRole: state.loginUser.userRole,
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -53,5 +66,5 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(DashboardHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardHeader);
 

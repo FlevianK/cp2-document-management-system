@@ -9,7 +9,7 @@ export function loadRoles() {
         dispatch(loadRolesSuccess(res.data));
       })
       .catch(error => {
-        throw(error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -25,7 +25,7 @@ export function loadRolesPage(limit, offset) {
         dispatch(loadRolesPageSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw(error);
       });
   };
 }

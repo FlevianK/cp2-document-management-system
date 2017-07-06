@@ -19,7 +19,7 @@ export class User extends React.Component {
                 title: ''
             }],
             activePage: 1,
-            limit: 4,
+            limit: 2,
             offset: 0
         };
         this.handlePageChange = this.handlePageChange.bind(this);

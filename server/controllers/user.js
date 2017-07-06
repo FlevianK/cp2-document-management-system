@@ -2,7 +2,7 @@ const User = require('../models').User;
 const InputValidate = require('./inputValidate');
 const bcrypt = require('bcryptjs');
 
-const salt = 8;
+const salt = bcrypt.genSaltSync(8);
 
 module.exports = {
   create(req, res) {
@@ -20,7 +20,9 @@ module.exports = {
         password: bcrypt.hashSync(req.body.password, salt),
         title: "regular",
       })
-      .then(user => res.status(201).send(user))
+      .then(() => res.status(201).send({
+             message: 'Created successful',
+          }))
       .catch(error => res.status(400).send(error));
   },
 
@@ -64,7 +66,7 @@ module.exports = {
   update(req, res) {
     if (req.params.userId == 1) {
       return res.status(401).send({ // forbidden request
-        message: 'Can not update super admin',
+        message: 'Can not update main admin',
       });
     }
     return User
@@ -86,7 +88,7 @@ module.exports = {
           })
           .then(() => res.status(200).send({
             message: 'Updated successfully'
-          }))  // Send back the updated user.
+          })) 
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
@@ -94,8 +96,8 @@ module.exports = {
 
   destroy(req, res) {
     if (req.params.userId == 1) {
-      return res.status(401).send({ // forbidden request
-        message: 'Can not delete super admin',
+      return res.status(401).send({ 
+        message: 'Can not delete main admin',
       });
     }
     return User

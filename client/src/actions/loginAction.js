@@ -7,10 +7,10 @@ export function loginUser(user) {
     return login(user)
       .then(res => {
         localStorage.setItem('jwt', res.data.token);
-        dispatch(loginUserSuccess(loginUser));
+        dispatch(loginUserSuccess(res.data));
       })
       .catch(error => {
-        throw(error)
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -22,6 +22,8 @@ export function loginUserSuccess(loginUser) {
 export function logoutUser() {
   return function (dispatch) {
     localStorage.removeItem('jwt');
+    console.log(loginUser)
+    
     dispatch(logoutUserSuccess());
   }
 }

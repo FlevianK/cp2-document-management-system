@@ -17,10 +17,14 @@ export class UserDelete extends React.Component {
     };
     this.onUserSave = this.onUserSave.bind(this);
   }
+
+  componentWillMount() {
+    this.props.actions.loadUser(this.props.params)
+  }
   onUserSave(event) {
     event.preventDefault();
     this.props.actions.deleteUser(this.state.deletedUser);
-    this.props.actions.loadUsersPage().then(()=> browserHistory.push('/users'));
+    this.props.actions.loadUsersPage().then(() => browserHistory.push('/users'));
   }
 
   render() {
@@ -29,8 +33,8 @@ export class UserDelete extends React.Component {
         <DashboardHeader />
         <form>
           <Input
-            value={this.props.params.userId}
-            label="User Id"/>
+            value={this.props.users.firstName}
+            label="Name" />
 
           <input
             type="submit"
@@ -42,10 +46,16 @@ export class UserDelete extends React.Component {
   }
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    users: state.users
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(userAction, dispatch)
   };
 }
 
-export default connect(null, mapDispatchToProps)(UserDelete);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDelete);

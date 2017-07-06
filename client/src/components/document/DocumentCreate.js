@@ -53,13 +53,12 @@ export class DocumentCreate extends React.Component {
         if (!this.documentFormIsValid()) {
             return;
         }
+        console.log('lll',this.state.newDocument )
         this.props.actions.createDocument(this.state.newDocument).then(() => browserHistory.push('/documents'));
 
     }
 
     render() {
-        const token = localStorage.jwt;
-        const role = token && jwtDecode(token);
         return (
             <div>
                 <DashboardHeader />
@@ -85,7 +84,7 @@ export class DocumentCreate extends React.Component {
                                 <option value="" disabled selected>Select access type</option>
                                 <option value="public" >Public</option>
                                 <option value="private">Private</option>
-                                <option value={role.userRole}>Role</option>
+                                <option value={this.props.userRole}>Role</option>
                             </select>
                         </div>
                     </div>
@@ -100,10 +99,16 @@ export class DocumentCreate extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state, ownProps) {
     return {
-        actions: bindActionCreators(documentAction, dispatch)
+        userRole: state.loginUser.userRole
     };
 }
 
-export default connect(null, mapDispatchToProps)(DocumentCreate);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators( documentAction, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentCreate);

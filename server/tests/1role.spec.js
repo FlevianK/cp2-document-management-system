@@ -6,26 +6,23 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
-
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE0OTg3MDg3OTMsImV4cCI6MTQ5ODcxMDIzM30.WemDTbqNT7Ya2OKijcmyuWAqEFlDB9DS0ppj_2CfMEM"
-
-
 describe('Roles', () => {
-  describe('/POST', () => {
-    it('should return a 201 response when create admin role', (done) => {
-      chai.request(app)
-        .post('/api/roles')
-        .set('x-access-token', token)
-        .send({
-          title: "admin"
-        })
-        .end((err, res) => {
-          res.should.have.status(201);
-          done();
-        });
-    });
+let token= '';
+  beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
+    chai.request(app)
+      .post('/api/users/login')
+      .send({
+        email: "admin@live.com",
+        password: "admin"
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        token = res.body.token;
+        done();
+      });
   });
   describe('/POST', () => {
+
     it('should return a 201 response when create regular role', (done) => {
       chai.request(app)
         .post('/api/roles')
@@ -80,7 +77,7 @@ describe('Roles', () => {
         });
     });
   });
-  
+
   describe('/DELETE', () => {
     it('should return a 204 response delete an existing role that is not admin', (done) => {
       chai.request(app)

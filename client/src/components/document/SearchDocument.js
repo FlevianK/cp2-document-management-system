@@ -52,7 +52,10 @@ export class SearchDocument extends React.Component {
         <div className="col s4 ">
           <i className="material-icons" onClick={this.onDocumentClick} >search</i>
         </div>
-        <DocumentsList documents={documentsSearch} />
+        {totalItems > 0
+          ? <DocumentsList documents={allDocuments} />
+          : ''
+        }
         <Pagination
           activePage={this.state.activePage}
           itemsCountPerPage={this.state.limit}
@@ -75,10 +78,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 function mapStateToProps(state, ownProps) {
-    return {
-        documentsSearch: state.documentsSearch.length,
-        documentsSearchPage: state.documentsSearchPage
-    };
+  return {
+    documentsSearch: state.documentsSearch.length,
+    documentsSearchPage: state.documentsSearchPage
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchDocument);

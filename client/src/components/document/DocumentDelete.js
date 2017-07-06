@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { Input, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
-import jwtDecode from 'jwt-decode';
 import { browserHistory } from 'react-router';
 
 export class DocumentDelete extends React.Component {
@@ -18,10 +17,14 @@ export class DocumentDelete extends React.Component {
         };
         this.onDocumentSave = this.onDocumentSave.bind(this);
     }
-    
+
+    componentWillMount() {
+        this.props.actions.loadDocument(this.props.params)
+    }
+
     onDocumentSave(event) {
         event.preventDefault();
-        this.props.actions.deleteDocument(this.state.deleteDocument).then(()=> browserHistory.push('/documents'));
+        this.props.actions.deleteDocument(this.state.deleteDocument).then(() => browserHistory.push('/documents'));
     }
 
     render() {
@@ -30,7 +33,8 @@ export class DocumentDelete extends React.Component {
                 <DashboardHeader />
                 <form>
                     <Input
-                        value={this.props.params.documentId} />
+                        label="Title"
+                        value={this.props.documents.title} />
 
                     <input
                         type="submit"
@@ -42,11 +46,17 @@ export class DocumentDelete extends React.Component {
     }
 }
 
+function mapStateToProps(state, ownProps) {
+    return {
+        documents: state.documents,
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(documentAction, dispatch)
     };
 }
 
-export default connect(null, mapDispatchToProps)(DocumentDelete);
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentDelete);
 

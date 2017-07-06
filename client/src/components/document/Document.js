@@ -9,15 +9,12 @@ import jwtDecode from 'jwt-decode';
 import SearchDocument from './SearchDocument';
 import Pagination from 'react-js-pagination';
 
-const token = localStorage.jwt;
-const user = token && jwtDecode(token);
-const idUser = user.userId;
+
 
 export class Document extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-          idUser: idUser,
             documents: [{
                 title: '',
                 content: '',
@@ -25,19 +22,19 @@ export class Document extends React.Component {
             }],
             activePage: 1,
             limit: 2,
-            offset:0
+            offset: 0
         };
         this.handlePageChange = this.handlePageChange.bind(this);
     }
 
     handlePageChange(pageNumber) {
         this.setState({ activePage: pageNumber });
-        this.props.actions.loadDocList(this.state.idUser, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
+        this.props.actions.loadDocList(this.props.userId, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
     }
 
     componentWillMount() {
-        this.props.actions.loadDoc(this.state.idUser);
-        this.props.actions.loadDocList(this.state.idUser, this.state.limit, this.state.offset);
+        this.props.actions.loadDoc(this.props.userId);
+        this.props.actions.loadDocList(this.props.userId, this.state.limit, this.state.offset);
     }
 
     render() {
@@ -47,7 +44,10 @@ export class Document extends React.Component {
             <div>
                 <DashboardHeader />
                 <DocumentHeader />
-                <DocumentList documents={documents} />
+                {totalItems > 0
+                    ? <DocumentList documents={documents} />
+                    : 'You do not have document'
+                }
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={this.state.limit}
@@ -61,11 +61,14 @@ export class Document extends React.Component {
 
 Document.PropTypes = {
     documents: PropTypes.object.isRequired,
-    documentsList: PropTypes.object.isRequired
+    documentsList: PropTypes.object.isRequired,
+    userId: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state, ownProps) {
+    
     return {
+        userId: state.loginUser.userId,
         documents: state.documents.length,
         documentsPage: state.documentsPage
     };

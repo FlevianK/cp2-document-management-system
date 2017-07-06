@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
-import jwtDecode from 'jwt-decode';
 import SearchDocument from './SearchDocument';
 import Pagination from 'react-js-pagination';
 
@@ -37,7 +36,10 @@ export class Documents extends React.Component {
             <div>
                 <DashboardHeader />
                 <DocumentHeader />
-                <DocumentsList documents={allDocuments} />
+                {totalItems > 0
+                    ? <DocumentsList documents={allDocuments} />
+                    : 'No document'
+                }
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={this.state.limit}

@@ -36,7 +36,10 @@ export class DocumentRole extends React.Component {
             <div>
                 <DashboardHeader />
                 <DocumentHeader />
-                <DocumentsList documents={roleDocuments} />
+                {totalItems > 0
+                    ? <DocumentsList documents={roleDocuments} />
+                    : 'No role document'
+                }
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={this.state.limit}

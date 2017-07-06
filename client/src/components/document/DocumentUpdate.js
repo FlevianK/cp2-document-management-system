@@ -39,9 +39,7 @@ export class DocumentUpdate extends React.Component {
   }
 
   render() {
-    const token = localStorage.jwt;
-    const role = token && jwtDecode(token);
-    const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: role.userRole, text:"Role"} ]
+    const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: this.props.userRole, text:"Role"} ]
     return (
       <div>
         <DashboardHeader />
@@ -88,7 +86,8 @@ DocumentUpdate.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    documents: state.documents
+    documents: state.documents,
+    userRole: state.loginUser.userRole,
   }
 }
 
