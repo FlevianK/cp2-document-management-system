@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">72.73% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/12</span>
+        <span class='fraction'>8/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">63.64% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/11</span>
+        <span class='fraction'>6/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">63.64% </span>
+        <span class="strong">70% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/11</span>
+        <span class='fraction'>7/10</span>
       </div>
     </div>
   </div>
@@ -73,43 +73,49 @@
 28
 29
 30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+31
+32
+33
+34</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as types from '../constants/appConstants';
 import initialState from './initialState';
 &nbsp;
-export default function userReducer(state = initialState.users, action) {
+export default function userReducer(state = <span class="branch-1 cbranch-no" title="branch not covered" >initialState.users, action) {</span>
     switch (action.type) {
-<span class="branch-0 cbranch-no" title="branch not covered" >        case types.LOAD_USERS_PAGE_SUCCESS:</span>
-<span class="cstat-no" title="statement not covered" >            return action.usersPage</span>
+        case types.LOAD_USERS_SUCCESS:
+            return action.users
 &nbsp;
         case types.CREATE_USER_SUCCESS:
             return [
@@ -117,20 +123,23 @@ export default function userReducer(state = initialState.users, action) {
                 Object.assign({}, action.users)
             ];
 &nbsp;
-        case types.DELETE_USER_SUCCESS:
-            return action.users
+<span class="branch-2 cbranch-no" title="branch not covered" >        case types.DELETE_USER_SUCCESS:</span>
+<span class="cstat-no" title="statement not covered" >            return [</span>
+                ...state,
+                Object.assign({}, action.users)
+            ];
 &nbsp;
 <span class="branch-3 cbranch-no" title="branch not covered" >        case types.UPDATE_USER_SUCCESS:</span>
-<span class="cstat-no" title="statement not covered" >            return action.users</span>
+<span class="cstat-no" title="statement not covered" >            return [</span>
+                ...state,
+                Object.assign({}, action.users)
+            ];
 &nbsp;
-<span class="branch-4 cbranch-no" title="branch not covered" >        case types.SEARCH_USER_SUCCESS:</span>
-<span class="cstat-no" title="statement not covered" >            return action.users</span>
+        case types.LOAD_USER_SUCCESS:
+            return action.users
 &nbsp;
-<span class="branch-5 cbranch-no" title="branch not covered" >        case types.LOAD_USER_SUCCESS:</span>
-<span class="cstat-no" title="statement not covered" >            return action.users</span>
-&nbsp;
-        default:
-            return state;
+<span class="branch-5 cbranch-no" title="branch not covered" >        default:</span>
+<span class="cstat-no" title="statement not covered" >            return state;</span>
     }
 }
 &nbsp;</pre></td></tr>
@@ -139,7 +148,7 @@ export default function userReducer(state = initialState.users, action) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 30 2017 06:56:45 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

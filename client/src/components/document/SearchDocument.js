@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
-import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
+import { DocumentsList, DocumentHeader } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 
 export class SearchDocument extends React.Component {
   constructor(props, context) {
@@ -30,7 +31,7 @@ export class SearchDocument extends React.Component {
     this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
   }
 
-  onDocumentClick() {
+  onDocumentClick(event) {
     event.preventDefault();
     this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, this.state.offset);
     this.props.actions.searchDocuments(this.state.searchValue)
@@ -72,15 +73,16 @@ SearchDocument.PropTypes = {
   documentsSearch: PropTypes.object.isRequired
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(documentAction, dispatch)
-  };
-}
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     documentsSearch: state.documentsSearch.length,
     documentsSearchPage: state.documentsSearchPage
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(documentAction, dispatch)
   };
 }
 

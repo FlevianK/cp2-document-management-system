@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, SelectOptions, DashboardHeader } from '../../containers';
+import { Input, SelectOptions } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
@@ -112,7 +113,7 @@ UserUpdate.PropTypes = {
   role: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   const roleDropdownData = state.roles.map(role => {
     return {
       value: role.title,
@@ -125,7 +126,7 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(userAction, dispatch),
     action: bindActionCreators(roleAction, dispatch)

@@ -77,7 +77,7 @@ export function createDocument(newDoc) {
         dispatch(createdocumentSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.res.data.message);
+        throw(error)
       });
   };
 }

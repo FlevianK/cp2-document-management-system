@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, DashboardHeader } from '../../containers';
+import { Input } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
@@ -46,13 +47,17 @@ export class DocumentDelete extends React.Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
+DocumentDelete.PropTypes = {
+  documents: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state, ownProps) => {
     return {
         documents: state.documents,
     }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(documentAction, dispatch)
     };

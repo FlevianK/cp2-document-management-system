@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { RoleList, RoleHeader, DashboardHeader } from '../../containers';
+import { RoleList, RoleHeader } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
@@ -25,7 +26,7 @@ export class Role extends React.Component {
       this.setState({ activePage: pageNumber });
       this.props.actions.loadRolesPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
     }
-    componentDidMount() {
+    componentWillMount() {
       this.props.actions.loadRoles();
       this.props.actions.loadRolesPage(this.state.limit, this.state.offset)
     }
@@ -50,18 +51,18 @@ export class Role extends React.Component {
   }
 
   Role.PropTypes = {
-    roles: PropTypes.object.isRequired,
+    roles: PropTypes.number.isRequired,
     rolesPage: PropTypes.object.isRequired
   }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     roles: state.roles.length,
     rolesPage: state.rolesPage
   };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(roleAction, dispatch)
   };

@@ -41,7 +41,7 @@ export function createRole(newRole) {
         dispatch(createroleSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw(error);
       });
   };
 }

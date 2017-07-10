@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.59% </span>
+        <span class="strong">82.14% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>12/17</span>
+        <span class='fraction'>23/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">33.33% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.59% </span>
+        <span class="strong">82.14% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/17</span>
+        <span class='fraction'>23/28</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -104,7 +104,38 @@
 59
 60
 61
-62</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -112,13 +143,17 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,7 +166,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,11 +207,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,13 +227,20 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
+import Pagination from 'react-js-pagination';
+import { DocumentsList, DocumentHeader } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 &nbsp;
 export class SearchDocument extends React.Component {
   constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
     super(props, context);
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      activePage: 1,
+      limit: 2,
+      offset: 0
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
     this.onDocumentChange = this.onDocumentChange.bind(this);
     this.onDocumentClick = this.onDocumentClick.bind(this);
   }
@@ -186,16 +249,24 @@ export class SearchDocument extends React.Component {
 <span class="cstat-no" title="statement not covered" >    return this.setState({ searchValue: event.target.value });</span>
   }
 &nbsp;
-  onDocumentClick() {
-<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >    this.props.actions.searchDocument(this.state.searchValue);</span>
+  handlePageChange(pageNumber) {
+<span class="cstat-no" title="statement not covered" >    this.setState({ activePage: pageNumber });</span>
+<span class="cstat-no" title="statement not covered" >    this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
+  }
+&nbsp;
+  onDocumentClick(event) {
+    event.preventDefault();
+    this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, this.state.offset);
+    this.props.actions.searchDocuments(this.state.searchValue)
   }
 &nbsp;
   render() {
+    const documentsSearch = this.props.documentsSearchPage;
+    const totalItems = this.props.documentsSearch;
     return (
-      &lt;div className="row"&gt;
+      &lt;div className="col-md-12"&gt;
+        &lt;DashboardHeader /&gt;
         &lt;div className="col s4 offset-m4"&gt;
-&nbsp;
           &lt;input
             name="document"
             label="Search"
@@ -203,26 +274,39 @@ export class SearchDocument extends React.Component {
             onChange={this.onDocumentChange} /&gt;
         &lt;/div&gt;
         &lt;div className="col s4 "&gt;
-        &lt;i className="material-icons" onClick={this.onDocumentClick} &gt;search&lt;/i&gt;
+          &lt;i className="material-icons" onClick={this.onDocumentClick} &gt;search&lt;/i&gt;
         &lt;/div&gt;
+        {totalItems &gt; 0
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;DocumentsList documents={allDocuments} /&gt;</span>
+          : ''
+        }
+        &lt;Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={this.state.limit}
+          totalItemsCount={totalItems}
+          onChange={this.handlePageChange}
+        /&gt;
       &lt;/div &gt;
     )
   }
 }
 &nbsp;
 SearchDocument.PropTypes = {
-  documents: PropTypes.object.isRequired
+  documentsSearchPage: PropTypes.object.isRequired,
+  documentsSearch: PropTypes.object.isRequired
 }
 &nbsp;
-f</span>unction <span class="fstat-no" title="function not covered" >mapDispatchToProps(dispatch) {
+const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    documentsSearch: state.documentsSearch.length,
+    documentsSearchPage: state.documentsSearchPage
+  };
+}
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
 <span class="cstat-no" title="statement not covered" >  return {</span>
     actions: bindActionCreators(documentAction, dispatch)
   };
-}
-f</span>unction <span class="fstat-no" title="function not covered" >mapStateToProps(state) {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    state
-  }
 }
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(SearchDocument);
@@ -232,7 +316,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SearchDocument);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 30 2017 06:56:45 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

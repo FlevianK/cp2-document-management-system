@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, DashboardHeader } from '../../containers';
+import { Input } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
@@ -46,13 +47,17 @@ export class UserDelete extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+UserDelete.PropTypes = {
+  users: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state, ownProps) => {
   return {
     users: state.users
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(userAction, dispatch)
   };

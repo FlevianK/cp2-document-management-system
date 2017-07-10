@@ -21,17 +21,17 @@ export function loadusersSuccess(users) {
 export function createUser(newUser) {
   return function (dispatch) {
     return createdUser(newUser)
-      .then(response => {
-        dispatch(createuserSuccess());
+      .then(res => {
+        dispatch(createuserSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }
 
-export function createuserSuccess() {
-  return { type: 'CREATE_USER_SUCCESS' }
+export function createuserSuccess(users) {
+  return { type: 'CREATE_USER_SUCCESS', users }
 }
 
 export function deleteUser(deletedUser) {

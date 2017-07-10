@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentList, DocumentHeader, DashboardHeader } from '../../containers';
+import { DocumentList, DocumentHeader} from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
 import SearchDocument from './SearchDocument';
+import DashboardHeader from './../DashboardHeader';
 import Pagination from 'react-js-pagination';
 
 
@@ -60,13 +61,12 @@ export class Document extends React.Component {
 }
 
 Document.PropTypes = {
-    documents: PropTypes.object.isRequired,
+    documents: PropTypes.number.isRequired,
     documentsList: PropTypes.object.isRequired,
     userId: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
-    
+const mapStateToProps = (state, ownProps) => {
     return {
         userId: state.loginUser.userId,
         documents: state.documents.length,
@@ -74,7 +74,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(documentAction, dispatch)
     };

@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, DashboardHeader } from '../../containers';
+import { Input } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
+import toastr from 'toastr';
 
 export class RoleCreate extends React.Component {
   constructor(props) {
@@ -13,8 +15,7 @@ export class RoleCreate extends React.Component {
     this.state = {
       newRole: {
         title: ''
-      },
-      errors: {}
+      }
     };
     this.onRoleChange = this.onRoleChange.bind(this);
     this.onRoleSave = this.onRoleSave.bind(this);
@@ -28,25 +29,12 @@ export class RoleCreate extends React.Component {
     return this.setState({ newRole: newRole });
   }
 
-  roleFormIsValid() {
-    let formIsValid = true;
-    let errors = {};
-
-    if (this.state.newRole.title.length < 1) {
-      errors.title = 'Role must not be empty';
-      formIsValid = false;
-    }
-    this.setState({ errors: errors });
-    return formIsValid;
-  }
-
   onRoleSave(event) {
     event.preventDefault();
-    if (!this.roleFormIsValid()) {
-      return;
-    }
     this.props.actions.createRole(this.state.newRole);
-    this.props.actions.loadRoles().then(() => browserHistory.push('/roles'));
+    this.props.actions.loadRoles()
+    .then(() => browserHistory.push('/roles'))
+    .catch(error => toastr.error(error.response.data.message));
   }
 
   render() {
@@ -55,7 +43,6 @@ export class RoleCreate extends React.Component {
         <DashboardHeader />
         <form>
           <Input
-            error={this.state.errors.title}
             name="title"
             type="text"
             label="Role"
@@ -71,7 +58,7 @@ export class RoleCreate extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(roleAction, dispatch)
   };

@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList, DashboardHeader, Form, UserHeader } from '../../containers';
+import { UserList, Form, UserHeader } from '../../containers';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
+import DashboardHeader from './../DashboardHeader';
 
 export class SearchUser extends React.Component {
     constructor(props, context) {
@@ -31,7 +32,7 @@ export class SearchUser extends React.Component {
         this.props.actions.searchUsersPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
     }
 
-    onUserClick() {
+    onUserClick(event) {
         event.preventDefault();
         this.props.actions.searchUsersPage(this.state.searchValue, this.state.limit, this.state.offset);
         this.props.actions.searchUsers(this.state.searchValue);
@@ -48,7 +49,7 @@ export class SearchUser extends React.Component {
                     <input
                         name="user"
                         label="Search"
-                        type="text"
+                        type="search"
                         onChange={this.onUserChange} />
                 </div>
                 <div className="col s4 ">
@@ -74,12 +75,12 @@ SearchUser.PropTypes = {
     usersSearchPage: PropTypes.object.isRequired
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(userAction, dispatch)
     };
 }
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
     return {
         usersSearch: state.usersSearch.length,
         usersSearchPage: state.usersSearchPage

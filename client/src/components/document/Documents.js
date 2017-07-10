@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
+import { DocumentsList, DocumentHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
+import DashboardHeader from './../DashboardHeader';
 import PropTypes from 'prop-types';
 import SearchDocument from './SearchDocument';
 import Pagination from 'react-js-pagination';
@@ -52,18 +53,18 @@ export class Documents extends React.Component {
 }
 
 Documents.PropTypes = {
-    allDocuments: PropTypes.object.isRequired,
+    allDocuments: PropTypes.number.isRequired,
     allDocumentsPage: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
     return {
         allDocumentsPage: state.allDocumentsPage,
         allDocuments: state.allDocuments.length
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(documentAction, dispatch)
     };

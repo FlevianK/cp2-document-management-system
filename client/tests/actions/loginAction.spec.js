@@ -15,13 +15,18 @@ describe('sync login actions', () => {
 
   it('login', () => {
     const user = {email: 'mick@gmail.com', password: 'htff'}
-    const expectedAction = [{ type: types.USER_LOGIN_SUCCESS }];
-    const store = mockStore({ loginUser: !!localStorage.jwt }, expectedAction);
+    const expectedAction = [{ type: types.USER_LOGIN_SUCCESS, body: { loginUser: [{token: 'hgfkjh.hgfg'}] } }];
+    const store = mockStore({ loginUser: [] }, expectedAction);
     store.dispatch(loginAction.loginUser(user)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.USER_LOGIN_SUCCESS);
       done();
     })
   })
+   it('logout', () => {
+    const expectedAction = [{ type: types.USER_LOGOUT_SUCCESS, body: { loginUser: [] } }];
+    const store = mockStore({ loginUser: [] }, expectedAction);
+    store.dispatch(loginAction.logoutUser())
+    })
 
 })

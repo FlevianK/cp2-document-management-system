@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
+import { DocumentsList, DocumentHeader} from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import SearchDocument from './SearchDocument';
@@ -52,18 +53,18 @@ export class DocumentRole extends React.Component {
 }
 
 DocumentRole.PropTypes = {
-    roleDocuments: PropTypes.object.isRequired,
+    roleDocuments: PropTypes.number.isRequired,
     roleDocumentsPage: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
     return {
         roleDocuments: state.roleDocuments.length,
         roleDocumentsPage: state.roleDocumentsPage,
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(documentAction, dispatch)
     };

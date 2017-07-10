@@ -15,14 +15,12 @@ module.exports = {
       })
       .then((user) => {
         if (!user) {
-          return res.status(404).send({ 
-            success: false, 
+          return res.status(401).send({ 
             message: 'Authentication failed. User not found.' 
           });
         } else if (user) {
           if (bcrypt.compareSync(user.password, req.body.password)) {
             return res.status(401).send({ 
-              success: false, 
               message: 'Authentication failed. Wrong password.' 
             });
           } else {
@@ -53,7 +51,7 @@ module.exports = {
     if (token) {
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {
-          return res.json({ 
+          return res.status(401).send({
             success: false, 
             message: 'Failed to authenticate token.' });
         } else {

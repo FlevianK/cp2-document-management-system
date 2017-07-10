@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, Forms, SelectOptions, DashboardHeader } from '../../containers';
+import { Input,  SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
+import DashboardHeader from './../DashboardHeader';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
 import { browserHistory } from 'react-router';
@@ -33,6 +34,7 @@ export class DocumentUpdate extends React.Component {
   }
 
   onDocumentSave(event) {
+
     event.preventDefault();
     this.props.actions.updateDocument(this.state.documents).then(()=> browserHistory.push('/documents'));
     
@@ -49,15 +51,13 @@ export class DocumentUpdate extends React.Component {
             label="title"
             type="text"
             placeholder={this.props.documents.title}
-            errors={this.state.errors}
             onChange={this.onDocumentChange} />
 
-          <Input
+          <textarea
             name="content"
             label="Content"
             type="text"
             placeholder={this.props.documents.content}
-            errors={this.state.errors}
             onChange={this.onDocumentChange} />
 
           <SelectOptions 
@@ -66,7 +66,6 @@ export class DocumentUpdate extends React.Component {
             label="Access Type"
             defaultOption="select access type"
             value={this.state.documents.access}
-            errors={this.state.errors}
             onChange={this.onDocumentChange} /> 
           <input
             type="submit"
@@ -84,14 +83,14 @@ DocumentUpdate.propTypes = {
   actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   return {
     documents: state.documents,
     userRole: state.loginUser.userRole,
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(documentAction, dispatch)
   };

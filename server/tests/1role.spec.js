@@ -67,12 +67,46 @@ let token= '';
   });
 
   describe('/GET/ roles', () => {
-    it('it should GET all roles', (done) => {
+    it('it should return 200 response and data', (done) => {
       chai.request(app)
         .get('/api/roles')
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(200);
+          done();
+        });
+    });
+  });
+
+  describe('/GET/ roles while paginating the results', () => {
+    it('it should return 200 response and data', (done) => {
+      chai.request(app)
+        .get('/api/roles/?limit=4&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+  describe('/GET/ roles while paginating the results by non existing range', () => {
+    it('it should return 404 response', (done) => {
+      chai.request(app)
+        .get('/api/roles/?limit=67&offset=90')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/ roles while paginating the results using incorrect data type for the query', () => {
+    it('it should return 400 response', (done) => {
+      chai.request(app)
+        .get('/api/roles/?limit=uy&offset=op')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });
@@ -108,6 +142,19 @@ let token= '';
     it('should return a 401 response when deleting an admin role', (done) => {
       chai.request(app)
         .delete('/api/roles/admin')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
+  });
+
+    describe('/DELETE', () => {
+    it('should return a 401 response when deleting a default role', (done) => {
+      chai.request(app)
+        .delete('/api/roles/regular')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {

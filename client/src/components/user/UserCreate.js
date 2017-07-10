@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, DashboardHeader } from '../../containers';
+import { Input } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
+import toastr from 'toastr';
 
 export class UserCreate extends React.Component {
     constructor(props) {
@@ -32,77 +34,44 @@ export class UserCreate extends React.Component {
         return this.setState({ newUser: newUser });
     }
 
-    userFormIsValid() {
-        let formIsValid = true;
-        let errors = {};
-
-        if (this.state.newUser.username.length < 1) {
-            errors.username = 'Username must not be empty';
-            formIsValid = false;
-        }
-        if (this.state.newUser.firstName.length < 1) {
-            errors.firstName = 'First name must not be empty';
-            formIsValid = false;
-        }
-        if (this.state.newUser.lastName.length < 1) {
-            errors.lastName = 'Surname must not be empty';
-            formIsValid = false;
-        }
-        if (this.state.newUser.email.length < 1) {
-            errors.email = 'Email must not be empty';
-            formIsValid = false;
-        }
-        if (this.state.newUser.password.length < 1) {
-            errors.password = 'Password not be empty';
-            formIsValid = false;
-        }
-        this.setState({ errors: errors });
-        return formIsValid;
-    }
-
     onUserSave(event) {
         event.preventDefault();
-        if (!this.userFormIsValid()) {
-            return;
-        }
-        this.props.actions.createUser(this.state.newUser).then(() => browserHistory.push('/'));
+        this.props.actions.createUser(this.state.newUser)
+        .then(() => browserHistory.push('/'))
+        .catch(error => {
+        toastr.error(error.response.data.message);
+      });
     }
-
     render() {
         return (
             <div>
                 <div>
                     <form>
                         <Input
-                            error={this.state.errors.username}
                             name="username"
                             label="Username"
                             type="text"
                             onChange={this.onUserChange} />
 
                         <Input
-                            error={this.state.errors.firstName}
                             name="firstName"
                             label="First Name"
                             type="text"
                             onChange={this.onUserChange} />
 
                         <Input
-                            error={this.state.errors.lastName}
                             name="lastName"
                             label="Surname"
                             type="text"
                             onChange={this.onUserChange} />
 
                         <Input
-                            error={this.state.errors.email}
                             name="email"
                             label="Email Address"
                             type="text"
                             onChange={this.onUserChange} />
 
                         <Input
-                            error={this.state.errors.password}
                             name="password"
                             label="Password"
                             type="text"
@@ -124,7 +93,7 @@ export class UserCreate extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(userAction, dispatch)
     };

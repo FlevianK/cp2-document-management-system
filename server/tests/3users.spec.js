@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 
 describe('Users', () => {
 let token= '';
-  beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
+beforeEach('it should return 200 response with a token when logging in with correct credecials', (done) => {
     chai.request(app)
       .post('/api/users/login')
       .send({
@@ -22,24 +22,12 @@ let token= '';
         done();
       });
   });
-
-  describe('/GET/:id user', () => {
-    it('it should return 400 retreving a user using bad request', (done) => {
-      chai.request(app)
-        .get('/api/users/uy')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          res.should.have.status(400);
-          done();
-        });
-    });
-  });
-
+  
   describe('/POST', () => {
     it('should return a 201 response creating a user successfuly', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
         .send({
           username: "v",
           firstName: "r",
@@ -56,7 +44,7 @@ let token= '';
     it('should return a 201 response creating a user successfuly', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
         .send({
           username: "vu",
           firstName: "ru",
@@ -76,7 +64,6 @@ let token= '';
     it('should return a 400 creating using field name that does not exist in the DB', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
           username: "v",
@@ -96,8 +83,6 @@ let token= '';
     it('should return a 403 response while some specified fields are empty', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('x-access-token', token)
-        .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
           username: "TQuebeq",
           firstName: "Day",
@@ -108,6 +93,18 @@ let token= '';
         })
         .end((err, res) => {
           res.should.have.status(403);
+          done();
+        });
+    });
+  });
+
+  describe('/GET/:id user', () => {
+    it('it should return 400 retreving a user using bad request', (done) => {
+      chai.request(app)
+        .get('/api/users/uy')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });
@@ -234,7 +231,17 @@ let token= '';
         });
     });
   });
-
+describe('/GET/:id user', () => {
+    it('it should return 404 when fetching a non existing user by the given id', (done) => {
+      chai.request(app)
+        .get('/api/users/90')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
   describe('/GET/users', () => {
     it('it 200 and data when listing all users if the users exist', (done) => {
       chai.request(app)
@@ -351,6 +358,39 @@ let token= '';
     it('it should return 404 searching a user that does not exist', (done) => {
       chai.request(app)
         .get('/api/search/users/?q=Marian')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/users/?q={}', () => {
+    it('it should return 200 searching users who exist while paginating the result ', (done) => {
+      chai.request(app)
+        .get('/api/search/users/?q=admin&limit=5&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/users/?q={}', () => {
+    it('it should return 400 searching users who exist while paginating the result using wrong data type ', (done) => {
+      chai.request(app)
+        .get('/api/search/users/?q=admin&limit=jfd&offset=oiu')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/users/?q={}', () => {
+    it('it should return 404 searching users who does not exist exist while paginating the result ', (done) => {
+      chai.request(app)
+        .get('/api/search/users/?q=Marian&limit=5&offset=0')
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404);

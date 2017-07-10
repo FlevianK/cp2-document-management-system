@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, DashboardHeader } from '../../containers';
+import { Input} from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
-import jwtDecode from 'jwt-decode';
 import Select from 'react-select';
 import { browserHistory } from 'react-router';
+import toastr from 'toastr';
 
 export class DocumentCreate extends React.Component {
     constructor(props) {
@@ -17,8 +18,7 @@ export class DocumentCreate extends React.Component {
                 title: '',
                 content: '',
                 access: ''
-            },
-            errors: {}
+            }
         };
         this.onDocumentChange = this.onDocumentChange.bind(this);
         this.onDocumentSave = this.onDocumentSave.bind(this);
@@ -32,29 +32,13 @@ export class DocumentCreate extends React.Component {
         return this.setState({ newDocument: newDocument });
     }
 
-    documentFormIsValid() {
-        let formIsValid = true;
-        let errors = {};
-
-        if (this.state.newDocument.title.length < 1) {
-            errors.title = 'Title must not be empty';
-            formIsValid = false;
-        }
-        if (this.state.newDocument.content.length < 1) {
-            errors.content = 'Content must be empty';
-            formIsValid = false;
-        }
-        this.setState({ errors: errors });
-        return formIsValid;
-    }
-
-    onDocumentSave(event) {
+    onDocumentSave(event){
         event.preventDefault();
-        if (!this.documentFormIsValid()) {
-            return;
-        }
-        console.log('lll',this.state.newDocument )
-        this.props.actions.createDocument(this.state.newDocument).then(() => browserHistory.push('/documents'));
+        this.props.actions.createDocument(this.state.newDocument)
+        .then(() => browserHistory.push('/documents'))
+        .catch(error => {
+        toastr.error(error.response.data.message);
+      });
 
     }
 
@@ -64,14 +48,12 @@ export class DocumentCreate extends React.Component {
                 <DashboardHeader />
                 <form>
                     <Input
-                        error={this.state.errors.title}
                         name="title"
-                        label="title"
+                        label="Title"
                         type="text"
                         onChange={this.onDocumentChange} />
 
-                    <Input
-                        error={this.state.errors.content}
+                    <textarea
                         name="content"
                         label="Content"
                         type="text"
@@ -99,13 +81,18 @@ export class DocumentCreate extends React.Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
+DocumentCreate.PropTypes = {
+  userRole: PropTypes.string.isRequired
+}
+
+
+const mapStateToProps = (state, ownProps) => {
     return {
         userRole: state.loginUser.userRole
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators( documentAction, dispatch)
     };

@@ -6,7 +6,7 @@ module.exports = {
   create(req, res) {
     if (InputValidate.validateInput(req.body)) {
       return res.status(403).json({ // forbidden request
-        message: 'Invalid Input',
+        message: 'Fill all fields',
       });
     }
     return Document
@@ -58,7 +58,7 @@ module.exports = {
             offset: req.query.offset,
             limit: req.query.limit,
             where: {
-              access: 'public',
+              access: 'public' || req.decoded.userRole
 
             }
           })
@@ -75,7 +75,7 @@ module.exports = {
       return Document
         .findAll({
           where: {
-            access: 'public'
+            access: 'public' || req.decoded.userRole
           }
         })
         .then(document => {

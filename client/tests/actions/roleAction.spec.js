@@ -37,13 +37,22 @@ describe('sync actions', () => {
       done();
     })
   })
+    it('load all roles while paginating', () => {
+    const expectedAction = [{ type: types.LOAD_ROLES_PAGE_SUCCESS, body: { rolesPage: [{ id: 1, title: 'admin' }] } }];
+    const store = mockStore({ rolesPage: [] }, expectedAction);
+    store.dispatch(roleAction.loadRolesPage()).then(() => {
+      const action = store.getAction();
+      expect(action[0].type).toEqual(types.LOAD_ROLES_PAGE_SUCCESS);
+      done();
+    })
+  })
   it('delete role', () => {
     const deletedRole = 'regular';
     const expectedAction = [{ type: types.DELETE_ROLE_SUCCESS, body: { roles: [] } }];
     const store = mockStore({ roles: [] }, expectedAction);
     store.dispatch(roleAction.deleteRole(deletedRole)).then(() => {
       const action = store.getAction();
-      expect(action[0].type).toEqual(types.DELETE_ROLE_SUCCESS);
+      expect(action[2].type).toEqual(types.DELETE_ROLE_SUCCESS);
       done();
     })
   })
@@ -53,7 +62,7 @@ describe('sync actions', () => {
     const store = mockStore({ roles: [] }, expectedAction);
     store.dispatch(roleAction.createRole(newRole)).then(() => {
       const action = store.getAction();
-      expect(action[0].type).toEqual(types.CREATE_ROLE_SUCCESS);
+      expect(action[1].type).toEqual(types.CREATE_ROLE_SUCCESS);
       done();
     })
   })

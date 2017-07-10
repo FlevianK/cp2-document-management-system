@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Input } from '../containers';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -30,8 +31,11 @@ export class Login extends React.Component {
 
   onLoginSave(event) {
     event.preventDefault();
-    console.log("iouytrfs")
-    this.props.actions.loginUser(this.state.loginDetails).then(()=> browserHistory.push('/dashboard'));
+    this.props.actions.loginUser(this.state.loginDetails)
+    .then(() => browserHistory.push('/dashboard'))
+    .catch(error => {
+        toastr.error(error.response.data.message);
+      });
   }
 
 
@@ -49,14 +53,12 @@ export class Login extends React.Component {
               <Input
                 name="email"
                 label="email"
-                value={this.state.loginDetails.email}
                 onChange={this.onLoginChange} />
 
               <Input
                 name="password"
                 label="password"
                 type="password"
-                value={this.state.loginDetails.password}
                 onChange={this.onLoginChange} />
 
               <input
@@ -78,7 +80,7 @@ export class Login extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(loginAction, dispatch)
   };

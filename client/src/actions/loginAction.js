@@ -10,7 +10,7 @@ export function loginUser(user) {
         dispatch(loginUserSuccess(res.data));
       })
       .catch(error => {
-        toastr.error(error.response.data.message);
+        throw(error);
       });
   };
 }
@@ -22,11 +22,9 @@ export function loginUserSuccess(loginUser) {
 export function logoutUser() {
   return function (dispatch) {
     localStorage.removeItem('jwt');
-    console.log(loginUser)
-    
     dispatch(logoutUserSuccess());
   }
 }
-export function logoutUserSuccess() {
-  return { type: 'USER_LOGOUT_SUCCESS' };
+export function logoutUserSuccess(loginUser) {
+  return { type: 'USER_LOGOUT_SUCCESS', loginUser};
 }

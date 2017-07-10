@@ -23,6 +23,17 @@ let token= '';
         done();
       });
   });
+  describe('/GET/documents', () => {
+    it('it should return 404 response when listing documents and non exists', (done) => {
+      chai.request(app)
+        .get('/api/documents/')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
   describe('/POST', () => {
     it('should return a 201 response', (done) => {
       chai.request(app)
@@ -89,6 +100,7 @@ let token= '';
     });
   });
 
+
   describe('/api/users/:userId/documents', () => {
     it('it should GET a documents using wrong datatype for user id', (done) => {
       chai.request(app)
@@ -113,6 +125,39 @@ let token= '';
     });
   });
   describe('/GET/search/documents/?q={}', () => {
+    it('it should 200 response and data when searching documents that exist while paginating', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=Tour%20to%20Quebeq&limit=6&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/documents/?q={}', () => {
+    it('it should 404 response and data when searching documents that does not exist while paginating', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=topping%20Quebeq&limit=6&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/documents/?q={}', () => {
+    it('it should 400response and data when searching documents using incorrect data types for the range', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=topping%20Quebeq&limit=pl&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/documents/?q={}', () => {
     it('it should 404 response when searching a document that does not exist', (done) => {
       chai.request(app)
         .get('/api/search/documents/?q=Toolkjj')
@@ -123,5 +168,16 @@ let token= '';
         });
     });
   });
-
+  describe('/GET/ roles by non admin', () => {
+    it('it should return 401 response for unauthorization', (done) => {
+      chai.request(app)
+        .get('/api/roles')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
+  });
+  
 });

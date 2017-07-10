@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList, DashboardHeader } from '../../containers';
+import { UserList } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
@@ -53,17 +54,18 @@ export class User extends React.Component {
 }
 
 User.PropTypes = {
-    users: PropTypes.object.isRequired
+    users: PropTypes.number.isRequired,
+    usersPage: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
     return {
         users: state.users.length,
         usersPage: state.usersPage
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators(userAction, dispatch)
     };

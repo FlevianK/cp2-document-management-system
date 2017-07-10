@@ -1,24 +1,20 @@
-import DocumentHeader from './documentHeader';
-import DocumentList from './documentList';
-import DocumentsList from './DocumentsList';
-import SelectOptions from './SelectInput.js';
-import SelectOption from './selectNewDocument';
-import Input from './form';
-import Forms from './forms';
-import UserList from './userList';
-import RoleHeader from './roleHeader';
-import RoleList from './roleList';
-import DashboardHeader from './dashboardHeader';
+import DocumentList from './documentList.jsx';
+import DocumentsList from './documentsList.jsx';
+import DocumentHeader from './documentHeader.jsx';
+import SelectOptions from './SelectInput.jsx';
+import SelectOption from './selectNewDocument.jsx';
+import Input from './form.jsx';
+import UserList from './userList.jsx';
+import RoleHeader from './roleHeader.jsx';
+import RoleList from './roleList.jsx';
 
 export {
   DocumentHeader,
   DocumentList,
   Input,
-  Forms,
   UserList,
   RoleHeader,
   RoleList,
-  DashboardHeader,
   DocumentsList,
   SelectOptions,
   SelectOption

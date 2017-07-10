@@ -32,7 +32,8 @@ import {
   loadDocList,
   searchUsersPage,
   searchDocumentsPage,
-  loadRolesPage
+  loadRolesPage,
+  logoutUser
 } from './actions';
 
 const store = configureStore();

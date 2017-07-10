@@ -24,7 +24,7 @@ let token= '';
       });
   });
   describe('/GET/documents', () => {
-    it('it should GET documents while paginate and do not document exist', (done) => {
+    it('it should GET documents while paginate and no not document exist', (done) => {
       chai.request(app)
         .get('/api/documents/')
         .set('x-access-token', token)
@@ -35,7 +35,7 @@ let token= '';
     });
   });
   describe('/GET/documents', () => {
-    it('it should GET documents while paginate and do not document exist for roles access type', (done) => {
+    it('it should GET documents while paginate and no not document exist for roles access type', (done) => {
       chai.request(app)
         .get('/api/roles/documents/')
         .set('x-access-token', token)
@@ -375,6 +375,17 @@ describe('/PUT', () => {
         });
     });
   });
+  describe('/api/users/:userId/documents', () => {
+    it('it should 200 response when retriving documents for an existing user while paginating', (done) => {
+      chai.request(app)
+        .get('/api/users/1/documents/?limit=4&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
 
   describe('/api/users/:userId/documents', () => {
     it('it should 400 response when retriving documents using wrong datatype for user id', (done) => {
@@ -383,6 +394,28 @@ describe('/PUT', () => {
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(400);
+          done();
+        });
+    });
+  });
+  describe('/api/users/:userId/documents', () => {
+    it('it should 400 response when retriving documents using wrong datatype for user id while paginating', (done) => {
+      chai.request(app)
+        .get('/api/users/jghnfbdd/documents?limit=4&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
+    describe('/api/users/:userId/documents', () => {
+    it('it should 404 response when retriving documents using user id that does not exist while paginating', (done) => {
+      chai.request(app)
+        .get('/api/users/90/documents?limit=4&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
           done();
         });
     });
@@ -409,7 +442,7 @@ describe('/PUT', () => {
         .send({
           title: "Tour to Quebeq",
           content: "Day to remember",
-          access: "public",
+          access: "admin",
           userId: 1
         })
         .end((err, res) => {
@@ -474,6 +507,39 @@ describe('/PUT', () => {
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/documents/?q={}', () => {
+    it('it should 200 response and data when searching documents that exist while paginating', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=o&limit=6&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/documents/?q={}', () => {
+    it('it should 404 response and data when searching documents that does not exist while paginating', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=topping%20Quebeq&limit=6&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/documents/?q={}', () => {
+    it('it should 400response and data when searching documents using incorrect data types for the range', (done) => {
+      chai.request(app)
+        .get('/api/search/documents/?q=topping%20Quebeq&limit=pl&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });

@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">82.61% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>19/23</span>
+        <span class='fraction'>20/24</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">82.61% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>19/23</span>
+        <span class='fraction'>20/24</span>
       </div>
     </div>
   </div>
@@ -129,11 +129,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,7 +139,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,16 +150,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,13 +177,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,10 +195,10 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList, DashboardHeader } from '../../containers';
+import { UserList } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
-import SearchUser from './SearchUser';
 import Pagination from 'react-js-pagination';
 &nbsp;
 &nbsp;
@@ -213,7 +213,8 @@ export class User extends React.Component {
                 title: ''
             }],
             activePage: 1,
-            limit: 4,
+            limit: 2,
+            offset: 0
         };
         this.handlePageChange = this.handlePageChange.bind(this);
     }
@@ -223,18 +224,16 @@ export class User extends React.Component {
 <span class="cstat-no" title="statement not covered" >        this.props.actions.loadUsersPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
     }
     componentWillMount() {
-        console.log('Component will mount', this.props.actions);
-        this.props.actions.loadUsersPage();
+        this.props.actions.loadUsersPage(this.state.limit, this.state.offset);
         this.props.actions.loadUsers()
     }
 &nbsp;
     render() {
-        const users = this.props.users;
-        const totalItems = this.props.usersPage;
+        const users = this.props.usersPage;
+        const totalItems = this.props.users;
         return (
             &lt;div className="col-md-12"&gt;
                 &lt;DashboardHeader /&gt;
-                &lt;SearchUser /&gt;
                 &lt;UserList users={users} /&gt;
                 &lt;Pagination
                     activePage={this.state.activePage}
@@ -248,17 +247,18 @@ export class User extends React.Component {
 }
 &nbsp;
 User.PropTypes = {
+    users: PropTypes.number.isRequired,
     usersPage: PropTypes.object.isRequired
 }
 &nbsp;
-f</span>unction <span class="fstat-no" title="function not covered" >mapStateToProps(state, ownProps) {
+const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
 <span class="cstat-no" title="statement not covered" >    return {</span>
-        users: state.users,
-        usersPage: state.usersPage.length
+        users: state.users.length,
+        usersPage: state.usersPage
     };
 }
 &nbsp;
-f</span>unction <span class="fstat-no" title="function not covered" >mapDispatchToProps(dispatch) {
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
 <span class="cstat-no" title="statement not covered" >    return {</span>
         actions: bindActionCreators(userAction, dispatch)
     };
@@ -271,7 +271,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(User);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 30 2017 06:56:45 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

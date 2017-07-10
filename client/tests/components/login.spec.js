@@ -1,21 +1,23 @@
 import expect from 'expect';
 import React from 'react';
 import {Login} from './../../src/components/Login';
-import { shallow, mount } from 'enzyme';
+import { shallow} from 'enzyme';
 
+describe("Login component", () => {
 it('renders div', () => {
-  const wrapper = mount(<Login />)
-  expect(wrapper.find('div').length).toBe(12)
+  const wrapper = shallow(<Login />)
+  expect(wrapper.find('div').length).toBe(8)
 })
 it('renders input', () => {
-  const wrapper = mount(<Login />)
-  expect(wrapper.find('input').length).toBe(3)
+  const wrapper = shallow(<Login />)
+  expect(wrapper.find('input').length).toBe(1)
 })
-it('renders Form', () => {
-  const wrapper = mount(<Login />)
-  expect(wrapper.find('Form').length).toBe(2)
+it('renders Input', () => {
+  const wrapper = shallow(<Login />)
+  expect(wrapper.find('Input').length).toBe(2)
 })
 it('renders form', () => {
-  const wrapper = mount(<Login />)
+  const wrapper = shallow(<Login />)
   expect(wrapper.find('form').length).toBe(1)
+})
 })

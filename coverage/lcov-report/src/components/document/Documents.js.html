@@ -27,7 +27,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/8</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">33.33% </span>
@@ -116,14 +116,7 @@
 71
 72
 73
-74
-75
-76
-77
-78
-79
-80
-81</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+74</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -135,18 +128,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,17 +144,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -189,14 +175,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,79 +193,72 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentsList, DocumentHeader, DashboardHeader } from '../../containers';
+import { DocumentsList, DocumentHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
+import DashboardHeader from './../DashboardHeader';
 import PropTypes from 'prop-types';
-import jwtDecode from 'jwt-decode';
 import SearchDocument from './SearchDocument';
 import Pagination from 'react-js-pagination';
 &nbsp;
 export class Documents extends React.Component {
-  constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
-    super(props, context);
-    this.state = {
-      documents: [{
-        title: '',
-        content: '',
-        access: ''
-      }],
-      activePage: 1,
-      limit: 4,
-    };
-    this.handlePageChange = this.handlePageChange.bind(this);
-  }
+    constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+        super(props, context);
+        this.state = {
+            activePage: 1,
+            limit: 2,
+            offset: 0
+        };
+        this.handlePageChange = this.handlePageChange.bind(this);
+    }
 &nbsp;
-  handlePageChange(pageNumber) {
-<span class="cstat-no" title="statement not covered" >    this.setState({ activePage: pageNumber });</span>
-<span class="cstat-no" title="statement not covered" >    this.props.actions.loadDocumentsPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
-  }
+    handlePageChange(pageNumber) {
+<span class="cstat-no" title="statement not covered" >        this.setState({ activePage: pageNumber });</span>
+<span class="cstat-no" title="statement not covered" >        this.props.actions.loadDocumentsPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
+    }
 &nbsp;
-  componentWillMount() {
-    this.props.actions.loadDocumentsPage();
-    this.props.actions.loadDocuments()
-  }
+    componentWillMount() {
+        this.props.actions.loadDocumentsPage(this.state.limit, this.state.offset);
+        this.props.actions.loadDocuments()
+    }
 &nbsp;
-  render() {
-    const documents = this.props.documents;
-    const totalItems = this.props.documentsPage;
-    const token = localStorage.jwt;
-    c</span>onst role = token &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >jwtDecode(token);
-    return (
-      &lt;div&gt;
-        {r</span>ole &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >role.userRole === "admin"
-          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;DashboardHeader /&gt;</span>
-          : ''
-        }
-        &lt;DocumentHeader /&gt;
-        &lt;SearchDocument /&gt;
-        &lt;DocumentsList documents={documents} /&gt;
-        &lt;Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={totalItems}
-          onChange={this.handlePageChange}
-        /&gt;
-      &lt;/div&gt;
-    )
-  }
+    render() {
+        const allDocuments = this.props.allDocumentsPage;
+        const totalItems = this.props.allDocuments;
+        return (
+            &lt;div&gt;
+                &lt;DashboardHeader /&gt;
+                &lt;DocumentHeader /&gt;
+                {totalItems &gt; 0
+                    ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;DocumentsList documents={allDocuments} /&gt;</span>
+                    : 'No document'
+                }
+                &lt;Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={this.state.limit}
+                    totalItemsCount={totalItems}
+                    onChange={this.handlePageChange}
+                /&gt;
+            &lt;/div&gt;
+        )
+    }
 }
 &nbsp;
 Documents.PropTypes = {
-  documents: PropTypes.object.isRequired,
-  documentsPage: PropTypes.object.isRequired
+    allDocuments: PropTypes.number.isRequired,
+    allDocumentsPage: PropTypes.object.isRequired
 }
 &nbsp;
-f</span>unction <span class="fstat-no" title="function not covered" >mapStateToProps(state, ownProps) {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    documentsPage: state.documentsPage.length,
-    documents: state.documents
-  };
+const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        allDocumentsPage: state.allDocumentsPage,
+        allDocuments: state.allDocuments.length
+    };
 }
 &nbsp;
-f</span>unction <span class="fstat-no" title="function not covered" >mapDispatchToProps(dispatch) {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    actions: bindActionCreators(documentAction, dispatch)
-  };
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        actions: bindActionCreators(documentAction, dispatch)
+    };
 }
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(Documents);
@@ -289,7 +268,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Documents);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 30 2017 06:56:45 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

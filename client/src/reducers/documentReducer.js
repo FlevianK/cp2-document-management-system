@@ -13,7 +13,10 @@ export default function documentReducer(state = initialState.documents, action) 
       ];
 
     case types.DELETE_DOCUMENT_SUCCESS:
-      return action.documents
+      return [
+        ...state,
+        Object.assign({}, action.documents)
+      ];
 
     case types.UPDATE_DOCUMENT_SUCCESS:
       return [

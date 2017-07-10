@@ -8,7 +8,7 @@ import configureMockStore from 'redux-mock-store';
 describe('User action', () => {
   describe('create user', () => {
     it('should create a user CREATE_USER_SUCCESS action', () => {
-      const users = { username: 'mick', firstNme: 'hey', lastNmae: 'hip', email: 'mick@gmail.com', password: 'public' };
+      const users = { username: 'mick', firstName: 'hey', lastName: 'hip', email: 'mick@gmail.com', password: 'public' };
       const expectedAction = {
         type: types.CREATE_USER_SUCCESS,
         users: users
@@ -39,11 +39,23 @@ describe('sync actions', () => {
   })
   it('search user', () => {
     const searchValue = 1;
-    const expectedAction = [{ type: types.SEARCH_USER_SUCCESS, body: { users: [{ id: 1, title: 'mercy' }] } }];
-    const store = mockStore({ users: [] }, expectedAction);
+    const expectedAction = [{ type: types.SEARCH_USER_SUCCESS, body: { usersSearch: [{ id: 1, title: 'mercy' }] } }];
+    const store = mockStore({ usersSearch: [] }, expectedAction);
     store.dispatch(userAction.searchUsers(searchValue)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.SEARCH_USER_SUCCESS);
+      done();
+    })
+  })
+    it('search user while paginating', () => {
+    const searchValue = 1;
+    const limit = 2;
+    const offset = 0;
+    const expectedAction = [{ type: types.SEARCH_USER_PAGE_SUCCESS, body: { usersSearchPage: [{ id: 1, title: 'mercy' }] } }];
+    const store = mockStore({ usersSearchPage: [] }, expectedAction);
+    store.dispatch(userAction.searchUsersPage(searchValue, limit, offset)).then(() => {
+      const action = store.getAction();
+      expect(action[0].type).toEqual(types.SEARCH_USER_PAGE_SUCCESS);
       done();
     })
   })
@@ -60,8 +72,8 @@ describe('sync actions', () => {
   it('load all paginated users', () => {
     const limit = 2;
     const offset = 0;
-    const expectedAction = [{ type: types.LOAD_USERS_PAGE_SUCCESS, body: { users: [{ id: 1, username: 'mervin' }] } }];
-    const store = mockStore({ users: [] }, expectedAction);
+    const expectedAction = [{ type: types.LOAD_USERS_PAGE_SUCCESS, body: { usersPage: [{ id: 1, username: 'mervin' }] } }];
+    const store = mockStore({ usersPage: [] }, expectedAction);
     store.dispatch(userAction.loadUsersPage(limit, offset)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.LOAD_USERS_PAGE_SUCCESS);

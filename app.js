@@ -1,11 +1,15 @@
 const express = require('express');
 const logger = require('morgan');
+// const webpack = require('webpack');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
+// const config = require('./webpack.config.js');
 
 // Set up the express app
 const port = parseInt(process.env.PORT, 10) || 8000;
 const app = express();
+// const compiler = webpack(config);
 app.set('port', port);
 // Log requests to the console.
 app.use(logger('dev'));
@@ -14,14 +18,22 @@ app.use(cors());
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.static(__dirname + '/dist'))
+
 
 // Require our routes into the application.
+// app.get('/', function (request, response) {
+//   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+// })
+// app.get('/index_bundle.js', function (request, response) {
+//   response.sendFile(path.resolve(__dirname, 'dist', 'index_bundle.js'))
+// })
+
 require('./server/routes/route')(app);
 
-// Setup a default catch-all route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the beginning of nothingness.',
-}));
-console.log('listening on localhost port 8000');
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, './client/dist/index.html'));
+// });
+
 app.listen(port);
 module.exports = app;
