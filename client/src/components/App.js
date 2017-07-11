@@ -1,19 +1,19 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router';  
+import { Link } from 'react-router';
 
 class App extends React.Component {
-  render () {
+  render() {
     return (
       <div className="container">
-      {this.props.children}
+        {this.props.children}
       </div>
     );
   }
 }
 
-// App.propTypes = {  
-//   children: PropTypes.object.isRequired
-// };
+App.propTypes = {  
+  children: PropTypes.object
+};
 
-export default App
+export default App;

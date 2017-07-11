@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Input } from '../containers';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginAction from '../actions/loginAction';
-import { browserHistory } from 'react-router';
+import { Input } from '../containers';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ export class Login extends React.Component {
         email: '',
         password: ''
       }
-    }
+    };
     this.onLoginChange = this.onLoginChange.bind(this);
     this.onLoginSave = this.onLoginSave.bind(this);
   }
@@ -26,64 +25,70 @@ export class Login extends React.Component {
     const field = event.target.name;
     const loginDetails = this.state.loginDetails;
     loginDetails[field] = event.target.value;
-    return this.setState({ loginDetails: loginDetails });
+    return this.setState({ loginDetails });
   }
 
   onLoginSave(event) {
     event.preventDefault();
     this.props.actions.loginUser(this.state.loginDetails)
-    .then(() => browserHistory.push('/dashboard'))
-    .catch(error => {
+      .then(() => browserHistory.push('/dashboard'))
+      .catch((error) => {
         toastr.error(error.response.data.message);
       });
   }
 
-
   render() {
     return (
-      <div>
-        <div className="row">
-          <div className="col s6 offset-m3">
-            Login or Sign up
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s6 offset-m3">
-            <form>
-              <Input
-                name="email"
-                label="email"
-                onChange={this.onLoginChange} />
-
-              <Input
-                name="password"
-                label="password"
-                type="password"
-                onChange={this.onLoginChange} />
-
-              <input
-                type="submit"
-                className="btn btn-primary"
-                onClick={this.onLoginSave} />
-            </form>
-            <div>
+      <div className="card">
+        <div className="card-image">
+          <div className="row">
+            <div className="col s6 offset-m3">
+              Login or Sign up
             </div>
+          </div>
+
+          <form>
+            <Input
+              name="email"
+              label="email"
+              onChange={this.onLoginChange}
+            />
+
+            <Input
+              name="password"
+              label="password"
+              type="password"
+              onChange={this.onLoginChange}
+            />
+
             <div className="row">
               <div className="col s6 offset-m3">
-                <Link to="/users/create" activeClassName="active">Sign Up</Link>
+
+                <input
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={this.onLoginSave}
+                />
               </div>
+            </div>
+          </form>
+          <div className="row">
+            <div className="col s6 offset-m3">
+              <p className="center medium-small sign-up">
+                <Link to="/users/create" activeClassName="active" style={{ color: 'green' }}> Sign up</Link> to create account
+              </p>
             </div>
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(loginAction, dispatch)
-  };
-}
+Login.propTypes = {
+  actions: PropTypes.object.isRequired
+};
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(loginAction, dispatch)
+});
 
 export default connect(null, mapDispatchToProps)(Login);

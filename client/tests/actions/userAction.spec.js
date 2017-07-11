@@ -11,7 +11,7 @@ describe('User action', () => {
       const users = { username: 'mick', firstName: 'hey', lastName: 'hip', email: 'mick@gmail.com', password: 'public' };
       const expectedAction = {
         type: types.CREATE_USER_SUCCESS,
-        users: users
+        users
       };
       const action = userAction.createuserSuccess(users);
 
@@ -34,20 +34,18 @@ describe('sync actions', () => {
     store.dispatch(userAction.loadUsers()).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.LOAD_USERS_SUCCESS);
-      done();
-    })
-  })
+    });
+  });
   it('search user', () => {
     const searchValue = 1;
     const expectedAction = [{ type: types.SEARCH_USER_SUCCESS, body: { usersSearch: [{ id: 1, title: 'mercy' }] } }];
     const store = mockStore({ usersSearch: [] }, expectedAction);
-    store.dispatch(userAction.searchUsers(searchValue)).then(() => {
+    store.dispatch(userAction.searchUser(searchValue)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.SEARCH_USER_SUCCESS);
-      done();
-    })
-  })
-    it('search user while paginating', () => {
+    });
+  });
+  it('search user while paginating', () => {
     const searchValue = 1;
     const limit = 2;
     const offset = 0;
@@ -56,9 +54,8 @@ describe('sync actions', () => {
     store.dispatch(userAction.searchUsersPage(searchValue, limit, offset)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.SEARCH_USER_PAGE_SUCCESS);
-      done();
-    })
-  })
+    });
+  });
   it('delete user', () => {
     const deletedUser = 1;
     const expectedAction = [{ type: types.DELETE_USER_SUCCESS, body: { users: [] } }];
@@ -66,9 +63,8 @@ describe('sync actions', () => {
     store.dispatch(userAction.deleteUser(deletedUser)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.DELETE_USER_SUCCESS);
-      done();
-    })
-  })
+    });
+  });
   it('load all paginated users', () => {
     const limit = 2;
     const offset = 0;
@@ -77,9 +73,8 @@ describe('sync actions', () => {
     store.dispatch(userAction.loadUsersPage(limit, offset)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.LOAD_USERS_PAGE_SUCCESS);
-      done();
-    })
-  })
+    });
+  });
   it('update user', () => {
     const updatedUser = { id: 1, title: 'fakeyith' };
     const expectedAction = [{ type: types.UPDATE_USER_SUCCESS, body: { users: [{ id: 1, title: 'fakeyith' }] } }];
@@ -87,9 +82,8 @@ describe('sync actions', () => {
     store.dispatch(userAction.updateUser(updatedUser)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.UPDATE_USER_SUCCESS);
-      done();
-    })
-  })
+    });
+  });
   it('create user', () => {
     const newUser = { username: 'mery' };
     const expectedAction = [{ type: types.CREATE_USER_SUCCESS, body: { users: [{ id: 1, username: 'mery' }] } }];
@@ -97,9 +91,8 @@ describe('sync actions', () => {
     store.dispatch(userAction.createUser(newUser)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.CREATE_USER_SUCCESS);
-      done();
-    })
-  })
+    });
+  });
   it('load a single user', () => {
     const user = 1;
     const expectedAction = [{ type: types.LOAD_USER_SUCCESS, body: { users: [{ id: 1, username: 'mervin' }] } }];
@@ -107,7 +100,6 @@ describe('sync actions', () => {
     store.dispatch(userAction.loadUser(user)).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.LOAD_USER_SUCCESS);
-      done();
-    })
-  })
-})
+    });
+  });
+});

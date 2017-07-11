@@ -35,9 +35,9 @@
         <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>20/24</span>
+        <span class='fraction'>20/22</span>
       </div>
     </div>
   </div>
@@ -115,9 +115,7 @@
 70
 71
 72
-73
-74
-75</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+73</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -146,12 +144,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,16 +176,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -203,66 +199,64 @@ import Pagination from 'react-js-pagination';
 &nbsp;
 &nbsp;
 export class User extends React.Component {
-    constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
-        super(props, context);
-        this.state = {
-            users: [{
-                firstName: '',
-                lastName: '',
-                email: '',
-                title: ''
-            }],
-            activePage: 1,
-            limit: 2,
-            offset: 0
-        };
-        this.handlePageChange = this.handlePageChange.bind(this);
-    }
-&nbsp;
-    handlePageChange(pageNumber) {
-<span class="cstat-no" title="statement not covered" >        this.setState({ activePage: pageNumber });</span>
-<span class="cstat-no" title="statement not covered" >        this.props.actions.loadUsersPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
-    }
-    componentWillMount() {
-        this.props.actions.loadUsersPage(this.state.limit, this.state.offset);
-        this.props.actions.loadUsers()
-    }
-&nbsp;
-    render() {
-        const users = this.props.usersPage;
-        const totalItems = this.props.users;
-        return (
-            &lt;div className="col-md-12"&gt;
-                &lt;DashboardHeader /&gt;
-                &lt;UserList users={users} /&gt;
-                &lt;Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={this.state.limit}
-                    totalItemsCount={totalItems}
-                    onChange={this.handlePageChange}
-                /&gt;
-            &lt;/div&gt;
-        )
-    }
-}
-&nbsp;
-User.PropTypes = {
-    users: PropTypes.number.isRequired,
-    usersPage: PropTypes.object.isRequired
-}
-&nbsp;
-const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        users: state.users.length,
-        usersPage: state.usersPage
+  constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+    super(props, context);
+    this.state = {
+      users: [{
+        firstName: '',
+        lastName: '',
+        email: '',
+        title: ''
+      }],
+      activePage: 1,
+      limit: 2,
+      offset: 0
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+&nbsp;
+  componentWillMount() {
+    this.props.actions.loadUsersPage(this.state.limit, this.state.offset);
+    this.props.actions.loadUsers();
+  }
+&nbsp;
+  handlePageChange(pageNumber) {
+<span class="cstat-no" title="statement not covered" >    this.setState({ activePage: pageNumber });</span>
+<span class="cstat-no" title="statement not covered" >    this.props.actions.loadUsersPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
+  }
+&nbsp;
+  render() {
+    const users = this.props.usersPage;
+    const totalItems = this.props.users;
+    return (
+      &lt;div className="col-md-12"&gt;
+        &lt;DashboardHeader /&gt;
+        &lt;UserList users={users} /&gt;
+        &lt;Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={this.state.limit}
+          totalItemsCount={totalItems}
+          onChange={this.handlePageChange}
+        /&gt;
+      &lt;/div&gt;
+    );
+  }
 }
 &nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        actions: bindActionCreators(userAction, dispatch)
-    };
-}
+User.propTypes = {
+  users: PropTypes.number.isRequired,
+  usersPage: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state, ownProps) =&gt; ({</span>
+  users: state.users.length,
+  usersPage: state.usersPage
+});
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(userAction, dispatch)
+});
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(User);
 &nbsp;</pre></td></tr>
@@ -271,7 +265,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(User);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

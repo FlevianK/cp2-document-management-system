@@ -7,15 +7,15 @@ import '../../node_modules/materialize-css/dist/css/materialize.min.css';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import { 
-  loginUser, 
-  loadDocuments, 
-  createDocument, 
-  deleteDocument, 
-  updateDocument, 
-  loadUsers, 
-  createUser, 
-  deleteUser, 
+import {
+  loginUser,
+  loadDocuments,
+  createDocument,
+  deleteDocument,
+  updateDocument,
+  loadUsers,
+  createUser,
+  deleteUser,
   updateUser,
   loadRoles,
   createRole,
@@ -24,10 +24,10 @@ import {
   loadUser,
   loadDocument,
   loadDoc,
-  searchDocument,
+  searchDocuments,
   loadRoleDocuments,
   loadDocumentsPage,
-  loadRoleDocumentsPage, 
+  loadRoleDocumentsPage,
   loadUsersPage,
   loadDocList,
   searchUsersPage,

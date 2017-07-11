@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { DashboardHeader } from './../containers';
-import Document from './document/Document';
+import Document from './document/Document'; 
 
 class Dashboard extends React.Component {
   render() {
@@ -14,5 +13,8 @@ class Dashboard extends React.Component {
     );
   }
 }
+Dashboard.propTypes = {  
+  children: PropTypes.object
+};
 
-export default Dashboard
+export default Dashboard;

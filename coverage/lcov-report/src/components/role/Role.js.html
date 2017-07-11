@@ -35,9 +35,9 @@
         <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>20/24</span>
+        <span class='fraction'>20/22</span>
       </div>
     </div>
   </div>
@@ -112,9 +112,7 @@
 67
 68
 69
-70
-71
-72</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+70</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -139,12 +137,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,16 +170,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -203,57 +199,55 @@ export class Role extends React.Component {
         title: '',
         activePage: 1
       },
-        limit: 2,
-        offset: 0
-    }
-      this.handlePageChange = this.handlePageChange.bind(this);
-    }
-&nbsp;
-    handlePageChange(pageNumber) {
-<span class="cstat-no" title="statement not covered" >      this.setState({ activePage: pageNumber });</span>
-<span class="cstat-no" title="statement not covered" >      this.props.actions.loadRolesPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
-    }
-    componentWillMount() {
-      this.props.actions.loadRoles();
-      this.props.actions.loadRolesPage(this.state.limit, this.state.offset)
-    }
-&nbsp;
-    render() {
-        const roles = this.props.rolesPage;
-        const totalItems = this.props.roles;
-      return (
-        &lt;div className="col-md-12"&gt;
-          &lt;DashboardHeader /&gt;
-          &lt;RoleHeader /&gt;
-          &lt;RoleList roles={roles} /&gt;
-          &lt;Pagination
-            activePage={this.state.activePage}
-            itemsCountPerPage={this.state.limit}
-            totalItemsCount={totalItems}
-            onChange={this.handlePageChange}
-          /&gt;
-        &lt;/div&gt;
-      )
-    }
+      limit: 2,
+      offset: 0
+    };
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 &nbsp;
-  Role.PropTypes = {
-    roles: PropTypes.number.isRequired,
-    rolesPage: PropTypes.object.isRequired
+  componentWillMount() {
+    this.props.actions.loadRoles();
+    this.props.actions.loadRolesPage(this.state.limit, this.state.offset);
   }
 &nbsp;
-const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    roles: state.roles.length,
-    rolesPage: state.rolesPage
-  };
+  handlePageChange(pageNumber) {
+<span class="cstat-no" title="statement not covered" >    this.setState({ activePage: pageNumber });</span>
+<span class="cstat-no" title="statement not covered" >    this.props.actions.loadRolesPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
+  }
+&nbsp;
+  render() {
+    const roles = this.props.rolesPage;
+    const totalItems = this.props.roles;
+    return (
+      &lt;div className="col-md-12"&gt;
+        &lt;DashboardHeader /&gt;
+        &lt;RoleHeader /&gt;
+        &lt;RoleList roles={roles} /&gt;
+        &lt;Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={this.state.limit}
+          totalItemsCount={totalItems}
+          onChange={this.handlePageChange}
+        /&gt;
+      &lt;/div&gt;
+    );
+  }
 }
 &nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    actions: bindActionCreators(roleAction, dispatch)
-  };
-}
+Role.propTypes = {
+  roles: PropTypes.number.isRequired,
+  rolesPage: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state, ownProps) =&gt; ({</span>
+  roles: state.roles.length,
+  rolesPage: state.rolesPage
+});
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(roleAction, dispatch)
+});
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(Role);
 &nbsp;</pre></td></tr>
@@ -262,7 +256,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Role);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { Input } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 import toastr from 'toastr';
 
 export class RoleCreate extends React.Component {
@@ -26,15 +25,15 @@ export class RoleCreate extends React.Component {
     const field = event.target.name;
     const newRole = this.state.newRole;
     newRole[field] = event.target.value;
-    return this.setState({ newRole: newRole });
+    return this.setState({ newRole });
   }
 
   onRoleSave(event) {
     event.preventDefault();
     this.props.actions.createRole(this.state.newRole);
     this.props.actions.loadRoles()
-    .then(() => browserHistory.push('/roles'))
-    .catch(error => toastr.error(error.response.data.message));
+      .then(() => browserHistory.push('/roles'))
+      .catch(error => toastr.error(error.response.data.message));
   }
 
   render() {
@@ -46,22 +45,24 @@ export class RoleCreate extends React.Component {
             name="title"
             type="text"
             label="Role"
-            onChange={this.onRoleChange} />
+            onChange={this.onRoleChange}
+          />
 
           <input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onRoleSave} />
+            onClick={this.onRoleSave}
+          />
         </form>
       </div>
-    )
+    );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(roleAction, dispatch)
-  };
-}
+RoleCreate.propTypes = {
+  actions: PropTypes.object.isRequired
+};
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(roleAction, dispatch)
+});
 
 export default connect(null, mapDispatchToProps)(RoleCreate);

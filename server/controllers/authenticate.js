@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const bcrypt = require('bcryptjs');
 const secret = 'HAHAHAHAHAHAHAHAhahahaahah>>>><<<<<<<<<<<<<<<<<<<<<<<<<<n jgfh g vgjkjvhkjfdkvjfdvjdfjgvjvjf';
 
-
 module.exports = {
   login(req, res) {
     return User

@@ -312,10 +312,10 @@ import toastr from 'toastr';
 export function loadUsers() {
   return function (dispatch) {
     return allUsers()
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadusersSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         throw (error);
       });
   };
@@ -328,90 +328,90 @@ export function loadusersSuccess(users) {
 export function createUser(newUser) {
   return function (dispatch) {
     return createdUser(newUser)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(createuserSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         throw (error);
       });
   };
 }
 &nbsp;
 export function createuserSuccess(users) {
-  return { type: 'CREATE_USER_SUCCESS', users }
+  return { type: 'CREATE_USER_SUCCESS', users };
 }
 &nbsp;
 export function deleteUser(deletedUser) {
   return function (dispatch) {
     return userDelete(deletedUser)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(deleteuserSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.response.data.message);
       });
   };
 }
 &nbsp;
 export f</span>unction <span class="fstat-no" title="function not covered" >deleteuserSuccess(users) {
-<span class="cstat-no" title="statement not covered" >  return { type: 'DELETE_USER_SUCCESS', users }</span>
+<span class="cstat-no" title="statement not covered" >  return { type: 'DELETE_USER_SUCCESS', users };</span>
 }
 &nbsp;
 export function updateUser(updatedUser) {
   return function (dispatch) {
     return userUpdate(updatedUser)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(updateuserSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.response.data.message);
       });
   };
 }
 &nbsp;
 export f</span>unction <span class="fstat-no" title="function not covered" >updateuserSuccess(users) {
-<span class="cstat-no" title="statement not covered" >  return { type: 'UPDATE_USER_SUCCESS', users }</span>
+<span class="cstat-no" title="statement not covered" >  return { type: 'UPDATE_USER_SUCCESS', users };</span>
 }
 &nbsp;
-export function searchUsers(searchValue) {
+export function searchUser(searchValue) {
   return function (dispatch) {
     return userSearch(searchValue)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(searchuserSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         throw (error);
       });
   };
 }
 &nbsp;
 export function searchuserSuccess(usersSearch) {
-  return { type: 'SEARCH_USER_SUCCESS', usersSearch }
+  return { type: 'SEARCH_USER_SUCCESS', usersSearch };
 }
 &nbsp;
 export function searchUsersPage(searchValue, limit, offset) {
   return function (dispatch) {
     return userSearchPage(searchValue, limit, offset)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(searchuserpagesuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.response.data.message);
       });
   };
 }
 &nbsp;
 export function searchuserpagesuccess(usersSearchPage) {
-  return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage }
+  return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage };
 }
 &nbsp;
 export function loadUser(user) {
   return function (dispatch) {
     return allUser(user)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadUserSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         throw (error);
       });
   };
@@ -424,10 +424,10 @@ export function loadUserSuccess(users) {
 export function loadUsersPage(limit, offset) {
   return function (dispatch) {
     return allUsersPage(limit, offset)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadUsersPageSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.response.data.message);
       });
   };
@@ -442,7 +442,7 @@ export function loadUsersPageSuccess(usersPage) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

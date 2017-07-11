@@ -1,15 +1,15 @@
-process.env.NODE_ENV = 'test';
-
 const app = require('../../app');
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
-chai.use(chaiHttp)
+chai.use(chaiHttp);
+
+process.env.NODE_ENV = 'test';
 
 // testing as regular user
 
 describe('Documents for regular test', () => {
-let token= '';
+  let token = '';
   beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
     chai.request(app)
       .post('/api/users/login')
@@ -113,7 +113,7 @@ let token= '';
     });
   });
 
-   describe('/GET/search/documents/?q={}', () => {
+  describe('/GET/search/documents/?q={}', () => {
     it('it should 200 response and data when searching a document that exist', (done) => {
       chai.request(app)
         .get('/api/search/documents/?q=Tour%20to%20Quebeq')
@@ -179,5 +179,5 @@ let token= '';
         });
     });
   });
-  
+
 });

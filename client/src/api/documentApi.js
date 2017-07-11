@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api'
+const API_URL = 'http://localhost:8000/api';
 
 export function allDocuments() {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/documents`,
     { headers: { 'x-access-token': token } }
@@ -11,7 +11,7 @@ export function allDocuments() {
 }
 
 export function allDocumentsPage(limit, offset) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/documents/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }
@@ -19,7 +19,7 @@ export function allDocumentsPage(limit, offset) {
 }
 
 export function createDoc(newDoc) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.post(
     `${API_URL}/documents`,
     newDoc,
@@ -28,7 +28,7 @@ export function createDoc(newDoc) {
 }
 
 export function updateDoc(updateDocs) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.put(
     `${API_URL}/documents/${updateDocs.documentId}`,
     updateDocs,
@@ -37,7 +37,7 @@ export function updateDoc(updateDocs) {
 }
 
 export function deleteDoc(deletedDoc) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.delete(
     `${API_URL}/documents/${deletedDoc.documentId}`,
     { headers: { 'x-access-token': token } }
@@ -45,7 +45,7 @@ export function deleteDoc(deletedDoc) {
 }
 
 export function singleDocument(document) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/documents/${document.documentId}`,
     { headers: { 'x-access-token': token } }
@@ -53,7 +53,7 @@ export function singleDocument(document) {
 }
 
 export function allDoc(doc) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/users/${doc}/documents`,
     { headers: { 'x-access-token': token } }
@@ -61,7 +61,7 @@ export function allDoc(doc) {
 }
 
 export function allDocList(doc, limit, offset) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/users/${doc}/documents/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }
@@ -69,7 +69,7 @@ export function allDocList(doc, limit, offset) {
 }
 
 export function documentSearch(documentValue) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/search/documents/?q=${documentValue}`,
     { headers: { 'x-access-token': token } }
@@ -77,7 +77,7 @@ export function documentSearch(documentValue) {
 }
 
 export function documentSearchPage(documentValue, limit, offset) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/search/documents/?q=${documentValue}&limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }
@@ -85,14 +85,14 @@ export function documentSearchPage(documentValue, limit, offset) {
 }
 
 export function allRoleDocument() {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/roles/documents`,
     { headers: { 'x-access-token': token } }
   );
 }
 export function allRoleDocumentPage(limit, offset) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/roles/documents/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }

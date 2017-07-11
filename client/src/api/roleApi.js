@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL='http://localhost:8000/api'
+const API_URL = 'http://localhost:8000/api';
 
 export function allRoles() {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/roles/`,
     { headers: { 'x-access-token': token } }
@@ -11,7 +11,7 @@ export function allRoles() {
 }
 
 export function allRolesPage(limit, offset) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.get(
     `${API_URL}/roles/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }
@@ -19,7 +19,7 @@ export function allRolesPage(limit, offset) {
 }
 
 export function roleCreate(newRole) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.post(
     `${API_URL}/roles`,
     newRole,
@@ -28,7 +28,7 @@ export function roleCreate(newRole) {
 }
 
 export function roleDelete(deletedRole) {
-  let token = localStorage.jwt;
+  const token = localStorage.jwt;
   return axios.delete(
     `${API_URL}/roles/${deletedRole.role}`,
     { headers: { 'x-access-token': token } }

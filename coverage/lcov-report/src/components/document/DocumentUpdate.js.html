@@ -35,9 +35,9 @@
         <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">80.77% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>21/28</span>
+        <span class='fraction'>21/26</span>
       </div>
     </div>
   </div>
@@ -141,8 +141,7 @@
 96
 97
 98
-99
-100</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+99</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -151,7 +150,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
@@ -178,10 +176,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,36 +217,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input,  SelectOptions } from '../../containers';
+import { Input, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import DashboardHeader from './../DashboardHeader';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
-import { browserHistory } from 'react-router';
 &nbsp;
 export class DocumentUpdate extends React.Component {
   constructor(props) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
@@ -265,7 +262,7 @@ export class DocumentUpdate extends React.Component {
   }
 &nbsp;
   componentWillMount() {
-    this.props.actions.loadDocument(this.props.params)
+    this.props.actions.loadDocument(this.props.params);
   }
 &nbsp;
   onDocumentChange(event) {
@@ -273,18 +270,16 @@ export class DocumentUpdate extends React.Component {
     c</span>onst field = <span class="cstat-no" title="statement not covered" >event.target.name;
     c</span>onst documents = <span class="cstat-no" title="statement not covered" >this.state.documents;
 <span class="cstat-no" title="statement not covered" >    documents[field] = event.target.value;</span>
-<span class="cstat-no" title="statement not covered" >    return this.setState({ documents: documents });</span>
+<span class="cstat-no" title="statement not covered" >    return this.setState({ documents });</span>
   }
 &nbsp;
   onDocumentSave(event) {
-&nbsp;
     event.preventDefault();
-    this.props.actions.updateDocument(this.state.documents).then(()=&gt; browserHistory.push('/documents'));
-    
+    this.props.actions.updateDocument(this.state.documents).then(() =&gt; browserHistory.push('/documents'));
   }
 &nbsp;
   render() {
-    const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: this.props.userRole, text:"Role"} ]
+    const accessOption = [{ value: 'private', text: 'Private' }, { value: 'public', text: 'Public' }, { value: this.props.userRole, text: 'Role' }];
     return (
       &lt;div&gt;
         &lt;DashboardHeader /&gt;
@@ -294,50 +289,52 @@ export class DocumentUpdate extends React.Component {
             label="title"
             type="text"
             placeholder={this.props.documents.title}
-            onChange={this.onDocumentChange} /&gt;
+            onChange={this.onDocumentChange}
+          /&gt;
 &nbsp;
           &lt;textarea
             name="content"
             label="Content"
             type="text"
             placeholder={this.props.documents.content}
-            onChange={this.onDocumentChange} /&gt;
+            onChange={this.onDocumentChange}
+          /&gt;
 &nbsp;
-          &lt;SelectOptions 
-            options = {accessOption}
+          &lt;SelectOptions
+            options={accessOption}
             name="access"
             label="Access Type"
             defaultOption="select access type"
             value={this.state.documents.access}
-            onChange={this.onDocumentChange} /&gt; 
+            onChange={this.onDocumentChange}
+          /&gt;
           &lt;input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onDocumentSave} /&gt;
+            onClick={this.onDocumentSave}
+          /&gt;
         &lt;/form&gt;
       &lt;/div&gt;
-    )
+    );
   }
 }
 &nbsp;
 DocumentUpdate.propTypes = {
   documents: PropTypes.object.isRequired,
   access: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-}
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  userRole: PropTypes.string.isRequired,
+};
 &nbsp;
-const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    documents: state.documents,
-    userRole: state.loginUser.userRole,
-  }
-}
+const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state, ownProps) =&gt; ({</span>
+  documents: state.documents,
+  userRole: state.loginUser.userRole,
+});
 &nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    actions: bindActionCreators(documentAction, dispatch)
-  };
-}
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(documentAction, dispatch)
+});
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentUpdate);
 &nbsp;</pre></td></tr>
@@ -346,7 +343,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DocumentUpdate);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

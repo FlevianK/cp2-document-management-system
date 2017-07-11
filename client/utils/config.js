@@ -13,9 +13,9 @@ require.extensions['.jpg'] = function () { return null; };
 
 // Configure JSDOM and set global variables
 // to simulate a browser environment for tests.
-let jsdom = require('jsdom').jsdom;
+const jsdom = require('jsdom').jsdom;
 
-let exposedProperties = ['window', 'navigator', 'document'];
+const exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
 const window = document.defaultView;
@@ -33,5 +33,4 @@ global.navigator = {
 };
 
 
-
-documentRef = document;  // eslint-disable-line no-undef
+documentRef = document; // eslint-disable-line no-undef

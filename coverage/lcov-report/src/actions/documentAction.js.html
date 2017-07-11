@@ -449,13 +449,13 @@ export f</span>unction <span class="fstat-no" title="function not covered" >fail
 <span class="cstat-no" title="statement not covered" >  return { type: 'FAILURE_MESSAGE', message };</span>
 }
 &nbsp;
-export function loadDocuments() { //all documents
+export function loadDocuments() { // all documents
   return function (dispatch) {
     return allDocuments()
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadDocumentsSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.res.data.message);
       });
   };
@@ -465,13 +465,13 @@ export function loadDocumentsSuccess(allDocuments) {
   return { type: 'LOAD_DOCUMENTS_SUCCESS', allDocuments };
 }
 &nbsp;
-export function loadDocumentsPage(limit, offset) { //all documents by pagination
+export function loadDocumentsPage(limit, offset) { // all documents by pagination
   return function (dispatch) {
     return allDocumentsPage(limit, offset)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadDocumentsPageSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         throw (error);
       });
   };
@@ -481,13 +481,13 @@ export function loadDocumentsPageSuccess(allDocumentsPage) {
   return { type: 'LOAD_DOCUMENTS_PAGE_SUCCESS', allDocumentsPage };
 }
 &nbsp;
-export function loadRoleDocuments() { //all documents by role
+export function loadRoleDocuments() { // all documents by role
   return function (dispatch) {
     return allRoleDocument()
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadRoleDocumentsSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.res.data.message);
       });
   };
@@ -497,14 +497,14 @@ export function loadRoleDocumentsSuccess(roleDocuments) {
   return { type: 'LOAD_ROLE_DOCUMENTS_SUCCESS', roleDocuments };
 }
 &nbsp;
-export function loadRoleDocumentsPage(limit, offset) { //all documents by role while paginated
+export function loadRoleDocumentsPage(limit, offset) { // all documents by role while paginated
   return function (dispatch) {
     return allRoleDocumentPage(limit, offset)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loadRoleDocumentsPageSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
-        throw(error);
+      .catch((error) =&gt; {
+        throw (error);
       });
   };
 }
@@ -516,58 +516,58 @@ export function loadRoleDocumentsPageSuccess(roleDocumentsPage) {
 export function createDocument(newDoc) {
   return function (dispatch) {
     return createDoc(newDoc)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(createdocumentSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
-        throw(error)
+      .catch((error) =&gt; {
+        throw (error);
       });
   };
 }
 &nbsp;
 export function createdocumentSuccess(documents) {
-  return { type: 'CREATE_DOCUMENT_SUCCESS', documents }
+  return { type: 'CREATE_DOCUMENT_SUCCESS', documents };
 }
 &nbsp;
 export function deleteDocument(deletedDoc) {
   return function (dispatch) {
     return deleteDoc(deletedDoc)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(deletedocumentSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.res.data.message);
       });
   };
 }
 &nbsp;
 export f</span>unction <span class="fstat-no" title="function not covered" >deletedocumentSuccess(documents) {
-<span class="cstat-no" title="statement not covered" >  return { type: 'DELETE_DOCUMENT_SUCCESS', documents }</span>
+<span class="cstat-no" title="statement not covered" >  return { type: 'DELETE_DOCUMENT_SUCCESS', documents };</span>
 }
 &nbsp;
 export function updateDocument(updateDocs) {
   return function (dispatch) {
     return updateDoc(updateDocs)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(updatedocumentSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.res.data.message);
       });
   };
 }
 &nbsp;
 export f</span>unction <span class="fstat-no" title="function not covered" >updatedocumentSuccess(documents) {
-<span class="cstat-no" title="statement not covered" >  return { type: 'UPDATE_DOCUMENT_SUCCESS', documents }</span>
+<span class="cstat-no" title="statement not covered" >  return { type: 'UPDATE_DOCUMENT_SUCCESS', documents };</span>
 }
 &nbsp;
 export function loadDocument(document) { // single document
   return function (dispatch) {
     return singleDocument(document)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loaddocumentSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.res.data.message);
       });
   };
@@ -577,13 +577,13 @@ export function loaddocumentSuccess(documents) {
   return { type: 'LOAD_DOCUMENT_SUCCESS', documents };
 }
 &nbsp;
-export function loadDoc(doc) { //all user documents
+export function loadDoc(doc) { // all user documents
   return function (dispatch) {
     return allDoc(doc)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loaddocSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.res.data.message);
       });
   };
@@ -593,14 +593,14 @@ export function loaddocSuccess(documents) {
   return { type: 'LOAD_DOC_SUCCESS', documents };
 }
 &nbsp;
-export function loadDocList(doc, limit, offset) { //all user documents by page
+export function loadDocList(doc, limit, offset) { // all user documents by page
   return function (dispatch) {
     return allDocList(doc, limit, offset)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(loaddoclistSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
-        throw(error);
+      .catch((error) =&gt; {
+        throw (error);
       });
   };
 }
@@ -612,33 +612,33 @@ export function loaddoclistSuccess(documentsPage) {
 export function searchDocuments(searchValue) {
   return function (dispatch) {
     return documentSearch(searchValue)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(searchdocumentSuccess(res.data));</span>
       })
-      .catch(error =&gt; {
+      .catch((error) =&gt; {
         toastr.error(error.response.data.message);
       });
   };
 }
 &nbsp;
 export function searchdocumentSuccess(documentsSearch) {
-  return { type: 'SEARCH_DOCUMENT_SUCCESS', documentsSearch }
+  return { type: 'SEARCH_DOCUMENT_SUCCESS', documentsSearch };
 }
 &nbsp;
 export function searchDocumentsPage(searchValue, limit, offset) {
   return function (dispatch) {
     return documentSearchPage(searchValue, limit, offset)
-      .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+      .then(<span class="fstat-no" title="function not covered" >(</span>res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(searchdocumentpagesuccess(res.data));</span>
       })
-      .catch(error =&gt; {
-        throw(error);
+      .catch((error) =&gt; {
+        throw (error);
       });
   };
 }
 &nbsp;
 export function searchdocumentpagesuccess(documentsSearchPage) {
-  return { type: 'SEARCH_DOCUMENT_PAGE_SUCCESS', documentsSearchPage }
+  return { type: 'SEARCH_DOCUMENT_PAGE_SUCCESS', documentsSearchPage };
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -646,7 +646,7 @@ export function searchdocumentpagesuccess(documentsSearchPage) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

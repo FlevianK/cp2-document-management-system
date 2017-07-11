@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.74% </span>
+        <span class="strong">95.24% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>18/19</span>
+        <span class='fraction'>20/21</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>3/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.74% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>18/19</span>
+        <span class='fraction'>20/20</span>
       </div>
     </div>
   </div>
@@ -99,7 +99,12 @@
 54
 55
 56
-57</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+57
+58
+59
+60
+61
+62</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -107,7 +112,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
@@ -148,22 +153,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 import { Input } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import DashboardHeader from './../DashboardHeader';
-import { browserHistory } from 'react-router';
 &nbsp;
 export class RoleDelete extends React.Component {
   constructor(props) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
@@ -181,8 +191,8 @@ export class RoleDelete extends React.Component {
     event.preventDefault();
     this.props.actions.deleteRole(this.state.deletedRole);
     this.props.actions.loadRoles()
-    .then(()=&gt; browserHistory.push('/roles'))
-    .catch(error =&gt; toastr.error(error.response.data.message));
+      .then(() =&gt; browserHistory.push('/roles'))
+      .catch(error =&gt; toastr.error(error.response.data.message));
   }
 &nbsp;
   render() {
@@ -192,23 +202,28 @@ export class RoleDelete extends React.Component {
         &lt;form&gt;
           &lt;Input
             value={this.props.params.roleTitle}
-            label="User role"/&gt;
+            label="User role"
+          /&gt;
 &nbsp;
           &lt;input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onRoleSave} /&gt;
+            onClick={this.onRoleSave}
+          /&gt;
         &lt;/form&gt;
       &lt;/div&gt;
-    )
+    );
   }
 }
 &nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    actions: bindActionCreators(roleAction, dispatch)
-  };
-}
+RoleDelete.propTypes = {
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(roleAction, dispatch)
+});
 &nbsp;
 export default connect(null, mapDispatchToProps)(RoleDelete);
 &nbsp;</pre></td></tr>
@@ -217,7 +232,7 @@ export default connect(null, mapDispatchToProps)(RoleDelete);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

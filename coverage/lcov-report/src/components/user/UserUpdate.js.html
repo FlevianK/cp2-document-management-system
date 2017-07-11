@@ -35,9 +35,9 @@
         <span class='fraction'>2/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">73.53% </span>
+        <span class="strong">78.13% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>25/34</span>
+        <span class='fraction'>25/32</span>
       </div>
     </div>
   </div>
@@ -179,7 +179,12 @@
 134
 135
 136
-137</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+137
+138
+139
+140
+141
+142</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -189,7 +194,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
@@ -289,19 +293,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,6 +311,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,14 +328,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { Input, SelectOptions } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 &nbsp;
 export class UserUpdate extends React.Component {
   constructor(props) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
@@ -340,8 +349,8 @@ export class UserUpdate extends React.Component {
   }
 &nbsp;
   componentWillMount() {
-    this.props.actions.loadUser(this.props.params)
-    this.props.action.loadRoles()
+    this.props.actions.loadUser(this.props.params);
+    this.props.action.loadRoles();
   }
 &nbsp;
   onUserChange(event) {
@@ -349,13 +358,13 @@ export class UserUpdate extends React.Component {
     c</span>onst field = <span class="cstat-no" title="statement not covered" >event.target.name;
     c</span>onst users = <span class="cstat-no" title="statement not covered" >this.state.users;
 <span class="cstat-no" title="statement not covered" >    users[field] = event.target.value;</span>
-<span class="cstat-no" title="statement not covered" >    return this.setState({ users: users });</span>
+<span class="cstat-no" title="statement not covered" >    return this.setState({ users });</span>
   }
 &nbsp;
 &nbsp;
   onUserSave(event) {
     event.preventDefault();
-    this.props.actions.updateUser(this.state.users)
+    this.props.actions.updateUser(this.state.users);
     this.props.actions.loadUsersPage().then(() =&gt; browserHistory.push('/users'));
   }
 &nbsp;
@@ -380,75 +389,81 @@ export class UserUpdate extends React.Component {
             label="First Name"
             value={this.props.users.firstName}
             type="text"
-            onChange={this.onUserChange} /&gt;
+            onChange={this.onUserChange}
+          /&gt;
 &nbsp;
           &lt;Input
             name="lastName"
             label="Last name"
             value={this.props.users.lastName}
             type="text"
-            onChange={this.onUserChange} /&gt;
+            onChange={this.onUserChange}
+          /&gt;
 &nbsp;
           &lt;Input
             name="email"
             label="Email ddress"
             value={this.props.users.email}
             type="text"
-            onChange={this.onUserChange} /&gt;
+            onChange={this.onUserChange}
+          /&gt;
 &nbsp;
           &lt;Input
             name="password"
             label="Password"
             type="text"
             value={this.props.users.password}
-            onChange={this.onUserChange} /&gt;
+            onChange={this.onUserChange}
+          /&gt;
 &nbsp;
 &nbsp;
-          {r</span>ole &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >role.userRole === "admin"
+          {r</span>ole &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >role.userRole === 'admin'
             ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;SelectOptions</span>
               options={this.props.roles}
               name="title"
               label="Title"
               defaultOption="Select role"
               value={this.props.users.title}
-              onChange={this.onUserChange} /&gt;
+              onChange={this.onUserChange}
+            /&gt;
             : ''
           }
 &nbsp;
           &lt;input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onUserSave} /&gt;
+            onClick={this.onUserSave}
+          /&gt;
         &lt;/form&gt;
       &lt;/div&gt;
-    )
+    );
   }
 }
 &nbsp;
-UserUpdate.PropTypes = {
+UserUpdate.propTypes = {
   users: PropTypes.object.isRequired,
-  role: PropTypes.object.isRequired
-}
+  role: PropTypes.object.isRequired,
+  roles: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  action: PropTypes.object.isRequired
+};
 &nbsp;
 const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
-  c</span>onst roleDropdownData = <span class="cstat-no" title="statement not covered" >state.roles.map(<span class="fstat-no" title="function not covered" >role =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      value: role.title,
-      text: role.title
-    };
-  });
+  c</span>onst roleDropdownData = <span class="cstat-no" title="statement not covered" >state.roles.map(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >role =&gt; ({</span></span>
+    value: role.title,
+    text: role.title
+  }));
 <span class="cstat-no" title="statement not covered" >  return {</span>
     users: state.users,
     roles: roleDropdownData
-  }
-}
-&nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    actions: bindActionCreators(userAction, dispatch),
-    action: bindActionCreators(roleAction, dispatch)
   };
-}
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(userAction, dispatch),
+  action: bindActionCreators(roleAction, dispatch)
+});
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate);
 &nbsp;</pre></td></tr>
@@ -457,7 +472,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

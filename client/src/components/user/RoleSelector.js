@@ -1,8 +1,6 @@
 export function roleDropdownData(roles) {
-  return roles.map(role => {
-    return {
-      value: role.title,
-      text: role.title
-    };
-  });
+  return roles.map(role => ({
+    value: role.title,
+    text: role.title
+  }));
 }

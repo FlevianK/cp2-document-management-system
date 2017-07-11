@@ -1,4 +1,4 @@
-export default {  
+export default {
   loginUser: [],
   documents: [],
   documentsPage: [],
@@ -11,8 +11,8 @@ export default {
   roles: [],
   rolesPage: [],
   failureMessage: null,
-  roleDocuments:[],
-  roleDocumentsPage:[],
+  roleDocuments: [],
+  roleDocumentsPage: [],
   usersSearchPage: [],
   usersSearch: []
-}
+};

@@ -6,13 +6,13 @@ export function failureMessage(message) {
   return { type: 'FAILURE_MESSAGE', message };
 }
 
-export function loadDocuments() { //all documents
+export function loadDocuments() { // all documents
   return function (dispatch) {
     return allDocuments()
-      .then(res => {
+      .then((res) => {
         dispatch(loadDocumentsSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.res.data.message);
       });
   };
@@ -22,13 +22,13 @@ export function loadDocumentsSuccess(allDocuments) {
   return { type: 'LOAD_DOCUMENTS_SUCCESS', allDocuments };
 }
 
-export function loadDocumentsPage(limit, offset) { //all documents by pagination
+export function loadDocumentsPage(limit, offset) { // all documents by pagination
   return function (dispatch) {
     return allDocumentsPage(limit, offset)
-      .then(res => {
+      .then((res) => {
         dispatch(loadDocumentsPageSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         throw (error);
       });
   };
@@ -38,13 +38,13 @@ export function loadDocumentsPageSuccess(allDocumentsPage) {
   return { type: 'LOAD_DOCUMENTS_PAGE_SUCCESS', allDocumentsPage };
 }
 
-export function loadRoleDocuments() { //all documents by role
+export function loadRoleDocuments() { // all documents by role
   return function (dispatch) {
     return allRoleDocument()
-      .then(res => {
+      .then((res) => {
         dispatch(loadRoleDocumentsSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.res.data.message);
       });
   };
@@ -54,14 +54,14 @@ export function loadRoleDocumentsSuccess(roleDocuments) {
   return { type: 'LOAD_ROLE_DOCUMENTS_SUCCESS', roleDocuments };
 }
 
-export function loadRoleDocumentsPage(limit, offset) { //all documents by role while paginated
+export function loadRoleDocumentsPage(limit, offset) { // all documents by role while paginated
   return function (dispatch) {
     return allRoleDocumentPage(limit, offset)
-      .then(res => {
+      .then((res) => {
         dispatch(loadRoleDocumentsPageSuccess(res.data));
       })
-      .catch(error => {
-        throw(error);
+      .catch((error) => {
+        throw (error);
       });
   };
 }
@@ -73,58 +73,58 @@ export function loadRoleDocumentsPageSuccess(roleDocumentsPage) {
 export function createDocument(newDoc) {
   return function (dispatch) {
     return createDoc(newDoc)
-      .then(res => {
+      .then((res) => {
         dispatch(createdocumentSuccess(res.data));
       })
-      .catch(error => {
-        throw(error)
+      .catch((error) => {
+        throw (error);
       });
   };
 }
 
 export function createdocumentSuccess(documents) {
-  return { type: 'CREATE_DOCUMENT_SUCCESS', documents }
+  return { type: 'CREATE_DOCUMENT_SUCCESS', documents };
 }
 
 export function deleteDocument(deletedDoc) {
   return function (dispatch) {
     return deleteDoc(deletedDoc)
-      .then(res => {
+      .then((res) => {
         dispatch(deletedocumentSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.res.data.message);
       });
   };
 }
 
 export function deletedocumentSuccess(documents) {
-  return { type: 'DELETE_DOCUMENT_SUCCESS', documents }
+  return { type: 'DELETE_DOCUMENT_SUCCESS', documents };
 }
 
 export function updateDocument(updateDocs) {
   return function (dispatch) {
     return updateDoc(updateDocs)
-      .then(res => {
+      .then((res) => {
         dispatch(updatedocumentSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.res.data.message);
       });
   };
 }
 
 export function updatedocumentSuccess(documents) {
-  return { type: 'UPDATE_DOCUMENT_SUCCESS', documents }
+  return { type: 'UPDATE_DOCUMENT_SUCCESS', documents };
 }
 
 export function loadDocument(document) { // single document
   return function (dispatch) {
     return singleDocument(document)
-      .then(res => {
+      .then((res) => {
         dispatch(loaddocumentSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.res.data.message);
       });
   };
@@ -134,13 +134,13 @@ export function loaddocumentSuccess(documents) {
   return { type: 'LOAD_DOCUMENT_SUCCESS', documents };
 }
 
-export function loadDoc(doc) { //all user documents
+export function loadDoc(doc) { // all user documents
   return function (dispatch) {
     return allDoc(doc)
-      .then(res => {
+      .then((res) => {
         dispatch(loaddocSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.res.data.message);
       });
   };
@@ -150,14 +150,14 @@ export function loaddocSuccess(documents) {
   return { type: 'LOAD_DOC_SUCCESS', documents };
 }
 
-export function loadDocList(doc, limit, offset) { //all user documents by page
+export function loadDocList(doc, limit, offset) { // all user documents by page
   return function (dispatch) {
     return allDocList(doc, limit, offset)
-      .then(res => {
+      .then((res) => {
         dispatch(loaddoclistSuccess(res.data));
       })
-      .catch(error => {
-        throw(error);
+      .catch((error) => {
+        throw (error);
       });
   };
 }
@@ -169,31 +169,31 @@ export function loaddoclistSuccess(documentsPage) {
 export function searchDocuments(searchValue) {
   return function (dispatch) {
     return documentSearch(searchValue)
-      .then(res => {
+      .then((res) => {
         dispatch(searchdocumentSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.response.data.message);
       });
   };
 }
 
 export function searchdocumentSuccess(documentsSearch) {
-  return { type: 'SEARCH_DOCUMENT_SUCCESS', documentsSearch }
+  return { type: 'SEARCH_DOCUMENT_SUCCESS', documentsSearch };
 }
 
 export function searchDocumentsPage(searchValue, limit, offset) {
   return function (dispatch) {
     return documentSearchPage(searchValue, limit, offset)
-      .then(res => {
+      .then((res) => {
         dispatch(searchdocumentpagesuccess(res.data));
       })
-      .catch(error => {
-        throw(error);
+      .catch((error) => {
+        throw (error);
       });
   };
 }
 
 export function searchdocumentpagesuccess(documentsSearchPage) {
-  return { type: 'SEARCH_DOCUMENT_PAGE_SUCCESS', documentsSearchPage }
+  return { type: 'SEARCH_DOCUMENT_PAGE_SUCCESS', documentsSearchPage };
 }

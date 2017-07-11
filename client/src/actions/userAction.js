@@ -5,10 +5,10 @@ import toastr from 'toastr';
 export function loadUsers() {
   return function (dispatch) {
     return allUsers()
-      .then(res => {
+      .then((res) => {
         dispatch(loadusersSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         throw (error);
       });
   };
@@ -21,90 +21,90 @@ export function loadusersSuccess(users) {
 export function createUser(newUser) {
   return function (dispatch) {
     return createdUser(newUser)
-      .then(res => {
+      .then((res) => {
         dispatch(createuserSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         throw (error);
       });
   };
 }
 
 export function createuserSuccess(users) {
-  return { type: 'CREATE_USER_SUCCESS', users }
+  return { type: 'CREATE_USER_SUCCESS', users };
 }
 
 export function deleteUser(deletedUser) {
   return function (dispatch) {
     return userDelete(deletedUser)
-      .then(res => {
+      .then((res) => {
         dispatch(deleteuserSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.response.data.message);
       });
   };
 }
 
 export function deleteuserSuccess(users) {
-  return { type: 'DELETE_USER_SUCCESS', users }
+  return { type: 'DELETE_USER_SUCCESS', users };
 }
 
 export function updateUser(updatedUser) {
   return function (dispatch) {
     return userUpdate(updatedUser)
-      .then(res => {
+      .then((res) => {
         dispatch(updateuserSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.response.data.message);
       });
   };
 }
 
 export function updateuserSuccess(users) {
-  return { type: 'UPDATE_USER_SUCCESS', users }
+  return { type: 'UPDATE_USER_SUCCESS', users };
 }
 
-export function searchUsers(searchValue) {
+export function searchUser(searchValue) {
   return function (dispatch) {
     return userSearch(searchValue)
-      .then(res => {
+      .then((res) => {
         dispatch(searchuserSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         throw (error);
       });
   };
 }
 
 export function searchuserSuccess(usersSearch) {
-  return { type: 'SEARCH_USER_SUCCESS', usersSearch }
+  return { type: 'SEARCH_USER_SUCCESS', usersSearch };
 }
 
 export function searchUsersPage(searchValue, limit, offset) {
   return function (dispatch) {
     return userSearchPage(searchValue, limit, offset)
-      .then(res => {
+      .then((res) => {
         dispatch(searchuserpagesuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.response.data.message);
       });
   };
 }
 
 export function searchuserpagesuccess(usersSearchPage) {
-  return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage }
+  return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage };
 }
 
 export function loadUser(user) {
   return function (dispatch) {
     return allUser(user)
-      .then(res => {
+      .then((res) => {
         dispatch(loadUserSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         throw (error);
       });
   };
@@ -117,10 +117,10 @@ export function loadUserSuccess(users) {
 export function loadUsersPage(limit, offset) {
   return function (dispatch) {
     return allUsersPage(limit, offset)
-      .then(res => {
+      .then((res) => {
         dispatch(loadUsersPageSuccess(res.data));
       })
-      .catch(error => {
+      .catch((error) => {
         toastr.error(error.response.data.message);
       });
   };

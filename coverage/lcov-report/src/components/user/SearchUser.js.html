@@ -35,9 +35,9 @@
         <span class='fraction'>1/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">79.31% </span>
+        <span class="strong">85.19% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>23/29</span>
+        <span class='fraction'>23/27</span>
       </div>
     </div>
   </div>
@@ -131,9 +131,7 @@
 86
 87
 88
-89
-90
-91</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+89</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -205,19 +203,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,90 +223,88 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList, Form, UserHeader } from '../../containers';
-import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
+import { UserList } from '../../containers';
+import * as userAction from '../../actions/userAction';
 import DashboardHeader from './../DashboardHeader';
 &nbsp;
 export class SearchUser extends React.Component {
-    constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
-        super(props, context);
-        this.state = {
-            searchValue: '',
-            activePage: 1,
-            limit: 4,
-            offset: 0
-        };
-        this.handlePageChange = this.handlePageChange.bind(this);
-        this.onUserChange = this.onUserChange.bind(this);
-        this.onUserClick = this.onUserClick.bind(this);
-    }
-&nbsp;
-    onUserChange(event) {
-<span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >        return this.setState({ searchValue: event.target.value });</span>
-    }
-&nbsp;
-    handlePageChange(pageNumber) {
-<span class="cstat-no" title="statement not covered" >        this.setState({ activePage: pageNumber });</span>
-<span class="cstat-no" title="statement not covered" >        this.props.actions.searchUsersPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
-    }
-&nbsp;
-    onUserClick(event) {
-        event.preventDefault();
-        this.props.actions.searchUsersPage(this.state.searchValue, this.state.limit, this.state.offset);
-        this.props.actions.searchUsers(this.state.searchValue);
-    }
-&nbsp;
-    render() {
-        const usersSearch = this.props.usersSearchPage;
-        const totalItems = this.props.usersSearch;
-        return (
-            &lt;div className="col-md-12"&gt;
-                &lt;DashboardHeader /&gt;
-                &lt;div className="col s4 offset-m4"&gt;
-&nbsp;
-                    &lt;input
-                        name="user"
-                        label="Search"
-                        type="search"
-                        onChange={this.onUserChange} /&gt;
-                &lt;/div&gt;
-                &lt;div className="col s4 "&gt;
-                    &lt;i className="material-icons" onClick={this.onUserClick} &gt;search&lt;/i&gt;
-                &lt;/div&gt;
-                {totalItems &gt; 0
-                    ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;UserList users={usersSearch} /&gt;</span>
-                    : ''
-                }
-                &lt;Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={this.state.limit}
-                    totalItemsCount={totalItems}
-                    onChange={this.handlePageChange}
-                /&gt;
-            &lt;/div &gt;
-        )
-    }
-}
-&nbsp;
-SearchUser.PropTypes = {
-    usersSearch: PropTypes.object.isRequired,
-    usersSearchPage: PropTypes.object.isRequired
-}
-&nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        actions: bindActionCreators(userAction, dispatch)
+  constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
+    super(props, context);
+    this.state = {
+      searchValue: '',
+      activePage: 1,
+      limit: 4,
+      offset: 0
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.onUserChange = this.onUserChange.bind(this);
+    this.onUserClick = this.onUserClick.bind(this);
+  }
+&nbsp;
+  onUserChange(event) {
+<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    return this.setState({ searchValue: event.target.value });</span>
+  }
+&nbsp;
+  handlePageChange(pageNumber) {
+<span class="cstat-no" title="statement not covered" >    this.setState({ activePage: pageNumber });</span>
+<span class="cstat-no" title="statement not covered" >    this.props.actions.searchUsersPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
+  }
+&nbsp;
+  onUserClick(event) {
+    event.preventDefault();
+    this.props.actions.searchUsersPage(this.state.searchValue, this.state.limit, this.state.offset);
+    this.props.actions.searchUser(this.state.searchValue);
+  }
+&nbsp;
+  render() {
+    const usersSearch = this.props.usersSearchPage;
+    const totalItems = this.props.usersSearch;
+    return (
+      &lt;div className="col-md-12"&gt;
+        &lt;DashboardHeader /&gt;
+        &lt;div className="col s4 offset-m4"&gt;
+&nbsp;
+          &lt;input
+            name="user"
+            label="Search"
+            type="search"
+            onChange={this.onUserChange}
+          /&gt;
+        &lt;/div&gt;
+        &lt;div className="col s4 "&gt;
+          &lt;i className="material-icons" onClick={this.onUserClick} &gt;search&lt;/i&gt;
+        &lt;/div&gt;
+        {totalItems &gt; 0
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;UserList users={usersSearch} /&gt;</span>
+          : ''
+        }
+        &lt;Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={this.state.limit}
+          totalItemsCount={totalItems}
+          onChange={this.handlePageChange}
+        /&gt;
+      &lt;/div &gt;
+    );
+  }
 }
-const <span class="fstat-no" title="function not covered" >mapStateToProps = (</span>state, ownProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        usersSearch: state.usersSearch.length,
-        usersSearchPage: state.usersSearchPage
-    };
-}
+&nbsp;
+SearchUser.propTypes = {
+  usersSearch: PropTypes.number.isRequired,
+  usersSearchPage: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(userAction, dispatch)
+});
+const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state, ownProps) =&gt; ({</span>
+  usersSearch: state.usersSearch.length,
+  usersSearchPage: state.usersSearchPage
+});
 &nbsp;
 export default connect(mapStateToProps, mapDispatchToProps)(SearchUser);
 &nbsp;</pre></td></tr>
@@ -319,7 +313,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SearchUser);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

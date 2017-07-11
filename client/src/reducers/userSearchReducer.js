@@ -3,11 +3,11 @@ import initialState from './initialState';
 
 export default function userSearchReducer(state = initialState.usersSearch, action) {
   switch (action.type) {
-    case types.SEARCH_USER_SUCCESS:
-      return action.usersSearch
+  case types.SEARCH_USER_SUCCESS:
+    return action.usersSearch;
 
-    default:
-      return state;
+  default:
+    return state;
   }
 }
 

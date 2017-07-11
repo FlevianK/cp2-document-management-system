@@ -16,56 +16,54 @@ export class Role extends React.Component {
         title: '',
         activePage: 1
       },
-        limit: 2,
-        offset: 0
-    }
-      this.handlePageChange = this.handlePageChange.bind(this);
-    }
-
-    handlePageChange(pageNumber) {
-      this.setState({ activePage: pageNumber });
-      this.props.actions.loadRolesPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
-    }
-    componentWillMount() {
-      this.props.actions.loadRoles();
-      this.props.actions.loadRolesPage(this.state.limit, this.state.offset)
-    }
-
-    render() {
-        const roles = this.props.rolesPage;
-        const totalItems = this.props.roles;
-      return (
-        <div className="col-md-12">
-          <DashboardHeader />
-          <RoleHeader />
-          <RoleList roles={roles} />
-          <Pagination
-            activePage={this.state.activePage}
-            itemsCountPerPage={this.state.limit}
-            totalItemsCount={totalItems}
-            onChange={this.handlePageChange}
-          />
-        </div>
-      )
-    }
+      limit: 2,
+      offset: 0
+    };
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  Role.PropTypes = {
-    roles: PropTypes.number.isRequired,
-    rolesPage: PropTypes.object.isRequired
+  componentWillMount() {
+    this.props.actions.loadRoles();
+    this.props.actions.loadRolesPage(this.state.limit, this.state.offset);
   }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    roles: state.roles.length,
-    rolesPage: state.rolesPage
-  };
+  handlePageChange(pageNumber) {
+    this.setState({ activePage: pageNumber });
+    this.props.actions.loadRolesPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
+  }
+
+  render() {
+    const roles = this.props.rolesPage;
+    const totalItems = this.props.roles;
+    return (
+      <div className="col-md-12">
+        <DashboardHeader />
+        <RoleHeader />
+        <RoleList roles={roles} />
+        <Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={this.state.limit}
+          totalItemsCount={totalItems}
+          onChange={this.handlePageChange}
+        />
+      </div>
+    );
+  }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(roleAction, dispatch)
-  };
-}
+Role.propTypes = {
+  roles: PropTypes.number.isRequired,
+  rolesPage: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  roles: state.roles.length,
+  rolesPage: state.rolesPage
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(roleAction, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Role);

@@ -23,7 +23,7 @@ export {
   // Logout 
   App,
   Dashboard,
-  
+
   Document,
   Documents,
   DocumentCreate,
@@ -41,4 +41,4 @@ export {
   Role,
   RoleCreate,
   RoleDelete
-}
+};

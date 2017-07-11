@@ -34,7 +34,7 @@ export class SearchDocument extends React.Component {
   onDocumentClick(event) {
     event.preventDefault();
     this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, this.state.offset);
-    this.props.actions.searchDocuments(this.state.searchValue)
+    this.props.actions.searchDocuments(this.state.searchValue);
   }
 
   render() {
@@ -48,13 +48,14 @@ export class SearchDocument extends React.Component {
             name="document"
             label="Search"
             type="search"
-            onChange={this.onDocumentChange} />
+            onChange={this.onDocumentChange}
+          />
         </div>
         <div className="col s4 ">
           <i className="material-icons" onClick={this.onDocumentClick} >search</i>
         </div>
         {totalItems > 0
-          ? <DocumentsList documents={allDocuments} />
+          ? <DocumentsList documents={documentsSearch} />
           : ''
         }
         <Pagination
@@ -64,26 +65,23 @@ export class SearchDocument extends React.Component {
           onChange={this.handlePageChange}
         />
       </div >
-    )
+    );
   }
 }
 
-SearchDocument.PropTypes = {
-  documentsSearchPage: PropTypes.object.isRequired,
-  documentsSearch: PropTypes.object.isRequired
-}
+SearchDocument.propTypes = {
+  documentsSearchPage: PropTypes.array.isRequired,
+  documentsSearch: PropTypes.number.isRequired,
+  actions: PropTypes.object.isRequired
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    documentsSearch: state.documentsSearch.length,
-    documentsSearchPage: state.documentsSearchPage
-  };
-}
+const mapStateToProps = (state, ownProps) => ({
+  documentsSearch: state.documentsSearch.length,
+  documentsSearchPage: state.documentsSearchPage
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(documentAction, dispatch)
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(documentAction, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchDocument);

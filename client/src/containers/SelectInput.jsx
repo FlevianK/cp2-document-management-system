@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const SelectOptions = ({ name, access , label, onChange, defaultOption, value, error, options }) => (
+export const SelectOptions = ({ name, access , label, onChange, defaultOption, value, options }) => (
   <div className="select=form">
     <label htmlFor={name}>{label}</label>
     <div className="field">
@@ -14,7 +14,6 @@ export const SelectOptions = ({ name, access , label, onChange, defaultOption, v
         })
         }
       </select>
-      {error && <div className="alert-danger">{error}</div>}
     </div>
   </div>
 
@@ -26,7 +25,6 @@ SelectOptions.propTypes = {
   onChange: PropTypes.func.isRequired,
   defaultOption: PropTypes.string,
   value: PropTypes.string,
-  error: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object)
 };
 export default SelectOptions;

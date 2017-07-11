@@ -3,10 +3,10 @@ import initialState from './initialState';
 
 export default function failureMessage(state = initialState.failureMessage, action) {
   switch (action.type) {
-    case types.FAILURE_MESSAGE:
-      return action.failureMessage
+  case types.FAILURE_MESSAGE:
+    return action.failureMessage;
 
-    default:
-      return state;
+  default:
+    return state;
   }
 }

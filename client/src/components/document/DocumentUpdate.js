@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input,  SelectOptions } from '../../containers';
+import { Input, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import DashboardHeader from './../DashboardHeader';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
-import { browserHistory } from 'react-router';
 
 export class DocumentUpdate extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ export class DocumentUpdate extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadDocument(this.props.params)
+    this.props.actions.loadDocument(this.props.params);
   }
 
   onDocumentChange(event) {
@@ -30,18 +29,16 @@ export class DocumentUpdate extends React.Component {
     const field = event.target.name;
     const documents = this.state.documents;
     documents[field] = event.target.value;
-    return this.setState({ documents: documents });
+    return this.setState({ documents });
   }
 
   onDocumentSave(event) {
-
     event.preventDefault();
-    this.props.actions.updateDocument(this.state.documents).then(()=> browserHistory.push('/documents'));
-    
+    this.props.actions.updateDocument(this.state.documents).then(() => browserHistory.push('/documents'));
   }
 
   render() {
-    const accessOption = [{value:"private", text:"Private"},{value:"public", text:"Public"}, {value: this.props.userRole, text:"Role"} ]
+    const accessOption = [{ value: 'private', text: 'Private' }, { value: 'public', text: 'Public' }, { value: this.props.userRole, text: 'Role' }];
     return (
       <div>
         <DashboardHeader />
@@ -51,49 +48,51 @@ export class DocumentUpdate extends React.Component {
             label="title"
             type="text"
             placeholder={this.props.documents.title}
-            onChange={this.onDocumentChange} />
+            onChange={this.onDocumentChange}
+          />
 
           <textarea
             name="content"
             label="Content"
             type="text"
             placeholder={this.props.documents.content}
-            onChange={this.onDocumentChange} />
+            onChange={this.onDocumentChange}
+          />
 
-          <SelectOptions 
-            options = {accessOption}
+          <SelectOptions
+            options={accessOption}
             name="access"
             label="Access Type"
             defaultOption="select access type"
             value={this.state.documents.access}
-            onChange={this.onDocumentChange} /> 
+            onChange={this.onDocumentChange}
+          />
           <input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onDocumentSave} />
+            onClick={this.onDocumentSave}
+          />
         </form>
       </div>
-    )
+    );
   }
 }
 
 DocumentUpdate.propTypes = {
   documents: PropTypes.object.isRequired,
   access: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-}
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  userRole: PropTypes.string.isRequired,
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    documents: state.documents,
-    userRole: state.loginUser.userRole,
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  documents: state.documents,
+  userRole: state.loginUser.userRole,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(documentAction, dispatch)
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(documentAction, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentUpdate);

@@ -12,11 +12,11 @@ describe('role selector component', () => {
       ];
 
       const expected = [
-        {value: 'admin', text: 'admin'},
-        {value: 'regular', text: 'regular'},
-        {value: 'fellow', text: 'fellow'}
+        { value: 'admin', text: 'admin' },
+        { value: 'regular', text: 'regular' },
+        { value: 'fellow', text: 'fellow' }
       ];
       expect(roleDropdownData(roles)).toEqual(expected);
-    })
-  })
-})
+    });
+  });
+});

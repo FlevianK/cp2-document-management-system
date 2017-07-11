@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 import { Input } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import DashboardHeader from './../DashboardHeader';
-import { browserHistory } from 'react-router';
 
 export class RoleDelete extends React.Component {
   constructor(props) {
@@ -24,8 +24,8 @@ export class RoleDelete extends React.Component {
     event.preventDefault();
     this.props.actions.deleteRole(this.state.deletedRole);
     this.props.actions.loadRoles()
-    .then(()=> browserHistory.push('/roles'))
-    .catch(error => toastr.error(error.response.data.message));
+      .then(() => browserHistory.push('/roles'))
+      .catch(error => toastr.error(error.response.data.message));
   }
 
   render() {
@@ -35,22 +35,27 @@ export class RoleDelete extends React.Component {
         <form>
           <Input
             value={this.props.params.roleTitle}
-            label="User role"/>
+            label="User role"
+          />
 
           <input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onRoleSave} />
+            onClick={this.onRoleSave}
+          />
         </form>
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(roleAction, dispatch)
-  };
-}
+RoleDelete.propTypes = {
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(roleAction, dispatch)
+});
 
 export default connect(null, mapDispatchToProps)(RoleDelete);

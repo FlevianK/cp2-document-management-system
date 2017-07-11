@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.92% </span>
+        <span class="strong">77.78% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>20/26</span>
+        <span class='fraction'>21/27</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>3/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.92% </span>
+        <span class="strong">80.77% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>20/26</span>
+        <span class='fraction'>21/26</span>
       </div>
     </div>
   </div>
@@ -110,7 +110,8 @@
 65
 66
 67
-68</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+68
+69</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -118,7 +119,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,22 +170,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { Input } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 import toastr from 'toastr';
 &nbsp;
 export class RoleCreate extends React.Component {
@@ -205,15 +206,15 @@ export class RoleCreate extends React.Component {
     c</span>onst field = <span class="cstat-no" title="statement not covered" >event.target.name;
     c</span>onst newRole = <span class="cstat-no" title="statement not covered" >this.state.newRole;
 <span class="cstat-no" title="statement not covered" >    newRole[field] = event.target.value;</span>
-<span class="cstat-no" title="statement not covered" >    return this.setState({ newRole: newRole });</span>
+<span class="cstat-no" title="statement not covered" >    return this.setState({ newRole });</span>
   }
 &nbsp;
   onRoleSave(event) {
     event.preventDefault();
     this.props.actions.createRole(this.state.newRole);
     this.props.actions.loadRoles()
-    .then(() =&gt; browserHistory.push('/roles'))
-    .catch(error =&gt; toastr.error(error.response.data.message));
+      .then(() =&gt; browserHistory.push('/roles'))
+      .catch(error =&gt; toastr.error(error.response.data.message));
   }
 &nbsp;
   render() {
@@ -225,23 +226,25 @@ export class RoleCreate extends React.Component {
             name="title"
             type="text"
             label="Role"
-            onChange={this.onRoleChange} /&gt;
+            onChange={this.onRoleChange}
+          /&gt;
 &nbsp;
           &lt;input
             type="submit"
             className="btn btn-primary"
-            onClick={this.onRoleSave} /&gt;
+            onClick={this.onRoleSave}
+          /&gt;
         &lt;/form&gt;
       &lt;/div&gt;
-    )
+    );
   }
 }
-&nbsp;
-const <span class="fstat-no" title="function not covered" >mapDispatchToProps = (</span>dispatch) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    actions: bindActionCreators(roleAction, dispatch)
-  };
-}
+RoleCreate.propTypes = {
+  actions: PropTypes.object.isRequired
+};
+const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
+  actions: bindActionCreators(roleAction, dispatch)
+});
 &nbsp;
 export default connect(null, mapDispatchToProps)(RoleCreate);
 &nbsp;</pre></td></tr>
@@ -250,7 +253,7 @@ export default connect(null, mapDispatchToProps)(RoleCreate);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 10 2017 10:45:26 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
