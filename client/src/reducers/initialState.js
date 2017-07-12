@@ -14,5 +14,7 @@ export default {
   roleDocuments: [],
   roleDocumentsPage: [],
   usersSearchPage: [],
-  usersSearch: []
+  usersSearch: [],
+  rolesSearchPage: [],
+  rolesSearch: []
 };

@@ -4,6 +4,10 @@ import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Input } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
@@ -16,10 +20,12 @@ export class DocumentCreate extends React.Component {
         title: '',
         content: '',
         access: ''
-      }
+      },
+      open: true
     };
     this.onDocumentChange = this.onDocumentChange.bind(this);
-    this.onDocumentSave = this.onDocumentSave.bind(this);
+    this.onDocumentCreate = this.onDocumentCreate.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   onDocumentChange(event) {
@@ -30,52 +36,84 @@ export class DocumentCreate extends React.Component {
     return this.setState({ newDocument });
   }
 
-  onDocumentSave(event) {
+  onDocumentCreate(event) {
     event.preventDefault();
     this.props.actions.createDocument(this.state.newDocument)
-      .then(() => browserHistory.push('/documents'))
+      .then(() => {
+        this.setState({ open: false });
+        browserHistory.push('/documents');
+      })
       .catch((error) => {
         toastr.error(error.response.data.message);
       });
   }
 
+  handleClose() {
+    this.setState({ open: false });
+    browserHistory.push('/documents');
+  }
+
   render() {
+    const actions = [
+      <FlatButton
+        style={{color: "red", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        style={{color: "green", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.onDocumentCreate}
+      />];
     return (
       <div>
         <DashboardHeader />
-        <form>
-          <Input
-            name="title"
-            label="Title"
-            type="text"
-            onChange={this.onDocumentChange}
-          />
+        <div>
+          <MuiThemeProvider>
+            <Dialog
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              <form>
+                <Input
+                  name="title"
+                  label="Title"
+                  type="text"
+                  onChange={this.onDocumentChange}
+                />
+                <div className="row">
+                  <div className="col s10 offset-m1">
+                    <textarea
+                      name="content"
+                      label="Content"
+                      type="text"
+                      onChange={this.onDocumentChange}
+                    />
+                  </div>
+                </div>
 
-          <textarea
-            name="content"
-            label="Content"
-            type="text"
-            onChange={this.onDocumentChange}
-          />
-
-          <div>
-            <label>Access</label>
-            <div>
-              <select name="access" className="browser-default" onChange={this.onDocumentChange}>
-                <option value="" disabled selected>Select access type</option>
-                <option value="public" >Public</option>
-                <option value="private">Private</option>
-                <option value={this.props.userRole}>Role</option>
-              </select>
-            </div>
-          </div>
-
-          <input
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.onDocumentSave}
-          />
-        </form>
+                <div className="row">
+                  <div className="col s10 offset-m1">
+                    <label>Access</label>
+                    <div>
+                      <select name="access" className="browser-default" onChange={this.onDocumentChange}>
+                        <option value="" disabled selected>Select access type</option>
+                        <option value="public" >Public</option>
+                        <option value="private">Private</option>
+                        <option value={this.props.userRole}>Role</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </Dialog>
+          </MuiThemeProvider>
+        </div>
       </div>
     );
   }

@@ -41,13 +41,16 @@ export class Login extends React.Component {
     return (
       <div className="card">
         <div className="card-image">
+          <nav style={{ backgroundColor: "green", color: "white", textAlign: "center" }}>
+            DOCUMENT MANAGEMENT SYSTEM
+          </nav>
           <div className="row">
             <div className="col s6 offset-m3">
-              Login or Sign up
+              <h5 style={{ color: "green", textAlign: "center" }}>Login</h5>
             </div>
           </div>
 
-          <form>
+          <form style={{margin: "0 20% 0 20% "}}>
             <Input
               name="email"
               label="email"
@@ -65,6 +68,7 @@ export class Login extends React.Component {
               <div className="col s6 offset-m3">
 
                 <input
+                  style={{ backgroundColor: "green", color: "white" }}
                   type="submit"
                   className="btn btn-primary"
                   onClick={this.onLoginSave}
@@ -75,7 +79,7 @@ export class Login extends React.Component {
           <div className="row">
             <div className="col s6 offset-m3">
               <p className="center medium-small sign-up">
-                <Link to="/users/create" activeClassName="active" style={{ color: 'green' }}> Sign up</Link> to create account
+                <Link to="/users/create" activeClassName="active" style={{ color: 'green', textAlign: "center" }}> Sign up</Link> to create account
               </p>
             </div>
           </div>

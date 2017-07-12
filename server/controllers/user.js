@@ -12,15 +12,15 @@ module.exports = {
       return res.status(403).send({ // forbidden request
         message: 'Fill all fields',
       });
-    } else if(!emailRegex.test(req.body.email)){
+    } else if (!emailRegex.test(req.body.email)) {
       res.status(403).send({ // forbidden request
         message: 'Incorrect email format',
       });
-    } else if(!(req.body.password).match(passwordRegex)){
+    } else if (!(req.body.password).match(passwordRegex)) {
       res.status(403).send({ // forbidden request
         message: 'Password must be atleast six characters with a digit, special symbols, lowercase and uppercase characters',
       });
-    } 
+    }
     return User
       .create({
         username: req.body.username,
@@ -98,7 +98,7 @@ module.exports = {
           })
           .then(() => res.status(200).send({
             message: 'Updated successfully'
-          })) 
+          }))
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
@@ -106,7 +106,7 @@ module.exports = {
 
   destroy(req, res) {
     if (req.params.userId == 1) {
-      return res.status(401).send({ 
+      return res.status(401).send({
         message: 'Can not delete main admin',
       });
     }
@@ -129,10 +129,31 @@ module.exports = {
   searchUser(req, res) {
     if (req.query.q) {
       if (req.query.limit || req.query.offset) {
+        return User
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+            where: {
+              $or: [
+                { firstName: { $iLike: `%${req.query.q}%` } },
+                { lastName: { $iLike: `%${req.query.q}%` } },
+                { email: { $iLike: `%${req.query.q}%` } },
+                { title: { $iLike: `%${req.query.q}%` } },
+              ]
+            }
+          })
+          .then(user => {
+            if (!user || user.length < 1) {
+              return res.status(404).send({
+                message: 'User Not Found',
+              });
+            }
+            return res.status(200).send(user);
+          })
+          .catch(error => res.status(400).send(error));
+      }
       return User
         .findAll({
-          offset: req.query.offset,
-          limit: req.query.limit,
           where: {
             $or: [
               { firstName: { $iLike: `%${req.query.q}%` } },
@@ -143,34 +164,13 @@ module.exports = {
           }
         })
         .then(user => {
-        if (!user || user.length < 1) {
-          return res.status(404).send({
-            message: 'User Not Found',
-          });
-        }
-        return res.status(200).send(user);
-      })
-        .catch(error => res.status(400).send(error));
-    }
-      return User
-        .findAll({
-          where: {
-            $or: [
-              { firstName: { $iLike: `%${req.query.q}%` } },
-              { lastName: { $iLike: `%${req.query.q}%` } },
-              { email: { $iLike: `%${req.query.q}%` } },
-              { title: { $iLike: `%${req.query.q}%` } },
-            ]
+          if (!user || user.length < 1) {
+            return res.status(404).send({
+              message: 'User Not Found',
+            });
           }
+          return res.status(200).send(user);
         })
-        .then(user => {
-        if (!user || user.length < 1) {
-          return res.status(404).send({
-            message: 'User Not Found',
-          });
-        }
-        return res.status(200).send(user);
-      })
         .catch(error => res.status(400).send(error));
     }
   }

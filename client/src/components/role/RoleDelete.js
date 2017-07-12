@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import toastr from 'toastr';
 import { Input } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
@@ -14,36 +18,57 @@ export class RoleDelete extends React.Component {
     this.state = {
       deletedRole: {
         role: this.props.params.roleTitle
-      }
+      },
+      open: true
     };
-    this.onRoleSave = this.onRoleSave.bind(this);
+    this.onRoleDelete = this.onRoleDelete.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
 
-  onRoleSave(event) {
+  onRoleDelete(event) {
     event.preventDefault();
-    this.props.actions.deleteRole(this.state.deletedRole);
-    this.props.actions.loadRoles()
+    this.setState({ open: false });
+    this.props.actions.deleteRole(this.state.deletedRole)
       .then(() => browserHistory.push('/roles'))
       .catch(error => toastr.error(error.response.data.message));
   }
+  handleClose() {
+    this.setState({ open: false });
+    browserHistory.push('/roles');
+  }
 
   render() {
+    const actions = [
+      <FlatButton
+        style={{color: "red", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        label="No"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        style={{color: "green", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        label="Yes"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.onRoleDelete}
+      />];
     return (
       <div className="col-md-12">
         <DashboardHeader />
-        <form>
-          <Input
-            value={this.props.params.roleTitle}
-            label="User role"
-          />
-
-          <input
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.onRoleSave}
-          />
-        </form>
+        <div>
+          <MuiThemeProvider>
+            <Dialog
+              title="Are you sure you want to delete this role?"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              <p>Role:  {this.props.params.roleTitle} </p>
+            </Dialog>
+          </MuiThemeProvider>
+        </div>
       </div>
     );
   }

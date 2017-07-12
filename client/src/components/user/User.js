@@ -43,12 +43,17 @@ export class User extends React.Component {
       <div className="col-md-12">
         <DashboardHeader />
         <UserList users={users} />
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={totalItems}
-          onChange={this.handlePageChange}
-        />
+        
+        {totalItems > this.state.limit
+          ? <Pagination
+            style={{backgroundColor: "green", color: "white"}}
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={totalItems}
+            onChange={this.handlePageChange}
+          />
+          : ''
+        }
       </div>
     );
   }

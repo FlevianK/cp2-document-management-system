@@ -44,7 +44,15 @@ export class UserCreate extends React.Component {
     return (
       <div className="card">
         <div className="card-image">
-          <form>
+          <nav style={{ backgroundColor: "green", color: "white", textAlign: "center" }}>
+            DOCUMENT MANAGEMENT SYSTEM
+          </nav>
+          <div className="row">
+            <div className="col s6 offset-m3">
+              <h5 style={{ color: "green", textAlign: "center" }}>Register</h5>
+            </div>
+          </div>
+          <form style={{margin: "0 20% 0 20% "}}>
             <Input
               name="username"
               label="Username"
@@ -83,6 +91,7 @@ export class UserCreate extends React.Component {
             <div className="row">
               <div className="col s6 offset-m3">
                 <input
+                  style={{backgroundColor: "green", color: "white"}}
                   type="submit"
                   className="btn btn-primary"
                   onClick={this.onUserSave}
@@ -92,8 +101,8 @@ export class UserCreate extends React.Component {
           </form>
           <div className="row">
             <div className="col s6 offset-m3">
-              <p>
-                <Link to="/" activeClassName="active" style={{ color: 'green' }}>Sign in</Link> if you already have an account
+              <p className="center medium-small sign-in">
+                <Link to="/" activeClassName="active" style={{ color: 'green', textAlign: "center" }}>Sign in</Link> if you already have an account
               </p>
             </div>
           </div>

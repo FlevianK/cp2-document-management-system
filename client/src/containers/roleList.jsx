@@ -1,26 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const RoleList = ({ roles }) => {  
+const RoleList = ({ roles }) => { 
   return (
-    <table>
-        <thead>
-          <tr>
-              <th>Role</th>
-              <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-           {roles.map(role => 
-          <tr key={role.title}>
-            <td>{role.title}</td>
-            <td ><Link to={`/roles/delete/${role.title}`}>Delete</Link></td>
-          </tr>
-           )}
-          </tbody>
-          </table>
-  );
+    <div>
+      {roles.map(role =>
+        <MuiThemeProvider>
+          <Card key={role.title} style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}}>
+            <CardText>
+              <p>Role: {role.title}</p>
+            </CardText>
+            <CardActions>
+              <Link to={`/roles/delete/${role.title}`} style={{color: " red", textAlign: "center"}}>DELETE</Link>
+            </CardActions>
+          </Card>
+        </MuiThemeProvider>
+      )}
+    </div>
+  ); 
 };
 
 export default RoleList;  

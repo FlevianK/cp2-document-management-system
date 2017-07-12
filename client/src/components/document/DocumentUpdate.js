@@ -2,11 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import PropTypes from 'prop-types';
+import jwtDecode from 'jwt-decode';
 import { Input, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import DashboardHeader from './../DashboardHeader';
-import PropTypes from 'prop-types';
-import jwtDecode from 'jwt-decode';
 
 export class DocumentUpdate extends React.Component {
   constructor(props) {
@@ -14,10 +18,12 @@ export class DocumentUpdate extends React.Component {
     this.state = {
       documents: {
         documentId: this.props.params.documentId
-      }
+      },
+      open: true
     };
     this.onDocumentChange = this.onDocumentChange.bind(this);
-    this.onDocumentSave = this.onDocumentSave.bind(this);
+    this.onDocumentUpdate = this.onDocumentUpdate.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentWillMount() {
@@ -32,47 +38,75 @@ export class DocumentUpdate extends React.Component {
     return this.setState({ documents });
   }
 
-  onDocumentSave(event) {
+  onDocumentUpdate(event) {
     event.preventDefault();
-    this.props.actions.updateDocument(this.state.documents).then(() => browserHistory.push('/documents'));
+    this.props.actions.updateDocument(this.state.documents)
+      .then(() => browserHistory.push('/documents'));
+  }
+
+  handleClose() {
+    this.setState({ open: false });
+    browserHistory.push('/documents');
   }
 
   render() {
+    const actions = [
+      <FlatButton
+        style={{color: "red", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        style={{color: "green", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        label="Update"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.onDocumentUpdate}
+      />]
     const accessOption = [{ value: 'private', text: 'Private' }, { value: 'public', text: 'Public' }, { value: this.props.userRole, text: 'Role' }];
     return (
       <div>
         <DashboardHeader />
-        <form>
-          <Input
-            name="title"
-            label="title"
-            type="text"
-            placeholder={this.props.documents.title}
-            onChange={this.onDocumentChange}
-          />
-
-          <textarea
-            name="content"
-            label="Content"
-            type="text"
-            placeholder={this.props.documents.content}
-            onChange={this.onDocumentChange}
-          />
-
-          <SelectOptions
-            options={accessOption}
-            name="access"
-            label="Access Type"
-            defaultOption="select access type"
-            value={this.state.documents.access}
-            onChange={this.onDocumentChange}
-          />
-          <input
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.onDocumentSave}
-          />
-        </form>
+        <div>
+          <MuiThemeProvider>
+            <Dialog
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              <form>
+                <Input
+                  name="title"
+                  label="title"
+                  type="text"
+                  value={this.props.documents.title}
+                  onChange={this.onDocumentChange}
+                />
+                <div className="row">
+                  <div className="col s10 offset-m1">
+                    <textarea
+                      name="content"
+                      label="Content"
+                      type="text"
+                      value={this.props.documents.content}
+                      onChange={this.onDocumentChange}
+                    />
+                  </div>
+                </div>
+                <SelectOptions
+                  options={accessOption}
+                  name="access"
+                  label="Access Type"
+                  defaultOption="select access type"
+                  value={this.state.documents.access}
+                  onChange={this.onDocumentChange}
+                />
+              </form>
+            </Dialog>
+          </MuiThemeProvider>
+        </div>
       </div>
     );
   }

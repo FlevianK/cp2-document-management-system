@@ -15,6 +15,10 @@ export class Document extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      
+      deleteDocument: {
+        documentId: ''
+      },
       documents: [{
         title: '',
         content: '',
@@ -44,26 +48,28 @@ export class Document extends React.Component {
       <div>
         <DashboardHeader />
         <DocumentHeader />
-        {totalItems > 0
-          ? <DocumentList documents={documents} />
-          : 'You do not have document'
+        <DocumentList documents={documents}/>
+        
+        {totalItems > this.state.limit
+          ? <Pagination
+            style={{backgroundColor: "green", color: "white"}}
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={totalItems}
+            onChange={this.handlePageChange}
+          />
+          : ''
         }
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={totalItems}
-          onChange={this.handlePageChange}
-        />
       </div>
     );
   }
 }
 
 Document.propTypes = {
-  documents: PropTypes.number.isRequired,
-  userId: PropTypes.number.isRequired,
-  documentsPage: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  documents: PropTypes.number,
+  userId: PropTypes.number,
+  documentsPage: PropTypes.array,
+  actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

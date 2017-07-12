@@ -1,5 +1,4 @@
 import Login from './Login';
-// import Logout from './Logout';
 import App from './App';
 import Dashboard from './Dashboard';
 import Document from './document/Document';
@@ -13,14 +12,15 @@ import User from './user/User';
 import UserCreate from './user/UserCreate';
 import UserDelete from './user/UserDelete';
 import UserUpdate from './user/UserUpdate';
+import UsersUpdate from './user/UsersUpdate';
 import SearchUser from './user/SearchUser';
 import Role from './role/Role';
 import RoleCreate from './role/RoleCreate';
 import RoleDelete from './role/RoleDelete';
+import SearchRole from './role/SearchRole';
 
 export {
   Login,
-  // Logout 
   App,
   Dashboard,
 
@@ -36,9 +36,11 @@ export {
   UserCreate,
   UserDelete,
   UserUpdate,
+  UsersUpdate,
   SearchUser,
 
   Role,
   RoleCreate,
-  RoleDelete
+  RoleDelete,
+  SearchRole,
 };

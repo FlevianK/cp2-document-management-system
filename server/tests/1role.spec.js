@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
 describe('Roles', () => {
-let token= '';
+  let token= '';
   beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
     chai.request(app)
       .post('/api/users/login')
@@ -151,7 +151,7 @@ let token= '';
     });
   });
 
-    describe('/DELETE', () => {
+  describe('/DELETE', () => {
     it('should return a 401 response when deleting a default role', (done) => {
       chai.request(app)
         .delete('/api/roles/regular')

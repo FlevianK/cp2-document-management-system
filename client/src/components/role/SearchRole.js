@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import * as documentAction from '../../actions/documentAction';
+import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
-import { DocumentList, DocumentHeader } from '../../containers';
+import { RoleList } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 
-export class SearchDocument extends React.Component {
+export class SearchRole extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -18,46 +18,49 @@ export class SearchDocument extends React.Component {
       offset: 0
     };
     this.handlePageChange = this.handlePageChange.bind(this);
-    this.onDocumentChange = this.onDocumentChange.bind(this);
-    this.onDocumentClick = this.onDocumentClick.bind(this);
+    this.onRoleChange = this.onRoleChange.bind(this);
+    this.onRoleClick = this.onRoleClick.bind(this);
   }
 
-  onDocumentChange(event) {
+  onRoleChange(event) {
     return this.setState({ searchValue: event.target.value });
   }
 
   handlePageChange(pageNumber) {
     this.setState({ activePage: pageNumber });
-    this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
+    this.props.actions.searchRolesPage(this.state.searchValue, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
   }
 
-  onDocumentClick(event) {
+  onRoleClick(event) {
     event.preventDefault();
-    this.props.actions.searchDocumentsPage(this.state.searchValue, this.state.limit, this.state.offset);
-    this.props.actions.searchDocuments(this.state.searchValue);
+    this.props.actions.searchRolesPage(this.state.searchValue, this.state.limit, this.state.offset);
+    this.props.actions.searchRoles(this.state.searchValue);
   }
 
   render() {
-    const documentsSearch = this.props.documentsSearchPage;
-    const totalItems = this.props.documentsSearch;
+    const rolesSearch = this.props.rolesSearchPage;
+    const totalItems = this.props.rolesSearch;
     return (
       <div className="col-md-12">
         <DashboardHeader />
         <div className="row">
           <div className="col s6 offset-m3">
             <input
-              name="document"
+              name="role"
               label="Search"
               type="search"
-              onChange={this.onDocumentChange}
+              onChange={this.onRoleChange}
             />
           </div>
           <div >
-            <i className="material-icons" onClick={this.onDocumentClick} >search</i>
+            <i className="material-icons" onClick={this.onRoleClick} >search</i>
           </div>
-        </div> 
-        <DocumentList documents={documentsSearch} />
-        
+        </div>
+
+        {totalItems > 0
+          ? <RoleList roles={rolesSearch} />
+          : ''
+        }
         {totalItems > this.state.limit
           ? <Pagination
             style={{backgroundColor: "green", color: "white"}}
@@ -73,19 +76,19 @@ export class SearchDocument extends React.Component {
   }
 }
 
-SearchDocument.propTypes = {
-  documentsSearchPage: PropTypes.array.isRequired,
-  documentsSearch: PropTypes.number.isRequired,
+SearchRole.propTypes = {
+  rolesSearchPage: PropTypes.array.isRequired,
+  rolesSearch: PropTypes.number.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  documentsSearch: state.documentsSearch.length,
-  documentsSearchPage: state.documentsSearchPage
+  rolesSearch: state.rolesSearch.length,
+  rolesSearchPage: state.rolesSearchPage
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(documentAction, dispatch)
+  actions: bindActionCreators(roleAction, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchDocument);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchRole);

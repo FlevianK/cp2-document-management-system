@@ -7,12 +7,12 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
 describe('App', () => {
-    it('should return 403 status for access denial', (done) => {
-      chai.request(app)
-        .get('/api/users/login/l')
-        .end((err, res) => {
-          res.should.have.status(403);
-          done();
-        });
-    });
+  it('should return 403 status for access denial', (done) => {
+    chai.request(app)
+      .get('/api/users/login/l')
+      .end((err, res) => {
+        res.should.have.status(403);
+        done();
+      });
   });
+});

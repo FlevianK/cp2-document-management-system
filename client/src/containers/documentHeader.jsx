@@ -8,7 +8,7 @@ const DocumentHeader = ({ documents }) => {
   const role = token && jwtDecode(token);
   return (
     <div style={{ marginTop: '10px' }}>
-      <Link to="/documents/create" activeClassName="active">Add</Link>
+      <Link to="/documents/create" activeClassName="active"><i className="material-icons">add</i></Link>
       {" | "}
       <Link to="/documents" activeClassName="active">My Documents</Link>
       {" | "}

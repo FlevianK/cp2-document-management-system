@@ -9,7 +9,7 @@ chai.use(chaiHttp)
 //testing as an admin
 
 describe('Documents for admin test', () => {
-let token= '';
+  let token= '';
   beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {
     chai.request(app)
       .post('/api/users/login')
@@ -46,7 +46,7 @@ let token= '';
     });
   });
 
-describe('/GET/documents', () => {
+  describe('/GET/documents', () => {
     it('it should 404 response lists documents and non exist for role access type', (done) => {
       chai.request(app)
         .get('/api/roles/documents/')
@@ -95,7 +95,7 @@ describe('/GET/documents', () => {
     });
   });
 
-describe('/POST', () => {
+  describe('/POST', () => {
     it('should return a 403 response while some specified fields are empty', (done) => {
       chai.request(app)
         .post('/api/documents/')
@@ -114,7 +114,7 @@ describe('/POST', () => {
     });
   });
 
-describe('/GET/<id>', () => {
+  describe('/GET/<id>', () => {
     it('it should 400 fetching a document by wrong datatype id', (done) => {
       chai.request(app)
         .get('/api/documents/jmhnvbcc')
@@ -183,9 +183,7 @@ describe('/GET/<id>', () => {
     });
   });
 
-  
-
-describe('/PUT', () => {
+  describe('/PUT', () => {
     it('should return a 400 response when updating a document using a wrong document id type', (done) => {
       chai.request(app)
         .put('/api/documents/jmnbcvx')
@@ -275,7 +273,7 @@ describe('/PUT', () => {
     });
   });
 
-   describe('/GET/documents', () => {
+  describe('/GET/documents', () => {
     it('it should return 400 response when documents while paginate using wrong datatype input', (done) => {
       chai.request(app)
         .get('/api/documents/?limit=khjgjf&offset=jhgngcbx')
@@ -409,7 +407,7 @@ describe('/PUT', () => {
         });
     });
   });
-    describe('/api/users/:userId/documents', () => {
+  describe('/api/users/:userId/documents', () => {
     it('it should 404 response when retriving documents using user id that does not exist while paginating', (done) => {
       chai.request(app)
         .get('/api/users/90/documents?limit=4&offset=0')
@@ -452,7 +450,7 @@ describe('/PUT', () => {
     });
   });
   
-   describe('/GET/documents', () => {
+  describe('/GET/documents', () => {
     it('it should 200 response and data lists documents and atleast one exist for role access type', (done) => {
       chai.request(app)
         .get('/api/roles/documents/')
@@ -488,7 +486,7 @@ describe('/PUT', () => {
     });
   });
 
-   describe('/GET/documents', () => {
+  describe('/GET/documents', () => {
     it('it should return 400 response when documents while paginate using wrong datatype input for role access type', (done) => {
       chai.request(app)
         .get('/api/roles/documents/?limit=khjgjf&offset=jhgngcbx')

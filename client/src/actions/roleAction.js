@@ -1,4 +1,4 @@
-import { allRoles, roleCreate, roleDelete, allRolesPage } from '../api/roleApi';
+import { allRoles, roleCreate, roleDelete, allRolesPage, roleSearchPage, roleSearch } from '../api/roleApi';
 import * as types from '../constants/appConstants';
 import toastr from 'toastr';
 
@@ -64,4 +64,36 @@ export function deleteRole(deletedRole) {
 
 export function deleteroleSuccess(roles) {
   return { type: 'DELETE_ROLE_SUCCESS', roles };
+}
+
+export function searchRoles(searchValue) {
+  return function (dispatch) {
+    return roleSearch(searchValue)
+      .then((res) => {
+        dispatch(searchroleSuccess(res.data));
+      })
+      .catch((error) => {
+        toastr.error(error.response.data.message);
+      });
+  };
+}
+
+export function searchroleSuccess(rolesSearch) {
+  return { type: 'SEARCH_ROLE_SUCCESS', rolesSearch };
+}
+
+export function searchRolesPage(searchValue, limit, offset) {
+  return function (dispatch) {
+    return roleSearchPage(searchValue, limit, offset)
+      .then((res) => {
+        dispatch(searchrolepagesuccess(res.data));
+      })
+      .catch((error) => {
+        throw (error);
+      });
+  };
+}
+
+export function searchrolepagesuccess(rolesSearchPage) {
+  return { type: 'SEARCH_ROLE_PAGE_SUCCESS', rolesSearchPage };
 }

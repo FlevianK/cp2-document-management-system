@@ -8,15 +8,15 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     }
   }, {
-      classMethods: {
-        associate: (models) => {
-          // associations can be defined here
-          Role.hasMany(models.User, {
-            foreignKey: 'title',
-            as: 'user',
-          });
-        }
+    classMethods: {
+      associate: (models) => {
+        // associations can be defined here
+        Role.hasMany(models.User, {
+          foreignKey: 'title',
+          as: 'user',
+        });
       }
-    });
+    }
+  });
   return Role;
 };

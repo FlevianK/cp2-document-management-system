@@ -4,22 +4,21 @@ import PropTypes from 'prop-types';
 const Input = ({name, label, onChange, placeholder, value, type="text"}) => {
   let wrapperClass = 'form-group';
   return (
-
-        <div className="row">
-          <div className="col s6 offset-m3">
-    <div className={wrapperClass}>
-      <label htmlFor={name}>{label}</label>
-      <div className="field">
-        <input
-          type={type}
-          name={name}
-          className="form-control"
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}/>
+    <div className="row">
+      <div className="col s10 offset-m1">
+        <div className={wrapperClass}>
+          <label htmlFor={name}>{label}</label>
+          <div className="field">
+            <input
+              type={type}
+              name={name}
+              className="form-control"
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}/>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

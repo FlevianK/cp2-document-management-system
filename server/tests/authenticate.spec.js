@@ -34,7 +34,7 @@ describe('Authenticate', () => {
         })
         .end((err, res) => {
           res.should.have.status(200);
-           let token = res.body.token;
+          let token = res.body.token;
           done();
         });
     });
@@ -43,13 +43,13 @@ describe('Authenticate', () => {
 })
 let token = 88888;
 describe('/GET/documents/?q={}', () => {
-    it('it should 401 response when access routes that need authentications in order to get in', (done) => {
-      chai.request(app)
-        .get('/api/search/documents/?q=Too')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          res.should.have.status(401);
-          done();
-        });
-    });
+  it('it should 401 response when access routes that need authentications in order to get in', (done) => {
+    chai.request(app)
+      .get('/api/search/documents/?q=Too')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(401);
+        done();
+      });
   });
+});

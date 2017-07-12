@@ -34,3 +34,19 @@ export function roleDelete(deletedRole) {
     { headers: { 'x-access-token': token } }
   );
 }
+
+export function roleSearch(roleValue) {
+  const token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/search/roles/?q=${roleValue}`,
+    { headers: { 'x-access-token': token } }
+  );
+}
+
+export function roleSearchPage(roleValue, limit, offset) {
+  const token = localStorage.jwt;
+  return axios.get(
+    `${API_URL}/search/roles/?q=${roleValue}&limit=${limit}&offset=${offset}`,
+    { headers: { 'x-access-token': token } }
+  );
+}

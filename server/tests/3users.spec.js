@@ -8,8 +8,8 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp)
 
 describe('Users', () => {
-let token= '';
-beforeEach('it should return 200 response with a token when logging in with correct credecials', (done) => {
+  let token= '';
+  beforeEach('it should return 200 response with a token when logging in with correct credecials', (done) => {
     chai.request(app)
       .post('/api/users/login')
       .send({
@@ -231,7 +231,7 @@ beforeEach('it should return 200 response with a token when logging in with corr
         });
     });
   });
-describe('/GET/:id user', () => {
+  describe('/GET/:id user', () => {
     it('it should return 404 when fetching a non existing user by the given id', (done) => {
       chai.request(app)
         .get('/api/users/90')

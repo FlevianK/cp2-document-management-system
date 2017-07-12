@@ -14,7 +14,7 @@ export class SearchUser extends React.Component {
     this.state = {
       searchValue: '',
       activePage: 1,
-      limit: 4,
+      limit: 2,
       offset: 0
     };
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -44,28 +44,31 @@ export class SearchUser extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
-        <div className="col s4 offset-m4">
-
-          <input
-            name="user"
-            label="Search"
-            type="search"
-            onChange={this.onUserChange}
+        <div className="row">
+          <div className="col s6 offset-m3">
+            <input
+              name="user"
+              label="Search"
+              type="search"
+              onChange={this.onUserChange}
+            />
+          </div>
+          <div>
+            <i className="material-icons" onClick={this.onUserClick} >search</i>
+          </div>
+        </div>
+        <UserList users={usersSearch} />
+        
+        {totalItems > this.state.limit
+          ? <Pagination
+            style={{backgroundColor: "green", color: "white"}}
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={totalItems}
+            onChange={this.handlePageChange}
           />
-        </div>
-        <div className="col s4 ">
-          <i className="material-icons" onClick={this.onUserClick} >search</i>
-        </div>
-        {totalItems > 0
-          ? <UserList users={usersSearch} />
           : ''
         }
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={totalItems}
-          onChange={this.handlePageChange}
-        />
       </div >
     );
   }

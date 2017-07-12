@@ -18,7 +18,9 @@ import {
   RoleDelete,
   Documents,
   DocumentRole,
-  SearchUser
+  SearchUser,
+  UsersUpdate,
+  SearchRole,
 
 } from './components';
 
@@ -36,10 +38,12 @@ export default (
     <Route path="/users" component={User} />
     <Route path="/users/create" component={UserCreate} />
     <Route path="/users/delete/:userId" component={UserDelete} />
-    <Route path="/users/update/:userId" component={UserUpdate} />
+    <Route path="/users/profile" component={UserUpdate} />
+    <Route path="/users/update/:userId" component={UsersUpdate} />
     <Route path="/users/search" component={SearchUser} />
     <Route path="/roles" component={Role} />
     <Route path="/roles/create" component={RoleCreate} />
     <Route path="/roles/delete/:roleTitle" component={RoleDelete} />
+    <Route path="/roles/search" component={SearchRole} />
   </Route>
 );

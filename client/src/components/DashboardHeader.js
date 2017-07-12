@@ -19,31 +19,37 @@ export class DashboardHeader extends React.Component {
 
   render() {
     return (
-      <nav>
-        {this.props.userRole && this.props.userRole === 'admin'
-          ? <Link to="/roles" activeClassName="active">Roles</Link>
-          : ''
-        }
-        {this.props.userRole && this.props.userRole === 'admin'
-          ? ' | '
-          : ''
-        }
-        {this.props.userRole && this.props.userRole === 'admin'
-          ? <Link to="/users" activeClassName="active">Users</Link>
-          : ''
-        }
-        {this.props.userRole && this.props.userRole === 'admin'
-          ? ' | '
-          : ''
-        }
-        <Link to="/documents" activeClassName="active">Documents</Link>
-        {'|'}
-        <Link to="/users/search" activeClassName="active">User search</Link>
-        {'|'}
-        <Link to="/documents/search" activeClassName="active">Document search</Link>
-        {' | '}
-        <Link to="#" activeClassName="active" onClick={this.onLogoutClick}>Logout</Link>
-      </nav>
+      <div>
+        <nav style={{backgroundColor: "green", color: "white"}}>
+          {this.props.userRole && this.props.userRole === 'admin'
+            ? <Link to="/roles" activeClassName="active">Roles</Link>
+            : ''
+          }
+          {this.props.userRole && this.props.userRole === 'admin'
+            ? ' | '
+            : ''
+          }
+          {this.props.userRole && this.props.userRole === 'admin'
+            ? <Link to="/users" activeClassName="active">Users</Link>
+            : ''
+          }
+          {this.props.userRole && this.props.userRole === 'admin'
+            ? ' | '
+            : ''
+          }
+          <Link to="/documents" activeClassName="active">My Documents</Link>
+          {'|'}
+          <Link to="/roles/search" activeClassName="active">Role search</Link>
+          {'|'}
+          <Link to="/users/search" activeClassName="active">User search</Link>
+          {'|'}
+          <Link to="/documents/search" activeClassName="active">Document search</Link>
+          {' | '}
+          <Link to="/users/profile" activeClassName="active">Edit profile</Link>
+          {' | '}
+          <Link to="#" activeClassName="active" onClick={this.onLogoutClick}>Logout</Link>
+        </nav>
+      </div>
     );
   }
 }

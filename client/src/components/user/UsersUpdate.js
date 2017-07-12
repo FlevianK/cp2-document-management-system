@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import jwtDecode from 'jwt-decode';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import Dialog from 'material-ui/Dialog';
@@ -11,16 +12,15 @@ import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
-import toastr from 'toastr';
 
-export class UserUpdate extends React.Component {
+export class UsersUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       users: {
-        userId: this.props.loginUser.userId
+        userId: this.props.params.userId
       },
-      open: true
+      open: true,
     };
     this.onUserUpdate = this.onUserUpdate.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
@@ -28,7 +28,8 @@ export class UserUpdate extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadUser(this.props.loginUser);
+    this.props.actions.loadUser(this.props.params);
+    this.props.action.loadRoles();
   }
 
   onUserChange(event) {
@@ -39,22 +40,19 @@ export class UserUpdate extends React.Component {
     return this.setState({ users });
   }
 
+
   onUserUpdate(event) {
     event.preventDefault();
+    this.setState({ open: false });
     this.props.actions.updateUser(this.state.users)
-      .then(() => {
-        this.setState({ open: false });
-        browserHistory.push('/documents');
-      })
-      .catch((error) => {
-        toastr.error(error.response.data.message);
-      });
+      .then(() => browserHistory.push('/users'));
   }
 
   handleClose() {
     this.setState({ open: false });
-    browserHistory.push('/documents');
+    browserHistory.push('/users');
   }
+
   render() {
     const actions = [
       <FlatButton
@@ -81,71 +79,55 @@ export class UserUpdate extends React.Component {
               open={this.state.open}
               onRequestClose={this.handleClose}
             >
+              <div className="row">
+                <div className="col s10 offset-m1">
+                  <p>UserName: {this.props.users.username}</p>
+                  <p>Name: {this.props.users.firstName} {this.props.users.lastName}</p>
+                  <p>email: {this.props.users.email}</p>
+                  <p>User role: {this.props.users.title}</p>
+                </div>
+              </div>
               <form>
-                <Input
-                  name="username"
-                  label="Username"
-                  type="text"
-                  placeholder={this.props.users.username}
-                  onChange={this.onUserChange}
-                />
-
-                <Input
-                  name="firstName"
-                  label="First name"
-                  placeholder={this.props.users.firstName}
-                  type="text"
-                  onChange={this.onUserChange}
-                />
-
-                <Input
-                  name="lastName"
-                  label="Last name"
-                  placeholder={this.props.users.lastName}
-                  type="text"
-                  onChange={this.onUserChange}
-                />
-
-                <Input
-                  name="email"
-                  label="Email address"
-                  placeholder={this.props.users.email}
-                  type="text"
-                  onChange={this.onUserChange}
-                />
-
-                <Input
-                  name="password"
-                  label="Password"
-                  type="text"
-                  placeholder={this.props.users.password}
+                <SelectOptions
+                  options={this.props.roles}
+                  name="title"
+                  label="Title"
+                  defaultOption="Select role"
+                  value={this.props.users.title}
                   onChange={this.onUserChange}
                 />
               </form>
             </Dialog>
           </MuiThemeProvider>
         </div>
-      </div >
+      </div>
     );
   }
 }
 
-UserUpdate.propTypes = {
+UsersUpdate.propTypes = {
   users: PropTypes.object.isRequired,
+  role: PropTypes.object.isRequired,
+  roles: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  loginUser: PropTypes.object,
-  params: PropTypes.object
+  params: PropTypes.object.isRequired,
+  action: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const roleDropdownData = state.roles.map(role => ({
+    value: role.title,
+    text: role.title
+  }));
   return {
     users: state.users,
-    loginUser: state.loginUser
+    roles: roleDropdownData
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(userAction, dispatch)
+  actions: bindActionCreators(userAction, dispatch),
+  action: bindActionCreators(roleAction, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersUpdate);

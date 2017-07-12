@@ -1,14 +1,36 @@
 {
-    "/roles(/*)?": {
-        "get": ["admin"],
-        "post": ["admin"],
-        "delete": ["admin"]
-    },
-    "/users(/*)?": {
-        "get": ["admin"],
-        "delete": ["admin"]
-    },
-    "/search/users(/*)?":{
-        "get": ["admin"]
-    }
+  "/roles(/*)?": {
+    "get": [
+      "admin"
+    ],
+    "post": [
+      "admin"
+    ],
+    "delete": [
+      "admin"
+    ],
+    "put": [
+      "admin"
+    ]
+  },
+  "/search/roles(/*)?": {
+    "get": [
+      "admin"
+    ]
+  },
+  "/users": {
+    "get": [
+      "admin"
+    ]
+  },
+  "/users(/*)?": {
+    "delete": [
+      "admin"
+    ]
+  },
+  "/search/users(/*)?": {
+    "get": [
+      "admin"
+    ]
+  }
 }

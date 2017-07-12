@@ -57,7 +57,7 @@ export function updateUser(updatedUser) {
         dispatch(updateuserSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw(error);
       });
   };
 }

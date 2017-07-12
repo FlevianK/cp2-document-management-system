@@ -14,6 +14,8 @@ import usersSearch from './userSearchReducer';
 import usersSearchPage from './userSearchPageReducer';
 import roles from './roleReducer';
 import rolesPage from './rolePageReducer';
+import rolesSearch from './roleSearchReducer';
+import rolesSearchPage from './roleSearchPageReducer';
 import * as types from '../constants/appConstants';
 import initialState from './initialState';
 import failureMessage from './failureMessageReducer';
@@ -35,7 +37,9 @@ const rootReducer = combineReducers({
   failureMessage,
   documentsPage,
   usersSearchPage,
-  usersSearch
+  usersSearch,
+  rolesSearch,
+  rolesSearchPage
 });
 
 export default rootReducer;

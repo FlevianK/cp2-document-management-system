@@ -51,21 +51,65 @@ module.exports = {
     } else if (req.params.roleId == 'regular') {
       return res.status(401).send({
         message: 'Can not delete default role',
-      })
+      });
     }
     return Role
-        .findById(req.params.roleId)
+      .findById(req.params.roleId)
+      .then(role => {
+        if (!role) {
+          return res.status(404).send({
+            message: 'Role Not Found',
+          });
+        }
+        return role
+          .destroy()
+          .then(() => res.status(204).send())
+          .catch(error => res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
+  },
+
+  searchRole(req, res) {
+    if (req.query.q) {
+      if (req.query.limit || req.query.offset) {
+        return Role
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+            where: {
+              $or: [
+                { title: { $iLike: `%${req.query.q}%` } },
+              ]
+            }
+          })
+          .then(role => {
+            if (!role || role.length < 1) {
+              return res.status(404).send({
+                message: 'Role Not Found',
+              });
+            }
+            return res.status(200).send(role);
+          })
+          .catch(error => res.status(400).send(error));
+      }
+      return Role
+        .findAll({
+          where: {
+            $or: [
+              { title: { $iLike: `%${req.query.q}%` } },
+            ]
+          }
+        })
         .then(role => {
-          if (!role) {
+          if (!role || role.length < 1) {
             return res.status(404).send({
               message: 'Role Not Found',
             });
           }
-          return role
-            .destroy()
-            .then(() => res.status(204).send())
-            .catch(error => res.status(400).send(error));
+          return res.status(200).send(role);
         })
         .catch(error => res.status(400).send(error));
     }
-  };
+  }
+
+};

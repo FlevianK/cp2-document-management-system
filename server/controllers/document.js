@@ -17,8 +17,8 @@ module.exports = {
         userId: req.decoded.userId,
       })
       .then(() => res.status(201).send({
-             message: 'Created successful',
-          }))
+        message: 'Created successful',
+      }))
       .catch(error => res.status(400).send(error));
   },
 
@@ -59,7 +59,6 @@ module.exports = {
             limit: req.query.limit,
             where: {
               access: 'public' || req.decoded.userRole
-
             }
           })
           .then(document => {
@@ -91,17 +90,17 @@ module.exports = {
   },
 
   retrieve(req, res) {
-      return Document
-        .findById(req.params.documentId)
-        .then(document => {
-          if (!document || document.length < 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-        .catch(error => res.status(400).send(error));
+    return Document
+      .findById(req.params.documentId)
+      .then(document => {
+        if (!document || document.length < 1) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        return res.status(200).send(document);
+      })
+      .catch(error => res.status(400).send(error));
   },
 
   update(req, res) {
@@ -161,7 +160,7 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
-             where: {
+            where: {
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
                 { content: { $iLike: `%${req.query.q}%` } },
@@ -178,26 +177,26 @@ module.exports = {
           })
           .catch(error => res.status(400).send(error));
       } else {
-      if (req.query.q) {
-        return Document
-          .findAll({
-            where: {
-              $or: [
-                { title: { $iLike: `%${req.query.q}%` } },
-                { content: { $iLike: `%${req.query.q}%` } },
-              ]
-            }
-          })
-          .then(document => {
-          if (!document || document.length < 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-          .catch(error => res.status(400).send(error));
-      }
+        if (req.query.q) {
+          return Document
+            .findAll({
+              where: {
+                $or: [
+                  { title: { $iLike: `%${req.query.q}%` } },
+                  { content: { $iLike: `%${req.query.q}%` } },
+                ]
+              }
+            })
+            .then(document => {
+              if (!document || document.length < 1) {
+                return res.status(404).send({
+                  message: 'Document Not Found',
+                });
+              }
+              return res.status(200).send(document);
+            })
+            .catch(error => res.status(400).send(error));
+        }
       }
     } else {
       if (req.query.limit || req.query.offset) {
@@ -205,7 +204,7 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
-             where: {
+            where: {
               access: 'public' || req.decoded.userRole,
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
@@ -235,29 +234,6 @@ module.exports = {
             }
           })
           .then(document => {
-          if (!document || document.length < 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-          .catch(error => res.status(400).send(error));
-      }
-    }
-  },
-
-  userDocs(req, res) {
-      if (req.query.limit || req.query.offset) {
-        return Document
-          .findAll({
-            offset: req.query.offset,
-            limit: req.query.limit,
-             where: {
-              userId: req.params.userId
-            }
-          })
-          .then(document => {
             if (!document || document.length < 1) {
               return res.status(404).send({
                 message: 'Document Not Found',
@@ -267,6 +243,29 @@ module.exports = {
           })
           .catch(error => res.status(400).send(error));
       }
+    }
+  },
+
+  userDocs(req, res) {
+    if (req.query.limit || req.query.offset) {
+      return Document
+        .findAll({
+          offset: req.query.offset,
+          limit: req.query.limit,
+          where: {
+            userId: req.params.userId
+          }
+        })
+        .then(document => {
+          if (!document || document.length < 1) {
+            return res.status(404).send({
+              message: 'Document Not Found',
+            });
+          }
+          return res.status(200).send(document);
+        })
+        .catch(error => res.status(400).send(error));
+    }
     return Document
       .findAll({
         where: {
@@ -284,33 +283,17 @@ module.exports = {
       .catch((error) => {
         res.status(400).send(error)
       });
-},
+  },
 
-roleDocs(req, res) {
-      if (req.query.limit || req.query.offset) {
-        return Document
-          .findAll({
-            offset: req.query.offset,
-            limit: req.query.limit,
-             where: {
-              access: req.decoded.userRole
-            }
-          })
-          .then(document => {
-            if (!document || document.length < 1) {
-              return res.status(404).send({
-                message: 'Document Not Found',
-              });
-            }
-            return res.status(200).send(document);
-          })
-          .catch(error => res.status(400).send(error));
-      }
+  roleDocs(req, res) {
+    if (req.query.limit || req.query.offset) {
       return Document
         .findAll({
-           where: {
-              access: req.decoded.userRole
-            }
+          offset: req.query.offset,
+          limit: req.query.limit,
+          where: {
+            access: req.decoded.userRole
+          }
         })
         .then(document => {
           if (!document || document.length < 1) {
@@ -322,4 +305,20 @@ roleDocs(req, res) {
         })
         .catch(error => res.status(400).send(error));
     }
+    return Document
+      .findAll({
+        where: {
+          access: req.decoded.userRole
+        }
+      })
+      .then(document => {
+        if (!document || document.length < 1) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        return res.status(200).send(document);
+      })
+      .catch(error => res.status(400).send(error));
   }
+}

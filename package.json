@@ -73,6 +73,7 @@
     "jwt-decode": "^2.2.0",
     "localStorage": "^1.0.3",
     "lodash._baseassign": "^3.2.0",
+    "material-ui": "^0.18.6",
     "materialize-css": "^0.98.2",
     "mocha": "^3.4.2",
     "nock": "^9.0.13",

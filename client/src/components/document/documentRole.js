@@ -37,16 +37,18 @@ export class DocumentRole extends React.Component {
       <div>
         <DashboardHeader />
         <DocumentHeader />
-        {totalItems > 0
-          ? <DocumentsList documents={roleDocuments} />
-          : 'No role document'
+        <DocumentsList documents={roleDocuments} />
+        
+        {totalItems > this.state.limit
+          ? <Pagination
+            style={{backgroundColor: "green", color: "white"}}
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={totalItems}
+            onChange={this.handlePageChange}
+          />
+          : ''
         }
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={totalItems}
-          onChange={this.handlePageChange}
-        />
       </div>
     );
   }

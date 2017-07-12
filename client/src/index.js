@@ -4,6 +4,7 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import initialState from './reducers/initialState';
 import '../../node_modules/materialize-css/dist/css/materialize.min.css';
+import '../../node_modules/materialize-css/dist/js/materialize.min';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
@@ -33,7 +34,9 @@ import {
   searchUsersPage,
   searchDocumentsPage,
   loadRolesPage,
-  logoutUser
+  logoutUser,
+  searchRoles,
+  searchRolesPage
 } from './actions';
 
 const store = configureStore();
