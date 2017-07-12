@@ -31,9 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 require('./server/routes/route')(app);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, './client/dist/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/index.html'));
+});
 
 app.listen(port);
 module.exports = app;

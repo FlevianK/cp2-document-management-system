@@ -11,6 +11,7 @@ module.exports = {
   entry: './client/src/index.js',
   output: {
     path: path.resolve('dist'),
+    publicPath: "/",
     filename: 'index_bundle.js'
   },
   module: {
@@ -23,6 +24,7 @@ module.exports = {
   },
   plugins: [HtmlWebpackPluginConfig],
   devServer: {
+    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'http://localhost:8000/',
