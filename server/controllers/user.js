@@ -44,6 +44,7 @@ module.exports = {
         .findAll({
           offset: req.query.offset,
           limit: req.query.limit,
+          attributes: { exclude: ['password'] }
         })
         .then(user => {
           if (!user || user.length < 1) {
@@ -63,7 +64,8 @@ module.exports = {
 
   retrieve(req, res) {
     return User
-      .findById(req.params.userId)
+      .findById(
+        req.params.userId)
       .then(user => {
         if (!user || user.length < 1) {
           return res.status(404).send({

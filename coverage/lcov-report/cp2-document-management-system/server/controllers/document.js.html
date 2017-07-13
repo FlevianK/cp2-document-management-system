@@ -366,7 +366,23 @@
 321
 322
 323
-324</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -399,8 +415,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -422,6 +442,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -536,6 +559,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -569,6 +595,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -656,6 +685,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -719,7 +751,10 @@ module.exports = {
         return Document
           .findAll({
             offset: req.query.offset,
-            limit: req.query.limit
+            limit: req.query.limit,
+            include: [{
+              model: User
+            }]
           })
           .then(document =&gt; {
             if (!document || document.length &lt; 1) {
@@ -727,6 +762,7 @@ module.exports = {
                 message: 'Document Not Found',
               });
             }
+&nbsp;
             return res.status(200).send(document);
           })
           .catch(error =&gt; res.status(400).send(error));
@@ -748,6 +784,9 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
+            include: [{
+              model: User
+            }],
             where: {
               access: 'public' || <span class="branch-1 cbranch-no" title="branch not covered" >req.decoded.userRole</span>
             }
@@ -851,6 +890,9 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
+            include: [{
+              model: User
+            }],
             where: {
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
@@ -895,6 +937,9 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
+            include: [{
+              model: User
+            }],
             where: {
               access: 'public' || <span class="branch-1 cbranch-no" title="branch not covered" >req.decoded.userRole,</span>
               $or: [
@@ -984,7 +1029,10 @@ module.exports = {
           limit: req.query.limit,
           where: {
             access: req.decoded.userRole
-          }
+          },
+          include: [{
+            model: User
+          }]
         })
         .then(document =&gt; {
           if (!document || document.length &lt; 1) {
@@ -1018,7 +1066,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 10:02:45 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 13:59:14 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

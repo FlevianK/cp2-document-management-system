@@ -32,6 +32,7 @@ export class Documents extends React.Component {
   }
   render() {
     const allDocuments = this.props.allDocumentsPage;
+    console.log(allDocuments)
     const totalItems = this.props.allDocuments;
     return (
       <div>

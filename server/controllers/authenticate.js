@@ -2,12 +2,16 @@ const User = require('../models').User;
 const Role = require('../models').Role;
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const bcrypt = require('bcryptjs');
-const secret = 'HAHAHAHAHAHAHAHAhahahaahah>>>><<<<<<<<<<<<<<<<<<<<<<<<<<n jgfh g vgjkjvhkjfdkvjfdvjdfjgvjvjf';
+const secret = process.env.secret;
+
 
 module.exports = {
+  
   login(req, res) {
+    console.log("ljhkgf", secret);
     const emailRegex = /\S+@\S+\.\S+/;
     const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+    console.log('fffff',req.body);
     if (!req.body.email) {
       return res.status(403).send({ // forbidden request
         message: 'Email is required',
@@ -57,7 +61,7 @@ module.exports = {
 
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send(console.log(error)));
   },
 
   verifyLogin(req, res, next) {

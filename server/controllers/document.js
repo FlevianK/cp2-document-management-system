@@ -28,7 +28,10 @@ module.exports = {
         return Document
           .findAll({
             offset: req.query.offset,
-            limit: req.query.limit
+            limit: req.query.limit,
+            include: [{
+              model: User
+            }]
           })
           .then(document => {
             if (!document || document.length < 1) {
@@ -36,6 +39,7 @@ module.exports = {
                 message: 'Document Not Found',
               });
             }
+
             return res.status(200).send(document);
           })
           .catch(error => res.status(400).send(error));
@@ -57,6 +61,9 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
+            include: [{
+              model: User
+            }],
             where: {
               access: 'public' || req.decoded.userRole
             }
@@ -160,6 +167,9 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
+            include: [{
+              model: User
+            }],
             where: {
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
@@ -204,6 +214,9 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
+            include: [{
+              model: User
+            }],
             where: {
               access: 'public' || req.decoded.userRole,
               $or: [
@@ -293,7 +306,10 @@ module.exports = {
           limit: req.query.limit,
           where: {
             access: req.decoded.userRole
-          }
+          },
+          include: [{
+            model: User
+          }]
         })
         .then(document => {
           if (!document || document.length < 1) {

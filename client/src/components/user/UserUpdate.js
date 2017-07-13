@@ -17,7 +17,7 @@ export class UserUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {
+      users: {
         userId: localStorage.userId
       },
       open: true
@@ -28,7 +28,7 @@ export class UserUpdate extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadUser(this.state.user);
+    this.props.actions.loadUser(this.state.users);
   }
 
   onUserChange(event) {
