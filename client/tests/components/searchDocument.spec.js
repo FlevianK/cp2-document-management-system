@@ -14,7 +14,7 @@ describe('Search document component', () => {
 
   it('renders doc div', () => {
     const wrapper = shallow(<SearchDocument {...props} />);
-    expect(wrapper.find('div').length).toBe(3);
+    expect(wrapper.find('div').length).toBe(4);
   }),
 
   it('renders input component', () => {

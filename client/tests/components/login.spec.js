@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 describe('Login component', () => {
   it('renders div', () => {
     const wrapper = shallow(<Login />);
-    expect(wrapper.find('div').length).toBe(8);
+    expect(wrapper.find('div').length).toBe(7);
   });
   it('renders input', () => {
     const wrapper = shallow(<Login />);

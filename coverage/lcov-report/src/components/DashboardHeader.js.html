@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">52.94% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/17</span>
+        <span class='fraction'>8/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">60% </span>
+        <span class="strong">53.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/15</span>
+        <span class='fraction'>8/15</span>
       </div>
     </div>
   </div>
@@ -104,11 +104,7 @@
 59
 60
 61
-62
-63
-64
-65
-66</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+62</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -128,6 +124,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,11 +151,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,50 +185,46 @@ export class DashboardHeader extends React.Component {
   }
 &nbsp;
   render() {
+    c</span>onst userRole = <span class="cstat-no" title="statement not covered" >localStorage.getItem('userRole');
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;nav&gt;
-        {this.props.userRole &amp;&amp; this.props.userRole === 'admin'
-          ? &lt;Link to="/roles" activeClassName="active"&gt;Roles&lt;/Link&gt;
-          : ''
-        }
-        {this.props.userRole &amp;&amp; this.props.userRole === 'admin'
-          ? ' | '
-          : ''
-        }
-        {this.props.userRole &amp;&amp; this.props.userRole === 'admin'
-          ? &lt;Link to="/users" activeClassName="active"&gt;Users&lt;/Link&gt;
-          : ''
-        }
-        {this.props.userRole &amp;&amp; this.props.userRole === 'admin'
-          ? ' | '
-          : ''
-        }
-        &lt;Link to="/documents" activeClassName="active"&gt;Documents&lt;/Link&gt;
-        {'|'}
-        &lt;Link to="/users/search" activeClassName="active"&gt;User search&lt;/Link&gt;
-        {'|'}
-        &lt;Link to="/documents/search" activeClassName="active"&gt;Document search&lt;/Link&gt;
-        {' | '}
-        &lt;Link to="#" activeClassName="active" onClick={this.onLogoutClick}&gt;Logout&lt;/Link&gt;
-      &lt;/nav&gt;
+      &lt;div&gt;
+        &lt;nav style={{backgroundColor: "green", color: "white"}}&gt;
+          {userRole &amp;&amp; userRole === 'admin'
+            ? &lt;Link to="/roles" activeClassName="active"&gt;Roles&lt;/Link&gt;
+            : ''
+          }
+          {userRole &amp;&amp; userRole === 'admin'
+            ? ' | '
+            : ''
+          }
+          {userRole &amp;&amp; userRole === 'admin'
+            ? &lt;Link to="/users" activeClassName="active"&gt;Users&lt;/Link&gt;
+            : ''
+          }
+          {userRole &amp;&amp; userRole === 'admin'
+            ? ' | '
+            : ''
+          }
+          &lt;Link to="/documents" activeClassName="active"&gt;My Documents&lt;/Link&gt;
+          {' | '}
+          &lt;Link to="/users/profile" activeClassName="active"&gt;Edit profile&lt;/Link&gt;
+          {' | '}
+          &lt;Link to="#" activeClassName="active" onClick={this.onLogoutClick}&gt;Logout&lt;/Link&gt;
+        &lt;/nav&gt;
+      &lt;/div&gt;
     );
   }
 }
 &nbsp;
 DashboardHeader.propTypes = {
-  userRole: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired
 };
-&nbsp;
-const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state, ownProps) =&gt; ({</span>
-  userRole: state.loginUser.userRole,
-});
 &nbsp;
 const <span class="fstat-no" title="function not covered" >mapDispatchToProps = <span class="cstat-no" title="statement not covered" >d</span>ispatch =&gt; ({</span>
   actions: bindActionCreators(loginAction, dispatch)
 });
 &nbsp;
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardHeader);
+export default connect(null, mapDispatchToProps)(DashboardHeader);
 &nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -244,7 +232,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DashboardHeader);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 10:57:17 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

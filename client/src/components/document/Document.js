@@ -15,7 +15,6 @@ export class Document extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      
       deleteDocument: {
         documentId: ''
       },
@@ -32,13 +31,13 @@ export class Document extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadDoc(this.props.userId);
-    this.props.actions.loadDocList(this.props.userId, this.state.limit, this.state.offset);
+    this.props.actions.loadDoc();
+    this.props.actions.loadDocList(this.state.limit, this.state.offset);
   }
 
   handlePageChange(pageNumber) {
     this.setState({ activePage: pageNumber });
-    this.props.actions.loadDocList(this.props.userId, this.state.limit, (this.state.limit * (this.state.activePage - 1)));
+    this.props.actions.loadDocList(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
   }
 
   render() {
@@ -67,13 +66,11 @@ export class Document extends React.Component {
 
 Document.propTypes = {
   documents: PropTypes.number,
-  userId: PropTypes.number,
   documentsPage: PropTypes.array,
   actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  userId: state.loginUser.userId,
   documents: state.documents.length,
   documentsPage: state.documentsPage
 });

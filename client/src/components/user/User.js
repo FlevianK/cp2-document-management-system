@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { UserList } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
-import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
+import { UserList, UserHeader } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
+import * as userAction from '../../actions/userAction';
 
 
 export class User extends React.Component {
@@ -42,6 +42,7 @@ export class User extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
+        <UserHeader />
         <UserList users={users} />
         
         {totalItems > this.state.limit

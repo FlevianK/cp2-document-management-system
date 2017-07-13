@@ -7,6 +7,8 @@ export const loginUser = (user) => {
     return login(user)
       .then((res) => {
         localStorage.setItem('jwt', res.data.token);
+        localStorage.setItem('userId', res.data.userId);
+        localStorage.setItem('userRole', res.data.userRole);
         dispatch(loginUserSuccess(res.data));
       })
       .catch((error) => {
@@ -22,6 +24,7 @@ export const loginUserSuccess = (loginUser) => {
 export function logoutUser() {
   return function (dispatch) {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('userId');
     dispatch(logoutUserSuccess());
   };
 }

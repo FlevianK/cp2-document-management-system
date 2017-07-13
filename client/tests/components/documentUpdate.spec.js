@@ -15,11 +15,7 @@ describe('Update document component', () => {
 
   it('renders div', () => {
     const wrapper = shallow(<DocumentUpdate {...props} />);
-    expect(wrapper.find('div').length).toBe(1);
-  });
-  it('renders input', () => {
-    const wrapper = shallow(<DocumentUpdate {...props} />);
-    expect(wrapper.find('input').length).toBe(1);
+    expect(wrapper.find('div').length).toBe(4);
   });
   it('renders Input', () => {
     const wrapper = shallow(<DocumentUpdate {...props} />);
@@ -28,13 +24,5 @@ describe('Update document component', () => {
   it('renders form', () => {
     const wrapper = shallow(<DocumentUpdate {...props} />);
     expect(wrapper.find('form').length).toBe(1);
-  });
-  it('renders doc submit button', () => {
-    const wrapper = shallow(<DocumentUpdate {...props} />);
-    const submit = wrapper.find('input').last();
-    expect(submit.prop('type')).toBe('submit');
-    submit.simulate('click', {
-      preventDefault: () => {}
-    });
   });
 });

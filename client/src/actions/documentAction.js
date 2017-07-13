@@ -134,9 +134,9 @@ export function loaddocumentSuccess(documents) {
   return { type: 'LOAD_DOCUMENT_SUCCESS', documents };
 }
 
-export function loadDoc(doc) { // all user documents
+export function loadDoc() { // all user documents
   return function (dispatch) {
-    return allDoc(doc)
+    return allDoc()
       .then((res) => {
         dispatch(loaddocSuccess(res.data));
       })
@@ -150,9 +150,9 @@ export function loaddocSuccess(documents) {
   return { type: 'LOAD_DOC_SUCCESS', documents };
 }
 
-export function loadDocList(doc, limit, offset) { // all user documents by page
+export function loadDocList(limit, offset) { // all user documents by page
   return function (dispatch) {
-    return allDocList(doc, limit, offset)
+    return allDocList(limit, offset)
       .then((res) => {
         dispatch(loaddoclistSuccess(res.data));
       })

@@ -27,14 +27,12 @@ describe('Users', () => {
     it('should return a 201 response creating a user successfuly', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('x-access-token', token)
         .send({
           username: "v",
           firstName: "r",
           lastName: "Kaa",
           email: "regular@gmail.com",
-          password: "regular",
-          title: "regular"
+          password: "regularW6t3@"
         })
         .end((err, res) => {
           res.should.have.status(201);
@@ -44,14 +42,12 @@ describe('Users', () => {
     it('should return a 201 response creating a user successfuly', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('x-access-token', token)
         .send({
           username: "vu",
           firstName: "ru",
           lastName: "Kaau",
           email: "flu@gmail.com",
-          password: "flev",
-          title: "regular"
+          password: "flev@R2j"
         })
         .end((err, res) => {
           res.should.have.status(201);
@@ -61,17 +57,33 @@ describe('Users', () => {
   });
 
   describe('/POST', () => {
-    it('should return a 400 creating using field name that does not exist in the DB', (done) => {
+    it('should return a 201 response creating a user successfuly', (done) => {
       chai.request(app)
         .post('/api/users/')
-        .set('x-access-token', token)
+        .send({
+          username: "vu",
+          firstName: "FAITH",
+          lastName: "Kaau",
+          email: "FAITH@gmail.com",
+          password: "flev@R2j"
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+  });
+
+  describe('/POST', () => {
+    it('should return a 400 with an email that exists in DB', (done) => {
+      chai.request(app)
+        .post('/api/users/')
         .send({
           username: "v",
           firstName: "r",
           lastName: "Kaa",
-          email: "fl@gmail.com",
-          password: "flev",
-          t: "regular"
+          email: "FAITH@gmail.com",
+          password: "flev2@gmRT"
         })
         .end((err, res) => {
           res.should.have.status(400);
@@ -88,8 +100,43 @@ describe('Users', () => {
           firstName: "Day",
           email: "",
           password: "",
-          lastName:"",
-          title:""
+          lastName:""
+        })
+        .end((err, res) => {
+          res.should.have.status(403);
+          done();
+        });
+    });
+  });
+
+  describe('/POST', () => {
+    it('should return a 403 response when registering with a wrong email formart', (done) => {
+      chai.request(app)
+        .post('/api/users/')
+        .send({
+          username: "TQuebeq",
+          firstName: "Day",
+          email: "gap",
+          password: "gap",
+          lastName:"gap",
+        })
+        .end((err, res) => {
+          res.should.have.status(403);
+          done();
+        });
+    });
+  });
+
+  describe('/POST', () => {
+    it('should return a 403 response when registering with a password that does not match pattern given', (done) => {
+      chai.request(app)
+        .post('/api/users/')
+        .send({
+          username: "TQuebeq",
+          firstName: "Day",
+          email: "gap@gmail.com",
+          password: "gap",
+          lastName:"gap",
         })
         .end((err, res) => {
           res.should.have.status(403);

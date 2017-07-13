@@ -21,7 +21,6 @@ import {
   SearchUser,
   UsersUpdate,
   SearchRole,
-
 } from './components';
 
 export default (

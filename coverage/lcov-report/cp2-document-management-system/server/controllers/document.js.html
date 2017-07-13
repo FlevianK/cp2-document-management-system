@@ -366,8 +366,7 @@
 321
 322
 323
-324
-325</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+324</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -423,7 +422,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -710,8 +708,8 @@ module.exports = {
         userId: req.decoded.userId,
       })
       .then(() =&gt; res.status(201).send({
-             message: 'Created successful',
-          }))
+        message: 'Created successful',
+      }))
       .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
   },
 &nbsp;
@@ -752,7 +750,6 @@ module.exports = {
             limit: req.query.limit,
             where: {
               access: 'public' || <span class="branch-1 cbranch-no" title="branch not covered" >req.decoded.userRole</span>
-&nbsp;
             }
           })
           .then(document =&gt; {
@@ -784,17 +781,17 @@ module.exports = {
   },
 &nbsp;
   retrieve(req, res) {
-      return Document
-        .findById(req.params.documentId)
-        .then(document =&gt; {
-          if (!document || document.length &lt; 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-        .catch(error =&gt; res.status(400).send(error));
+    return Document
+      .findById(req.params.documentId)
+      .then(document =&gt; {
+        if (!document || document.length &lt; 1) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        return res.status(200).send(document);
+      })
+      .catch(error =&gt; res.status(400).send(error));
   },
 &nbsp;
   update(req, res) {
@@ -854,7 +851,7 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
-             where: {
+            where: {
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
                 { content: { $iLike: `%${req.query.q}%` } },
@@ -871,26 +868,26 @@ module.exports = {
           })
           .catch(error =&gt; res.status(400).send(error));
       } else {
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (req.query.q) {
-        return Document
-          .findAll({
-            where: {
-              $or: [
-                { title: { $iLike: `%${req.query.q}%` } },
-                { content: { $iLike: `%${req.query.q}%` } },
-              ]
-            }
-          })
-          .then(document =&gt; {
-          if (!document || document.length &lt; 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-          .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
-      }
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (req.query.q) {
+          return Document
+            .findAll({
+              where: {
+                $or: [
+                  { title: { $iLike: `%${req.query.q}%` } },
+                  { content: { $iLike: `%${req.query.q}%` } },
+                ]
+              }
+            })
+            .then(document =&gt; {
+              if (!document || document.length &lt; 1) {
+                return res.status(404).send({
+                  message: 'Document Not Found',
+                });
+              }
+              return res.status(200).send(document);
+            })
+            .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
+        }
       }
     } else {
       if (req.query.limit || req.query.offset) {
@@ -898,7 +895,7 @@ module.exports = {
           .findAll({
             offset: req.query.offset,
             limit: req.query.limit,
-             where: {
+            where: {
               access: 'public' || <span class="branch-1 cbranch-no" title="branch not covered" >req.decoded.userRole,</span>
               $or: [
                 { title: { $iLike: `%${req.query.q}%` } },
@@ -928,29 +925,6 @@ module.exports = {
             }
           })
           .then(document =&gt; {
-          if (!document || document.length &lt; 1) {
-            return res.status(404).send({
-              message: 'Document Not Found',
-            });
-          }
-          return res.status(200).send(document);
-        })
-          .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
-      }
-    }
-  },
-&nbsp;
-  userDocs(req, res) {
-      if (req.query.limit || req.query.offset) {
-        return Document
-          .findAll({
-            offset: req.query.offset,
-            limit: req.query.limit,
-             where: {
-              userId: req.params.userId
-            }
-          })
-          .then(document =&gt; {
             if (!document || document.length &lt; 1) {
               return res.status(404).send({
                 message: 'Document Not Found',
@@ -958,8 +932,31 @@ module.exports = {
             }
             return res.status(200).send(document);
           })
-          .catch(error =&gt; res.status(400).send(error));
+          .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
       }
+    }
+  },
+&nbsp;
+  userDocs(req, res) {
+    if (req.query.limit || req.query.offset) {
+      return Document
+        .findAll({
+          offset: req.query.offset,
+          limit: req.query.limit,
+          where: {
+            userId: req.params.userId
+          }
+        })
+        .then(document =&gt; {
+          if (!document || document.length &lt; 1) {
+            return res.status(404).send({
+              message: 'Document Not Found',
+            });
+          }
+          return res.status(200).send(document);
+        })
+        .catch(error =&gt; res.status(400).send(error));
+    }
     return Document
       .findAll({
         where: {
@@ -977,33 +974,17 @@ module.exports = {
       .catch((error) =&gt; {
         res.status(400).send(error)
       });
-},
+  },
 &nbsp;
-roleDocs(req, res) {
-      if (req.query.limit || req.query.offset) {
-        return Document
-          .findAll({
-            offset: req.query.offset,
-            limit: req.query.limit,
-             where: {
-              access: req.decoded.userRole
-            }
-          })
-          .then(document =&gt; {
-            if (!document || document.length &lt; 1) {
-              return res.status(404).send({
-                message: 'Document Not Found',
-              });
-            }
-            return res.status(200).send(document);
-          })
-          .catch(error =&gt; res.status(400).send(error));
-      }
+  roleDocs(req, res) {
+    if (req.query.limit || req.query.offset) {
       return Document
         .findAll({
-           where: {
-              access: req.decoded.userRole
-            }
+          offset: req.query.offset,
+          limit: req.query.limit,
+          where: {
+            access: req.decoded.userRole
+          }
         })
         .then(document =&gt; {
           if (!document || document.length &lt; 1) {
@@ -1013,15 +994,31 @@ roleDocs(req, res) {
           }
           return res.status(200).send(document);
         })
-        .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
+        .catch(error =&gt; res.status(400).send(error));
     }
-  }</pre></td></tr>
+    return Document
+      .findAll({
+        where: {
+          access: req.decoded.userRole
+        }
+      })
+      .then(document =&gt; {
+        if (!document || document.length &lt; 1) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        return res.status(200).send(document);
+      })
+      .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
+  }
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 11:16:58 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 10:02:45 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

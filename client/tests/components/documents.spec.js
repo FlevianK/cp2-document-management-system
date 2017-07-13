@@ -21,8 +21,4 @@ describe('All documents component', () => {
     const wrapper = shallow(<Documents {...props} />);
     expect(wrapper.find('DocumentHeader').length).toBe(1);
   });
-  it('renders Pagination component', () => {
-    const wrapper = shallow(<Documents {...props} />);
-    expect(wrapper.find('Pagination').length).toBe(1);
-  });
 });

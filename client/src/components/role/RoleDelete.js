@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import toastr from 'toastr';
-import { Input } from '../../containers';
+import { RoleHeader } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import DashboardHeader from './../DashboardHeader';
@@ -56,6 +56,7 @@ export class RoleDelete extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
+        <RoleHeader />
         <div>
           <MuiThemeProvider>
             <Dialog

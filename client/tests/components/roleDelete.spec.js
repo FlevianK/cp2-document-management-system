@@ -14,26 +14,14 @@ describe('Role delete  component', () => {
 
   it('renders div', () => {
     const wrapper = shallow(<RoleDelete {...props} />);
-    expect(wrapper.find('div').length).toBe(1);
+    expect(wrapper.find('div').length).toBe(2);
   });
-  it('renders input', () => {
+  it('renders MuiThemeProvider', () => {
     const wrapper = shallow(<RoleDelete {...props} />);
-    expect(wrapper.find('input').length).toBe(1);
+    expect(wrapper.find('MuiThemeProvider').length).toBe(1);
   });
-  it('renders Input', () => {
+  it('renders Dialog', () => {
     const wrapper = shallow(<RoleDelete {...props} />);
-    expect(wrapper.find('Input').length).toBe(1);
-  });
-  it('renders form', () => {
-    const wrapper = shallow(<RoleDelete {...props} />);
-    expect(wrapper.find('form').length).toBe(1);
-  });
-  it('renders doc submit button', () => {
-    const wrapper = shallow(<RoleDelete {...props} />);
-    const submit = wrapper.find('input').last();
-    expect(submit.prop('type')).toBe('submit');
-    submit.simulate('click', {
-      preventDefault: () => {}
-    });
+    expect(wrapper.find('Dialog').length).toBe(1);
   });
 });

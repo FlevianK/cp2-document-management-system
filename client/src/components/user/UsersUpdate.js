@@ -7,7 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Input, SelectOptions } from '../../containers';
+import { Input, SelectOptions, UserHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
@@ -71,6 +71,7 @@ export class UsersUpdate extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
+        <UserHeader />
         <div>
           <MuiThemeProvider>
             <Dialog

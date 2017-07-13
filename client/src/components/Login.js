@@ -39,49 +39,47 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <div className="card">
-        <div className="card-image">
-          <nav style={{ backgroundColor: "green", color: "white", textAlign: "center" }}>
-            DOCUMENT MANAGEMENT SYSTEM
-          </nav>
+      <div>
+        <nav className="col-md-12" style={{ backgroundColor: "green", color: "white", textAlign: "center" }}>
+          DOCUMENT MANAGEMENT SYSTEM
+        </nav>
+        <div className="row">
+          <div className="col s6 offset-m3">
+            <h5 style={{ color: "green", textAlign: "center" }}>Login</h5>
+          </div>
+        </div>
+
+        <form style={{margin: "0 20% 0 20% "}}>
+          <Input
+            name="email"
+            label="email"
+            onChange={this.onLoginChange}
+          />
+
+          <Input
+            name="password"
+            label="password"
+            type="password"
+            onChange={this.onLoginChange}
+          />
+
           <div className="row">
             <div className="col s6 offset-m3">
-              <h5 style={{ color: "green", textAlign: "center" }}>Login</h5>
+
+              <input
+                style={{ backgroundColor: "green", color: "white" }}
+                type="submit"
+                className="btn btn-primary"
+                onClick={this.onLoginSave}
+              />
             </div>
           </div>
-
-          <form style={{margin: "0 20% 0 20% "}}>
-            <Input
-              name="email"
-              label="email"
-              onChange={this.onLoginChange}
-            />
-
-            <Input
-              name="password"
-              label="password"
-              type="password"
-              onChange={this.onLoginChange}
-            />
-
-            <div className="row">
-              <div className="col s6 offset-m3">
-
-                <input
-                  style={{ backgroundColor: "green", color: "white" }}
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={this.onLoginSave}
-                />
-              </div>
-            </div>
-          </form>
-          <div className="row">
-            <div className="col s6 offset-m3">
-              <p className="center medium-small sign-up">
-                <Link to="/users/create" activeClassName="active" style={{ color: 'green', textAlign: "center" }}> Sign up</Link> to create account
-              </p>
-            </div>
+        </form>
+        <div className="row">
+          <div className="col s6 offset-m3">
+            <p className="center medium-small sign-up">
+              <Link to="/users/create" activeClassName="active" style={{ color: 'green', textAlign: "center" }}> Sign up</Link> to create account
+            </p>
           </div>
         </div>
       </div>

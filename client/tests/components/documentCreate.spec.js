@@ -1,51 +1,31 @@
 import expect from 'expect';
 import React from 'react';
-import { DocumentCreate } from './../../src/components/document/DocumentCreate';
+import { DocumentCreate } from '../../src/components/document/DocumentCreate';
 import { shallow } from 'enzyme';
 
 describe('Create document component', () => {
-  it('renders doc div', () => {
+  it('renders div', () => {
     const wrapper = shallow(<DocumentCreate />);
-    expect(wrapper.find('div').length).toBe(3);
+    expect(wrapper.find('div').length).toBe(7);
   });
-  it('renders doc  input', () => {
+  it('renders MuiThemeProvider component', () => {
     const wrapper = shallow(<DocumentCreate />);
-    expect(wrapper.find('input').length).toBe(1);
+    expect(wrapper.find('MuiThemeProvider').length).toBe(1);
   });
-  it('renders doc Input', () => {
+  it('renders Dialog component', () => {
+    const wrapper = shallow(<DocumentCreate />);
+    expect(wrapper.find('Dialog').length).toBe(1);
+  });
+  it('renders Input component', () => {
     const wrapper = shallow(<DocumentCreate />);
     expect(wrapper.find('Input').length).toBe(1);
   });
-
-  it('renders textarea Input', () => {
+  it('renders textarea input', () => {
     const wrapper = shallow(<DocumentCreate />);
     expect(wrapper.find('textarea').length).toBe(1);
   });
   it('renders doc form', () => {
     const wrapper = shallow(<DocumentCreate />);
     expect(wrapper.find('form').length).toBe(1);
-  });
-  it('form doc input type', () => {
-    const wrapper = shallow(<DocumentCreate />);
-    const submit = wrapper.find('Input').last();
-    expect(submit.prop('type')).toBe('text');
-    expect(submit.prop('name')).toBe('title');
-    expect(submit.prop('label')).toBe('Title');
-  });
-  it('renders doc submit button', () => {
-    const props = {
-      actions: {
-        createDocument: () => Promise.resolve()
-      },
-      newDocument: {
-        title: ''
-      }
-    };
-    const wrapper = shallow(<DocumentCreate {...props} />);
-    const submit = wrapper.find('input').last();
-    expect(submit.prop('type')).toBe('submit');
-    submit.simulate('click', {
-      preventDefault: () => {}
-    });
   });
 });

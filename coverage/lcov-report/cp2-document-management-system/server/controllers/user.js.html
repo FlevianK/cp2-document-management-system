@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">95% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>55/60</span>
+        <span class='fraction'>57/60</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.93% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>47/56</span>
+        <span class='fraction'>49/56</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">85% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>16/20</span>
+        <span class='fraction'>17/20</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">95% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>55/60</span>
+        <span class='fraction'>57/60</span>
       </div>
     </div>
   </div>
@@ -219,40 +219,44 @@
 174
 175
 176
-177</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+177
+178
+179</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -409,15 +413,15 @@ module.exports = {
       return res.status(403).send({ // forbidden request
         message: 'Fill all fields',
       });
-    } else <span class="missing-if-branch" title="if path not taken" >I</span>if(!emailRegex.test(req.body.email)){
-<span class="cstat-no" title="statement not covered" >      res.status(403).send({ // forbidden request</span>
+    } else if (!emailRegex.test(req.body.email)) {
+      return res.status(403).send({ // forbidden request
         message: 'Incorrect email format',
       });
-    } else <span class="missing-if-branch" title="else path not taken" >E</span>if(!(req.body.password).match(passwordRegex)){
-      res.status(403).send({ // forbidden request
+    } else if (!(req.body.password).match(passwordRegex)) {
+      return res.status(403).send({ // forbidden request
         message: 'Password must be atleast six characters with a digit, special symbols, lowercase and uppercase characters',
       });
-    } 
+    }
     return User
       .create({
         username: req.body.username,
@@ -427,8 +431,10 @@ module.exports = {
         password: bcrypt.hashSync(req.body.password, salt),
         title: "regular",
       })
-      .then(() =&gt; res.status(201).send())
-      .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send({</span>
+      .then(() =&gt; res.status(201).send({
+        message: 'Registered successfully',
+      }))
+      .catch(error =&gt; res.status(400).send({
         message: 'Email exist',
       }));
   },
@@ -495,7 +501,7 @@ module.exports = {
           })
           .then(() =&gt; res.status(200).send({
             message: 'Updated successfully'
-          })) 
+          }))
           .catch((error) =&gt; res.status(400).send(error));
       })
       .catch((error) =&gt; res.status(400).send(error));
@@ -503,7 +509,7 @@ module.exports = {
 &nbsp;
   destroy(req, res) {
     if (req.params.userId == 1) {
-      return res.status(401).send({ 
+      return res.status(401).send({
         message: 'Can not delete main admin',
       });
     }
@@ -526,10 +532,31 @@ module.exports = {
   searchUser(req, res) {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (req.query.q) {
       if (req.query.limit || req.query.offset) {
+        return User
+          .findAll({
+            offset: req.query.offset,
+            limit: req.query.limit,
+            where: {
+              $or: [
+                { firstName: { $iLike: `%${req.query.q}%` } },
+                { lastName: { $iLike: `%${req.query.q}%` } },
+                { email: { $iLike: `%${req.query.q}%` } },
+                { title: { $iLike: `%${req.query.q}%` } },
+              ]
+            }
+          })
+          .then(user =&gt; {
+            if (!user || user.length &lt; 1) {
+              return res.status(404).send({
+                message: 'User Not Found',
+              });
+            }
+            return res.status(200).send(user);
+          })
+          .catch(error =&gt; res.status(400).send(error));
+      }
       return User
         .findAll({
-          offset: req.query.offset,
-          limit: req.query.limit,
           where: {
             $or: [
               { firstName: { $iLike: `%${req.query.q}%` } },
@@ -540,34 +567,13 @@ module.exports = {
           }
         })
         .then(user =&gt; {
-        if (!user || user.length &lt; 1) {
-          return res.status(404).send({
-            message: 'User Not Found',
-          });
-        }
-        return res.status(200).send(user);
-      })
-        .catch(error =&gt; res.status(400).send(error));
-    }
-      return User
-        .findAll({
-          where: {
-            $or: [
-              { firstName: { $iLike: `%${req.query.q}%` } },
-              { lastName: { $iLike: `%${req.query.q}%` } },
-              { email: { $iLike: `%${req.query.q}%` } },
-              { title: { $iLike: `%${req.query.q}%` } },
-            ]
+          if (!user || user.length &lt; 1) {
+            return res.status(404).send({
+              message: 'User Not Found',
+            });
           }
+          return res.status(200).send(user);
         })
-        .then(user =&gt; {
-        if (!user || user.length &lt; 1) {
-          return res.status(404).send({
-            message: 'User Not Found',
-          });
-        }
-        return res.status(200).send(user);
-      })
         .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >res.status(400).send(error))</span>;
     }
   }
@@ -577,7 +583,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 11:16:58 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 10:02:45 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

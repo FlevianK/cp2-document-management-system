@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const RoleHeader = ({ roles }) => {
+const RoleHeader = () => {
   return (
     <div style={{ marginTop: '10px' }}>
-      <Link to="/roles/create" activeClassName="active">Add</Link>
+      <Link to="/roles/create" activeClassName="active" style={{ color: "green" }}>Add</Link>
+      {'|'}
+      <Link to="/roles/search" activeClassName="active" style={{ color: "green" }}>search</Link>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Input } from '../../containers';
+import { Input, RoleHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
@@ -69,6 +69,7 @@ export class RoleCreate extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
+        <RoleHeader />
         <div>
           <MuiThemeProvider>
             <Dialog

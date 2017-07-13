@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input } from '../../containers';
+import { Input, UserHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
@@ -57,6 +57,7 @@ export class UserDelete extends React.Component {
     return (
       <div className="col-md-12">
         <DashboardHeader />
+        <UserHeader />
         <div>
           <MuiThemeProvider>
             <Dialog

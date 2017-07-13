@@ -1,6 +1,8 @@
 import expect from 'expect';
 import roleReducer from '../../src/reducers/roleReducer';
 import rolePageReducer from '../../src/reducers/rolePageReducer';
+import roleSearchReducer from '../../src/reducers/roleSearchReducer';
+import roleSearchPageReducer from '../../src/reducers/roleSearchPageReducer';
 import * as actions from '../../src/actions/roleAction';
 
 describe('role reducer', () => {
@@ -37,6 +39,25 @@ describe('role reducer', () => {
     ];
     const action = actions.loadRolesPageSuccess(rolesPage);
     const newState = rolePageReducer(initialState, action);
+    expect(newState.length).toEqual(2);
+  });
+  it('it should get search result when passed SEARCH_ROLE_SUCCESS if the search value exists', () => {
+    const initialState = [];
+    const rolesSearch = [
+      { title: 'M', }
+    ];
+    const action = actions.searchroleSuccess(rolesSearch);
+    const newState = roleSearchReducer(initialState, action);
+    expect(newState.length).toEqual(1);
+  });
+  it('it should get search result according to pagination limit when passed SEARCH_ROLE_PAGE_SUCCESS if the search value exists', () => {
+    const initialState = [];
+    const rolesSearchPage = [
+      { title: 'B' },
+      { title: 'BA' }
+    ];
+    const action = actions.searchrolepagesuccess(rolesSearchPage);
+    const newState = roleSearchPageReducer(initialState, action);
     expect(newState.length).toEqual(2);
   });
 });

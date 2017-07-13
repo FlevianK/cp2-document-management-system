@@ -8,7 +8,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Input } from '../../containers';
+import { Input, DocumentHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 
@@ -71,6 +71,7 @@ export class DocumentCreate extends React.Component {
     return (
       <div>
         <DashboardHeader />
+        <DocumentHeader />
         <div>
           <MuiThemeProvider>
             <Dialog

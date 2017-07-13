@@ -16,11 +16,7 @@ describe('create role component', () => {
 
   it('renders div', () => {
     const wrapper = shallow(<RoleCreate />);
-    expect(wrapper.find('div').length).toBe(1);
-  });
-  it('renders input', () => {
-    const wrapper = shallow(<RoleCreate />);
-    expect(wrapper.find('input').length).toBe(1);
+    expect(wrapper.find('div').length).toBe(2);
   });
   it('renders Input', () => {
     const wrapper = shallow(<RoleCreate />);
@@ -35,22 +31,5 @@ describe('create role component', () => {
   it('renders form', () => {
     const wrapper = shallow(<RoleCreate />);
     expect(wrapper.find('form').length).toBe(1);
-  });
-  it('renders doc submit button', () => {
-    const props = {
-      actions: {
-        createRole: () => Promise.resolve(),
-        loadRoles: () => Promise.resolve()
-      },
-      newRole: {
-        title: ''
-      }
-    };
-    const wrapper = shallow(<RoleCreate {...props} />);
-    const submit = wrapper.find('input').last();
-    expect(submit.prop('type')).toBe('submit');
-    submit.simulate('click', {
-      preventDefault: () => {}
-    });
   });
 });

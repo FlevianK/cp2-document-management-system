@@ -13,11 +13,11 @@ module.exports = {
         message: 'Fill all fields',
       });
     } else if (!emailRegex.test(req.body.email)) {
-      res.status(403).send({ // forbidden request
+      return res.status(403).send({ // forbidden request
         message: 'Incorrect email format',
       });
     } else if (!(req.body.password).match(passwordRegex)) {
-      res.status(403).send({ // forbidden request
+      return res.status(403).send({ // forbidden request
         message: 'Password must be atleast six characters with a digit, special symbols, lowercase and uppercase characters',
       });
     }
@@ -30,7 +30,9 @@ module.exports = {
         password: bcrypt.hashSync(req.body.password, salt),
         title: "regular",
       })
-      .then(() => res.status(201).send())
+      .then(() => res.status(201).send({
+        message: 'Registered successfully',
+      }))
       .catch(error => res.status(400).send({
         message: 'Email exist',
       }));

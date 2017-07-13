@@ -23,12 +23,12 @@ describe('Roles', () => {
   });
   describe('/POST', () => {
 
-    it('should return a 201 response when create regular role', (done) => {
+    it('should return a 201 response when create guest role', (done) => {
       chai.request(app)
         .post('/api/roles')
         .set('x-access-token', token)
         .send({
-          title: "regular"
+          title: "guest"
         })
         .end((err, res) => {
           res.should.have.status(201);
@@ -159,6 +159,62 @@ describe('Roles', () => {
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(401);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/roles/?q={}', () => {
+    it('it should GET a role by searching', (done) => {
+      chai.request(app)
+        .get('/api/search/roles/?q=admin')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+
+  describe('/GET/search/roles/?q={}', () => {
+    it('it should return 404 searching a role that does not exist', (done) => {
+      chai.request(app)
+        .get('/api/search/roles/?q=MCA')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/roles/?q={}', () => {
+    it('it should return 200 searching roles who exist while paginating the result ', (done) => {
+      chai.request(app)
+        .get('/api/search/roles/?q=admin&limit=5&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/roles/?q={}', () => {
+    it('it should return 400 searching roles who exist while paginating the result using wrong data type ', (done) => {
+      chai.request(app)
+        .get('/api/search/roles/?q=MCA&limit=jfd&offset=oiu')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
+  describe('/GET/search/roles/?q={}', () => {
+    it('it should return 404 searching roles who does not exist exist while paginating the result ', (done) => {
+      chai.request(app)
+        .get('/api/search/roles/?q=MCA&limit=5&offset=0')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
           done();
         });
     });

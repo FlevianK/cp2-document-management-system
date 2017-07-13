@@ -6,6 +6,21 @@ const secret = 'HAHAHAHAHAHAHAHAhahahaahah>>>><<<<<<<<<<<<<<<<<<<<<<<<<<n jgfh g
 
 module.exports = {
   login(req, res) {
+    const emailRegex = /\S+@\S+\.\S+/;
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+    if (!req.body.email) {
+      return res.status(403).send({ // forbidden request
+        message: 'Email is required',
+      });
+    } else if (!emailRegex.test(req.body.email)) {
+      return res.status(403).send({ // forbidden request
+        message: 'Incorrect email format',
+      });
+    } else if (!req.body.password) {
+      return res.status(403).send({ // forbidden request
+        message: 'Password is required',
+      });
+    } 
     return User
       .findOne({
         where: {

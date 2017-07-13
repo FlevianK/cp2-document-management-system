@@ -29,7 +29,7 @@ describe('sync actions', () => {
   });
 
   it('load all roles', () => {
-    const expectedAction = [{ type: types.LOAD_ROLES_SUCCESS, body: { roles: [{ id: 1, title: 'admin' }] } }];
+    const expectedAction = [{ type: types.LOAD_ROLES_SUCCESS, body: { roles: [{ title: 'admin' }] } }];
     const store = mockStore({ roles: [] }, expectedAction);
     store.dispatch(roleAction.loadRoles()).then(() => {
       const action = store.getAction();
@@ -37,11 +37,27 @@ describe('sync actions', () => {
     });
   });
   it('load all roles while paginating', () => {
-    const expectedAction = [{ type: types.LOAD_ROLES_PAGE_SUCCESS, body: { rolesPage: [{ id: 1, title: 'admin' }] } }];
+    const expectedAction = [{ type: types.LOAD_ROLES_PAGE_SUCCESS, body: { rolesPage: [{ title: 'admin' }] } }];
     const store = mockStore({ rolesPage: [] }, expectedAction);
     store.dispatch(roleAction.loadRolesPage()).then(() => {
       const action = store.getAction();
       expect(action[0].type).toEqual(types.LOAD_ROLES_PAGE_SUCCESS);
+    });
+  });
+  it('load roles search results', () => {
+    const expectedAction = [{ type: types.SEARCH_ROLE_SUCCESS, body: { rolesSearch: [{title: 'admin' }] } }];
+    const store = mockStore({ rolesSearch: [] }, expectedAction);
+    store.dispatch(roleAction.searchRoles()).then(() => {
+      const action = store.getAction();
+      expect(action[0].type).toEqual(types.SEARCH_ROLE_SUCCESS);
+    });
+  });
+  it('load roles search results while paginating', () => {
+    const expectedAction = [{ type: types.SEARCH_ROLE_PAGE_SUCCESS, body: { rolesSearchPage: [{ title: 'admin' }] } }];
+    const store = mockStore({ rolesSearchPage: [] }, expectedAction);
+    store.dispatch(roleAction.searchRolesPage()).then(() => {
+      const action = store.getAction();
+      expect(action[0].type).toEqual(types.SEARCH_ROLE_PAGE_SUCCESS);
     });
   });
   it('delete role', () => {
@@ -55,7 +71,7 @@ describe('sync actions', () => {
   });
   it('create role', () => {
     const newRole = { title: 'regular' };
-    const expectedAction = [{ type: types.CREATE_ROLE_SUCCESS, body: { users: [{ id: 1, username: 'regular' }] } }];
+    const expectedAction = [{ type: types.CREATE_ROLE_SUCCESS, body: { roles: [{title: 'regular' }] } }];
     const store = mockStore({ roles: [] }, expectedAction);
     store.dispatch(roleAction.createRole(newRole)).then(() => {
       const action = store.getAction();

@@ -122,7 +122,10 @@
 77
 78
 79
-80</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+80
+81
+82
+83</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -148,6 +151,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,15 +189,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -218,6 +224,9 @@ export class Document extends React.Component {
   constructor(props, context) <span class="branch-1 cbranch-no" title="branch not covered" >{</span>
     super(props, context);
     this.state = {
+      deleteDocument: {
+        documentId: ''
+      },
       documents: [{
         title: '',
         content: '',
@@ -231,13 +240,13 @@ export class Document extends React.Component {
   }
 &nbsp;
   componentWillMount() {
-    this.props.actions.loadDoc(this.props.userId);
-    this.props.actions.loadDocList(this.props.userId, this.state.limit, this.state.offset);
+    this.props.actions.loadDoc();
+    this.props.actions.loadDocList(this.state.limit, this.state.offset);
   }
 &nbsp;
   handlePageChange(pageNumber) {
 <span class="cstat-no" title="statement not covered" >    this.setState({ activePage: pageNumber });</span>
-<span class="cstat-no" title="statement not covered" >    this.props.actions.loadDocList(this.props.userId, this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
+<span class="cstat-no" title="statement not covered" >    this.props.actions.loadDocList(this.state.limit, (this.state.limit * (this.state.activePage - 1)));</span>
   }
 &nbsp;
   render() {
@@ -247,30 +256,30 @@ export class Document extends React.Component {
       &lt;div&gt;
         &lt;DashboardHeader /&gt;
         &lt;DocumentHeader /&gt;
-        {totalItems &gt; 0
-          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;DocumentList documents={documents} /&gt;</span>
-          : 'You do not have document'
+        &lt;DocumentList documents={documents}/&gt;
+        
+        {totalItems &gt; this.state.limit
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;Pagination</span>
+            style={{backgroundColor: "green", color: "white"}}
+            activePage={this.state.activePage}
+            itemsCountPerPage={this.state.limit}
+            totalItemsCount={totalItems}
+            onChange={this.handlePageChange}
+          /&gt;
+          : ''
         }
-        &lt;Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.limit}
-          totalItemsCount={totalItems}
-          onChange={this.handlePageChange}
-        /&gt;
       &lt;/div&gt;
     );
   }
 }
 &nbsp;
 Document.propTypes = {
-  documents: PropTypes.number.isRequired,
-  userId: PropTypes.number.isRequired,
-  documentsPage: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  documents: PropTypes.number,
+  documentsPage: PropTypes.array,
+  actions: PropTypes.object
 };
 &nbsp;
 const <span class="fstat-no" title="function not covered" >mapStateToProps = <span class="cstat-no" title="statement not covered" >(</span>state, ownProps) =&gt; ({</span>
-  userId: state.loginUser.userId,
   documents: state.documents.length,
   documentsPage: state.documentsPage
 });
@@ -286,7 +295,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Document);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 11 2017 14:33:40 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 10:57:17 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -52,16 +52,18 @@ export function singleDocument(document) {
   );
 }
 
-export function allDoc(doc) {
+export function allDoc() {
   const token = localStorage.jwt;
+  const doc = localStorage.userId;
   return axios.get(
     `${API_URL}/users/${doc}/documents`,
     { headers: { 'x-access-token': token } }
   );
 }
 
-export function allDocList(doc, limit, offset) {
+export function allDocList(limit, offset) {
   const token = localStorage.jwt;
+  const doc = localStorage.userId;
   return axios.get(
     `${API_URL}/users/${doc}/documents/?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': token } }

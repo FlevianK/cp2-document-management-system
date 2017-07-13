@@ -18,22 +18,8 @@ app.use(cors());
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(express.static(__dirname + '/dist'))
-
-
-// Require our routes into the application.
-// app.get('/', function (request, response) {
-//   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
-// })
-// app.get('/index_bundle.js', function (request, response) {
-//   response.sendFile(path.resolve(__dirname, 'dist', 'index_bundle.js'))
-// })
 
 require('./server/routes/route')(app);
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/index.html'));
-});
 
 app.listen(port);
 module.exports = app;

@@ -17,8 +17,8 @@ export class UserUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: {
-        userId: this.props.loginUser.userId
+      user: {
+        userId: localStorage.userId
       },
       open: true
     };
@@ -28,7 +28,7 @@ export class UserUpdate extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.loadUser(this.props.loginUser);
+    this.props.actions.loadUser(this.state.user);
   }
 
   onUserChange(event) {
@@ -133,14 +133,12 @@ export class UserUpdate extends React.Component {
 UserUpdate.propTypes = {
   users: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  loginUser: PropTypes.object,
   params: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
     users: state.users,
-    loginUser: state.loginUser
   };
 };
 
