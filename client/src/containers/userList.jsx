@@ -9,9 +9,6 @@ const UserList = ({ users }) => {
       {users.map(user =>
         <MuiThemeProvider>
           <Card key={user.id} style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}}>
-            {/*<CardHeader
-              title={document.title}
-            />*/}
             <CardText>
               <p>Username: {user.username}</p>
               <p>Role: {user.title}</p>
