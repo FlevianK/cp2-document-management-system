@@ -11,11 +11,11 @@ const DocumentsList = ({ documents }) => {
           <Card key={document.id} style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}}>
             <CardText>
               <h5>
-                <p>Title: {document.title}</p>
+                <p >Title: {document.title}</p>
               </h5>
-              <p>Author: {document.User.firstName} {document.User.lastName}</p>
               <p>{document.content}</p>
-              <p>{document.access}</p>
+              <p>Author: {document.User.firstName} {document.User.lastName}</p>
+              <p style={{ color: "green"}}>{document.access}</p>
             </CardText>
           </Card>
         </MuiThemeProvider>

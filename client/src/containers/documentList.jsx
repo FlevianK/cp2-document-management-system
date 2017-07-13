@@ -13,7 +13,7 @@ const DocumentList = ({ documents, handleOpen }) => {
               title={document.title}
             />
             <CardText>
-              <p>{document.content}</p>
+              <p >{document.content}</p>
               <p>{document.access}</p>
             </CardText>
             <CardActions>

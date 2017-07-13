@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">67.57% </span>
+        <span class="strong">63.41% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>25/37</span>
+        <span class='fraction'>26/41</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">25% </span>
+        <span class="strong">20% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/4</span>
+        <span class='fraction'>1/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.43% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>25/35</span>
+        <span class='fraction'>26/39</span>
       </div>
     </div>
   </div>
@@ -175,7 +175,15 @@
 130
 131
 132
-133</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+133
+134
+135
+136
+137
+138
+139
+140</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -215,10 +223,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -317,6 +331,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
+import toastr from 'toastr';
 import { Input, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import DashboardHeader from './../DashboardHeader';
@@ -347,10 +362,16 @@ export class DocumentUpdate extends React.Component {
 <span class="cstat-no" title="statement not covered" >    return this.setState({ documents });</span>
   }
 &nbsp;
-  onDocumentUpdate(event) {
+  onDocumentUpdate(event) <span class="cstat-no" title="statement not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
 <span class="cstat-no" title="statement not covered" >    this.props.actions.updateDocument(this.state.documents)</span>
-      .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; browserHistory.push('/documents'));</span></span>
+      .then(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >        this.setState({ open: false });</span>
+<span class="cstat-no" title="statement not covered" >        browserHistory.push('/documents');</span>
+      })
+      .catch(<span class="fstat-no" title="function not covered" >(</span>error) =&gt; {
+<span class="cstat-no" title="statement not covered" >        toastr.error(error.response.data.message);</span>
+      });
   }
 &nbsp;
   handleClose() {
@@ -390,7 +411,7 @@ export class DocumentUpdate extends React.Component {
                   name="title"
                   label="title"
                   type="text"
-                  value={this.props.documents.title}
+                  placeholder={this.props.documents.title}
                   onChange={this.onDocumentChange}
                 /&gt;
                 &lt;div className="row"&gt;
@@ -399,7 +420,7 @@ export class DocumentUpdate extends React.Component {
                       name="content"
                       label="Content"
                       type="text"
-                      value={this.props.documents.content}
+                      placeholder={this.props.documents.content}
                       onChange={this.onDocumentChange}
                     /&gt;
                   &lt;/div&gt;
@@ -409,7 +430,7 @@ export class DocumentUpdate extends React.Component {
                   name="access"
                   label="Access Type"
                   defaultOption="select access type"
-                  value={this.state.documents.access}
+                  placeholder={this.state.documents.access}
                   onChange={this.onDocumentChange}
                 /&gt;
               &lt;/form&gt;
@@ -445,7 +466,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DocumentUpdate);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 13:58:38 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 13 2017 15:03:27 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

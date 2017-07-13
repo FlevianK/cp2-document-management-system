@@ -22,27 +22,30 @@ export class DashboardHeader extends React.Component {
     return (
       <div>
         <nav style={{backgroundColor: "green", color: "white"}}>
-          {userRole && userRole === 'admin'
-            ? <Link to="/roles" activeClassName="active">Roles</Link>
-            : ''
-          }
-          {userRole && userRole === 'admin'
-            ? ' | '
-            : ''
-          }
-          {userRole && userRole === 'admin'
-            ? <Link to="/users" activeClassName="active">Users</Link>
-            : ''
-          }
-          {userRole && userRole === 'admin'
-            ? ' | '
-            : ''
-          }
-          <Link to="/documents" activeClassName="active">My Documents</Link>
-          {' | '}
-          <Link to="/users/profile" activeClassName="active">Edit profile</Link>
-          {' | '}
-          <Link to="#" activeClassName="active" onClick={this.onLogoutClick}>Logout</Link>
+          <span style={{ float: 'left', paddingLeft : "15%" }}>
+            {userRole && userRole === 'admin'
+              ? <Link to="/roles" activeClassName="active">Roles</Link>
+              : ''
+            }
+            {userRole && userRole === 'admin'
+              ? ' | '
+              : ''
+            }
+            {userRole && userRole === 'admin'
+              ? <Link to="/users" activeClassName="active">Users</Link>
+              : ''
+            }
+            {userRole && userRole === 'admin'
+              ? ' | '
+              : ''
+            }
+            <Link to="/documents" activeClassName="active">My Documents</Link>
+            {' | '}
+            <Link to="/users/profile" activeClassName="active">Edit profile</Link>
+          </span>
+          <span style={{ float: 'right', paddingRight : "15%" }}>
+            <Link to="#" activeClassName="active" onClick={this.onLogoutClick}>Logout</Link>
+          </span>
         </nav>
       </div>
     );

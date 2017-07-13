@@ -42,7 +42,7 @@ export class Documents extends React.Component {
         
         {totalItems > this.state.limit
           ? <Pagination
-            style={{backgroundColor: "green", color: "white"}}
+            style={{backgroundColor: "green", color: "white", }}
             activePage={this.state.activePage}
             itemsCountPerPage={this.state.limit}
             totalItemsCount={totalItems}

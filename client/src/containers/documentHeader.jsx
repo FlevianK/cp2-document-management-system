@@ -10,7 +10,6 @@ const DocumentHeader = () => {
     <div style={{ marginTop: '1%', paddingBottom: "4%" }}>
       <span style={{ float: 'left', paddingLeft : "15%" }}>
         <Link to="/documents/create" activeClassName="active" style={{ color: "green" }}><i className="material-icons">add</i></Link>
-        {" | "}
         <Link to="/documents" activeClassName="active" style={{ color: "green" }}>My Documents</Link>
         {" | "}
         <Link to="/documents/role" activeClassName="active" style={{ color: "green" }}>Role Documents</Link>

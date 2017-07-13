@@ -12,6 +12,8 @@ import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
+
 
 export class UsersUpdate extends React.Component {
   constructor(props) {
@@ -45,7 +47,13 @@ export class UsersUpdate extends React.Component {
     event.preventDefault();
     this.setState({ open: false });
     this.props.actions.updateUser(this.state.users)
-      .then(() => browserHistory.push('/users'));
+      .then(() =>{
+        this.setState({ open: false });
+        browserHistory.push('/users');
+      })
+      .catch((error) => {
+        toastr.error(error.response.data.message);
+      });
   }
 
   handleClose() {
@@ -94,7 +102,7 @@ export class UsersUpdate extends React.Component {
                   name="title"
                   label="Title"
                   defaultOption="Select role"
-                  value={this.props.users.title}
+                  placeholder={this.props.users.title}
                   onChange={this.onUserChange}
                 />
               </form>

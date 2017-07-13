@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
+import toastr from 'toastr';
 import { Input, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import DashboardHeader from './../DashboardHeader';
@@ -41,7 +42,13 @@ export class DocumentUpdate extends React.Component {
   onDocumentUpdate(event) {
     event.preventDefault();
     this.props.actions.updateDocument(this.state.documents)
-      .then(() => browserHistory.push('/documents'));
+      .then(() => {
+        this.setState({ open: false });
+        browserHistory.push('/documents');
+      })
+      .catch((error) => {
+        toastr.error(error.response.data.message);
+      });
   }
 
   handleClose() {
@@ -81,7 +88,7 @@ export class DocumentUpdate extends React.Component {
                   name="title"
                   label="title"
                   type="text"
-                  value={this.props.documents.title}
+                  placeholder={this.props.documents.title}
                   onChange={this.onDocumentChange}
                 />
                 <div className="row">
@@ -90,7 +97,7 @@ export class DocumentUpdate extends React.Component {
                       name="content"
                       label="Content"
                       type="text"
-                      value={this.props.documents.content}
+                      placeholder={this.props.documents.content}
                       onChange={this.onDocumentChange}
                     />
                   </div>
@@ -100,7 +107,7 @@ export class DocumentUpdate extends React.Component {
                   name="access"
                   label="Access Type"
                   defaultOption="select access type"
-                  value={this.state.documents.access}
+                  placeholder={this.state.documents.access}
                   onChange={this.onDocumentChange}
                 />
               </form>
