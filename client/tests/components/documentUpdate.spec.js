@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { DocumentUpdate } from './../../src/components/document/DocumentUpdate';
+import { DocumentUpdate } from '../../src/components/document/DocumentUpdate';
 import { shallow } from 'enzyme';
 
 describe('Update document component', () => {

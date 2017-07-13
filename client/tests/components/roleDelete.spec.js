@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { RoleDelete } from './../../src/components/role/RoleDelete';
+import { RoleDelete } from '../../src/components/role/RoleDelete';
 import { shallow } from 'enzyme';
 
 describe('Role delete  component', () => {

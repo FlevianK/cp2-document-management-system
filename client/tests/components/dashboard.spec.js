@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import App from './../../src/components/Dashboard';
+import App from '../../src/components/Dashboard';
 import { shallow, mount } from 'enzyme';
 
 describe('Dashboard component', () => {

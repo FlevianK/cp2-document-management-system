@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { roleDropdownData } from './../../src/components/user/RoleSelector';
+import { roleDropdownData } from '../../src/components/user/RoleSelector';
 
 describe('role selector component', () => {
   describe('roleDropdownData', () => {

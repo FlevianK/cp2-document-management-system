@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { DocumentDelete } from './../../src/components/document/DocumentDelete';
+import { DocumentDelete } from '../../src/components/document/DocumentDelete';
 import { shallow } from 'enzyme';
 
 describe('Delete document component', () => {

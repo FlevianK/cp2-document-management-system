@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { DocumentRole } from './../../src/components/document/DocumentRole';
+import { DocumentRole } from '../../src/components/document/DocumentRole';
 import { shallow } from 'enzyme';
 
 describe('role documents component', () => {

@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { SearchDocument } from './../../src/components/document/SearchDocument';
+import { SearchDocument } from '../../src/components/document/SearchDocument';
 import { shallow, mount } from 'enzyme';
 
 describe('Search document component', () => {

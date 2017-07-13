@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { UsersUpdate } from './../../src/components/user/UsersUpdate';
+import { UsersUpdate } from '../../src/components/user/UsersUpdate';
 import { shallow, mount } from 'enzyme';
 
 describe('Update users component', () => {

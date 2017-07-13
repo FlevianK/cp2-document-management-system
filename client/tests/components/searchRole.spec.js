@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { SearchRole } from './../../src/components/role/SearchRole';
+import { SearchRole } from '../../src/components/role/SearchRole';
 import { shallow, mount } from 'enzyme';
 
 describe('Search role component', () => {

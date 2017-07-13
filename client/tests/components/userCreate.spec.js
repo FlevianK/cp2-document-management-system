@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { UserCreate } from './../../src/components/user/UserCreate';
+import { UserCreate } from '../../src/components/user/UserCreate';
 import { shallow, mount } from 'enzyme';
 
 describe('Create user', () => {

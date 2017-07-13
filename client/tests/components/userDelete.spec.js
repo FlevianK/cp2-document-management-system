@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { UserDelete } from './../../src/components/user/UserDelete';
+import { UserDelete } from '../../src/components/user/UserDelete';
 import { shallow, mount } from 'enzyme';
 
 describe('User delete', () => {

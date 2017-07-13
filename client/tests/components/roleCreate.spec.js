@@ -1,7 +1,7 @@
 
 import expect from 'expect';
 import React from 'react';
-import { RoleCreate } from './../../src/components/role/RoleCreate';
+import { RoleCreate } from '../../src/components/role/RoleCreate';
 import { shallow, mount } from 'enzyme';
 
 describe('create role component', () => {
