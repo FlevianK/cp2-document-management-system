@@ -32,14 +32,15 @@ export class Documents extends React.Component {
   }
   render() {
     const allDocuments = this.props.allDocumentsPage;
-    console.log(allDocuments)
     const totalItems = this.props.allDocuments;
     return (
       <div>
         <DashboardHeader />
         <DocumentHeader />
-        <DocumentsList documents={allDocuments} />
-        
+        {totalItems > this.state.limit
+          ?<DocumentsList documents={allDocuments} />
+          :<h6 style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}} >No document found</h6>
+        }
         {totalItems > this.state.limit
           ? <Pagination
             style={{backgroundColor: "green", color: "white", }}

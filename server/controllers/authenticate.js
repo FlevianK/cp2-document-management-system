@@ -4,9 +4,7 @@ const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const bcrypt = require('bcryptjs');
 const secret = process.env.secret;
 
-
 module.exports = {
-  
   login(req, res) {
     const emailRegex = /\S+@\S+\.\S+/;
     const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
@@ -95,4 +93,4 @@ module.exports = {
       message: err.message
     });
   }
-};
+}

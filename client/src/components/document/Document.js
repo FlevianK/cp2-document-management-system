@@ -47,8 +47,10 @@ export class Document extends React.Component {
       <div>
         <DashboardHeader />
         <DocumentHeader />
-        <DocumentList documents={documents}/>
-        
+        {totalItems > this.state.limit
+          ? <DocumentList documents={documents}/>
+          :<h6 style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}} >Post a document</h6>
+        }
         {totalItems > this.state.limit
           ? <Pagination
             activePage={this.state.activePage}
