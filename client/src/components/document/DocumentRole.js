@@ -37,7 +37,7 @@ export class DocumentRole extends React.Component {
       <div>
         <DashboardHeader />
         <DocumentHeader />
-        {totalItems > this.state.limit
+        {totalItems > 0
           ?<DocumentsList documents={roleDocuments} />
           :<h6 style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}} >No role document found</h6>
         }

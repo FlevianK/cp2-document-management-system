@@ -6,7 +6,7 @@
   "scripts": {
     "client-test": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./client/utils/config.js -R spec ./client/tests/**",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "start": "node index.js",
+    "start": "webpack-dev-server",
     "compile": "webpack",
     "server-test": "NODE_ENV=test npm run migrate && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -R spec server/tests",
     "test-migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
@@ -41,6 +41,7 @@
     "express": "^4.15.3",
     "file-loader": "^0.11.2",
     "has-flag": "^2.0.0",
+    "heroku-cli": "^6.12.8",
     "html-webpack-plugin": "^2.29.0",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^7.4.1",

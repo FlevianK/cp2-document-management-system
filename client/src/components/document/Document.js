@@ -47,7 +47,7 @@ export class Document extends React.Component {
       <div>
         <DashboardHeader />
         <DocumentHeader />
-        {totalItems > this.state.limit
+        {totalItems > 0
           ? <DocumentList documents={documents}/>
           :<h6 style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}} >Post a document</h6>
         }
