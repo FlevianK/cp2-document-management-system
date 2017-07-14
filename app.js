@@ -6,7 +6,7 @@ const path = require('path');
 require('dotenv').config();
 
 // Set up the express app
-const port = parseInt(process.env.PORT, 10) || 8000;
+const port = process.env.PORT || 8000;
 const app = express();
 const env = process.env.NODE_ENV  || 'development';
 
