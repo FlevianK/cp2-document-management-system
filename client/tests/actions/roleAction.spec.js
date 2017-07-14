@@ -24,9 +24,9 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('sync actions', () => {
-  afterEach(() => {
-    nock.cleanAll();
-  });
+  // afterEach(() => {
+  //   nock.cleanAll();
+  // });
 
   it('load all roles', () => {
     const expectedAction = [{ type: types.LOAD_ROLES_SUCCESS, body: { roles: [{ title: 'admin' }] } }];

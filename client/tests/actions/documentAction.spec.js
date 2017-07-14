@@ -22,9 +22,9 @@ describe('Document action', () => {
   const mockStore = configureMockStore(middleware);
 
   describe('sync actions', () => {
-    afterEach(() => {
-      nock.cleanAll();
-    });
+    // afterEach(() => {
+    //   nock.cleanAll();
+    // });
 
     it('load all documents', () => {
       const expectedAction = [{ type: types.LOAD_DOCUMENTS_SUCCESS, body: { allDocuments: [{ id: 1, title: 'rock', content: 'hey there' }] } }];

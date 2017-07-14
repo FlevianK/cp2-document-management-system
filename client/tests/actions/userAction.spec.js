@@ -24,9 +24,9 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('sync actions', () => {
-  afterEach(() => {
-    nock.cleanAll();
-  });
+  // afterEach(() => {
+  //   nock.cleanAll();
+  // });
 
   it('load all users', () => {
     const expectedAction = [{ type: types.LOAD_USERS_SUCCESS, body: { usersPage: [{ id: 1, username: 'mick', firstNme: 'hey' }] } }];

@@ -9,9 +9,9 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('sync login actions', () => {
-  afterEach(() => {
-    nock.cleanAll();
-  });
+  // afterEach(() => {
+  //   nock.cleanAll();
+  // });
 
   it('login', () => {
     const user = { email: 'mick@gmail.com', password: 'htff' };
