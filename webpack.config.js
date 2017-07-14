@@ -31,5 +31,11 @@ module.exports = {
         secure: false
       }
     }
+  },
+  customLaunchers: {  
+    Chrome_travis_ci: {
+      base: 'Chrome',
+      flags: ['--no-sandbox']
+    }
   }
 };
