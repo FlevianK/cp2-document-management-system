@@ -13,6 +13,10 @@
     "test": "npm run server-test && npm run client-test",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
+  "engines":{
+    "node": "8.1.4",
+    "npm": "5.0.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FlevianK/cp2-document-management-system.git"
