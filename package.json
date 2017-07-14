@@ -6,7 +6,7 @@
   "scripts": {
     "client-test": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./client/utils/config.js -R spec ./client/tests/**",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "start": "webpack-dev-server",
+    "start": "node index.js",
     "compile": "webpack",
     "server-test": "NODE_ENV=test npm run migrate && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -R spec server/tests",
     "test-migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
@@ -73,7 +73,9 @@
     "toastr": "^2.1.2",
     "url-loader": "^0.5.9",
     "uuid": "^3.1.0",
+    "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.2",
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
