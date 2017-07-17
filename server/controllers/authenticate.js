@@ -20,7 +20,7 @@ module.exports = {
       return res.status(403).send({ // forbidden request
         message: 'Password is required',
       });
-    } 
+    }
     return User
       .findOne({
         where: {
@@ -29,20 +29,25 @@ module.exports = {
       })
       .then((user) => {
         if (!user) {
-          return res.status(401).send({ 
-            message: 'Authentication failed. User not found.' 
+          return res.status(401).send({
+            message: 'Authentication failed. User not found.'
           });
         } else if (user) {
-          if (bcrypt.compareSync(user.password, req.body.password)) {
-            return res.status(401).send({ 
-              message: 'Authentication failed. Wrong password.' 
-            });
-          } else {
-            const token = jwt.sign({ 
-              userId: user.id, 
+          // const password = genSalt(8, function)
+          // console.log('USER IS: ', user.password);
+          // console.log('BODY IS: ', req.body.password);
+          bcrypt.compare(req.body.password, user.password, (err, confirm) => {
+            if (err || confirm === false) {
+              console.log("tunafika hapa");
+              return res.status(401).send({
+                message: 'Authentication failed. Wrong password.'
+              });
+            }
+            const token = jwt.sign({
+              userId: user.id,
               userRole: user.title
-            }, 
-            secret, 
+            },
+            secret,
             {
               expiresIn: 1440 // expires in 24 hours
             });
@@ -50,12 +55,13 @@ module.exports = {
               success: true,
               message: 'Login successful!',
               token: token,
-              userRole: user.title,
+              userRole: user.title || 'undefined',
               userId: user.id
             });
-          }
-
+          });
         }
+
+
       })
       .catch(error => res.status(400).send(error));
   },
@@ -66,8 +72,9 @@ module.exports = {
       jwt.verify(token, secret, (err, decoded) => {
         if (err) {
           return res.status(401).send({
-            success: false, 
-            message: 'Failed to authenticate token.' });
+            success: false,
+            message: 'Failed to authenticate token.'
+          });
         } else {
           req.decoded = decoded;
           next();
@@ -93,4 +100,4 @@ module.exports = {
       message: err.message
     });
   }
-}
+};

@@ -26,7 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       required: true,
-    }
+    },
+    title: {
+      type: DataTypes.STRING,
+      required: true,
+    },
   }, {
     classMethods: {
       associate: (models) => {
@@ -37,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         User.hasMany(models.Document, {
           foreignKey: 'userId',
-          as: 'document',
+          as: 'documents',
         });
       }
     }
