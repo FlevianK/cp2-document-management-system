@@ -33,12 +33,8 @@ module.exports = {
             message: 'Authentication failed. User not found.'
           });
         } else if (user) {
-          // const password = genSalt(8, function)
-          // console.log('USER IS: ', user.password);
-          // console.log('BODY IS: ', req.body.password);
           bcrypt.compare(req.body.password, user.password, (err, confirm) => {
             if (err || confirm === false) {
-              console.log("tunafika hapa");
               return res.status(401).send({
                 message: 'Authentication failed. Wrong password.'
               });

@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       required: true,
       default: 'public',
-    }
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      required: true,
+    },
   }, {
     classMethods: {
       associate: (models) => {
