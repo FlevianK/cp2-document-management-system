@@ -12,4 +12,13 @@ describe('login reducer', () => {
     const newState = loginUserReducer(initialState, action);
     expect(newState.length).toEqual(1);
   });
+  it('it should log out a user when passed USER_LOGOUT_SUCCESS', () => {
+    const initialState = [
+      { token: 'hgvvc.hjgc' }];
+    const loginUser = [
+    ];
+    const action = actions.logoutUserSuccess(loginUser);
+    const newState = loginUserReducer(initialState, action);
+    expect(newState.length).toEqual(0);
+  });
 });

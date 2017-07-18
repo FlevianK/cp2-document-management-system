@@ -1,0 +1,752 @@
+FORMAT: 1A
+
+# DMS
+- DMS is a simple document management system that allows users to perform all CRUD operations. It is implemented using RESTful API for the purpose of securing information while allowing user to interact with it smoothly.
+
+## Specifics
+- The endpoints of the API require authentication except login and user registration. 
+
+## Users Endpoints
+### Register a user  [POST /api/users]
+
+- Any one in the system becomes a member by registering apart from main system admin who's information is seed during installation of the system.
+- When registering a user is given a default role which is regular, it is the work of the admin to assign a user new role.
+- The following fields are required:
+
++ First Name
++ Last Name
++ Username
++ Email address
++ Password
+
++ Request (application/json)
+
+      {
+        "firstName": "Flevian",
+        "lastName": "Kanaiza",
+        "username": "kan",
+        "email": "kanaiza@gmail.com",
+        "password": "kanaiza"
+      }
+
++ Response 201 (application/json)
+
+    {
+      "message": "Registered successfully"
+    }
+
+### Login a User [POST /api/users/login]
+- Logs in an existing user.
+- The following fields are required:
++ Email address
++ Password
+
++ Request (application/json)
+
+      {
+        "email": "kanaiza@gmail.com",
+        "password": "kanaiza"
+      }
+      Response 200 (application/json)
+
+      {
+        "message": "Login successful!",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE1MDAzMzk5MTUsImV4cCI6MTUwMDM0MTM1NX0.C0ZC1gBopGxDQ-FlweC6ykjt3g0gE2GhNR2DQNhB0z8"
+        "username": "kanaiza",
+        "userRole": "regular"
+        "userId": 2,
+      }
+
+### List all Users [GET /api/users]
+- Lists all existing users.
++ Requires authentication and admin access
++ Response 200 (application/json)
+
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin@live.com",
+    "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+    "title": "admin",
+    "createdAt": "2017-07-18T07:46:12.855Z",
+    "updatedAt": "2017-07-18T07:46:12.855Z"
+  },
+  {
+    "id": 2,
+    "username": "mercy",
+    "firstName": "mushai",
+    "lastName": "mercy",
+    "email": "kan@gmail.com",
+    "password": "$2a$08$h/kRSxO0w2ian2k/QnqNS.pwC8CmxC4Ga0ekM.lLzSeIvvv6p68fa",
+    "title": "regular",
+    "createdAt": "2017-07-18T11:58:17.326Z",
+    "updatedAt": "2017-07-18T11:58:17.326Z"
+  },
+  {
+    "id": 21,
+    "username": "ma",
+    "firstName": "mike",
+    "lastName": "mike",
+    "email": "mike@gmail.com",
+    "password": "$2a$08$0FEbalk2N91gOejDN6tlZOORKFEcU.SFMWtV4/p8KN.7cI88L0k56",
+    "title": "regular",
+    "createdAt": "2017-07-18T13:43:51.737Z",
+    "updatedAt": "2017-07-18T13:43:51.737Z"
+  }
+]
+
+### Pagination for users [GET /api/users/?limit={integer}&offset={integer}]
+- Gives a list of existing users retrive depending on the limit and offset provided
+- For example:`/api/users/?limit=2&offset=0`
++ Requires authentication and admin access
++ Response 200 (application/json)
+
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin@live.com",
+    "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+    "title": "admin",
+    "createdAt": "2017-07-18T07:46:12.855Z",
+    "updatedAt": "2017-07-18T07:46:12.855Z"
+  },
+  {
+    "id": 2,
+    "username": "mercy",
+    "firstName": "mushai",
+    "lastName": "mercy",
+    "email": "kan@gmail.com",
+    "password": "$2a$08$h/kRSxO0w2ian2k/QnqNS.pwC8CmxC4Ga0ekM.lLzSeIvvv6p68fa",
+    "title": "regular",
+    "createdAt": "2017-07-18T11:58:17.326Z",
+    "updatedAt": "2017-07-18T11:58:17.326Z"
+  }
+]
+
+### Get a specific user [GET /api/users/:userId]
+- Retrives a specific user i.e, `/api/users/2`
++ Requires authentication
++ Response 200 (application/json)
+
+{
+  "id": 2,
+  "username": "mercy",
+  "firstName": "mushai",
+  "lastName": "mercy",
+  "email": "kan@gmail.com",
+  "password": "$2a$08$h/kRSxO0w2ian2k/QnqNS.pwC8CmxC4Ga0ekM.lLzSeIvvv6p68fa",
+  "title": "regular",
+  "createdAt": "2017-07-18T11:58:17.326Z",
+  "updatedAt": "2017-07-18T11:58:17.326Z"
+}
+
+### Updates user information [PUT /api/users/:userId]
+- Update details of a user whose id is specified, i.e `/api/users/2`
++ Requires authentication
+
++ Request (application/json)
+
+        {
+           firstName: "manie",
+           username: "human
+        }
+
++ Response 200 (application/json)
+{
+  "message": "Updated successfully"
+}
+
+
+### Delete a user [DELETE /api/users/:UserId]
+- Deletes a user whose id is specified, i.e `/api/users/3`
++ Requires authentication and Admin access
+
++ Response 204 (application/json)
+
+- If the user does not exist:
++ Response 404 (application/json)
+          {
+            "message": "User not Found"
+          }
+
+### Search for a User [GET /api/search/users/?q={searcValue}]
+- Search a user by their username,first name, last name and email address, i.e `/api/search/users/?q=mi`
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin@live.com",
+    "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+    "title": "admin",
+    "createdAt": "2017-07-18T07:46:12.855Z",
+    "updatedAt": "2017-07-18T07:46:12.855Z"
+  },
+  {
+    "id": 21,
+    "username": "ma",
+    "firstName": "mike",
+    "lastName": "mike",
+    "email": "mike@gmail.com",
+    "password": "$2a$08$0FEbalk2N91gOejDN6tlZOORKFEcU.SFMWtV4/p8KN.7cI88L0k56",
+    "title": "regular",
+    "createdAt": "2017-07-18T13:43:51.737Z",
+    "updatedAt": "2017-07-18T13:43:51.737Z"
+  }
+]
+
+### Pagination for users search results [GET /api/search/users/?q={searcValue}limit={integer}&offset={integer}]
+- Gives a list of existing users retrive depending on the limit and offset provided, i.e /api/search/users/?q=mi&limit=2&offset=0
+- For example:`/api/search/users/?q=ka&limit=2&offset=0`
++ Requires authentication and admin access
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin@live.com",
+    "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+    "title": "admin",
+    "createdAt": "2017-07-18T07:46:12.855Z",
+    "updatedAt": "2017-07-18T07:46:12.855Z"
+  },
+  {
+    "id": 21,
+    "username": "ma",
+    "firstName": "mike",
+    "lastName": "mike",
+    "email": "mike@gmail.com",
+    "password": "$2a$08$0FEbalk2N91gOejDN6tlZOORKFEcU.SFMWtV4/p8KN.7cI88L0k56",
+    "title": "regular",
+    "createdAt": "2017-07-18T13:43:51.737Z",
+    "updatedAt": "2017-07-18T13:43:51.737Z"
+  }
+]
+
+
+## Role Endpoints
+- All roles endpoints require authentication by the admin.
+-roles are unique
+
+### create a role [POST /api/roles]
++ Requires authentication
+- The following field are required:
+
++ title
++ Request (application/json)
+    {
+      title: 'Fellow'
+    }
++ Response 201 (application/json)
+    {
+      "message": "Created successfully"
+    }
+
+### list roles [GET /api/roles]
+- Lists all existing roles. 
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "title": "admin",
+    "description": "admin",
+    "createdAt": "2017-07-18T07:46:12.804Z",
+    "updatedAt": "2017-07-18T07:46:12.804Z"
+  },
+  {
+    "id": 2,
+    "title": "regular",
+    "description": "regular",
+    "createdAt": "2017-07-18T07:46:12.804Z",
+    "updatedAt": "2017-07-18T07:46:12.804Z"
+  },
+  {
+    "id": 5,
+    "title": "adss000",
+    "description": "asdssss",
+    "createdAt": "2017-07-18T09:20:40.549Z",
+    "updatedAt": "2017-07-18T10:20:07.749Z"
+  },
+  {
+    "id": 7,
+    "title": "ad",
+    "description": "aa",
+    "createdAt": "2017-07-18T10:20:49.000Z",
+    "updatedAt": "2017-07-18T10:20:49.000Z"
+  }
+]
+
+### Pagination of roles [GET /api/roles/?q={searcValue}limit={integer}&offset={integer}]
+- Lists all existing roles depending on the limit and offset provided, i.e /api/roles/?q=ad&limit=2&offset=0. 
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "title": "admin",
+    "description": "admin",
+    "createdAt": "2017-07-18T07:46:12.804Z",
+    "updatedAt": "2017-07-18T07:46:12.804Z"
+  },
+  {
+    "id": 2,
+    "title": "regular",
+    "description": "regular",
+    "createdAt": "2017-07-18T07:46:12.804Z",
+    "updatedAt": "2017-07-18T07:46:12.804Z"
+  }
+]
+
+### List role for the search results [GET /api/search/roles/?q=ad]
+- Lists all existing roles depending on the limit and offset provided. 
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "title": "admin",
+    "description": "admin",
+    "createdAt": "2017-07-18T07:46:12.804Z",
+    "updatedAt": "2017-07-18T07:46:12.804Z"
+  },
+  {
+    "id": 5,
+    "title": "adss000",
+    "description": "asdssss",
+    "createdAt": "2017-07-18T09:20:40.549Z",
+    "updatedAt": "2017-07-18T10:20:07.749Z"
+  },
+  {
+    "id": 7,
+    "title": "ad",
+    "description": "aa",
+    "createdAt": "2017-07-18T10:20:49.000Z",
+    "updatedAt": "2017-07-18T10:20:49.000Z"
+  }
+]
+
+### Pagination of roles for the result of search [GET /api/search/roles/?q={searcValue}limit={integer}&offset={integer}]
+- Lists all existing roles depending on the limit and offset provided, i.e /api/search/roles/?q=ad&limit=2&offset=0. 
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "title": "admin",
+    "description": "admin",
+    "createdAt": "2017-07-18T07:46:12.804Z",
+    "updatedAt": "2017-07-18T07:46:12.804Z"
+  },
+  {
+    "id": 5,
+    "title": "adss000",
+    "description": "asdssss",
+    "createdAt": "2017-07-18T09:20:40.549Z",
+    "updatedAt": "2017-07-18T10:20:07.749Z"
+  }
+]
+
+### Delete a role [DELETE /api/roles/:roleId]
+- Deletes a role depending on the role provided. 
++ Response 204 (application/json)
+-If does not exists
++ Response 404 (application/json)
+{
+  "message": "Role not found"
+}
+
+### Update a role [PUT /api/roles/:roleId]
+- Updates a role depending on the role id specified.
++ Response 200 (application/json)
+{
+  "message": "Update successfully" 
+}
+
+### Get a role by  the specied role id  [GET /api/roles/:roleId]
+- Deletes a role depending on the role provided. 
++ Response 200 (application/json)
+{
+  "id": 2,
+  "title": "regular",
+  "description": "regular",
+  "createdAt": "2017-07-18T07:46:12.804Z",
+  "updatedAt": "2017-07-18T07:46:12.804Z"
+}
+
+
+## Documents Enpoints
+- All documents endpoints require authentication. They are specific to the user. 
+- The admin can view all documents belonging to all users.
+- Other users have access to public documents, their role type access documents and their own documents.
+
+### create a document [POST /api/documents]
+- Creates a new document specific to the user.
++ Requires authentication
+- The following fields are required:
+
++ title
++ content
++ category: [select options] `Public` or `Private` or `Role` for example 'regular'
+
++ Request (application/json)
+
+    {
+      title: 'React',
+      content: 'React with redux',
+      access: 'Public',
+    }
+
++ Response 201 (application/json)
+    {
+      "message": "Created successfully"
+    }
+
+### list documents [GET /api/documents]
+- Lists all existing documents including the details of the user who created.. 
+- Users can view all documennts they created, public and those whose access is the same as their roles. 
+- Admin views all documents.
+- For example: `/api/documents`
++ Requires authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "title": "a",
+    "content": "aa",
+    "access": "private",
+    "userId": 1,
+    "createdAt": "2017-07-18T07:49:25.103Z",
+    "updatedAt": "2017-07-18T07:49:43.172Z"
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "private",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:04:34.606Z"
+  },
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "public",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:04:46.544Z"
+  }
+]
+
+### Pagination all for documents [GET /api/documents/?limit={integer}&offset={integer}]
+
+- Lists all documents including the details of the user who created with limit and offset provided.
+- For example: `/api/documents/?limit=2&offset=1`
++ Requires authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 1,
+    "title": "a",
+    "content": "aa",
+    "access": "private",
+    "userId": 1,
+    "createdAt": "2017-07-18T07:49:25.103Z",
+    "updatedAt": "2017-07-18T07:49:43.172Z",
+    "User": {
+      "id": 1,
+      "username": "admin",
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@live.com",
+      "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+      "title": "admin",
+      "createdAt": "2017-07-18T07:46:12.855Z",
+      "updatedAt": "2017-07-18T07:46:12.855Z"
+    }
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "private",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:04:34.606Z",
+    "User": {
+      "id": 1,
+      "username": "admin",
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@live.com",
+      "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+      "title": "admin",
+      "createdAt": "2017-07-18T07:46:12.855Z",
+      "updatedAt": "2017-07-18T07:46:12.855Z"
+    }
+  }
+]
+
+### List all  role-based documents [GET /api/roles/documents/]
+- Lists all role-based existing documents including the details of the user who created. Users can view all role-based documents depending on their roles.
+- requires authentication
+- For example: `/api/roles/documents/`
++ Response 200 (application/json)
+[
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:06:51.616Z"
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:06:58.388Z"
+  },
+  {
+    "id": 1,
+    "title": "a",
+    "content": "aa",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T07:49:25.103Z",
+    "updatedAt": "2017-07-18T14:07:03.135Z"
+  }
+]
+
+### Pagination for all role-based documents [GET /api/roles/documents/?limit={integer}&offset={integer}]
+- Lists all role-based documents existing including the details of the user who created depending on the role of the authenticated user with limit and offset provided.
+- For example: `/api/documents/?limit=2&offset=1`
++ Requires authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:06:51.616Z",
+    "User": {
+      "id": 1,
+      "username": "admin",
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@live.com",
+      "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+      "title": "admin",
+      "createdAt": "2017-07-18T07:46:12.855Z",
+      "updatedAt": "2017-07-18T07:46:12.855Z"
+    }
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:06:58.388Z",
+    "User": {
+      "id": 1,
+      "username": "admin",
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@live.com",
+      "password": "$2a$08$9bj8YC9hAx848T8cuVH89esW.gdClpLH.jg.z4hwzqMAfyQPyHVD.",
+      "title": "admin",
+      "createdAt": "2017-07-18T07:46:12.855Z",
+      "updatedAt": "2017-07-18T07:46:12.855Z"
+    }
+  }
+]
+
+### Get a specific document [GET /api/documents/:documentId]
+- Gets a document with the ID provided.
+- For example: `/api/documents/1`
++ Requires authentication
++ Response 200 (application/json).
+{
+  "id": 6,
+  "title": "hey",
+  "content": "more",
+  "access": "admin",
+  "userId": 1,
+  "createdAt": "2017-07-18T14:04:46.544Z",
+  "updatedAt": "2017-07-18T14:06:51.616Z"
+}
+
+### Get a user's documents [GET /users/:UserId/documents]
+- Lists all documents belonging to the user whose id has been specified.
+- For example: `api/users/1/documents`
++ Requires Authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:06:51.616Z"
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:06:58.388Z"
+  },
+  {
+    "id": 1,
+    "title": "a",
+    "content": "aa",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T07:49:25.103Z",
+    "updatedAt": "2017-07-18T14:07:03.135Z"
+  }
+]
+
+### Pagination for all user's documents [GET /api/users/:UserId/documents/?limit={integer}&offset={integer}]
+- Lists all user's documents for the authenticated user with limit and offset provided.
+- For example: `/api/users/1/documents/?limit=2&offset=0`
++ Requires authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:06:51.616Z"
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:06:58.388Z"
+  }
+]
+
+
+### Update a document [PUT /api/documents/:documentId]
+Updates the document whose id is provided.
+- For example: `/api/documents/1`
++ Requires authentication
++ Response 200 (application/json)
+  {
+    "message": "Updated successful"
+  }
+- If the document does not exist:
++ Response 404 (application/json)
+    {
+      "message": "Document not Found"
+    }
+
+### Deletes a document [DELETE /api/documents/:documentId]
+
+- Deletes the document whose id has been pdrovided.
+- For example i.e `/api/documents/87`
+- Requires authentication
++ Response 204 (application/json)
+
+- If the document does not exist:
++ Response 404 (application/json)
+    {
+      "message": "Document not Found"
+    }
+
+### Search for a document [GET /api/search/documents/q={searcValue}]
+- Searches for documents by their titles, content, access.
+- For admin the search is done across all documents in the database while for any other user the search is done across all the documents the authenticated user craated, public access type and role-based access type depending on the role of the authenticated user.
+- For example: `api/search/documents/?q=a`
++ Requires authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:06:51.616Z"
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:06:58.388Z"
+  },
+  {
+    "id": 1,
+    "title": "a",
+    "content": "aa",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T07:49:25.103Z",
+    "updatedAt": "2017-07-18T14:07:03.135Z"
+  }
+]
+
+- If the document does not exist:
++ Response 404 (application/json)
+    {
+      "message": "Document not Found"
+    }
+
+### Pagination for search documents results [GET /api/search/documents/?q={searcValue}limit={integer}&offset={integer}]
+- Lists all documents depending on the serch item for the authenticated user with limit and offset provided.
+- For admin the search is done across all documents in the database while for any other user the search is done across all the documents the authenticated user craated, public access type and role-based access type depending on the role of the authenticated user.
+- Searches for documents by their titles, content, access.
+- For example: `/api/search/documents/?q=a&limit=2&offset=1`
++ Requires authentication
++ Response 200 (application/json)
+[
+  {
+    "id": 6,
+    "title": "hey",
+    "content": "more",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:46.544Z",
+    "updatedAt": "2017-07-18T14:06:51.616Z"
+  },
+  {
+    "id": 5,
+    "title": "hey",
+    "content": "home",
+    "access": "admin",
+    "userId": 1,
+    "createdAt": "2017-07-18T14:04:34.606Z",
+    "updatedAt": "2017-07-18T14:06:58.388Z"
+  }
+]

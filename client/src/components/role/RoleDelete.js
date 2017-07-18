@@ -17,7 +17,7 @@ export class RoleDelete extends React.Component {
     super(props);
     this.state = {
       deletedRole: {
-        role: this.props.params.roleTitle
+        id: this.props.params.roleId
       },
       open: true
     };

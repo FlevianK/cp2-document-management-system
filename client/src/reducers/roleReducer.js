@@ -18,6 +18,15 @@ export default function roleReducer(state = initialState.roles, action) {
       Object.assign({}, action.roles)
     ];
 
+  case types.UPDATE_ROLE_SUCCESS:
+    return [
+      ...state,
+      Object.assign({}, action.roles)
+    ];
+
+  case types.LOAD_ROLE_SUCCESS:
+    return action.roles;
+
   default:
     return state;
   }

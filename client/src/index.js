@@ -36,7 +36,9 @@ import {
   loadRolesPage,
   logoutUser,
   searchRoles,
-  searchRolesPage
+  searchRolesPage,
+  updateRole,
+  loadRole
 } from './actions';
 
 const store = configureStore();

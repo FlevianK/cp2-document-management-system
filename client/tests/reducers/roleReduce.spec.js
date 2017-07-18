@@ -60,4 +60,16 @@ describe('role reducer', () => {
     const newState = roleSearchPageReducer(initialState, action);
     expect(newState.length).toEqual(2);
   });
+  it('it should get a single role when passed LOAD_ROLE_SUCCESS', () => {
+    const initialState = [
+      { id: 'A', title: 'A' },
+      { id: 'B', title: 'B' }
+    ];
+    const roles = [
+      { id: 'A', title: 'A' }
+    ];
+    const action = actions.loadRoleSuccess(roles);
+    const newState = roleReducer(initialState, action);
+    expect(newState.length).toEqual(1);
+  });
 });

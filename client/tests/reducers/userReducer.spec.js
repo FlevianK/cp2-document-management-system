@@ -19,13 +19,26 @@ describe('user reducer', () => {
     expect(newState[1].username).toEqual('B');
     expect(newState[2].username).toEqual('C');
   });
+  it('it should update user when passed UPDATE_USER_SUCCESS', () => {
+    const initialState = [
+      { username: 'A' },
+      { username: 'B' }
+    ];
+    const user = { username: 'C' };
+    const action = actions.updateuserSuccess(user);
+    const newState = userReducer(initialState, action);
+    expect(newState.length).toEqual(3);
+    expect(newState[0].username).toEqual('A');
+    expect(newState[1].username).toEqual('B');
+    expect(newState[2].username).toEqual('C');
+  });
   it('it should get a single user when passed LOAD_USER_SUCCESS', () => {
     const initialState = [
       { id: 'A', username: 'A' },
       { id: 'B', username: 'B' }
     ];
     const users = [
-      { ids: 'A', username: 'A' }
+      { id: 'A', username: 'A' }
     ];
     const action = actions.loadUserSuccess(users);
     const newState = userReducer(initialState, action);

@@ -5,13 +5,15 @@ import { bindActionCreators } from 'redux';
 import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
-import { DocumentList, DocumentHeader } from '../../containers';
+import { DocumentsList, DocumentHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 
 export class SearchDocument extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      documentsSearchPage: {},
+      documentsSearch: {},
       searchValue: '',
       activePage: 1,
       limit: 2,
@@ -56,7 +58,7 @@ export class SearchDocument extends React.Component {
             <i className="material-icons" onClick={this.onDocumentClick} >search</i>
           </div>
         </div> 
-        <DocumentList documents={documentsSearch} />
+        <DocumentsList documents={documentsSearch} />
         
         {totalItems > this.state.limit
           ? <Pagination

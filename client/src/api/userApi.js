@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
+//const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
+const API_URL = 'http://localhost:8000/api';
 
 export function login(user) {
   return axios.post(`${API_URL}/users/login`, user);
@@ -26,7 +27,7 @@ export function createdUser(newUser) {
 export function userUpdate(updatedUser) {
   const token = localStorage.jwt;
   return axios.put(
-    `${API_URL}/users/${updatedUser.userId}`,
+    `${API_URL}/users/${updatedUser.id}`,
     updatedUser,
     { headers: { 'x-access-token': token } }
   );

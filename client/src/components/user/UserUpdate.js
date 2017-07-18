@@ -31,6 +31,13 @@ export class UserUpdate extends React.Component {
     this.props.actions.loadUser(this.state.users);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const user = nextProps.users;
+    this.setState({
+      users: user
+    });
+  }
+
   onUserChange(event) {
     event.preventDefault();
     const field = event.target.name;
@@ -86,14 +93,14 @@ export class UserUpdate extends React.Component {
                   name="username"
                   label="Username"
                   type="text"
-                  placeholder={this.props.users.username}
+                  value={this.state.users.username}
                   onChange={this.onUserChange}
                 />
 
                 <Input
                   name="firstName"
                   label="First name"
-                  placeholder={this.props.users.firstName}
+                  value={this.state.users.firstName}
                   type="text"
                   onChange={this.onUserChange}
                 />
@@ -101,7 +108,7 @@ export class UserUpdate extends React.Component {
                 <Input
                   name="lastName"
                   label="Last name"
-                  placeholder={this.props.users.lastName}
+                  value={this.state.users.lastName}
                   type="text"
                   onChange={this.onUserChange}
                 />
@@ -109,7 +116,7 @@ export class UserUpdate extends React.Component {
                 <Input
                   name="email"
                   label="Email address"
-                  placeholder={this.props.users.email}
+                  value={this.state.users.email}
                   type="text"
                   onChange={this.onUserChange}
                 />
@@ -117,8 +124,7 @@ export class UserUpdate extends React.Component {
                 <Input
                   name="password"
                   label="Password"
-                  type="text"
-                  placeholder={this.props.users.password}
+                  type="password"
                   onChange={this.onUserChange}
                 />
               </form>

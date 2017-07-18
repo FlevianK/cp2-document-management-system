@@ -6,38 +6,48 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Input, RoleHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
-import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
+import { Input } from '../../containers';
+import * as roleAction from '../../actions/roleAction';
+import DashboardHeader from './../DashboardHeader';
 
-export class RoleCreate extends React.Component {
+export class RoleUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newRole: {
-        title: '',
-        description: ''
+      roles: {
+        roleId: this.props.params.roleId
       },
       open: true
     };
     this.onRoleChange = this.onRoleChange.bind(this);
-    this.onRoleCreate = this.onRoleCreate.bind(this);
+    this.onRoleUpdate = this.onRoleUpdate.bind(this);
     this.handleClose = this.handleClose.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.actions.loadRole(this.props.params);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const role = nextProps.roles;
+    this.setState({
+      roles: role
+    });
   }
 
   onRoleChange(event) {
     event.preventDefault();
     const field = event.target.name;
-    const newRole = this.state.newRole;
-    newRole[field] = event.target.value;
-    return this.setState({ newRole });
+    const roles = this.state.roles;
+    roles[field] = event.target.value;
+    return this.setState({ roles });
   }
 
-  onRoleCreate(event) {
+  onRoleUpdate(event) {
     event.preventDefault();
-    this.props.actions.createRole(this.state.newRole)
+    this.props.actions.updateRole(this.state.roles)
       .then(() => {
         this.setState({ open: false });
         browserHistory.push('/roles');
@@ -53,28 +63,28 @@ export class RoleCreate extends React.Component {
   }
 
   render() {
+    console.log(this.props, "llll")
+    const { roles } = this.props;
     const actions = [
       <FlatButton
-        style={{color: "red", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
+        style={{ color: "red", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% " }}
         label="Cancel"
         primary={true}
         onClick={this.handleClose}
       />,
       <FlatButton
-        style={{color: "green", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% "}}
-        label="Create"
+        style={{ color: "green", margin: " 0 15% 0 15%", padding: " 0 4% 0 4% " }}
+        label="Update"
         primary={true}
         keyboardFocused={true}
-        onClick={this.onRoleCreate}
+        onClick={this.onRoleUpdate}
       />];
     return (
-      <div className="col-md-12">
+      <div>
         <DashboardHeader />
-        <RoleHeader />
         <div>
           <MuiThemeProvider>
             <Dialog
-              title="Create a role"
               actions={actions}
               modal={false}
               open={this.state.open}
@@ -83,14 +93,16 @@ export class RoleCreate extends React.Component {
               <form>
                 <Input
                   name="title"
+                  label="title"
                   type="text"
-                  label="Role"
+                  value={this.state.roles.title}
                   onChange={this.onRoleChange}
                 />
                 <Input
                   name="description"
+                  label="Description"
                   type="text"
-                  label="Descriptin"
+                  value={this.state.roles.description}
                   onChange={this.onRoleChange}
                 />
               </form>
@@ -101,11 +113,19 @@ export class RoleCreate extends React.Component {
     );
   }
 }
-RoleCreate.propTypes = {
-  actions: PropTypes.object.isRequired
+
+RoleUpdate.propTypes = {
+  roles: PropTypes.object,
+  actions: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
 };
+
+const mapStateToProps = (state, ownProps) => ({
+  roles: state.roles
+});
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(roleAction, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(RoleCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(RoleUpdate);

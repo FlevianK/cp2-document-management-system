@@ -25,6 +25,7 @@ export function logoutUser() {
   return function (dispatch) {
     localStorage.removeItem('jwt');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userRole');
     dispatch(logoutUserSuccess());
   };
 }

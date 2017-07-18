@@ -8,7 +8,7 @@ export default function loginUserReducer(state = initialState.loginUser, action)
 
   case types.USER_LOGOUT_SUCCESS:
     action.loginUser = [];
-    return {};
+    return action.loginUser;
 
   default:
     return state;

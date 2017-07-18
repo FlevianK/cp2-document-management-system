@@ -31,7 +31,15 @@ export class DocumentUpdate extends React.Component {
     this.props.actions.loadDocument(this.props.params);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const document = nextProps.documents;
+    this.setState({
+      documents: document
+    });
+  }
+
   onDocumentChange(event) {
+    
     event.preventDefault();
     const field = event.target.name;
     const documents = this.state.documents;
@@ -71,7 +79,7 @@ export class DocumentUpdate extends React.Component {
         keyboardFocused={true}
         onClick={this.onDocumentUpdate}
       />]
-    const accessOption = [{ value: 'private', text: 'Private' }, { value: 'public', text: 'Public' }, { value: this.props.userRole, text: 'Role' }];
+    const accessOption = [{ value: '', text: 'select access type' }, { value: 'private', text: 'Private' }, { value: 'public', text: 'Public' }, { value: this.props.userRole, text: 'Role' }];
     return (
       <div>
         <DashboardHeader />
@@ -86,9 +94,9 @@ export class DocumentUpdate extends React.Component {
               <form>
                 <Input
                   name="title"
-                  label="title"
+                  label="Title"
                   type="text"
-                  placeholder={this.props.documents.title}
+                  value={this.state.documents.title}
                   onChange={this.onDocumentChange}
                 />
                 <div className="row">
@@ -97,7 +105,7 @@ export class DocumentUpdate extends React.Component {
                       name="content"
                       label="Content"
                       type="text"
-                      placeholder={this.props.documents.content}
+                      value={this.state.documents.content}
                       onChange={this.onDocumentChange}
                     />
                   </div>
@@ -106,8 +114,7 @@ export class DocumentUpdate extends React.Component {
                   options={accessOption}
                   name="access"
                   label="Access Type"
-                  defaultOption="select access type"
-                  placeholder={this.state.documents.access}
+                  value={this.state.documents.access}
                   onChange={this.onDocumentChange}
                 />
               </form>

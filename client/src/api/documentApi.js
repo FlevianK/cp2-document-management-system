@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
+//const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
+const API_URL = 'http://localhost:8000/api';
 
 export function allDocuments() {
   const token = localStorage.jwt;
@@ -30,7 +31,7 @@ export function createDoc(newDoc) {
 export function updateDoc(updateDocs) {
   const token = localStorage.jwt;
   return axios.put(
-    `${API_URL}/documents/${updateDocs.documentId}`,
+    `${API_URL}/documents/${updateDocs.id}`,
     updateDocs,
     { headers: { 'x-access-token': token } }
   );

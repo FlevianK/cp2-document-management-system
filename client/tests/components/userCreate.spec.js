@@ -6,7 +6,7 @@ import { shallow, mount } from 'enzyme';
 describe('Create user', () => {
   it('renders div', () => {
     const wrapper = shallow(<UserCreate />);
-    expect(wrapper.find('div').length).toBe(8);
+    expect(wrapper.find('div').length).toBe(7);
   });
   it('renders input', () => {
     const wrapper = shallow(<UserCreate />);
@@ -24,7 +24,7 @@ describe('Create user', () => {
   it('form  input type', () => {
     const wrapper = shallow(<UserCreate />);
     const submit = wrapper.find('Input').last();
-    expect(submit.prop('type')).toBe('text');
+    expect(submit.prop('type')).toBe('password');
   });
   it('renders doc submit button', () => {
     const props = {

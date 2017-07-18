@@ -18,6 +18,18 @@ describe('User action', () => {
       expect(action).toEqual(expectedAction);
     });
   });
+  describe('update user', () => {
+    it('should update a user UPDATE_USER_SUCCESS action', () => {
+      const users = { id: 2, username: 'mick', firstName: 'hey', lastName: 'hip', email: 'mick@gmail.com', password: 'public' };
+      const expectedAction = {
+        type: types.UPDATE_USER_SUCCESS,
+        users
+      };
+      const action = userAction.updateuserSuccess(users);
+
+      expect(action).toEqual(expectedAction);
+    });
+  });
 });
 
 const middleware = [thunk];

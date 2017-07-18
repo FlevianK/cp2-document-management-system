@@ -17,6 +17,16 @@ describe('role action', () => {
 
       expect(action).toEqual(expectedAction);
     });
+    it('should update a role UPDATE_ROLE_SUCCESS action', () => {
+      const roles = { id: 3, title: 'fellow'};
+      const expectedAction = {
+        type: types.UPDATE_ROLE_SUCCESS,
+        roles
+      };
+      const action = roleAction.updateRoleSuccess(roles);
+
+      expect(action).toEqual(expectedAction);
+    });
   });
 });
 
@@ -76,6 +86,24 @@ describe('sync actions', () => {
     store.dispatch(roleAction.createRole(newRole)).then(() => {
       const action = store.getAction();
       expect(action[1].type).toEqual(types.CREATE_ROLE_SUCCESS);
+    });
+  });
+  it('update role', () => {
+    const updatedRole = { id: 1, title: 'fellow' };
+    const expectedAction = [{ type: types.UPDATE_ROLE_SUCCESS, body: { roles: [{ id: 1, title: 'fellow' }] } }];
+    const store = mockStore({ roles: [] }, expectedAction);
+    store.dispatch(roleAction.updateRole(updatedRole)).then(() => {
+      const action = store.getAction();
+      expect(action[4].type).toEqual(types.UPDATE_ROLE_SUCCESS);
+    });
+  });
+  it('load a single user', () => {
+    const role = 1;
+    const expectedAction = [{ type: types.LOAD_ROLE_SUCCESS, body: { roles: [{ id: 1, username: 'mervin' }] } }];
+    const store = mockStore({ roles: [] }, expectedAction);
+    store.dispatch(roleAction.loadRole(role)).then(() => {
+      const action = store.getAction();
+      expect(action[5].type).toEqual(types.LOAD_ROLE_SUCCESS);
     });
   });
 });

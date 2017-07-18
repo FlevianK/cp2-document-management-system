@@ -18,6 +18,7 @@ import Role from './role/Role';
 import RoleCreate from './role/RoleCreate';
 import RoleDelete from './role/RoleDelete';
 import SearchRole from './role/SearchRole';
+import RoleUpdate from './role/RoleUpdate';
 
 export {
   Login,
@@ -43,4 +44,5 @@ export {
   RoleCreate,
   RoleDelete,
   SearchRole,
+  RoleUpdate,
 };

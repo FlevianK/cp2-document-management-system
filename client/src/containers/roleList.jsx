@@ -8,12 +8,14 @@ const RoleList = ({ roles }) => {
     <div>
       {roles.map(role =>
         <MuiThemeProvider>
-          <Card key={role.title} style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}}>
+          <Card key={role.id} style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}}>
             <CardText>
               <p>Role: {role.title}</p>
+              <p>Role: {role.description}</p>
             </CardText>
             <CardActions>
-              <Link to={`/roles/delete/${role.title}`} style={{color: " red", textAlign: "center"}}>DELETE</Link>
+              <Link to={`/roles/delete/${role.id}`} style={{color: " red", textAlign: "center"}}>DELETE</Link>
+              <Link to={`/roles/update/${role.id}`} style={{color: " green", float: "right"}}>UPDATE</Link>
             </CardActions>
           </Card>
         </MuiThemeProvider>

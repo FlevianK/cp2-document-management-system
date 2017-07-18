@@ -17,7 +17,18 @@ describe('Document action', () => {
 
       expect(action).toEqual(expectedAction);
     });
+    it('should update a document UPDATE_DOCUMENT_SUCCESS action', () => {
+      const documents = { id: 2, title: 'sun shine'};
+      const expectedAction = {
+        type: types.UPDATE_DOCUMENT_SUCCESS,
+        documents
+      };
+      const action = documentAction.updatedocumentSuccess(documents);
+
+      expect(action).toEqual(expectedAction);
+    });
   });
+  
   const middleware = [thunk];
   const mockStore = configureMockStore(middleware);
 

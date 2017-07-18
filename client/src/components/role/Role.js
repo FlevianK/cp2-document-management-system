@@ -12,10 +12,8 @@ export class Role extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      roles: {
-        title: '',
-        activePage: 1
-      },
+      roles: {},
+      activePage: 1,
       limit: 2,
       offset: 0
     };

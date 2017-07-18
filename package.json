@@ -9,7 +9,7 @@
     "start": "node index.js",
     "server-test": "NODE_ENV=test npm run migrate && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -R spec server/tests",
     "test-migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "test": "npm run server-test && npm run client-test",
+    "test": "npm run client-test && npm run server-test",
     "postinstall": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/FlevianK/cp2-document-management-system#readme",
   "dependencies": {
+    "aglio": "^2.3.0",
     "axios": "^0.16.2",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -72,7 +73,7 @@
     "redux-thunk": "^2.2.0",
     "rest-bac": "^1.0.0",
     "sass-loader": "^6.0.6",
-    "sequelize": "^4.3.2",
+    "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0",
     "start-server-webpack-plugin": "^2.2.0",
     "style-loader": "^0.18.2",

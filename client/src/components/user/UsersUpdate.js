@@ -34,6 +34,13 @@ export class UsersUpdate extends React.Component {
     this.props.action.loadRoles();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const user = nextProps.users;
+    this.setState({
+      users: user
+    });
+  }
+
   onUserChange(event) {
     event.preventDefault();
     const field = event.target.name;
@@ -41,7 +48,6 @@ export class UsersUpdate extends React.Component {
     users[field] = event.target.value;
     return this.setState({ users });
   }
-
 
   onUserUpdate(event) {
     event.preventDefault();
@@ -100,9 +106,9 @@ export class UsersUpdate extends React.Component {
                 <SelectOptions
                   options={this.props.roles}
                   name="title"
-                  label="Title"
+                  label="Role"
                   defaultOption="Select role"
-                  placeholder={this.props.users.title}
+                  value={this.state.users.title}
                   onChange={this.onUserChange}
                 />
               </form>

@@ -20,13 +20,13 @@ describe('create role component', () => {
   });
   it('renders Input', () => {
     const wrapper = shallow(<RoleCreate />);
-    expect(wrapper.find('Input').length).toBe(1);
+    expect(wrapper.find('Input').length).toBe(2);
   });
   it('form input type', () => {
     const wrapper = shallow(<RoleCreate />);
     const submit = wrapper.find('Input').last();
     expect(submit.prop('type')).toBe('text');
-    expect(submit.prop('name')).toBe('title');
+    expect(submit.prop('name')).toBe('description');
   });
   it('renders form', () => {
     const wrapper = shallow(<RoleCreate />);

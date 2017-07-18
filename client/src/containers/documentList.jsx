@@ -9,12 +9,12 @@ const DocumentList = ({ documents, handleOpen }) => {
       {documents.map(document =>
         <MuiThemeProvider>
           <Card key={document.id} style={{margin: " 1% 15% 3% 15%", padding: " 0 4% 4% 4% "}}>
-            <CardHeader
-              title={document.title}
-            />
             <CardText>
-              <p >{document.content}</p>
-              <p>{document.access}</p>
+              <h5>
+                <p >Title: {document.title}</p>
+              </h5>
+              <p>{document.content}</p>
+              <p style={{color: " green"}}>{document.access}</p>
             </CardText>
             <CardActions>
               <Link to={`/documents/delete/${document.id}`} style={{color: " red", float: "left"}}>DELETE</Link>

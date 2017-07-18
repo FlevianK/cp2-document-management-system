@@ -1,4 +1,4 @@
-import { allRoles, roleCreate, roleDelete, allRolesPage, roleSearchPage, roleSearch } from '../api/roleApi';
+import { allRoles, roleCreate, roleDelete, allRolesPage, roleSearchPage, roleSearch, singlerole, roleUpdate } from '../api/roleApi';
 import * as types from '../constants/appConstants';
 import toastr from 'toastr';
 
@@ -96,4 +96,36 @@ export function searchRolesPage(searchValue, limit, offset) {
 
 export function searchrolepagesuccess(rolesSearchPage) {
   return { type: 'SEARCH_ROLE_PAGE_SUCCESS', rolesSearchPage };
+}
+
+export function loadRole(role) {
+  return function (dispatch) {
+    return singlerole(role)
+      .then((res) => {
+        dispatch(loadRoleSuccess(res.data));
+      })
+      .catch((error) => {
+        throw (error);
+      });
+  };
+}
+
+export function loadRoleSuccess(roles) {
+  return { type: 'LOAD_ROLE_SUCCESS', roles };
+}
+
+export function updateRole(updatedRole) {
+  return function (dispatch) {
+    return roleUpdate(updatedRole)
+      .then((res) => {
+        dispatch(updateRoleSuccess(res.data));
+      })
+      .catch((error) => {
+        throw (error);
+      });
+  };
+}
+
+export function updateRoleSuccess(roles) {
+  return { type: 'UPDATE_ROLE_SUCCESS', roles };
 }

@@ -21,6 +21,7 @@ import {
   SearchUser,
   UsersUpdate,
   SearchRole,
+  RoleUpdate,
 } from './components';
 
 export default (
@@ -42,7 +43,8 @@ export default (
     <Route path="/users/search" component={SearchUser} />
     <Route path="/roles" component={Role} />
     <Route path="/roles/create" component={RoleCreate} />
-    <Route path="/roles/delete/:roleTitle" component={RoleDelete} />
+    <Route path="/roles/delete/:roleId" component={RoleDelete} />
+    <Route path="/roles/update/:roleId" component={RoleUpdate} />
     <Route path="/roles/search" component={SearchRole} />
   </Route>
 );
