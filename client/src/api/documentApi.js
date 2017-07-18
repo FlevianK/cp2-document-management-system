@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
+// const API_URL = 'http://localhost:8000/api';
 
 export function allDocuments() {
   const token = localStorage.jwt;
