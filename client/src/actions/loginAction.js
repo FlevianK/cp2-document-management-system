@@ -10,9 +10,6 @@ export const loginUser = (user) => {
         localStorage.setItem('userId', res.data.userId);
         localStorage.setItem('userRole', res.data.userRole);
         dispatch(loginUserSuccess(res.data));
-      })
-      .catch((error) => {
-        throw (error);
       });
   };
 };

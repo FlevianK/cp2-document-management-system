@@ -13,7 +13,7 @@ export function loadDocuments() { // all documents
         dispatch(loadDocumentsSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.res.data.message);
+        throw (error);
       });
   };
 }
@@ -45,7 +45,7 @@ export function loadRoleDocuments() { // all documents by role
         dispatch(loadRoleDocumentsSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.res.data.message);
+        throw (error);
       });
   };
 }
@@ -77,7 +77,7 @@ export function createDocument(newDoc) {
         dispatch(createdocumentSuccess(res.data));
       })
       .catch((error) => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -93,7 +93,7 @@ export function deleteDocument(deletedDoc) {
         dispatch(deletedocumentSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.res.data.message);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -109,7 +109,7 @@ export function updateDocument(updateDocs) {
         dispatch(updatedocumentSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.res.data.message);
+        throw (error);
       });
   };
 }
@@ -125,7 +125,7 @@ export function loadDocument(document) { // single document
         dispatch(loaddocumentSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.res.data.message);
+        throw (error);
       });
   };
 }
@@ -141,7 +141,7 @@ export function loadDoc() { // all user documents
         dispatch(loaddocSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.res.data.message);
+        throw (error);
       });
   };
 }
@@ -150,7 +150,7 @@ export function loaddocSuccess(documents) {
   return { type: 'LOAD_DOC_SUCCESS', documents };
 }
 
-export function loadDocList(limit, offset) { // all user documents by page
+export function loadDocList(limit, offset) { // all user documents by pagination
   return function (dispatch) {
     return allDocList(limit, offset)
       .then((res) => {
@@ -173,7 +173,7 @@ export function searchDocuments(searchValue) {
         dispatch(searchdocumentSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }
@@ -189,7 +189,7 @@ export function searchDocumentsPage(searchValue, limit, offset) {
         dispatch(searchdocumentpagesuccess(res.data));
       })
       .catch((error) => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }

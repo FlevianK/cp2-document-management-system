@@ -82,6 +82,7 @@ SearchUser.propTypes = {
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(userAction, dispatch)
 });
+
 const mapStateToProps = (state, ownProps) => ({
   usersSearch: state.usersSearch.length,
   usersSearchPage: state.usersSearchPage

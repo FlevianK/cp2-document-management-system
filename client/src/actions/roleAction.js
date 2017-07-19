@@ -9,7 +9,7 @@ export function loadRoles() {
         dispatch(loadRolesSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }
@@ -41,7 +41,7 @@ export function createRole(newRole) {
         dispatch(createroleSuccess(res.data));
       })
       .catch((error) => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -73,7 +73,7 @@ export function searchRoles(searchValue) {
         dispatch(searchroleSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }
@@ -89,7 +89,7 @@ export function searchRolesPage(searchValue, limit, offset) {
         dispatch(searchrolepagesuccess(res.data));
       })
       .catch((error) => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -121,7 +121,7 @@ export function updateRole(updatedRole) {
         dispatch(updateRoleSuccess(res.data));
       })
       .catch((error) => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }

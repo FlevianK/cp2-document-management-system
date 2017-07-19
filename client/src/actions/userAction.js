@@ -25,7 +25,7 @@ export function createUser(newUser) {
         dispatch(createuserSuccess(res.data));
       })
       .catch((error) => {
-        throw (error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -57,7 +57,7 @@ export function updateUser(updatedUser) {
         dispatch(updateuserSuccess(res.data));
       })
       .catch((error) => {
-        throw(error);
+        toastr.error(error.response.data.message);
       });
   };
 }
@@ -121,7 +121,7 @@ export function loadUsersPage(limit, offset) {
         dispatch(loadUsersPageSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
 }

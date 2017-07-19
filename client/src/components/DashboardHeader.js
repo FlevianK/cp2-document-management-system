@@ -15,6 +15,7 @@ export class DashboardHeader extends React.Component {
     event.preventDefault();
     this.props.actions.logoutUser();
     browserHistory.push('/');
+    window.location.reload();
   }
 
   render() {
@@ -51,8 +52,9 @@ export class DashboardHeader extends React.Component {
     );
   }
 }
+
 DashboardHeader.propTypes = {
-  actions: PropTypes.object
+  actions: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -60,3 +62,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(DashboardHeader);
+
