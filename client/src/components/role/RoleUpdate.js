@@ -90,14 +90,12 @@ export class RoleUpdate extends React.Component {
               open={this.state.open}
               onRequestClose={this.handleClose}
             >
+              <div className="row">
+                <div className="col s10 offset-m1">
+                  <p>Role: {this.state.roles.title}</p>
+                </div>
+              </div>
               <form>
-                <Input
-                  name="title"
-                  label="title"
-                  type="text"
-                  value={this.state.roles.title}
-                  onChange={this.onRoleChange}
-                />
                 <Input
                   name="description"
                   label="Description"
