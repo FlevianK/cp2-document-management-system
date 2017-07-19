@@ -1,7 +1,7 @@
-import { LOAD_USERS_SUCCESS, CREATE_USER_SUCCESS, DELETE_USER_SUCCESS, UPDATE_USER_SUCCESS, LOAD_USER_SUCCESS} from '../constants/appConstants';
-import initialState from './initialState';
+import { LOAD_USERS_SUCCESS, CREATE_USER_SUCCESS, DELETE_USER_SUCCESS, UPDATE_USER_SUCCESS, LOAD_USER_SUCCESS} from '../../constants/appConstants';
+import initialState from '../initialState';
 
-export default function userReducer(state = initialState.users, action) {
+const userReducer = (state = initialState.users, action) => {
   switch (action.type) {
   case LOAD_USERS_SUCCESS:
     return action.users;
@@ -30,4 +30,6 @@ export default function userReducer(state = initialState.users, action) {
   default:
     return state;
   }
-}
+}; 
+
+export default userReducer;

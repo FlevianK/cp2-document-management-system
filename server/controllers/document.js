@@ -9,6 +9,7 @@ module.exports = {
         message: 'Fill all fields',
       });
     }
+    console.log(req.body);
     return Document
       .create({
         title: req.body.title,

@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Input, DocumentHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 
 export class DocumentCreate extends React.Component {
@@ -44,6 +44,7 @@ export class DocumentCreate extends React.Component {
         browserHistory.push('/documents');
       })
       .catch((error) => {
+        this.setState({ open: true });
         toastr.error(error.response.data.message);
       });
   }

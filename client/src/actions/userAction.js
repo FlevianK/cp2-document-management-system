@@ -2,8 +2,12 @@ import { allUsers, createdUser, userDelete, userUpdate, allUsersPage, userSearch
 import * as types from '../constants/appConstants';
 import toastr from 'toastr';
 
-export function loadUsers() {
-  return function (dispatch) {
+export const loadUsers = () => {
+  /**
+    * loadUsers method
+    * @return all users
+    */
+  return (dispatch) => {
     return allUsers()
       .then((res) => {
         dispatch(loadusersSuccess(res.data));
@@ -12,62 +16,79 @@ export function loadUsers() {
         throw (error);
       });
   };
-}
+};
 
-export function loadusersSuccess(users) {
+export const loadusersSuccess = (users) => {
   return { type: 'LOAD_USERS_SUCCESS', users };
-}
+};
 
-export function createUser(newUser) {
-  return function (dispatch) {
+export const createUser = (newUser) => {
+  /**
+    * createUser method
+    * @params data - user details
+    */
+  return (dispatch) => {
     return createdUser(newUser)
       .then((res) => {
         dispatch(createuserSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
-}
+};
 
-export function createuserSuccess(users) {
+export const createuserSuccess = (users) => {
   return { type: 'CREATE_USER_SUCCESS', users };
-}
+};
 
-export function deleteUser(deletedUser) {
-  return function (dispatch) {
+export const deleteUser = (deletedUser)  => {
+  /**
+    * deleteUser method
+    * @params data - user id
+    */
+  return (dispatch) => {
     return userDelete(deletedUser)
       .then((res) => {
         dispatch(deleteuserSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
-}
+};
 
-export function deleteuserSuccess(users) {
+export const deleteuserSuccess = (users) => {
   return { type: 'DELETE_USER_SUCCESS', users };
-}
+};
 
-export function updateUser(updatedUser) {
-  return function (dispatch) {
+export const updateUser = (updatedUser) => {
+  /**
+    * updateUser method
+    * @params data - user details
+    */
+  return (dispatch) => {
     return userUpdate(updatedUser)
       .then((res) => {
         dispatch(updateuserSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
-}
+};
 
-export function updateuserSuccess(users) {
+export const updateuserSuccess = (users) => {
   return { type: 'UPDATE_USER_SUCCESS', users };
-}
+};
 
-export function searchUser(searchValue) {
-  return function (dispatch) {
+export const searchUser = (searchValue) => {
+  /**
+    * searchUser method
+    * @params data - search value
+    * @return all users depending on the search value
+    */
+  return (dispatch) => {
     return userSearch(searchValue)
       .then((res) => {
         dispatch(searchuserSuccess(res.data));
@@ -76,14 +97,19 @@ export function searchUser(searchValue) {
         throw (error);
       });
   };
-}
+};
 
-export function searchuserSuccess(usersSearch) {
+export const searchuserSuccess = (usersSearch) => {
   return { type: 'SEARCH_USER_SUCCESS', usersSearch };
-}
+};
 
-export function searchUsersPage(searchValue, limit, offset) {
-  return function (dispatch) {
+export const searchUsersPage = (searchValue, limit, offset) => {
+  /**
+    * searchUsersPage method
+    * @params data - search value, limit and offset
+    * @return all users depending on the search value and specified range
+    */
+  return (dispatch) => {
     return userSearchPage(searchValue, limit, offset)
       .then((res) => {
         dispatch(searchuserpagesuccess(res.data));
@@ -92,14 +118,19 @@ export function searchUsersPage(searchValue, limit, offset) {
         toastr.error(error.response.data.message);
       });
   };
-}
+};
 
-export function searchuserpagesuccess(usersSearchPage) {
+export const searchuserpagesuccess = (usersSearchPage) => {
   return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage };
-}
+};
 
-export function loadUser(user) {
-  return function (dispatch) {
+export const loadUser = (user) => {
+  /**
+    * loadUser method
+    * @params data - user id
+    * @return single user
+    */
+  return (dispatch) => {
     return allUser(user)
       .then((res) => {
         dispatch(loadUserSuccess(res.data));
@@ -108,14 +139,19 @@ export function loadUser(user) {
         throw (error);
       });
   };
-}
+};
 
-export function loadUserSuccess(users) {
+export const loadUserSuccess = (users) => {
   return { type: 'LOAD_USER_SUCCESS', users };
-}
+};
 
-export function loadUsersPage(limit, offset) {
-  return function (dispatch) {
+export const loadUsersPage = (limit, offset) => {
+  /**
+    * loadUsersPage method
+    * @params data - limit and offset
+    * @return all users depending on the specified range
+    */
+  return (dispatch) => {
     return allUsersPage(limit, offset)
       .then((res) => {
         dispatch(loadUsersPageSuccess(res.data));
@@ -124,8 +160,8 @@ export function loadUsersPage(limit, offset) {
         throw (error);
       });
   };
-}
+};
 
-export function loadUsersPageSuccess(usersPage) {
+export const loadUsersPageSuccess = (usersPage) => {
   return { type: 'LOAD_USERS_PAGE_SUCCESS', usersPage };
 }

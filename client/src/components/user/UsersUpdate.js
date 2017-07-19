@@ -10,7 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Input, SelectOptions, UserHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 

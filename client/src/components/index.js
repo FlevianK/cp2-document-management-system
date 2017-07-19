@@ -1,6 +1,5 @@
-import Login from './Login';
-import App from './App';
-import Dashboard from './Dashboard';
+import App from './common/App';
+import Dashboard from './common/Dashboard';
 import Document from './document/Document';
 import Documents from './document/Documents';
 import DocumentCreate from './document/DocumentCreate';
@@ -14,6 +13,7 @@ import UserDelete from './user/UserDelete';
 import UserUpdate from './user/UserUpdate';
 import UsersUpdate from './user/UsersUpdate';
 import SearchUser from './user/SearchUser';
+import Login from './user/Login';
 import Role from './role/Role';
 import RoleCreate from './role/RoleCreate';
 import RoleDelete from './role/RoleDelete';

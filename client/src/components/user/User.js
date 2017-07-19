@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { UserList, UserHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
 export class User extends React.Component {

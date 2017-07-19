@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { DocumentsList, DocumentHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 import SearchDocument from './SearchDocument';
 

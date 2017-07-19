@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Input, UserHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
 export class UserDelete extends React.Component {

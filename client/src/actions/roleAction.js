@@ -2,8 +2,12 @@ import { allRoles, roleCreate, roleDelete, allRolesPage, roleSearchPage, roleSea
 import * as types from '../constants/appConstants';
 import toastr from 'toastr';
 
-export function loadRoles() {
-  return function (dispatch) {
+export const loadRoles = () => {
+  /**
+    * loadRoles method
+    * @return all roles
+    */
+  return (dispatch) => {
     return allRoles()
       .then((res) => {
         dispatch(loadRolesSuccess(res.data));
@@ -12,14 +16,19 @@ export function loadRoles() {
         throw (error);
       });
   };
-}
+};
 
-export function loadRolesSuccess(roles) {
+export const loadRolesSuccess = (roles) => {
   return { type: 'LOAD_ROLES_SUCCESS', roles };
-}
+};
 
-export function loadRolesPage(limit, offset) {
-  return function (dispatch) {
+export const loadRolesPage = (limit, offset) => {
+  /**
+    * loadRolesPage method
+    * @params data - limit and offset
+    * @return all roles depending on the specified range
+    */
+  return (dispatch) => {
     return allRolesPage(limit, offset)
       .then((res) => {
         dispatch(loadRolesPageSuccess(res.data));
@@ -28,46 +37,59 @@ export function loadRolesPage(limit, offset) {
         throw (error);
       });
   };
-}
+};
 
-export function loadRolesPageSuccess(rolesPage) {
+export const loadRolesPageSuccess = (rolesPage) => {
   return { type: 'LOAD_ROLES_PAGE_SUCCESS', rolesPage };
-}
+};
 
-export function createRole(newRole) {
-  return function (dispatch) {
+export const createRole = (newRole) => {
+  /**
+    * createRole method
+    * @params data - role details
+    */
+  return (dispatch) => {
     return roleCreate(newRole)
       .then((res) => {
         dispatch(createroleSuccess(res.data));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
-}
+};
 
-export function createroleSuccess(roles) {
+export const createroleSuccess = (roles) => {
   return { type: 'CREATE_ROLE_SUCCESS', roles };
-}
+};
 
-export function deleteRole(deletedRole) {
-  return function (dispatch) {
+export const deleteRole = (deletedRole) => {
+  /**
+    * deleteRole method
+    * @params data - role id
+    */
+  return (dispatch) => {
     return roleDelete(deletedRole)
       .then((res) => {
         dispatch(deleteroleSuccess(res.body));
       })
       .catch((error) => {
-        toastr.error(error.response.data.message);
+        throw (error);
       });
   };
-}
+};
 
-export function deleteroleSuccess(roles) {
+export const deleteroleSuccess = (roles) => {
   return { type: 'DELETE_ROLE_SUCCESS', roles };
-}
+};
 
-export function searchRoles(searchValue) {
-  return function (dispatch) {
+export const searchRoles = (searchValue) => {
+  /**
+    * searchRoles method
+    * @params data - search value
+    * @return all roles depending on the search value
+    */
+  return (dispatch) => {
     return roleSearch(searchValue)
       .then((res) => {
         dispatch(searchroleSuccess(res.data));
@@ -76,14 +98,19 @@ export function searchRoles(searchValue) {
         throw (error);
       });
   };
-}
+};
 
-export function searchroleSuccess(rolesSearch) {
+export const searchroleSuccess = (rolesSearch) => {
   return { type: 'SEARCH_ROLE_SUCCESS', rolesSearch };
-}
+};
 
-export function searchRolesPage(searchValue, limit, offset) {
-  return function (dispatch) {
+export const searchRolesPage = (searchValue, limit, offset) => {
+  /**
+    * searchRolesPage method
+    * @params data - search value, limit and offset
+    * @return all roles depending on the search value and specified range
+    */
+  return (dispatch) => {
     return roleSearchPage(searchValue, limit, offset)
       .then((res) => {
         dispatch(searchrolepagesuccess(res.data));
@@ -92,14 +119,19 @@ export function searchRolesPage(searchValue, limit, offset) {
         toastr.error(error.response.data.message);
       });
   };
-}
+};
 
-export function searchrolepagesuccess(rolesSearchPage) {
+export const searchrolepagesuccess = (rolesSearchPage) => {
   return { type: 'SEARCH_ROLE_PAGE_SUCCESS', rolesSearchPage };
-}
+};
 
-export function loadRole(role) {
-  return function (dispatch) {
+export const loadRole = (role) => {
+  /**
+    * loadRole method
+    * @params data - role id
+    * @return single document
+    */
+  return (dispatch) => {
     return singlerole(role)
       .then((res) => {
         dispatch(loadRoleSuccess(res.data));
@@ -108,14 +140,18 @@ export function loadRole(role) {
         throw (error);
       });
   };
-}
+};
 
-export function loadRoleSuccess(roles) {
+export const loadRoleSuccess = (roles) => {
   return { type: 'LOAD_ROLE_SUCCESS', roles };
-}
+};
 
-export function updateRole(updatedRole) {
-  return function (dispatch) {
+export const updateRole = (updatedRole) => {
+  /**
+    * updateRole method
+    * @params data - role details
+    */
+  return (dispatch) => {
     return roleUpdate(updatedRole)
       .then((res) => {
         dispatch(updateRoleSuccess(res.data));
@@ -124,8 +160,8 @@ export function updateRole(updatedRole) {
         toastr.error(error.response.data.message);
       });
   };
-}
+};
 
-export function updateRoleSuccess(roles) {
+export const updateRoleSuccess = (roles) => {
   return { type: 'UPDATE_ROLE_SUCCESS', roles };
-}
+};

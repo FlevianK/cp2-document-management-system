@@ -1,12 +1,12 @@
 import expect from 'expect';
-import documentReducer from '../../src/reducers/documentReducer';
-import documentPageReducer from '../../src/reducers/documentPageReducer';
-import documentsReducer from '../../src/reducers/documentsReducer';
-import documentsPageReducer from '../../src/reducers/documentsPageReducer';
-import documentSearchReducer from '../../src/reducers/documentSearchReducer';
-import documentSearchPageReducer from '../../src/reducers/documentSearchPageReducer';
-import roleDocumentsReducer from '../../src/reducers/roleDocumentsReducer';
-import roleDocumentsPageReducer from '../../src/reducers/roleDocumentsPageReducer';
+import documentReducer from '../../src/reducers/document/documentReducer';
+import documentPageReducer from '../../src/reducers/document/documentPageReducer';
+import documentsReducer from '../../src/reducers/document/documentsReducer';
+import documentsPageReducer from '../../src/reducers/document/documentsPageReducer';
+import documentSearchReducer from '../../src/reducers/document/documentSearchReducer';
+import documentSearchPageReducer from '../../src/reducers/document/documentSearchPageReducer';
+import roleDocumentsReducer from '../../src/reducers/document/roleDocumentsReducer';
+import roleDocumentsPageReducer from '../../src/reducers/document/roleDocumentsPageReducer';
 import * as actions from '../../src/actions/documentAction';
 
 describe('document reducer', () => {

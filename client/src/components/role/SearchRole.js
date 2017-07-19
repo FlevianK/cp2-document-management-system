@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { RoleList } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 
 export class SearchRole extends React.Component {

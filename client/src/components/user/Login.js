@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as loginAction from '../actions/loginAction';
-import { Input } from '../containers';
+import * as loginAction from '../../actions/loginAction';
+import { Input } from '../../containers';
 
 export class Login extends React.Component {
   constructor(props) {

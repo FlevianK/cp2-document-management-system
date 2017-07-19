@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode';
 import { DocumentList, DocumentHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 import SearchDocument from './SearchDocument';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 
 export class Document extends React.Component {
   constructor(props, context) {

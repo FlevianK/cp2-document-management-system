@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Input } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
 export class UserCreate extends React.Component {
@@ -40,7 +40,7 @@ export class UserCreate extends React.Component {
         toastr.error(error.response.data.message);
       });
   }
-  
+
   render() {
     return (
       <div>

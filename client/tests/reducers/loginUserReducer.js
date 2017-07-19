@@ -1,5 +1,5 @@
 import expect from 'expect';
-import loginUserReducer from '../../src/reducers/loginUserReducer';
+import loginUserReducer from '../../src/reducers/user/loginUserReducer';
 import * as actions from '../../src/actions/loginAction';
 
 describe('login reducer', () => {

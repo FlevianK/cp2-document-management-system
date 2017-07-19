@@ -1,8 +1,8 @@
 import expect from 'expect';
-import roleReducer from '../../src/reducers/roleReducer';
-import rolePageReducer from '../../src/reducers/rolePageReducer';
-import roleSearchReducer from '../../src/reducers/roleSearchReducer';
-import roleSearchPageReducer from '../../src/reducers/roleSearchPageReducer';
+import roleReducer from '../../src/reducers/role/roleReducer';
+import rolePageReducer from '../../src/reducers/role/rolePageReducer';
+import roleSearchReducer from '../../src/reducers/role/roleSearchReducer';
+import roleSearchPageReducer from '../../src/reducers/role/roleSearchPageReducer';
 import * as actions from '../../src/actions/roleAction';
 
 describe('role reducer', () => {

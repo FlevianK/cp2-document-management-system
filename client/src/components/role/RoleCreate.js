@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Input, RoleHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 
 export class RoleCreate extends React.Component {

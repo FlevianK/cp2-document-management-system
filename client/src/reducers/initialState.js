@@ -10,7 +10,6 @@ export default {
   usersPage: [],
   roles: [],
   rolesPage: [],
-  failureMessage: null,
   roleDocuments: [],
   roleDocumentsPage: [],
   usersSearchPage: [],

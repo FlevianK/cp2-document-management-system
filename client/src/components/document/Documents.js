@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 import SearchDocument from './SearchDocument';
 import { DocumentsList, DocumentHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
@@ -30,7 +30,7 @@ export class Documents extends React.Component {
     this.setState({ activePage: pageNumber });
     this.props.actions.loadDocumentsPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
   }
-  
+
   render() {
     const allDocuments = this.props.allDocumentsPage;
     const totalItems = this.props.allDocuments;

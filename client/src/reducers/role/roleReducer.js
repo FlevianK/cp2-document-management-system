@@ -1,7 +1,7 @@
-import { LOAD_ROLES_SUCCESS, CREATE_ROLE_SUCCESS, DELETE_ROLE_SUCCESS, UPDATE_ROLE_SUCCESS, LOAD_ROLE_SUCCESS} from '../constants/appConstants';
-import initialState from './initialState';
+import { LOAD_ROLES_SUCCESS, CREATE_ROLE_SUCCESS, DELETE_ROLE_SUCCESS, UPDATE_ROLE_SUCCESS, LOAD_ROLE_SUCCESS} from '../../constants/appConstants';
+import initialState from '../initialState';
 
-export default function roleReducer(state = initialState.roles, action) {
+const roleReducer = (state = initialState.roles, action) => {
   switch (action.type) {
   case LOAD_ROLES_SUCCESS:
     return action.roles;
@@ -30,4 +30,6 @@ export default function roleReducer(state = initialState.roles, action) {
   default:
     return state;
   }
-}
+};
+
+export default roleReducer;

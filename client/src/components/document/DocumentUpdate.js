@@ -11,7 +11,7 @@ import jwtDecode from 'jwt-decode';
 import toastr from 'toastr';
 import { Input, SelectOptions } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 
 export class DocumentUpdate extends React.Component {
   constructor(props) {

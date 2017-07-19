@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Input } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 
 export class RoleUpdate extends React.Component {
   constructor(props) {

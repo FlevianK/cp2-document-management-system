@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { UserList } from '../../containers';
 import * as userAction from '../../actions/userAction';
-import DashboardHeader from './../DashboardHeader';
+import DashboardHeader from '../common/DashboardHeader';
 
 export class SearchUser extends React.Component {
   constructor(props, context) {

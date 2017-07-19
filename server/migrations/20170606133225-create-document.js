@@ -18,7 +18,8 @@ module.exports = {
       },
       access: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'public',
       },
       createdAt: {
         allowNull: false,

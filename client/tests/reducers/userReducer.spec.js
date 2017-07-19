@@ -1,8 +1,8 @@
 import expect from 'expect';
-import userReducer from '../../src/reducers/userReducer';
-import userPageReducer from '../../src/reducers/userPageReducer';
-import userSearchReducer from '../../src/reducers/userSearchReducer';
-import userSearchPageReducer from '../../src/reducers/userSearchPageReducer';
+import userReducer from '../../src/reducers/user/userReducer';
+import userPageReducer from '../../src/reducers/user/userPageReducer';
+import userSearchReducer from '../../src/reducers/user/userSearchReducer';
+import userSearchPageReducer from '../../src/reducers/user/userSearchPageReducer';
 import * as actions from '../../src/actions/userAction';
 
 describe('user reducer', () => {

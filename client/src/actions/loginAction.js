@@ -18,14 +18,14 @@ export const loginUserSuccess = (loginUser) => {
   return { type: 'USER_LOGIN_SUCCESS', loginUser };
 };
 
-export function logoutUser() {
-  return function (dispatch) {
+export const logoutUser = () => {
+  return (dispatch) => {
     localStorage.removeItem('jwt');
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
     dispatch(logoutUserSuccess());
   };
-}
-export function logoutUserSuccess(loginUser) {
+};
+export const logoutUserSuccess = (loginUser) => {
   return { type: 'USER_LOGOUT_SUCCESS', loginUser };
-}
+};

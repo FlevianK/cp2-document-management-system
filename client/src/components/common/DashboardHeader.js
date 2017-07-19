@@ -3,7 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as loginAction from '../actions/loginAction';
+import * as loginAction from '../../actions/loginAction';
 
 export class DashboardHeader extends React.Component {
   constructor(props) {
