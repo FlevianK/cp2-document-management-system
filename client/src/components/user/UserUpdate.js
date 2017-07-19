@@ -6,12 +6,12 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Input, SelectOptions } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
-import PropTypes from 'prop-types';
-import toastr from 'toastr';
 
 export class UserUpdate extends React.Component {
   constructor(props) {
@@ -135,10 +135,9 @@ export class UserUpdate extends React.Component {
     );
   }
 }
-
 UserUpdate.propTypes = {
-  users: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  users: PropTypes.object,
+  actions: PropTypes.object,
   params: PropTypes.object
 };
 

@@ -6,11 +6,11 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Input, RoleHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
-import PropTypes from 'prop-types';
-import toastr from 'toastr';
 
 export class RoleCreate extends React.Component {
   constructor(props) {
@@ -102,7 +102,7 @@ export class RoleCreate extends React.Component {
   }
 }
 RoleCreate.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object
 };
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(roleAction, dispatch)

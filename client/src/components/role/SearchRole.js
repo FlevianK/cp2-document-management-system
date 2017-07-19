@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import * as roleAction from '../../actions/roleAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { RoleList } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
+import * as roleAction from '../../actions/roleAction';
 
 export class SearchRole extends React.Component {
   constructor(props, context) {
@@ -77,9 +77,9 @@ export class SearchRole extends React.Component {
 }
 
 SearchRole.propTypes = {
-  rolesSearchPage: PropTypes.array.isRequired,
-  rolesSearch: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
+  rolesSearchPage: PropTypes.array,
+  rolesSearch: PropTypes.number,
+  actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

@@ -7,13 +7,12 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Input, SelectOptions, UserHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
-import PropTypes from 'prop-types';
-import toastr from 'toastr';
-
 
 export class UsersUpdate extends React.Component {
   constructor(props) {
@@ -119,14 +118,13 @@ export class UsersUpdate extends React.Component {
     );
   }
 }
-
 UsersUpdate.propTypes = {
-  users: PropTypes.object.isRequired,
-  role: PropTypes.object.isRequired,
-  roles: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired,
-  action: PropTypes.object.isRequired
+  users: PropTypes.object,
+  role: PropTypes.object,
+  roles: PropTypes.object,
+  actions: PropTypes.object,
+  params: PropTypes.object,
+  action: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => {

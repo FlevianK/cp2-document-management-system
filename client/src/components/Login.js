@@ -87,7 +87,7 @@ export class Login extends React.Component {
   }
 }
 Login.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object
 };
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(loginAction, dispatch)

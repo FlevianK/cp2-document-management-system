@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Input } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
-import PropTypes from 'prop-types';
-import toastr from 'toastr';
 
 export class UserCreate extends React.Component {
   constructor(props) {
@@ -40,6 +40,7 @@ export class UserCreate extends React.Component {
         toastr.error(error.response.data.message);
       });
   }
+  
   render() {
     return (
       <div>
@@ -109,7 +110,6 @@ export class UserCreate extends React.Component {
     );
   }
 }
-
 UserCreate.propTypes = {
   actions: PropTypes.object.isRequired
 };

@@ -8,7 +8,6 @@ import { UserList, UserHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
-
 export class User extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -59,11 +58,10 @@ export class User extends React.Component {
     );
   }
 }
-
 User.propTypes = {
-  users: PropTypes.number.isRequired,
-  usersPage: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  users: PropTypes.number,
+  usersPage: PropTypes.array,
+  actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

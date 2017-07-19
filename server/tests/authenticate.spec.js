@@ -43,8 +43,8 @@ describe('Authenticate', () => {
         .post('/api/users/login')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-          email: "",
-          password: "admin"
+          email: "admin@gmail.co",
+          password: ""
         })
         .end((err, res) => {
           res.should.have.status(403);
@@ -67,21 +67,21 @@ describe('Authenticate', () => {
         });
     });
   });
-  // describe('/POST non existing password', () => {
-  //   it('it should return 401 response loging in with a non existing password', (done) => {
-  //     chai.request(app)
-  //       .post('/api/users/login')
-  //       .set('Content-Type', 'application/x-www-form-urlencoded')
-  //       .send({
-  //         email: "admin@live.com",
-  //         password: "adminpoiuytg"
-  //       })
-  //       .end((err, res) => {
-  //         res.should.have.status(401);
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('/POST non existing password', () => {
+    it('it should return 401 response loging in with a non existing password', (done) => {
+      chai.request(app)
+        .post('/api/users/login')
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+          email: "admin@live.com",
+          password: "adminpoiuytg"
+        })
+        .end((err, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
+  });
 
   describe('/POST/users/login', () => {
     beforeEach('it should return 200 response with a token when loging in with correct credecials', (done) => {

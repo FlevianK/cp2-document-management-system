@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -24,6 +25,9 @@ const UserList = ({ users }) => {
       )}
     </div>
   );
+};
+UserList.propTypes = {
+  users: PropTypes.object,
 };
 
 export default UserList;  

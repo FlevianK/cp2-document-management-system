@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const SelectOptions = ({ name, access, label, onChange, defaultOption, value, options }) => (
+export const SelectOptions = ({ name, label, onChange, defaultOption, value, options }) => (
   <div className="row">
     <div className="col s10 offset-m1">
       <div className="select=form">
@@ -20,15 +20,14 @@ export const SelectOptions = ({ name, access, label, onChange, defaultOption, va
       </div>
     </div>
   </div>
-
-
 );
 SelectOptions.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
   defaultOption: PropTypes.string,
   value: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object)
 };
+
 export default SelectOptions;

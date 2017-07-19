@@ -22,6 +22,11 @@ import failureMessage from './failureMessageReducer';
 
 const rootReducer = combineReducers({
   loginUser,
+  usersSearchPage,
+  usersSearch,
+  users,
+  usersPage,
+
   documents,
   allDocuments,
   allDocumentsPage,
@@ -29,15 +34,13 @@ const rootReducer = combineReducers({
   roleDocumentsPage,
   documentsSearchPage,
   documentsSearch,
+
   initialState,
+  failureMessage,
+
   roles,
   rolesPage,
-  users,
-  usersPage,
-  failureMessage,
   documentsPage,
-  usersSearchPage,
-  usersSearch,
   rolesSearch,
   rolesSearchPage
 });

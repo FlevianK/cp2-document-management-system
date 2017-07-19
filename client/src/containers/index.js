@@ -12,12 +12,12 @@ import RoleList from './roleList.jsx';
 export {
   DocumentHeader,
   DocumentList,
+  DocumentsList,
   Input,
-  UserList,
   RoleHeader,
   RoleList,
-  DocumentsList,
   SelectOptions,
   SelectOption,
-  UserHeader
+  UserHeader,
+  UserList,
 };

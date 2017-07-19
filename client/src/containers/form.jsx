@@ -24,11 +24,12 @@ const Input = ({name, label, onChange, placeholder, value, type="text"}) => {
 };
 
 Input.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default Input;

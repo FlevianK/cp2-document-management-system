@@ -73,11 +73,10 @@ export class SearchUser extends React.Component {
     );
   }
 }
-
 SearchUser.propTypes = {
-  usersSearch: PropTypes.number.isRequired,
-  usersSearchPage: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  usersSearch: PropTypes.number,
+  usersSearchPage: PropTypes.array,
+  actions: PropTypes.object
 };
 
 const mapDispatchToProps = dispatch => ({

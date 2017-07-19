@@ -2,14 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { DocumentList, DocumentHeader } from '../../containers';
-import * as documentAction from '../../actions/documentAction';
+import Pagination from 'react-js-pagination';
 import PropTypes from 'prop-types';
 import jwtDecode from 'jwt-decode';
+import { DocumentList, DocumentHeader } from '../../containers';
+import * as documentAction from '../../actions/documentAction';
 import SearchDocument from './SearchDocument';
 import DashboardHeader from './../DashboardHeader';
-import Pagination from 'react-js-pagination';
-
 
 export class Document extends React.Component {
   constructor(props, context) {

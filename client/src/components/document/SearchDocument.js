@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { DocumentsList, DocumentHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
+import * as documentAction from '../../actions/documentAction';
 
 export class SearchDocument extends React.Component {
   constructor(props, context) {
@@ -74,11 +74,10 @@ export class SearchDocument extends React.Component {
     );
   }
 }
-
 SearchDocument.propTypes = {
-  documentsSearchPage: PropTypes.array.isRequired,
-  documentsSearch: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
+  documentsSearchPage: PropTypes.array,
+  documentsSearch: PropTypes.number,
+  actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

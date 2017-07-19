@@ -51,9 +51,8 @@ export class DashboardHeader extends React.Component {
     );
   }
 }
-
 DashboardHeader.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -61,4 +60,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(DashboardHeader);
-

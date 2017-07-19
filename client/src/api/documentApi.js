@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://dms-flev-backend.herokuapp.com/api';
-// const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://dms-flev-backend.herokuapp.com/api'; // comment this code when running this app locally
+// const API_URL = 'http://localhost:8000/api'; // comment this code if pushing this file to git
 
 export function allDocuments() {
   const token = localStorage.jwt;
@@ -94,6 +94,7 @@ export function allRoleDocument() {
     { headers: { 'x-access-token': token } }
   );
 }
+
 export function allRoleDocumentPage(limit, offset) {
   const token = localStorage.jwt;
   return axios.get(

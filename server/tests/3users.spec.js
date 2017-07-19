@@ -75,7 +75,7 @@ describe('Users', () => {
   });
 
   describe('/POST', () => {
-    it('should return a 400 with an email that exists in DB', (done) => {
+    it('should return a 409 with an email that exists in DB', (done) => {
       chai.request(app)
         .post('/api/users/')
         .send({
@@ -86,7 +86,7 @@ describe('Users', () => {
           password: "flev2@gmRT"
         })
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           done();
         });
     });

@@ -125,13 +125,12 @@ export class DocumentUpdate extends React.Component {
     );
   }
 }
-
 DocumentUpdate.propTypes = {
-  documents: PropTypes.object.isRequired,
-  access: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired,
-  userRole: PropTypes.string.isRequired,
+  documents: PropTypes.object,
+  access: PropTypes.array,
+  actions: PropTypes.object,
+  params: PropTypes.object,
+  userRole: PropTypes.string,
 };
 
 const mapStateToProps = (state, ownProps) => ({

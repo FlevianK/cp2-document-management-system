@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
-import * as documentAction from '../../actions/documentAction';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Input } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
+import * as documentAction from '../../actions/documentAction';
 
 export class DocumentDelete extends React.Component {
   constructor(props) {

@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import Pagination from 'react-js-pagination';
 import { DocumentsList, DocumentHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
-import PropTypes from 'prop-types';
 import SearchDocument from './SearchDocument';
-import Pagination from 'react-js-pagination';
 
 export class DocumentRole extends React.Component {
   constructor(props, context) {
@@ -55,11 +55,10 @@ export class DocumentRole extends React.Component {
     );
   }
 }
-
 DocumentRole.propTypes = {
-  roleDocuments: PropTypes.number.isRequired,
-  roleDocumentsPage: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  roleDocuments: PropTypes.number,
+  roleDocumentsPage: PropTypes.array,
+  actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

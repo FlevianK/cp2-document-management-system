@@ -30,6 +30,7 @@ export class Documents extends React.Component {
     this.setState({ activePage: pageNumber });
     this.props.actions.loadDocumentsPage(this.state.limit, (this.state.limit * (this.state.activePage - 1)));
   }
+  
   render() {
     const allDocuments = this.props.allDocumentsPage;
     const totalItems = this.props.allDocuments;
@@ -55,11 +56,10 @@ export class Documents extends React.Component {
     );
   }
 }
-
 Documents.propTypes = {
-  allDocuments: PropTypes.number.isRequired,
-  allDocumentsPage: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  allDocuments: PropTypes.number,
+  allDocumentsPage: PropTypes.array,
+  actions: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

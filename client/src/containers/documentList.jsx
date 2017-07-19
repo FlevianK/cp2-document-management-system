@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -25,6 +26,10 @@ const DocumentList = ({ documents, handleOpen }) => {
       )}
     </div>
   );
+};
+DocumentList.propTypes = {
+  documents: PropTypes.object,
+  handleOpen: PropTypes.func
 };
 
 export default DocumentList;  

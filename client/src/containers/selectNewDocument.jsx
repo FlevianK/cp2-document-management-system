@@ -22,11 +22,13 @@ export const SelectOption = ({ name, roleUser, label, onChange, defaultOption, v
   </div>
 );
 SelectOption.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
   defaultOption: PropTypes.string,
   value: PropTypes.string,
-  options: PropTypes.array
+  options: PropTypes.array,
+  roleUser: PropTypes.string,
 };
+
 export default SelectOption;

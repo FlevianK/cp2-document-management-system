@@ -97,7 +97,6 @@ export class DocumentCreate extends React.Component {
                     />
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="col s10 offset-m1">
                     <label>Access</label>

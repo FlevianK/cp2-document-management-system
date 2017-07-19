@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Input, UserHeader } from '../../containers';
-import DashboardHeader from './../DashboardHeader';
-import * as userAction from '../../actions/userAction';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Input, UserHeader } from '../../containers';
+import DashboardHeader from './../DashboardHeader';
+import * as userAction from '../../actions/userAction';
 
 export class UserDelete extends React.Component {
   constructor(props) {
@@ -78,11 +78,10 @@ export class UserDelete extends React.Component {
     );
   }
 }
-
 UserDelete.propTypes = {
-  users: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired,
+  users: PropTypes.object,
+  actions: PropTypes.object,
+  params: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => ({

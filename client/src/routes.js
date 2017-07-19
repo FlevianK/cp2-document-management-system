@@ -1,27 +1,30 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import {
-  Login,
   Dashboard,
   App,
+
   Document,
   DocumentCreate,
   DocumentDelete,
   DocumentUpdate,
   SearchDocument,
+  Documents,
+  DocumentRole,
+
   User,
   UserCreate,
   UserDelete,
   UserUpdate,
+  SearchUser,
+  UsersUpdate,
+
   Role,
   RoleCreate,
   RoleDelete,
-  Documents,
-  DocumentRole,
-  SearchUser,
-  UsersUpdate,
-  SearchRole,
   RoleUpdate,
+  SearchRole,
+  Login,
 } from './components';
 
 export default (

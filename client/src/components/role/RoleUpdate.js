@@ -111,11 +111,10 @@ export class RoleUpdate extends React.Component {
     );
   }
 }
-
 RoleUpdate.propTypes = {
   roles: PropTypes.object,
-  actions: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired,
+  actions: PropTypes.object,
+  params: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => ({

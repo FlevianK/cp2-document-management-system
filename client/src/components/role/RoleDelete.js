@@ -7,9 +7,9 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import toastr from 'toastr';
+import PropTypes from 'prop-types';
 import { RoleHeader } from '../../containers';
 import * as roleAction from '../../actions/roleAction';
-import PropTypes from 'prop-types';
 import DashboardHeader from './../DashboardHeader';
 
 export class RoleDelete extends React.Component {
@@ -74,10 +74,9 @@ export class RoleDelete extends React.Component {
     );
   }
 }
-
 RoleDelete.propTypes = {
-  actions: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired,
+  actions: PropTypes.object,
+  params: PropTypes.object,
 };
 
 const mapDispatchToProps = dispatch => ({

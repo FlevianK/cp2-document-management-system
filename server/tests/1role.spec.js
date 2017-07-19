@@ -36,8 +36,6 @@ describe('Roles', () => {
           done();
         });
     });
-  });
-  describe('/POST', () => {
     it('should return a 201 response create fellow role', (done) => {
       chai.request(app)
         .post('/api/roles')
@@ -51,9 +49,6 @@ describe('Roles', () => {
           done();
         });
     });
-  });
-
-  describe('/POST', () => {
     it('should return a 400 response create wrong field name', (done) => {
       chai.request(app)
         .post('/api/roles')
@@ -64,6 +59,19 @@ describe('Roles', () => {
         })
         .end((err, res) => {
           res.should.have.status(400);
+          done();
+        });
+    });
+    it('should return a 403 response create role with empty inputs', (done) => {
+      chai.request(app)
+        .post('/api/roles')
+        .set('x-access-token', token)
+        .send({
+          te: "",
+          description: "fellow"
+        })
+        .end((err, res) => {
+          res.should.have.status(403);
           done();
         });
     });
@@ -79,10 +87,7 @@ describe('Roles', () => {
           done();
         });
     });
-  });
-
-  describe('/GET/ roles while paginating the results', () => {
-    it('it should return 200 response and data', (done) => {
+    it('it should return 200 response and data while paginating the results', (done) => {
       chai.request(app)
         .get('/api/roles/?limit=4&offset=0')
         .set('x-access-token', token)
@@ -91,9 +96,7 @@ describe('Roles', () => {
           done();
         });
     });
-  });
-  describe('/GET/ roles while paginating the results by non existing range', () => {
-    it('it should return 404 response', (done) => {
+    it('it should return 404 response and data for paginating the results by non existing range', (done) => {
       chai.request(app)
         .get('/api/roles/?limit=67&offset=90')
         .set('x-access-token', token)
@@ -102,9 +105,7 @@ describe('Roles', () => {
           done();
         });
     });
-  });
-  describe('/GET/ roles while paginating the results using incorrect data type for the query', () => {
-    it('it should return 400 response', (done) => {
+    it('it should return 400 response for paginating the results using incorrect data type for the query', (done) => {
       chai.request(app)
         .get('/api/roles/?limit=uy&offset=op')
         .set('x-access-token', token)
@@ -155,25 +156,25 @@ describe('Roles', () => {
   });
 
   describe('/DELETE', () => {
-    it('should return a 401 response when deleting a default role admin', (done) => {
+    it('should return a 403 response when deleting a default role admin', (done) => {
       chai.request(app)
         .delete('/api/roles/1')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {
-          res.should.have.status(401);
+          res.should.have.status(403);
           done();
         });
     });
   });
   describe('/DELETE', () => {
-    it('should return a 401 response when deleting a default role regular', (done) => {
+    it('should return a 403 response when deleting a default role regular', (done) => {
       chai.request(app)
         .delete('/api/roles/2')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {
-          res.should.have.status(401);
+          res.should.have.status(403);
           done();
         });
     });
@@ -264,7 +265,7 @@ describe('Roles', () => {
     });
   });
   describe('/PUT', () => {
-    it('should return a 401 when updating default roles admin details', (done) => {
+    it('should return a 403 when updating default roles admin details', (done) => {
       chai.request(app)
         .put('/api/roles/1')
         .set('x-access-token', token)
@@ -272,13 +273,13 @@ describe('Roles', () => {
           title: "fello"
         })
         .end((err, res) => {
-          res.should.have.status(401);
+          res.should.have.status(403);
           done();
         });
     });
   });
   describe('/PUT', () => {
-    it('should return a 401 when updating default role regular details', (done) => {
+    it('should return a 403 when updating default role regular details', (done) => {
       chai.request(app)
         .put('/api/roles/2')
         .set('x-access-token', token)
@@ -286,7 +287,7 @@ describe('Roles', () => {
           title: "fello"
         })
         .end((err, res) => {
-          res.should.have.status(401);
+          res.should.have.status(403);
           done();
         });
     });
@@ -321,10 +322,10 @@ describe('Roles', () => {
         });
     });
   });
-  describe('/GET/:id user', () => {
-    it('it should return 400 retreving a user using bad request', (done) => {
+  describe('/GET/:id role', () => {
+    it('it should return 400 retreving a role using bad request', (done) => {
       chai.request(app)
-        .get('/api/users/uy')
+        .get('/api/roles/uy')
         .set('x-access-token', token)
         .end((err, res) => {
           res.should.have.status(400);

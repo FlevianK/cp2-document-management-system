@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import Pagination from 'react-js-pagination';
 import { RoleList, RoleHeader } from '../../containers';
 import DashboardHeader from './../DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
-import PropTypes from 'prop-types';
-import Pagination from 'react-js-pagination';
 
 export class Role extends React.Component {
   constructor(props, context) {
@@ -52,7 +52,6 @@ export class Role extends React.Component {
     );
   }
 }
-
 Role.propTypes = {
   roles: PropTypes.number.isRequired,
   rolesPage: PropTypes.array.isRequired,
