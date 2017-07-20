@@ -9,6 +9,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
 export class User extends React.Component {
+  /**
+    * User class
+    * It is for displaying all users
+  */
   constructor(props, context) {
     super(props, context);
     this.state = {

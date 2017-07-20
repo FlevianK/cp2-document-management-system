@@ -9,6 +9,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 
 export class SearchDocument extends React.Component {
+  /**
+    * SearchDocument class
+    * It is for searching document
+    */
   constructor(props, context) {
     super(props, context);
     this.state = {

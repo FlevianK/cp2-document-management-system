@@ -9,6 +9,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
 export class UserCreate extends React.Component {
+  /**
+    * UserCreate class
+    * It is for registering users to use the system
+  */
   constructor(props) {
     super(props);
     this.state = {

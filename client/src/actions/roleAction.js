@@ -1,5 +1,5 @@
 import { allRoles, roleCreate, roleDelete, allRolesPage, roleSearchPage, roleSearch, singlerole, roleUpdate } from '../api/roleApi';
-import * as types from '../constants/appConstants';
+import { LOAD_ROLES_SUCCESS, LOAD_ROLES_PAGE_SUCCESS, CREATE_ROLE_SUCCESS, DELETE_ROLE_SUCCESS, SEARCH_ROLE_SUCCESS, SEARCH_ROLE_PAGE_SUCCESS, LOAD_ROLE_SUCCESS, UPDATE_ROLE_SUCCESS } from '../constants/appConstants';
 import toastr from 'toastr';
 
 export const loadRoles = () => {
@@ -19,7 +19,7 @@ export const loadRoles = () => {
 };
 
 export const loadRolesSuccess = (roles) => {
-  return { type: 'LOAD_ROLES_SUCCESS', roles };
+  return { type: LOAD_ROLES_SUCCESS, roles };
 };
 
 export const loadRolesPage = (limit, offset) => {
@@ -40,7 +40,7 @@ export const loadRolesPage = (limit, offset) => {
 };
 
 export const loadRolesPageSuccess = (rolesPage) => {
-  return { type: 'LOAD_ROLES_PAGE_SUCCESS', rolesPage };
+  return { type: LOAD_ROLES_PAGE_SUCCESS, rolesPage };
 };
 
 export const createRole = (newRole) => {
@@ -60,7 +60,7 @@ export const createRole = (newRole) => {
 };
 
 export const createroleSuccess = (roles) => {
-  return { type: 'CREATE_ROLE_SUCCESS', roles };
+  return { type: CREATE_ROLE_SUCCESS, roles };
 };
 
 export const deleteRole = (deletedRole) => {
@@ -80,7 +80,7 @@ export const deleteRole = (deletedRole) => {
 };
 
 export const deleteroleSuccess = (roles) => {
-  return { type: 'DELETE_ROLE_SUCCESS', roles };
+  return { type: DELETE_ROLE_SUCCESS, roles };
 };
 
 export const searchRoles = (searchValue) => {
@@ -101,7 +101,7 @@ export const searchRoles = (searchValue) => {
 };
 
 export const searchroleSuccess = (rolesSearch) => {
-  return { type: 'SEARCH_ROLE_SUCCESS', rolesSearch };
+  return { type: SEARCH_ROLE_SUCCESS, rolesSearch };
 };
 
 export const searchRolesPage = (searchValue, limit, offset) => {
@@ -122,7 +122,7 @@ export const searchRolesPage = (searchValue, limit, offset) => {
 };
 
 export const searchrolepagesuccess = (rolesSearchPage) => {
-  return { type: 'SEARCH_ROLE_PAGE_SUCCESS', rolesSearchPage };
+  return { type: SEARCH_ROLE_PAGE_SUCCESS, rolesSearchPage };
 };
 
 export const loadRole = (role) => {
@@ -143,7 +143,7 @@ export const loadRole = (role) => {
 };
 
 export const loadRoleSuccess = (roles) => {
-  return { type: 'LOAD_ROLE_SUCCESS', roles };
+  return { type: LOAD_ROLE_SUCCESS, roles };
 };
 
 export const updateRole = (updatedRole) => {
@@ -163,5 +163,5 @@ export const updateRole = (updatedRole) => {
 };
 
 export const updateRoleSuccess = (roles) => {
-  return { type: 'UPDATE_ROLE_SUCCESS', roles };
+  return { type: UPDATE_ROLE_SUCCESS, roles };
 };

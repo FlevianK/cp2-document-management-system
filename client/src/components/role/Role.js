@@ -9,6 +9,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 
 export class Role extends React.Component {
+  /**
+    * Role class
+    * It is for displaying all roles
+  */
   constructor(props, context) {
     super(props, context);
     this.state = {

@@ -14,6 +14,10 @@ import * as documentAction from '../../actions/documentAction';
 import DashboardHeader from '../common/DashboardHeader';
 
 export class DocumentUpdate extends React.Component {
+  /**
+    * DocumentUpdate class
+    * It is for updating a document content
+    */
   constructor(props) {
     super(props);
     this.state = {

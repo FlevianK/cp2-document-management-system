@@ -8,6 +8,10 @@ import * as loginAction from '../../actions/loginAction';
 import { Input } from '../../containers';
 
 export class Login extends React.Component {
+  /**
+    * Login class
+    * It is for logging in users to use the system
+  */
   constructor(props) {
     super(props);
     this.state = {

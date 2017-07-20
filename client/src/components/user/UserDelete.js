@@ -12,6 +12,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as userAction from '../../actions/userAction';
 
 export class UserDelete extends React.Component {
+  /**
+    * UserDelete class
+    * It is for deleting a user
+  */
   constructor(props) {
     super(props);
     this.state = {

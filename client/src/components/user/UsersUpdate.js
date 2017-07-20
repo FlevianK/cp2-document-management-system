@@ -15,6 +15,10 @@ import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 
 export class UsersUpdate extends React.Component {
+  /**
+    * UsersUpdate class
+    * It is for upadating user's role
+  */
   constructor(props) {
     super(props);
     this.state = {

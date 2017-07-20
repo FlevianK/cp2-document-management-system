@@ -13,6 +13,10 @@ import * as roleAction from '../../actions/roleAction';
 import DashboardHeader from '../common/DashboardHeader';
 
 export class RoleUpdate extends React.Component {
+  /**
+    * RoleUpdate class
+    * It is for updating role description
+  */
   constructor(props) {
     super(props);
     this.state = {

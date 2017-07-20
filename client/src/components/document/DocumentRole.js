@@ -10,6 +10,10 @@ import * as documentAction from '../../actions/documentAction';
 import SearchDocument from './SearchDocument';
 
 export class DocumentRole extends React.Component {
+  /**
+    * DocumentRole class
+    * It is for displaying role-based documents
+    */
   constructor(props, context) {
     super(props, context);
     this.state = {

@@ -11,6 +11,10 @@ import SearchDocument from './SearchDocument';
 import DashboardHeader from '../common/DashboardHeader';
 
 export class Document extends React.Component {
+  /**
+    * Document class
+    * It is for displays all documents for a single user
+    */
   constructor(props, context) {
     super(props, context);
     this.state = {

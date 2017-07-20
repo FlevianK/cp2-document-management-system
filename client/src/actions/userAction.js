@@ -1,5 +1,5 @@
 import { allUsers, createdUser, userDelete, userUpdate, allUsersPage, userSearch, allUser, userSearchPage } from '../api/userApi';
-import * as types from '../constants/appConstants';
+import { LOAD_USERS_SUCCESS, CREATE_USER_SUCCESS, DELETE_USER_SUCCESS, UPDATE_USER_SUCCESS, SEARCH_USER_SUCCESS, SEARCH_USER_PAGE_SUCCESS, LOAD_USER_SUCCESS, LOAD_USERS_PAGE_SUCCESS } from '../constants/appConstants';
 import toastr from 'toastr';
 
 export const loadUsers = () => {
@@ -19,7 +19,7 @@ export const loadUsers = () => {
 };
 
 export const loadusersSuccess = (users) => {
-  return { type: 'LOAD_USERS_SUCCESS', users };
+  return { type: LOAD_USERS_SUCCESS, users };
 };
 
 export const createUser = (newUser) => {
@@ -39,7 +39,7 @@ export const createUser = (newUser) => {
 };
 
 export const createuserSuccess = (users) => {
-  return { type: 'CREATE_USER_SUCCESS', users };
+  return { type: CREATE_USER_SUCCESS, users };
 };
 
 export const deleteUser = (deletedUser)  => {
@@ -59,7 +59,7 @@ export const deleteUser = (deletedUser)  => {
 };
 
 export const deleteuserSuccess = (users) => {
-  return { type: 'DELETE_USER_SUCCESS', users };
+  return { type: DELETE_USER_SUCCESS, users };
 };
 
 export const updateUser = (updatedUser) => {
@@ -79,7 +79,7 @@ export const updateUser = (updatedUser) => {
 };
 
 export const updateuserSuccess = (users) => {
-  return { type: 'UPDATE_USER_SUCCESS', users };
+  return { type: UPDATE_USER_SUCCESS, users };
 };
 
 export const searchUser = (searchValue) => {
@@ -100,7 +100,7 @@ export const searchUser = (searchValue) => {
 };
 
 export const searchuserSuccess = (usersSearch) => {
-  return { type: 'SEARCH_USER_SUCCESS', usersSearch };
+  return { type: SEARCH_USER_SUCCESS, usersSearch };
 };
 
 export const searchUsersPage = (searchValue, limit, offset) => {
@@ -121,7 +121,7 @@ export const searchUsersPage = (searchValue, limit, offset) => {
 };
 
 export const searchuserpagesuccess = (usersSearchPage) => {
-  return { type: 'SEARCH_USER_PAGE_SUCCESS', usersSearchPage };
+  return { type: SEARCH_USER_PAGE_SUCCESS, usersSearchPage };
 };
 
 export const loadUser = (user) => {
@@ -142,7 +142,7 @@ export const loadUser = (user) => {
 };
 
 export const loadUserSuccess = (users) => {
-  return { type: 'LOAD_USER_SUCCESS', users };
+  return { type: LOAD_USER_SUCCESS, users };
 };
 
 export const loadUsersPage = (limit, offset) => {
@@ -163,5 +163,5 @@ export const loadUsersPage = (limit, offset) => {
 };
 
 export const loadUsersPageSuccess = (usersPage) => {
-  return { type: 'LOAD_USERS_PAGE_SUCCESS', usersPage };
+  return { type: LOAD_USERS_PAGE_SUCCESS, usersPage };
 }

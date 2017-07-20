@@ -1,5 +1,5 @@
 import { login } from '../api/userApi';
-import * as types from '../constants/appConstants';
+import { USER_LOGOUT_SUCCESS, USER_LOGIN_SUCCESS } from '../constants/appConstants';
 import toastr from 'toastr';
 
 export const loginUser = (user) => {
@@ -15,7 +15,7 @@ export const loginUser = (user) => {
 };
 
 export const loginUserSuccess = (loginUser) => {
-  return { type: 'USER_LOGIN_SUCCESS', loginUser };
+  return { type: USER_LOGIN_SUCCESS, loginUser };
 };
 
 export const logoutUser = () => {
@@ -27,5 +27,5 @@ export const logoutUser = () => {
   };
 };
 export const logoutUserSuccess = (loginUser) => {
-  return { type: 'USER_LOGOUT_SUCCESS', loginUser };
+  return { type: USER_LOGOUT_SUCCESS, loginUser };
 };

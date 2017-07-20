@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 import * as loginAction from '../../actions/loginAction';
 
 export class DashboardHeader extends React.Component {
+  /**
+    * DashboardHeader class
+    * It the the header for all pages in the system excluding login and sign up page
+    */
   constructor(props) {
     super(props);
     this.onLogoutClick = this.onLogoutClick.bind(this);
@@ -24,6 +28,8 @@ export class DashboardHeader extends React.Component {
       <div>
         <nav style={{backgroundColor: "green", color: "white"}}>
           <span style={{ float: 'left', paddingLeft : "15%" }}>
+            <span>DMS</span>
+            {' | '}
             {userRole && userRole === 'admin'
               ? <Link to="/roles" activeClassName="active">Roles</Link>
               : ''

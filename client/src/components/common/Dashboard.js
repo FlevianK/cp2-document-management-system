@@ -4,6 +4,10 @@ import { Link } from 'react-router';
 import Document from '../document/Document'; 
 
 class Dashboard extends React.Component {
+  /**
+    * Dashboard class
+    * It the landing page afte logging in
+    */
   render() {
     return (
       <div>

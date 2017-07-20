@@ -13,6 +13,10 @@ import * as roleAction from '../../actions/roleAction';
 import DashboardHeader from '../common/DashboardHeader';
 
 export class RoleDelete extends React.Component {
+  /**
+    * RoleDelete class
+    * It is for deleting a role
+  */
   constructor(props) {
     super(props);
     this.state = {

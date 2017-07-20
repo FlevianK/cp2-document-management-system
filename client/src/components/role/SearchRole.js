@@ -9,6 +9,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 
 export class SearchRole extends React.Component {
+  /**
+    * SearchRole class
+    * It is for searching roles
+  */
   constructor(props, context) {
     super(props, context);
     this.state = {

@@ -14,6 +14,10 @@ import * as userAction from '../../actions/userAction';
 import * as roleAction from '../../actions/roleAction';
 
 export class UserUpdate extends React.Component {
+  /**
+    * UserUpdate class
+    * It is for upadating users details excluding user's role
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -125,6 +129,7 @@ export class UserUpdate extends React.Component {
                   name="password"
                   label="Password"
                   type="password"
+                  value={this.state.users.password}
                   onChange={this.onUserChange}
                 />
               </form>

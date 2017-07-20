@@ -11,6 +11,10 @@ import { DocumentsList, DocumentHeader } from '../../containers';
 import * as documentAction from '../../actions/documentAction';
 
 export class Documents extends React.Component {
+  /**
+    * Documents class
+    * It is for displaying all documents
+    */
   constructor(props, context) {
     super(props, context);
     this.state = {

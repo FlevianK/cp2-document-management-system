@@ -1,5 +1,5 @@
 import { allDocuments, createDoc, deleteDoc, allRoleDocumentPage, allDocumentsPage, updateDoc, singleDocument, allRoleDocument, allDoc, documentSearch, documentSearchPage, allDocList } from '../api/documentApi';
-import * as types from '../constants/appConstants';
+import { LOAD_DOCUMENTS_SUCCESS, LOAD_DOCUMENTS_PAGE_SUCCESS, LOAD_ROLE_DOCUMENTS_SUCCESS, LOAD_ROLE_DOCUMENTS_PAGE_SUCCESS, CREATE_DOCUMENT_SUCCESS, UPDATE_DOCUMENT_SUCCESS, DELETE_DOCUMENT_SUCCESS, LOAD_DOCUMENT_SUCCESS, LOAD_DOC_SUCCESS, LOAD_DOC_PAGE_SUCCESS, SEARCH_DOCUMENT_PAGE_SUCCESS, SEARCH_DOCUMENT_SUCCESS} from '../constants/appConstants';
 import toastr from 'toastr';
 
 export const loadDocuments =() => { 
@@ -19,7 +19,7 @@ export const loadDocuments =() => {
 };
 
 export const loadDocumentsSuccess =(allDocuments) => {
-  return { type: 'LOAD_DOCUMENTS_SUCCESS', allDocuments };
+  return { type: LOAD_DOCUMENTS_SUCCESS, allDocuments };
 };
 
 export const loadDocumentsPage = (limit, offset) => { 
@@ -40,7 +40,7 @@ export const loadDocumentsPage = (limit, offset) => {
 };
 
 export const loadDocumentsPageSuccess = (allDocumentsPage) => {
-  return { type: 'LOAD_DOCUMENTS_PAGE_SUCCESS', allDocumentsPage };
+  return { type: LOAD_DOCUMENTS_PAGE_SUCCESS, allDocumentsPage };
 };
 
 export const loadRoleDocuments = () => {
@@ -60,7 +60,7 @@ export const loadRoleDocuments = () => {
 };
 
 export const loadRoleDocumentsSuccess = (roleDocuments) => {
-  return { type: 'LOAD_ROLE_DOCUMENTS_SUCCESS', roleDocuments };
+  return { type: LOAD_ROLE_DOCUMENTS_SUCCESS, roleDocuments };
 };
 
 export const loadRoleDocumentsPage = (limit, offset) => {
@@ -81,7 +81,7 @@ export const loadRoleDocumentsPage = (limit, offset) => {
 };
 
 export const loadRoleDocumentsPageSuccess = (roleDocumentsPage) => {
-  return { type: 'LOAD_ROLE_DOCUMENTS_PAGE_SUCCESS', roleDocumentsPage };
+  return { type: LOAD_ROLE_DOCUMENTS_PAGE_SUCCESS, roleDocumentsPage };
 };
 
 export const createDocument = (newDoc) => {
@@ -101,7 +101,7 @@ export const createDocument = (newDoc) => {
 };
 
 export const createdocumentSuccess = (documents) => {
-  return { type: 'CREATE_DOCUMENT_SUCCESS', documents };
+  return { type: CREATE_DOCUMENT_SUCCESS, documents };
 };
 
 export const deleteDocument = (deletedDoc) => {
@@ -121,7 +121,7 @@ export const deleteDocument = (deletedDoc) => {
 };
 
 export const deletedocumentSuccess = (documents) => {
-  return { type: 'DELETE_DOCUMENT_SUCCESS', documents };
+  return { type: DELETE_DOCUMENT_SUCCESS, documents };
 };
 
 export const updateDocument = (updateDocs) => {
@@ -141,7 +141,7 @@ export const updateDocument = (updateDocs) => {
 };
 
 export const updatedocumentSuccess = (documents) => {
-  return { type: 'UPDATE_DOCUMENT_SUCCESS', documents };
+  return { type: UPDATE_DOCUMENT_SUCCESS, documents };
 };
 
 export const loadDocument = (document) =>{ 
@@ -162,7 +162,7 @@ export const loadDocument = (document) =>{
 };
 
 export const loaddocumentSuccess = (documents) => {
-  return { type: 'LOAD_DOCUMENT_SUCCESS', documents };
+  return { type: LOAD_DOCUMENT_SUCCESS, documents };
 };
 
 export const loadDoc = () => {
@@ -182,7 +182,7 @@ export const loadDoc = () => {
 };
 
 export const loaddocSuccess = (documents) => {
-  return { type: 'LOAD_DOC_SUCCESS', documents };
+  return { type: LOAD_DOC_SUCCESS, documents };
 };
 
 export const loadDocList = (limit, offset) =>{ 
@@ -203,7 +203,7 @@ export const loadDocList = (limit, offset) =>{
 };
 
 export const loaddoclistSuccess = (documentsPage) => {
-  return { type: 'LOAD_DOC_PAGE_SUCCESS', documentsPage };
+  return { type: LOAD_DOC_PAGE_SUCCESS, documentsPage };
 };
 
 export const searchDocuments = (searchValue) => {
@@ -224,7 +224,7 @@ export const searchDocuments = (searchValue) => {
 };
 
 export const searchdocumentSuccess = (documentsSearch) =>{
-  return { type: 'SEARCH_DOCUMENT_SUCCESS', documentsSearch };
+  return { type: SEARCH_DOCUMENT_SUCCESS, documentsSearch };
 };
 
 export const searchDocumentsPage = (searchValue, limit, offset) => {
@@ -245,5 +245,5 @@ export const searchDocumentsPage = (searchValue, limit, offset) => {
 };
 
 export const searchdocumentpagesuccess = (documentsSearchPage) => {
-  return { type: 'SEARCH_DOCUMENT_PAGE_SUCCESS', documentsSearchPage };
+  return { type: SEARCH_DOCUMENT_PAGE_SUCCESS, documentsSearchPage };
 };

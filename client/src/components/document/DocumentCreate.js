@@ -13,6 +13,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 
 export class DocumentCreate extends React.Component {
+  /**
+    * DocumentCreate class
+    * It is for creating a document
+    */
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +48,6 @@ export class DocumentCreate extends React.Component {
         browserHistory.push('/documents');
       })
       .catch((error) => {
-        this.setState({ open: true });
         toastr.error(error.response.data.message);
       });
   }

@@ -9,6 +9,10 @@ import * as userAction from '../../actions/userAction';
 import DashboardHeader from '../common/DashboardHeader';
 
 export class SearchUser extends React.Component {
+  /**
+    * SearchUser class
+    * It is for searching users
+  */
   constructor(props, context) {
     super(props, context);
     this.state = {

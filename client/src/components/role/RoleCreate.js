@@ -13,6 +13,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as roleAction from '../../actions/roleAction';
 
 export class RoleCreate extends React.Component {
+  /**
+    * RoleCreate class
+    * It is for creating a role
+  */
   constructor(props) {
     super(props);
     this.state = {

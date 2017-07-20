@@ -12,6 +12,10 @@ import DashboardHeader from '../common/DashboardHeader';
 import * as documentAction from '../../actions/documentAction';
 
 export class DocumentDelete extends React.Component {
+  /**
+    * DocumentDelete class
+    * It is for deleting a document
+    */
   constructor(props) {
     super(props);
     this.state = {
