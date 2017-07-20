@@ -55,10 +55,17 @@ Testing is achieved through use of `enzyme`, `mocha` and `chai` packages; `mocha
 1. Open to tab/window on your terminal
 2. Navigate to the root folder of the system on your terminal and perform the following operations:
 * Create database by the following comand: `createdb database_test` 
-* Run the test by the following command: `npm test`
+* Run the test by the following command: `npm run test:app`
 
 ## Deployment
-Find this app on [heroku](https://dms-flev.herokuapp.com/)
+The system is hosted on Heroku
+
+The backend and front end are hosted independly but are integrate and the system oparates fully.
+* The system [backend](https://dms-flev-backend.herokuapp.com/)
+* The system [frontend](https://dms-flev.herokuapp.com/) 
+
+Find the app on [Heroku](https://dms-flev.herokuapp.com/) 
+ 
 
 ## Author
 * Flevian Kanaiza
