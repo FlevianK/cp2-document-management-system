@@ -62,7 +62,7 @@ Testing is achieved through use of `enzyme`, `mocha` and `chai` packages; `mocha
 ## Deployment
 The system is hosted on Heroku
 
-The backend and front end are hosted independly but are integrate and the system oparates fully.
+The backend and front end are hosted independently but are integrate and the system oparates fully.
 * The system [backend](https://dms-flev-backend.herokuapp.com/)
 * The system [frontend](https://dms-flev.herokuapp.com/) 
 
