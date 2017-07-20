@@ -2,6 +2,7 @@
 
 # DMS
 DMS is a document management system. The system makes it easy for users to keep track of their documents and also share with each other depending on the the document access type selected; the options are: private public and role. The users are grouped into groups using role type, this makes it easy for them to share with each other documents depending on their roles and also the documents are private to that group since only members of that group and admin can view. Also, a user can have privates documents which are viewed by the user who created it and the admin only. Public documents are viewed by all users in the system. A document is managed by the user who created it since the creater is the only one who can delete or update the document's content.
+
 The system allows people to become its users by registering and the new member is given a default role after successful registration. Their after administrator of the system can update the role of the user depending on the group the user wants to join. Administrator is the only who has the permissions to update user role or delete a user excluding default user who is the system administrator whereas a user can update his/her details except role. The roles are managed by the administrator who has the permission to create, update role description and delete a role excluding default roles which are regular and admin
 
 ## Built With
