@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FlevianK/cp2-document-management-system.svg?branch=feature/#146512103/client-side)](https://travis-ci.org/FlevianK/cp2-document-management-system)
+
 [![Coverage Status](https://coveralls.io/repos/github/FlevianK/cp2-document-management-system/badge.svg?branch=feature/#146512103/client-side )](https://coveralls.io/github/FlevianK/cp2-document-management-system?branch=feature/#146512103/client-side )
 
 # DMS
@@ -50,8 +52,6 @@ To login in as an admin use the following credentials
 
 ## Testing
 Testing is achieved through use of `enzyme`, `mocha` and `chai` packages; `mocha` is the testing framework, `enzyme` simulates react events while testing and `chai` is the exception library.
-
-View results on [travis](https://travis-ci.org/FlevianK/cp2-document-management-system?utm_source=email&utm_medium=notification)
 
 ### To perform the test 
 1. Open to tab/window on your terminal
