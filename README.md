@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/FlevianK/cp2-document-management-system.svg?branch=feature%2F%23146512103%2Fclient-side)](https://travis-ci.org/FlevianK/cp2-document-management-system)
-
 [![Coverage Status](https://coveralls.io/repos/github/FlevianK/cp2-document-management-system/badge.svg?branch=feature%2F%23146512103%2Fclient-side)](https://coveralls.io/github/FlevianK/cp2-document-management-system?branch=feature%2F%23146512103%2Fclient-side)
 
 # DMS
@@ -44,11 +43,6 @@ Ensure you have `Node.js` and `Postgresql` installed.
 2. Navigate to the root folder of the system on your terminal and perform the following operation on the first tab/window: `npm start`
 3. Navigate to the root folder of the system on your terminal and perform the following operation on the second tab/window: `nodemon app.js`
 4. Open your browser and writing the following url to use the system: `http://localhost:8080/`
-
-#### Admistrator access
-To login in as an admin use the following credentials
-* email: admin@dms.com
-* password: Admin@1
 
 ## Testing
 Testing is achieved through use of `enzyme`, `mocha` and `chai` packages; `mocha` is the testing framework, `enzyme` simulates react events while testing and `chai` is the exception library.
