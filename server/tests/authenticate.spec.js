@@ -4,7 +4,7 @@ const app = require('../../app');
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
-chai.use(chaiHttp)
+chai.use(chaiHttp);
 
 describe('Authenticate', () => {
   describe('/POST empty email', () => {
@@ -89,8 +89,8 @@ describe('Authenticate', () => {
         .post('/api/users/login')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send({
-          email: "admin@gmail.com",
-          password: "admin"
+          email: "admin@dms.com",
+          password: "Admin@1"
         })
         .end((err, res) => {
           res.should.have.status(200);

@@ -16,8 +16,8 @@ describe('EndToEnd test for login form', function () {
   });
 
   it('logs in successfully', (done) => {
-    driver.findElement(By.xpath('//*[@id="app"]/div/div/form/div[1]/div/div/div/input')).sendKeys('admin@live.com');
-    driver.findElement(By.xpath('//*[@id="app"]/div/div/form/div[2]/div/div/div/input')).sendKeys('admin');
+    driver.findElement(By.xpath('//*[@id="app"]/div/div/form/div[1]/div/div/div/input')).sendKeys('admin@dms.com');
+    driver.findElement(By.xpath('//*[@id="app"]/div/div/form/div[2]/div/div/div/input')).sendKeys('Admin@1');
     driver.findElement(By.xpath('//*[@id="app"]/div/div/form/div[3]/div/input')).click()
       .then(() => done());
   });

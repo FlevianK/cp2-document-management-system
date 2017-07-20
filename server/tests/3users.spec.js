@@ -13,8 +13,8 @@ describe('Users', () => {
     chai.request(app)
       .post('/api/users/login')
       .send({
-        email: "admin@live.com",
-        password: "admin"
+        email: "admin@dms.com",
+        password: "Admin@1"
       })
       .end((err, res) => {
         res.should.have.status(200);
