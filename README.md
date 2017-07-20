@@ -22,7 +22,7 @@ The system allows people to become its users by registering and the new member i
 ## Agile
 This project was managed using [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2041339)
 
-## Producer for running the system locally
+## Procedure for running the system locally
 Follow the steps below systematically to have system in your machine and operate as expected
 
 ### Prerequisites
