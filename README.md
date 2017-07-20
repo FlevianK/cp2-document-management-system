@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/FlevianK/cp2-document-management-system.svg?branch=feature/#146512103/client-side)](https://travis-ci.org/FlevianK/cp2-document-management-system)
 
-[![Coverage Status](https://coveralls.io/repos/github/FlevianK/cp2-document-management-system/badge.svg?branch=feature/#146512103/client-side )](https://coveralls.io/github/FlevianK/cp2-document-management-system?branch=feature/#146512103/client-side )
+[![Coverage Status](https://coveralls.io/repos/github/FlevianK/cp2-document-management-system/badge.svg?branch=feature%2F%23146512103%2Fclient-side)](https://coveralls.io/github/FlevianK/cp2-document-management-system?branch=feature%2F%23146512103%2Fclient-side)
 
 # DMS
 DMS is a document management system. The system makes it easy for users to keep track of their documents and also share with each other depending on the the document access type selected; the options are: private public and role. The users are grouped into groups using role type, this makes it easy for them to share with each other documents depending on their roles and also the documents are private to that group since only members of that group and admin can view. Also, a user can have privates documents which are viewed by the user who created it and the admin only. Public documents are viewed by all users in the system. A document is managed by the user who created it since the creater is the only one who can delete or update the document's content.
