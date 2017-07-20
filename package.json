@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/FlevianK/cp2-document-management-system#readme",
   "dependencies": {
-    "aglio": "^2.3.0",
     "axios": "^0.16.2",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
