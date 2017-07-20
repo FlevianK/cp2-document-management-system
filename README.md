@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/FlevianK/cp2-document-management-system.svg?branch=feature/#146512103/client-side)](https://travis-ci.org/FlevianK/cp2-document-management-system)
+[![Build Status](https://travis-ci.org/FlevianK/cp2-document-management-system.svg?branch=feature%2F%23146512103%2Fclient-side)](https://travis-ci.org/FlevianK/cp2-document-management-system)
 
 [![Coverage Status](https://coveralls.io/repos/github/FlevianK/cp2-document-management-system/badge.svg?branch=feature%2F%23146512103%2Fclient-side)](https://coveralls.io/github/FlevianK/cp2-document-management-system?branch=feature%2F%23146512103%2Fclient-side)
 
