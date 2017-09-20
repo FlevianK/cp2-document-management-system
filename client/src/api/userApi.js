@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://dms-flev-backend.herokuapp.com/api'; // comment this code when running this app locally
+const API_URL = 'https://dms-flev-backend.herokuapp.com/api' || 'http://localhost:8000/api'; // comment this code when running this app locally
 // const API_URL = 'http://localhost:8000/api'; // comment this code if pushing this file to git
 
 export const login = (user) => {
