@@ -4,3 +4,7 @@ package-lock.json
 coverage
 .env
 .vscode
+*/.DS_Store
+yarn.lock
+yarn-error.log
+.swp
