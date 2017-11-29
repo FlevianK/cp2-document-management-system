@@ -6,7 +6,7 @@
   "scripts": {
     "test:client": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./client/utils/config.js -R spec ./client/tests/**",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "start": "node aglio -i apiBlueprint.apib --server",
+    "start": "aglio -i apiBlueprint.apib --server",
     "test:server": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -R spec server/tests",
     "pretest:server": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
     "test": "npm run test:client && npm run test:server",
