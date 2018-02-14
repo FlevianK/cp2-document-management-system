@@ -2,7 +2,7 @@ language: node_js
 sudo: required  
 dist: trusty
 node_js:
-  - stable
+  - "8.1.4"
 services:
   - postgresql
 addons:

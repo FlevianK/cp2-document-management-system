@@ -89,7 +89,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
-    "ajv": "^4.11.8",
+    "ajv": "^5.0.0",
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
     "chromedriver": "^2.30.1",
